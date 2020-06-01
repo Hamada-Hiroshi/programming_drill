@@ -6,7 +6,7 @@
 
 ### サイトテーマ
 投稿する内容はデプロイされたアプリケーションのURLと、リモートリポジトリ（GitHub等）のURL。
-それに加えて使用した言語・プラグイン等、難易度・学習対象者、身に付くスキル、難しいポイントに対するヒント・解説。
+それに加えて使用した言語・フレームワーク・ライブラリ等、難易度・学習対象者、身に付くスキル、難点に対するヒント・解説。
 投稿されたアプリに対しては不明点や行き詰まった部分等についてコメント欄から質問をすることができ、
 サイト利用者が相互に学習を支援できる仕組みとする。
 投稿されたアプリは学習者がレビューできるようにすることで評価が蓄積され、
@@ -34,4 +34,4 @@
 ## 設計書
 
 ### 機能一覧
-<https://docs.google.com/spreadsheets/d/1UgK-6l38k5T81XjcTIn7CHnGRkB_sBXS5xQWAVhWmks/edit#gid=0>
+https://docs.google.com/spreadsheets/d/1BeDFPT9XnqasDAUF5jbDraDXg5rhDRHrpklPOQHjV10/edit#gid=108870661
