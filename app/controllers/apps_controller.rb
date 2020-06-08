@@ -6,6 +6,7 @@ class AppsController < ApplicationController
   end
 
   def new
+    @app = App.new
   end
 
   def confirm
