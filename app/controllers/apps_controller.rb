@@ -10,9 +10,21 @@ class AppsController < ApplicationController
   end
 
   def confirm
+    @app = session[:app] = current_user.apps.new(app_params)
+    unless @app.valid?
+      render 'new'
+    end
   end
 
   def create
+    @app = App.new(session[:app])
+    if params[:back]
+      render 'new'
+    else
+      @app.save
+      flash[:success] = "新規投稿に成功しました。"
+      redirect_to user_path(current_user)
+    end
   end
 
   def show
@@ -31,5 +43,10 @@ class AppsController < ApplicationController
   end
 
   def explanation
+  end
+
+  private
+  def app_params
+    params.require(:app).permit(:title, :language_id, :overview, :app_url, :repo_url, :function, :target)
   end
 end
