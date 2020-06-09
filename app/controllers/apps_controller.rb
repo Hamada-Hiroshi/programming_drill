@@ -1,8 +1,12 @@
 class AppsController < ApplicationController
   def index
+    @languages = Language.all
+    @apps = App.all.order(created_at: "DESC")
   end
 
   def rate_index
+    @languages = Language.all
+    @apps = App.all #評価順にソートする
   end
 
   def new
