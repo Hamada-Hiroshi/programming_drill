@@ -8,6 +8,11 @@
   </div>
 
   <div class="col-md-9">
+    <div>
+      <%= @app.updated_at.strftime("%Y年%m月%d日更新") %>
+      <h1><%= @app.title %></h1>
+    </div>
+
     <%= form_with(model: @app, local: true) do |f| %>
     <%= render 'layouts/error_messages', model: @app %>
 

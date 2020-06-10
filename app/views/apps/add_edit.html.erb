@@ -8,6 +8,12 @@
   </div>
 
   <div class="col-md-9">
+    <div>
+      <%= @app.updated_at.strftime("%Y年%m月%d日更新") %>
+      <h1><%= @app.title %></h1>
+      <p>開発言語<%= link_to @app.language.name, language_path(@app.language) %></p>
+    </div>
+
     <%= form_with(model: @app, url: add_update_app_path, local: true) do |f| %>
     <%= render 'layouts/error_messages', model: @app %>
 
