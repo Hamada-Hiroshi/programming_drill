@@ -38,7 +38,7 @@
         <%= @app.target %>
       </section>
 
-      <% if @app.user != current_user %>
+      <% unless @app.user == current_user || Learning.find_by(user_id: current_user.id, app_id: @app.id) %>
         <%= link_to "このアプリケーションを作成する", app_learnings_path(@app), method: :post, class: "btn btn-primary" %>
       <% end %>
     </article>
@@ -47,9 +47,28 @@
   <div class="col-md-2">
     <div class="link-bar">
       <% if @app.user == current_user %>
-        <%= link_to "編集", edit_app_path(@app), class: "btn btn-primary" %>
+        <div class="btn-group-vertical">
+          <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-primary" %>
+          <%= link_to "ヒント", "#", class: "btn btn-default" %>
+          <%= link_to "質問", "#", class: "btn btn-default" %>
+          <%= link_to "解説", "#", class: "btn btn-default" %>
+        </div>
+        <div>
+          <%= link_to "編集", edit_app_path(@app), class: "btn btn-primary" %>
+        </div>
       <% else %>
-        <%= link_to "学習開始", app_learnings_path(@app), method: :post, class: "btn btn-primary" %>
+        <% if Learning.find_by(user_id: current_user.id, app_id: @app.id) %>
+        <!-- コントローラにも同様に記述している。良い書き方はないか調べる。 -->
+          <div class="btn-group-vertical">
+            <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-primary" %>
+            <%= link_to "学習メモ", app_learning_path(@app, @learning), class: "btn btn-default" %>
+            <%= link_to "ヒント", "#", class: "btn btn-default" %>
+            <%= link_to "質問", "#", class: "btn btn-default" %>
+            <%= link_to "解説", "#", class: "btn btn-default" %>
+          </div>
+        <% else %>
+          <%= link_to "学習開始", app_learnings_path(@app), method: :post, class: "btn btn-primary" %>
+        <% end %>
       <% end %>
     </div>
   </div>
