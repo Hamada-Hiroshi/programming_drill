@@ -9,28 +9,28 @@
 
   <div class="col-md-9">
   <%= form_with(model: @user) do |f| %>
-    <div class="row">
+    <div class="field">
       <%= attachment_image_tag(@user, :profile_image, size: "150x150", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
       <h3><%= @user.name %></h3>
       <%= f.attachment_field :profile_image %>
     </div>
 
-    <div class="row">
+    <div class="field">
       <%= f.label :name, "ユーザーネーム" %>
       <%= f.text_field :name %>
     </div>
 
-    <div class="row">
+    <div class="field">
       <%= f.label :email, "メールアドレス" %>
       <%= f.email_field :email %>
     </div>
 
-    <div class="row">
+    <div class="field">
       <%= f.label :introduction, "自己紹介" %>
       <%= f.text_area :introduction %>
     </div>
 
-    <div class="row">
+    <div class="field">
       <%= f.label :skill, "学習スキル" %>
       <%= f.text_area :skill %>
     </div>

@@ -1,2 +1,43 @@
-<h1>Apps#new</h1>
-<p>Find me in app/views/apps/new.html.erb</p>
+<div class="row">
+  <%= form_with(model: @app, url: confirm_apps_path, local: true) do |f| %>
+    <%= render 'layouts/error_messages', model: @app %>
+
+    <div class="field">
+      <%= f.label :title, "アプリケーション名" %>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="field">
+      <%= f.label :language_id, "開発言語" %>
+      <%= f.collection_select :language_id, Language.all, :id, :name, include_blank: "選択してください" %>
+      <!-- プロパティ名, オブジェクトの配列, value属性（何を返すか）, テキストの項目（何を選択肢として表示するか） [, オプション] -->
+    </div>
+
+    <div class="field">
+      <%= f.label :overview, "アプリケーションの概要" %>
+      <%= f.text_area :overview %>
+    </div>
+
+    <div class="field">
+      <%= f.label :app_url, "アプリケーションURL" %>
+      <%= f.text_area :app_url %>
+    </div>
+
+    <div class="field">
+      <%= f.label :repo_url, "リポジトリURL" %>
+      <%= f.text_area :repo_url %>
+    </div>
+
+    <div class="field">
+      <%= f.label :function, "機能" %>
+      <%= f.text_area :function %>
+    </div>
+
+    <div class="field">
+      <%= f.label :target, "対象者" %>
+      <%= f.text_area :target %>
+    </div>
+
+    <%= f.submit "確認ページへ進む", class: "btn btn-primary" %>
+  <% end %>
+</div>

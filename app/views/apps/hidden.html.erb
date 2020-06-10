@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-3">
+    <ul>
+      <li><%= link_to "基本情報を編集", edit_app_path(@app) %></li>
+      <li><%= link_to "ヒント・解説を追加・編集", add_edit_app_path(@app) %></li>
+      <li><%= link_to "アプリを非公開にする", hidden_app_path(@app) %></li>
+    </ul>
+  </div>
+
+  <div class="col-md-9">
+    <div>
+      <%= @app.updated_at.strftime("%Y年%m月%d日更新") %>
+      <h1><%= @app.title %></h1>
+      <p>開発言語<%= link_to @app.language.name, language_path(@app.language) %></p>
+    </div>
+    <div>
+      <p>
+        この投稿アプリを一覧ページから非表示にします。<br>
+        非表示にすると、一般のユーザーはこのアプリを閲覧できなくなりますが、<br>
+        現在学習中のユーザーは引き続きマイページから閲覧が可能となります。<br>
+        一度非公開にしたアプリは、元の状態に戻すことはできません。<br>
+        本当にこのアプリを非公開にしてもよろしいですか？
+      </p>
+      <%= link_to "アプリの公開を継続", app_path(@app), class: "btn btn-primary" %>
+      <%= link_to "アプリを非公開にする", cancel_app_path(@app), method: :patch, class: "btn btn-danger" %>
+    </div>
+  </div>
+</div>

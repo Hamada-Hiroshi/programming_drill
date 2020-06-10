@@ -1,2 +1,40 @@
-<h1>Apps#confirm</h1>
-<p>Find me in app/views/apps/confirm.html.erb</p>
+<div class="row">
+  <div>
+    <h4>アプリケーション名</h4>
+    <%= session[:app]["title"] %>
+  </div>
+
+  <div>
+    <h4>開発言語</h4>
+    <%= @app.language.name %>
+  </div>
+
+  <div>
+    <h4>アプリケーションの概要</h4>
+    <%= session[:app]["overview"] %>
+  </div>
+
+  <div>
+    <h4>アプリケーションURL</h4>
+    <%= session[:app]["app_url"] %>
+  </div>
+
+  <div>
+    <h4>リポジトリURL</h4>
+    <%= session[:app]["repo_url"] %>
+  </div>
+
+  <div>
+    <h4>機能</h4>
+    <%= session[:app]["function"] %>
+  </div>
+
+  <div>
+    <h4>対象者</h4>
+    <%= session[:app]["target"] %>
+  </div>
+
+  <%= link_to "投稿する", apps_path, method: :post, class: "btn btn-primary" %>
+  <%= link_to "入力ページに戻る", apps_path(back: "render"), method: :post, class: "btn btn-primary" %>
+
+</div>

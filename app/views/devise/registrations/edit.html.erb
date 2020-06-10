@@ -8,7 +8,7 @@
   </div>
 
   <div class="col-md-9">
-    <div class="row">
+    <div>
       <%= attachment_image_tag(@user, :profile_image, size: "150x150", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
       <h3><%= @user.name %></h3>
     </div>
