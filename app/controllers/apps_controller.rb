@@ -38,6 +38,7 @@ class AppsController < ApplicationController
   end
 
   def show
+    @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
   end
 
   def edit

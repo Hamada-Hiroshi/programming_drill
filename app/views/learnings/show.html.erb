@@ -1,2 +1,49 @@
-<h1>Learnings#show</h1>
-<p>Find me in app/views/learnings/show.html.erb</p>
+<div class="row">
+  <div class="col-md-10">
+    <div class="learning-info">
+      <article  class="app-info">
+        <h1><%= @learning.app.title %></h1>
+        <section>
+          <h5>アプリケーションURL</h5>
+          <%= link_to @learning.app.app_url, @learning.app.app_url, target: :_blank %>
+        </section>
+        <section>
+          <h5>リモートリポジトリURL</h5>
+          <%= link_to @learning.app.repo_url, @learning.app.repo_url, target: :_blank %>
+        </section>
+      </article>
+
+      <div id="learning-contents">
+        <div class="learning-status">
+          <h4>学習開始日 <%= @learning.created_at.strftime("%Y年%m月%d日") %></h4>
+          <div class="field">
+            <h4>学習状況</h4>
+            <%= form_with(model: [@learning.app, @learning]) do |f| %>
+              <%= f.select :status, ["学習中", "学習済み", "学習中断"] %>
+              <%= f.submit "更新", class: "btn btn-default" %>
+            <% end %>
+          </div>
+        </div>
+
+        <div id="learning-memo">
+          <%= form_with(model: [@learning.app, @learning]) do |f| %>
+            <%= f.text_area :memo %>
+            <%= f.submit "メモを保存", class: "btn btn-default" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2">
+    <div class="link-bar">
+      <div class="btn-group-vertical">
+        <%= link_to "アプリ詳細", app_path(@learning.app), class: "btn btn-default" %>
+        <%= link_to "学習メモ", app_learning_path(@learning.app, @learning), class: "btn btn-primary" %>
+        <%= link_to "ヒント", "#", class: "btn btn-default" %>
+        <%= link_to "質問", "#", class: "btn btn-default" %>
+        <%= link_to "解説", "#", class: "btn btn-default" %>
+      </div>
+    </div>
+  </div>
+</div>
