@@ -1,4 +1,10 @@
 class AppsController < ApplicationController
+  before_action :set_app, only: [:show, :edit, :add_edit, :update, :hint, :explanation]
+
+  def set_app
+    @app = App.find(params[:id])
+  end
+
   def index
     @languages = Language.all
     @apps = App.all.order(created_at: "DESC")
@@ -47,6 +53,12 @@ class AppsController < ApplicationController
   end
 
   def explanation
+  end
+
+  def hidden
+  end
+
+  def cancel
   end
 
   private
