@@ -1,5 +1,5 @@
 class AppsController < ApplicationController
-  before_action :set_app, only: [:show, :edit, :add_edit, :update, :hint, :explanation]
+  before_action :set_app, only: [:show, :edit, :add_edit, :update, :add_update, :hint, :explanation, :hidden, :cancel]
 
   def set_app
     @app = App.find(params[:id])
@@ -7,12 +7,12 @@ class AppsController < ApplicationController
 
   def index
     @languages = Language.all
-    @apps = App.all.order(created_at: "DESC")
+    @apps = App.where(status: true).order(created_at: "DESC")
   end
 
   def rate_index
     @languages = Language.all
-    @apps = App.all #評価順にソートする
+    @apps = App.where(status: true) #評価順にソートする
   end
 
   def new
@@ -33,7 +33,7 @@ class AppsController < ApplicationController
     else
       @app.save
       flash[:success] = "新規投稿に成功しました。"
-      redirect_to user_path(current_user)
+      redirect_to app_path(@app)
     end
   end
 
@@ -47,6 +47,21 @@ class AppsController < ApplicationController
   end
 
   def update
+    if @app.update(app_params)
+      flash[:success] = "投稿アプリを更新しました。"
+      redirect_to app_path(@app)
+    else
+      render 'edit'
+    end
+  end
+
+  def add_update
+    if @app.update(add_app_params)
+      flash[:success] = "投稿アプリを更新しました。"
+      redirect_to app_path(@app)
+    else
+      render 'add_edit'
+    end
   end
 
   def hint
@@ -59,10 +74,17 @@ class AppsController < ApplicationController
   end
 
   def cancel
+    @app.update(status: false)
+    flash[:alert] = "アプリを非公開にしました。"
+    redirect_to user_path(current_user)
   end
 
   private
   def app_params
     params.require(:app).permit(:title, :language_id, :overview, :app_url, :repo_url, :function, :target)
+  end
+
+  def add_app_params
+    params.require(:app).permit(:hint, :explanation)
   end
 end

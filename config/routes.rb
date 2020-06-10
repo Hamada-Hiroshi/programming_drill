@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'apps/rate' => 'apps#rate_index', as: 'rate_apps'
   post 'apps/confirm' => 'apps#confirm', as: 'confirm_apps'
   get 'apps/:id/add_edit' => 'apps#add_edit', as: 'add_edit_app'
+  patch 'apps/:id/add' => 'apps#add_update', as: 'add_update_app'
   get 'apps/:id/hint' => 'apps#hint', as: 'hint_app'
   get 'apps/:id/explanation' => 'apps#explanation', as: 'explanation_app'
   get 'apps/:id/hidden' => 'apps#hidden', as: 'hidden_app'
