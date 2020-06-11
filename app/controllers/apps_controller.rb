@@ -1,8 +1,13 @@
 class AppsController < ApplicationController
   before_action :set_app, only: [:show, :edit, :add_edit, :update, :add_update, :hint, :explanation, :hidden, :cancel]
+  before_action :set_learning, only: [:show, :hint, :explanation]
 
   def set_app
     @app = App.find(params[:id])
+  end
+
+  def set_learning
+    @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
   end
 
   def index
@@ -38,7 +43,6 @@ class AppsController < ApplicationController
   end
 
   def show
-    @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
   end
 
   def edit
