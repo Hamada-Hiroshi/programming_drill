@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
     @app = App.find(params[:app_id])
     @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
     @question = Question.new
-    @questions = @app.questions.all
+    @questions = @app.questions.where(parent_id: nil).order(created_at: "DESC")
   end
 
   def create
@@ -11,7 +11,11 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.new(question_params)
     @question.app_id = @app.id
     if @question.save
-      flash[:success] = "質問を投稿しました。"
+      if @question.parent_id == nil
+        flash[:success] = "質問を投稿しました。"
+      else
+        flash[:success] = "質問への回答を投稿しました。"
+      end
       redirect_to app_questions_path(@app)
     else
       @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
@@ -22,6 +26,6 @@ class QuestionsController < ApplicationController
 
   private
   def question_params
-    params.require(:question).permit(:content)
+    params.require(:question).permit(:content, :parent_id)
   end
 end
