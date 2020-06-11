@@ -16,3 +16,28 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).on('turbolinks:load', function(){
+  $('#myImage').on('change', function (e) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          $("#profilePreview").attr('src', e.target.result);
+      }
+      reader.readAsDataURL(e.target.files[0]);
+  });
+});
+
+
+$(document).on('turbolinks:load', function(){
+  $('#tab-contents .tab[id != "tab1"]').hide();
+});
+
+$(document).on('turbolinks:load', function(){
+  $('#tab-menu a').on('click', function() {
+    $("#tab-contents .tab").hide();
+    $("#tab-menu .active").removeClass("active");
+    $(this).addClass("active");
+    $($(this).attr("href")).show();
+    return false;
+  });
+});
