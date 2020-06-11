@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   patch 'apps/:id/cancel' => 'apps#cancel', as: 'cancel_app'
   resources :apps, only: [:new, :create, :show, :edit, :update] do
     resources :learnings, only: [:create, :show, :edit, :update]
-    resources :questions, only: [:index, :edit, :update]
+    resources :questions, only: [:index, :create]
     resource :reviews, only: [:index]
   end
 

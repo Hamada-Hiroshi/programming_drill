@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_07_063555) do
+ActiveRecord::Schema.define(version: 2020_06_11_072552) do
 
   create_table "apps", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 2020_06_07_063555) do
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "parent_id"
+    t.index ["parent_id"], name: "index_questions_on_parent_id"
   end
 
   create_table "reviews", force: :cascade do |t|
