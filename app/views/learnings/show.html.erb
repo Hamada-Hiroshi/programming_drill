@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-10">
-    <div class="learning-info">
+    <div id="app-learning">
       <article  class="app-info">
         <h1><%= @learning.app.title %></h1>
         <section>
@@ -13,24 +13,23 @@
         </section>
       </article>
 
-      <div id="learning-contents">
-        <div class="learning-status">
-          <h4>学習開始日 <%= @learning.created_at.strftime("%Y年%m月%d日") %></h4>
-          <div class="field">
-            <h4>学習状況</h4>
-            <%= form_with(model: [@learning.app, @learning]) do |f| %>
-              <%= f.select :status, ["学習中", "学習済み", "学習中断"] %>
-              <%= f.submit "更新", class: "btn btn-default" %>
-            <% end %>
-          </div>
-        </div>
-
-        <div id="learning-memo">
+      <div class="learning-status">
+        <h4>学習開始日 <%= @learning.created_at.strftime("%Y年%m月%d日") %></h4>
+        <div class="field">
+          <h4>学習状況</h4>
           <%= form_with(model: [@learning.app, @learning]) do |f| %>
-            <%= f.text_area :memo %>
-            <%= f.submit "メモを保存", class: "btn btn-default" %>
+            <%= f.select :status, ["学習中", "学習済み", "学習中断"] %>
+            <%= f.submit "更新", class: "btn btn-default" %>
           <% end %>
         </div>
+      </div>
+
+      <div id="learning-memo">
+        <h4>学習メモ</h4>
+        <%= form_with(model: [@learning.app, @learning]) do |f| %>
+          <%= f.text_area :memo %>
+          <%= f.submit "メモを保存", class: "btn btn-default" %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -40,9 +39,9 @@
       <div class="btn-group-vertical">
         <%= link_to "アプリ詳細", app_path(@learning.app), class: "btn btn-default" %>
         <%= link_to "学習メモ", app_learning_path(@learning.app, @learning), class: "btn btn-primary" %>
-        <%= link_to "ヒント", "#", class: "btn btn-default" %>
+        <%= link_to "ヒント", hint_app_path(@learning.app), class: "btn btn-default" %>
         <%= link_to "質問", "#", class: "btn btn-default" %>
-        <%= link_to "解説", "#", class: "btn btn-default" %>
+        <%= link_to "解説", explanation_app_path(@learning.app), class: "btn btn-default" %>
       </div>
     </div>
   </div>
