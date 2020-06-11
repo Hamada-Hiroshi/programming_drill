@@ -13,16 +13,18 @@
         </section>
       </article>
 
-      <div class="learning-status">
-        <h4>学習開始日 <%= @learning.created_at.strftime("%Y年%m月%d日") %></h4>
-        <div class="field">
-          <h4>学習状況</h4>
-          <%= form_with(model: [@app, @learning]) do |f| %>
-            <%= f.select :status, ["学習中", "学習済み", "学習中断"] %>
-            <%= f.submit "更新", class: "btn btn-default" %>
-          <% end %>
+      <% if @app.user != current_user %>
+        <div class="learning-status">
+          <h4>学習開始日 <%= @learning.created_at.strftime("%Y年%m月%d日") %></h4>
+          <div class="field">
+            <h4>学習状況</h4>
+            <%= form_with(model: [@app, @learning]) do |f| %>
+              <%= f.select :status, ["学習中", "学習済み", "学習中断"] %>
+              <%= f.submit "更新", class: "btn btn-default" %>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
 
       <div id="explanation-info">
         <h4>解説</h4>
@@ -33,13 +35,25 @@
 
   <div class="col-md-2">
     <div class="link-bar">
-      <div class="btn-group-vertical">
-        <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-default" %>
-        <%= link_to "学習メモ", app_learning_path(@app, @learning), class: "btn btn-default" %>
-        <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
-        <%= link_to "質問", "#", class: "btn btn-default" %>
-        <%= link_to "解説", explanation_app_path(@app), class: "btn btn-primary" %>
-      </div>
+      <% if @app.user == current_user %>
+        <div class="btn-group-vertical">
+          <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-default" %>
+          <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
+          <%= link_to "質問", "#", class: "btn btn-default" %>
+          <%= link_to "解説", explanation_app_path(@app), class: "btn btn-primary" %>
+        </div>
+        <div>
+          <%= link_to "編集", edit_app_path(@app), class: "btn btn-primary" %>
+        </div>
+      <% else %>
+        <div class="btn-group-vertical">
+          <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-default" %>
+          <%= link_to "学習メモ", app_learning_path(@app, @learning), class: "btn btn-default" %>
+          <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
+          <%= link_to "質問", "#", class: "btn btn-default" %>
+          <%= link_to "解説", explanation_app_path(@app), class: "btn btn-primary" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

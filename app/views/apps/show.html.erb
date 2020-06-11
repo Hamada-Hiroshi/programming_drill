@@ -51,7 +51,7 @@
           <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-primary" %>
           <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
           <%= link_to "質問", "#", class: "btn btn-default" %>
-          <%= link_to "解説", "#", class: "btn btn-default" %>
+          <%= link_to "解説", explanation_app_path(@app), class: "btn btn-default" %>
         </div>
         <div>
           <%= link_to "編集", edit_app_path(@app), class: "btn btn-primary" %>
