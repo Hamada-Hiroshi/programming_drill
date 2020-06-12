@@ -1,2 +1,43 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="row">
+  <div class="col-md-3">
+    <%= attachment_image_tag(@user, :profile_image, size: "150x150", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
+  </div>
+
+  <div class="col-md-9">
+    <h3><%= @user.name %></h3>
+    <% if @user == current_user %>
+      <%= link_to "アカウント情報を編集", edit_user_path(@user), class: "btn btn-default" %>
+    <% end %>
+    <h5>自己紹介</h5>
+    <%= @user.introduction %>
+    <h5>学習スキル</h5>
+    <%= @user.skill %>
+  </div>
+</div>
+
+<div class="row">
+  <div id="user-app">
+    <ul id="tab-menu" class="nav nav-tabs">
+      <li class="active"><%= link_to "学習#{@user.learnings.count}件", "#tab1" %></li>
+      <li><%= link_to "投稿#{@user.apps.count}件", "#tab2" %></li>
+    </ul>
+
+    <div id="tab-contents">
+      <div id="tab1" class="tab">
+        <ul>
+          <% @user.learnings.each do |learning| %>
+            <li><%= link_to learning.app.title, app_path(learning.app) %></li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div id="tab2" class="tab">
+        <ul>
+          <% @user.apps.each do |app| %>
+            <li><%= link_to app.title, app_path(app) %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

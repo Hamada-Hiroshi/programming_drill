@@ -1,2 +1,77 @@
-<h1>Apps#show</h1>
-<p>Find me in app/views/apps/show.html.erb</p>
+<div class="row">
+  <div class="col-md-10">
+    <article class="app-info">
+      <section>
+        <div>
+          <%= link_to user_path(@app.user) do %>
+            <%= attachment_image_tag(@app.user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
+            <%= @app.user.name %>
+          <% end %>
+          <%= @app.updated_at.strftime("%Y年%m月%d日更新") %>
+        </div>
+        <h1><%= @app.title %></h1>
+        <p>開発言語<%= link_to @app.language.name, language_path(@app.language) %></p>
+      </section>
+
+      <section>
+        <h3>概要</h3>
+        <%= @app.overview %>
+      </section>
+
+      <section>
+        <h3>アプリケーションURL</h3>
+        <%= link_to @app.app_url, @app.app_url, target: :_blank %>
+      </section>
+
+      <section>
+        <h3>リモートリポジトリURL</h3>
+        <%= link_to @app.repo_url, @app.repo_url, target: :_blank %>
+      </section>
+
+      <section>
+        <h3>機能一覧</h3>
+        <%= @app.function %>
+      </section>
+
+      <section>
+        <h3>対象者</h3>
+        <%= @app.target %>
+      </section>
+
+      <% unless @app.user == current_user || Learning.find_by(user_id: current_user.id, app_id: @app.id) %>
+        <%= link_to "このアプリケーションを作成する", app_learnings_path(@app), method: :post, class: "btn btn-primary" %>
+      <% end %>
+    </article>
+  </div>
+
+  <div class="col-md-2">
+    <div class="link-bar">
+      <% if @app.user == current_user %>
+        <div class="btn-group-vertical">
+          <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-primary" %>
+          <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
+          <%= link_to "質問", app_questions_path(@app), class: "btn btn-default" %>
+          <%= link_to "解説", explanation_app_path(@app), class: "btn btn-default" %>
+        </div>
+        <div>
+          <%= link_to "編集", edit_app_path(@app), class: "btn btn-primary" %>
+        </div>
+      <% else %>
+        <% if @learning.present? %>
+          <div class="btn-group-vertical">
+            <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-primary" %>
+            <%= link_to "学習メモ", app_learning_path(@app, @learning), class: "btn btn-default" %>
+            <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
+            <%= link_to "質問", app_questions_path(@app), class: "btn btn-default" %>
+            <%= link_to "解説", explanation_app_path(@app), class: "btn btn-default" %>
+          </div>
+        <% else %>
+          <%= link_to "学習開始", app_learnings_path(@app), method: :post, class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
+      <div>
+        <%= link_to "レビュー", app_reviews_path(@app), class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

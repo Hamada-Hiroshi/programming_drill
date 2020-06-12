@@ -1,2 +1,111 @@
-<h1>Questions#index</h1>
-<p>Find me in app/views/questions/index.html.erb</p>
+<div class="row">
+  <div class="col-md-10">
+    <div id="app-question">
+      <article  class="app-info">
+        <h1><%= @app.title %></h1>
+        <section>
+          <h5>アプリケーションURL</h5>
+          <%= link_to @app.app_url, @app.app_url, target: :_blank %>
+        </section>
+        <section>
+          <h5>リモートリポジトリURL</h5>
+          <%= link_to @app.repo_url, @app.repo_url, target: :_blank %>
+        </section>
+      </article>
+
+      <% if @app.user != current_user %>
+        <div class="learning-status">
+          <h4>学習開始日 <%= @learning.created_at.strftime("%Y年%m月%d日") %></h4>
+          <div class="field">
+            <h4>学習状況</h4>
+            <%= form_with(model: [@app, @learning]) do |f| %>
+              <%= f.select :status, ["学習中", "学習済み", "学習中断"] %>
+              <%= f.submit "更新", class: "btn btn-default" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <div id="question-contents">
+        <div id="question-form" class="field">
+          <%= form_with(model: [@app, @question]) do |f| %>
+            <h4>質問</h4>
+            <%= f.text_area :content %>
+            <%= f.submit "質問を投稿", class: "btn btn-default" %>
+          <% end %>
+        </div>
+
+        <div id="question-index">
+          <% @questions.each do |question| %>
+            <hr>
+            <div id="question-box">
+              <div id="question">
+                <div class="post-user">
+                  <%= attachment_image_tag(question.user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
+                  <%= question.user.name %>
+                  <%= question.created_at.strftime("%Y年%m月%d日") %>
+                </div>
+                <div class="post-content">
+                  <%= question.content %>
+                </div>
+              </div>
+
+              <div id="reply-index">
+                <% question.replies.each do |reply| %>
+                  <div id="reply">
+                    <div>
+                      <%= attachment_image_tag(reply.user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
+                      <%= reply.user.name %>
+                      <%= reply.created_at.strftime("%Y年%m月%d日") %>
+                    </div>
+                    <div>
+                      <%= reply.content %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+
+              <div id="reply-form" class="field">
+                <%= form_with(model: [@app, @question]) do |f| %>
+                  <%= f.label :content, "質問に回答する" %>
+                  <%= f.text_area :content %>
+                  <%= f.hidden_field :parent_id, value: question.id  %>
+                  <%= f.submit "回答を送信", class: "btn btn-default" %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2">
+    <div class="link-bar">
+      <% if @app.user == current_user %>
+        <div class="btn-group-vertical">
+          <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-default" %>
+          <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
+          <%= link_to "質問",  app_questions_path(@app), class: "btn btn-primary" %>
+          <%= link_to "解説", explanation_app_path(@app), class: "btn btn-default" %>
+        </div>
+        <div>
+          <%= link_to "編集", edit_app_path(@app), class: "btn btn-primary" %>
+        </div>
+      <% else %>
+        <div class="btn-group-vertical">
+          <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-default" %>
+          <%= link_to "学習メモ", app_learning_path(@app, @learning), class: "btn btn-default" %>
+          <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
+          <%= link_to "質問", app_questions_path(@app), class: "btn btn-primary" %>
+          <%= link_to "解説", explanation_app_path(@app), class: "btn btn-default" %>
+        </div>
+      <% end %>
+      <div>
+        <%= link_to "レビュー", app_reviews_path(@app), class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
