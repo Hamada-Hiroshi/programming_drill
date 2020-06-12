@@ -43,6 +43,7 @@ $(document).on('turbolinks:load', function(){
   });
 });
 
+
 $(document).on('turbolinks:load', function(){
   $('#star').raty({
     size: 36,
@@ -51,5 +52,18 @@ $(document).on('turbolinks:load', function(){
     starHalf: "/assets/star-half.png",
     scoreName: 'review[rate]',
     half: true,
+  });
+});
+
+$(document).on('turbolinks:load', function(){
+  $('#star-rate-#{review.id}').raty({
+    size: 36,
+    starOff: "/assets/star-off.png",
+    starOn: "/assets/star-on.png",
+    starHalf: "/assets/star-half.png",
+    scoreName: 'review[rate]',
+    half: true,
+    readOnly: true,
+    score: "#{review.rate}"
   });
 });

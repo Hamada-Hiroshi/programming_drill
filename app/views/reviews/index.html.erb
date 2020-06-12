@@ -15,23 +15,45 @@
     </article>
 
     <div id="review-contents">
-      <% if @learning.present? && @learning.status == "学習済み" %>
-        <div id="review-form" class="field">
-          <%= form_with(model: [@app, @review]) do |f| %>
-            <h4>レビュー</h4>
-            <div id="star">
-              <%= f.label :rate, "評価" %>
-              <%= f.hidden_field :rate, id: "review_star" %>
-            </div>
-            <%= f.text_area :content %>
-            <%= f.submit "レビューを投稿", class: "btn btn-default" %>
+      <div id="review-form" class="field">
+        <% unless @my_review.present? %>
+          <% if @learning.present? && @learning.status == "学習済み" %>
+              <%= form_with(model: [@app, @review]) do |f| %>
+                <h4>レビュー</h4>
+                <div id="star">
+                  <%= f.label :rate, "評価" %>
+                  <%= f.hidden_field :rate, id: "review_star" %>
+                </div>
+                <%= f.text_area :content %>
+                <%= f.submit "レビューを投稿", class: "btn btn-default" %>
+              <% end %>
+          <% elsif @app.user != current_user %>
+          <!-- 投稿者ではないユーザのうち、まだ学習を始めていない、または学習ステータスが”学習済み”ではないユーザ -->
+            <p>学習済みのアプリケーションのみ、レビューを投稿できます。</p>
           <% end %>
-        </div>
-      <% elsif @app.user != current_user %> <!-- 投稿者ではないユーザで、かつ学習ステータスが”学習済み”ではない場合 -->
-        <p>学習済みのアプリケーションのみ、レビューを投稿できます。</p>
-      <% end %>
+        <% else %>
+          <p>このアプリケーションはすでにレビュー済みです。</p>
+        <% end %>
+      </div>
     </div>
 
+    <div id="review-index">
+      <% @reviews.each do |review| %>
+        <hr>
+        <div id="review-box">
+          <div class="post-user">
+            <%= attachment_image_tag(review.user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
+            <%= review.user.name %>
+            <%= review.created_at.strftime("%Y年%m月%d日") %>
+          </div>
+          <div class="post-content">
+            <div id="star-rate-#{review.id}"></div>
+            <%= review.rate %>
+            <%= review.content %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <div class="col-md-2">
