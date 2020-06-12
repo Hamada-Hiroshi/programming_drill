@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :apps, only: [:new, :create, :show, :edit, :update] do
     resources :learnings, only: [:create, :show, :edit, :update]
     resources :questions, only: [:index, :create]
-    resource :reviews, only: [:index]
+    resources :reviews, only: [:index, :create]
   end
 
   get 'languages/:id/rate' => 'languages#rate_show', as: 'rate_language'

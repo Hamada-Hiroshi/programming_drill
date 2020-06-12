@@ -29,7 +29,7 @@
       <div id="question-contents">
         <div id="question-form" class="field">
           <%= form_with(model: [@app, @question]) do |f| %>
-            <h4><%= f.label :content, "質問" %></h4>
+            <h4>質問</h4>
             <%= f.text_area :content %>
             <%= f.submit "質問を投稿", class: "btn btn-default" %>
           <% end %>
@@ -101,6 +101,9 @@
           <%= link_to "解説", explanation_app_path(@app), class: "btn btn-default" %>
         </div>
       <% end %>
+      <div>
+        <%= link_to "レビュー", app_reviews_path(@app), class: "btn btn-primary" %>
+      </div>
     </div>
   </div>
 </div>

@@ -14,6 +14,7 @@
 //= require activestorage
 //= require turbolinks
 //= require jquery
+//= require jquery.raty
 //= require bootstrap-sprockets
 //= require_tree .
 
@@ -39,5 +40,16 @@ $(document).on('turbolinks:load', function(){
     $(this).addClass("active");
     $($(this).attr("href")).show();
     return false;
+  });
+});
+
+$(document).on('turbolinks:load', function(){
+  $('#star').raty({
+    size: 36,
+    starOff: "/assets/star-off.png",
+    starOn: "/assets/star-on.png",
+    starHalf: "/assets/star-half.png",
+    scoreName: 'review[rate]',
+    half: true,
   });
 });
