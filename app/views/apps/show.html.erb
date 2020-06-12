@@ -57,8 +57,7 @@
           <%= link_to "編集", edit_app_path(@app), class: "btn btn-primary" %>
         </div>
       <% else %>
-        <% if Learning.find_by(user_id: current_user.id, app_id: @app.id) %>
-        <!-- コントローラにも同様に記述している。良い書き方はないか調べる。 -->
+        <% if @learning.present? %>
           <div class="btn-group-vertical">
             <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-primary" %>
             <%= link_to "学習メモ", app_learning_path(@app, @learning), class: "btn btn-default" %>
@@ -70,6 +69,9 @@
           <%= link_to "学習開始", app_learnings_path(@app), method: :post, class: "btn btn-primary" %>
         <% end %>
       <% end %>
+      <div>
+        <%= link_to "レビュー", app_reviews_path(@app), class: "btn btn-primary" %>
+      </div>
     </div>
   </div>
 </div>

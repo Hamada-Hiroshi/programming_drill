@@ -19,7 +19,7 @@ class QuestionsController < ApplicationController
       redirect_to app_questions_path(@app)
     else
       @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
-      @questions = @app.questions.all
+      @questions = @app.questions.where(parent_id: nil).order(created_at: "DESC")
       render 'index'
     end
   end
