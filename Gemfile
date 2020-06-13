@@ -73,4 +73,8 @@ gem 'ransack'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
+gem 'dotenv-rails'
 
+group :production do
+  gem 'mysql2'
+end
