@@ -56,14 +56,14 @@ $(document).on('turbolinks:load', function(){
 });
 
 $(document).on('turbolinks:load', function(){
-  $('#star-rate-#{review.id}').raty({
+  var $startEl = $('.star-rate')
+  $startEl.raty({
     size: 36,
     starOff: "/assets/star-off.png",
     starOn: "/assets/star-on.png",
     starHalf: "/assets/star-half.png",
-    scoreName: 'review[rate]',
     half: true,
     readOnly: true,
-    score: "#{review.rate}"
+    score: $startEl.data('score')
   });
 });
