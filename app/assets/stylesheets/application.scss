@@ -66,6 +66,44 @@ footer {
 }
 
 
+.btn-tag {
+  background-color: #CCC;
+  padding: 4px 8px;
+  margin-right: 5px
+}
+
+.link-app-box {
+  border-bottom: solid 1px #C0C0C0;
+  padding: 10px 0;
+  .link-app-user {
+    float: left;
+    height: 110px;
+    margin: 10px 20px 0 0;
+  }
+  .link-app-info {
+    height: 110px;
+    h4 {
+      margin: 5px 0;
+    }
+    .star-rate {
+      display: inline-block;
+      margin-bottom: 5px;
+      img {
+        width: 13px;
+        height: 13px;
+      }
+    }
+    span {
+      font-size: 0.9em;
+    }
+  }
+}
+
+
+
+
+
+
 
 
 

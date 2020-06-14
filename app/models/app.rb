@@ -9,7 +9,11 @@ class App < ApplicationRecord
   attr_accessor :score
 
   def average_rate
-    self.reviews.average(:rate)
+    if reviews.present?
+      reviews.average(:rate)
+    else
+      return "評価なし"
+    end
   end
 
 end

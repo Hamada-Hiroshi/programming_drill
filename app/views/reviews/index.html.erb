@@ -10,7 +10,7 @@
           <%= @app.updated_at.strftime("%Y年%m月%d日更新") %>
         </div>
         <h1><%= @app.title %></h1>
-        <div class="star-rate" data-score="<%= @reviews.average(:rate) %>"></div>
+        <div class="star-rate" data-score="<%= @app.average_rate %>"></div>
         <%= @app.average_rate %>
         <p>開発言語<%= link_to @app.language.name, language_path(@app.language) %></p>
       </section>

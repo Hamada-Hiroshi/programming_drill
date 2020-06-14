@@ -33,12 +33,21 @@
       </ul>
 
       <% @apps.each do |app| %>
-        <div class="new-app">
-          <%= link_to user_path(app.user) do %>
-            <%= attachment_image_tag(app.user, :profile_image, size: "70x70", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
-          <% end %>
-          <%= link_to app.title, app_path(app) %>
-          <%= link_to app.language.name, language_path(app.language) %>
+        <div class="link-app-box">
+          <div class="link-app-user">
+            <%= link_to user_path(app.user) do %>
+              <%= attachment_image_tag(app.user, :profile_image, size: "60x60", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
+            <% end %>
+          </div>
+          <div class="link-app-info">
+            <h4><%= link_to app.title, app_path(app) %></h4>
+            <div class="star-rate" data-score="<%= app.average_rate %>"></div>
+            <span>（<%= app.average_rate %>）</span>
+            <p>開発言語：<%= link_to app.language.name, language_path(app.language) %></p>
+            <% app.tag_list.each do |tag| %>
+              <span><%= link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag" %></span>
+            <% end %>
+          </div>
         </div>
       <% end %>
     </div>
