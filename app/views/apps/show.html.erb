@@ -1,44 +1,46 @@
 <div class="row">
   <div class="col-md-10">
     <article class="app-info">
-      <section>
-        <div>
+      <section class="app-info-top">
+        <div class="app-post">
           <%= link_to user_path(@app.user) do %>
             <%= attachment_image_tag(@app.user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
-            <%= @app.user.name %>
           <% end %>
-          <%= @app.updated_at.strftime("%Y年%m月%d日更新") %>
+          <span><%= @app.user.name %></span>
+          <span><%= @app.updated_at.strftime("%Y年%m月%d日更新") %></span>
         </div>
         <h1><%= @app.title %></h1>
-        <p>開発言語<%= link_to @app.language.name, language_path(@app.language) %></p>
+        <div class="star-rate" data-score="<%= @app.average_rate %>"></div>
+        <span>（<%= @app.average_rate %>）</span>
+        <p>開発言語：<%= link_to @app.language.name, language_path(@app.language) %></p>
         <% @app.tag_list.each do |tag| %>
-          <span><%= link_to tag, tag_apps_path(tag_name: tag) %></span>
+          <span><%= link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag" %></span>
         <% end %>
       </section>
 
-      <section>
+      <section class="app-contents">
         <h3>概要</h3>
-        <%= @app.overview %>
+        <p><%= @app.overview %></p>
       </section>
 
-      <section>
+      <section class="app-contents">
         <h3>アプリケーションURL</h3>
         <%= link_to @app.app_url, @app.app_url, target: :_blank %>
       </section>
 
-      <section>
+      <section class="app-contents">
         <h3>リモートリポジトリURL</h3>
         <%= link_to @app.repo_url, @app.repo_url, target: :_blank %>
       </section>
 
-      <section>
+      <section class="app-contents">
         <h3>機能一覧</h3>
-        <%= @app.function %>
+        <p><%= @app.function %></p>
       </section>
 
-      <section>
+      <section class="app-contents">
         <h3>対象者</h3>
-        <%= @app.target %>
+        <p><%= @app.target %></p>
       </section>
 
       <% unless @app.user == current_user || Learning.find_by(user_id: current_user.id, app_id: @app.id) %>

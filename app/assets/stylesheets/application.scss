@@ -51,6 +51,7 @@ header {
 footer {
   #footer-top {
     padding: 50px 200px; /* 左右余白 */
+    margin-top: 70px;
     height: 200px;
     background-color: #FFF;
     border-top: solid 1px #AAA;
@@ -65,12 +66,21 @@ footer {
   }
 }
 
-
+/* タグ */
 .btn-tag {
   background-color: #CCC;
   padding: 4px 8px;
   margin-right: 5px
 }
+
+/* レビュー星 */
+.star-rate {
+  display: inline-block;
+}
+span {
+  font-size: 0.9em;
+}
+
 
 .link-app-box {
   border-bottom: solid 1px #C0C0C0;
@@ -86,20 +96,69 @@ footer {
       margin: 5px 0;
     }
     .star-rate {
-      display: inline-block;
       margin-bottom: 5px;
       img {
         width: 13px;
         height: 13px;
       }
     }
-    span {
-      font-size: 0.9em;
-    }
   }
 }
 
+.my-app-box {
+  border-bottom: solid 1px #C0C0C0;
+  padding: 10px 20px 15px;
+  h4 {
+    margin: 5px 30px 15px 0;
+    display: inline-block;
+  }
+  .star-rate {
+    img {
+      width: 13px;
+      height: 13px;
+    }
+  }
+}
+.my-learning-status {
+  vertical-align: bottom;
+  p {
+    margin: 5px 0 0;
+  }
+  a {
+    margin-top: 5px;
+  }
+}
+.my-app-edit {
+  margin-top: 20px;
+}
 
+.app-info {
+  .app-info-top {
+    .app-post {
+      span {
+        font-size: 1.1em;
+        vertical-align: bottom;
+        margin-right: 10px;
+      }
+    }
+    h1 {
+      font-size: 40px;
+      margin: 10px 0 5px;
+    }
+    p {
+      margin: 15px 0 5px;
+      font-size: 1.2em;
+    }
+  }
+  .app-contents {
+    h3 {
+      margin-top: 50px;
+    }
+    p, a {
+      font-size: 1.2em;
+    }
+  }
+}
 
 
 
