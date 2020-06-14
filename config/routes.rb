@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update]
 
   get 'apps/rate' => 'apps#rate_index', as: 'rate_apps'
+  get 'apps/tag' => 'apps#tag', as: 'tag_apps'
+  get 'apps/tag/rate' => 'apps#rate_tag', as: 'rate_tag_apps'
   post 'apps/confirm' => 'apps#confirm', as: 'confirm_apps'
   get 'apps/:id/add_edit' => 'apps#add_edit', as: 'add_edit_app'
   patch 'apps/:id/add' => 'apps#add_update', as: 'add_update_app'

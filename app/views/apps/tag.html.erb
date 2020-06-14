@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-md-3">
     <div class="category-bar">
-      <ul class="category-menu nav nav-tabs">
-        <li class="active"><%= link_to "言語別", ".language-tab" %></li>
-        <li><%= link_to "タグ別", ".tag-tab" %></li>
+      <ul class="category-menu2 nav nav-tabs">
+        <li><%= link_to "言語別", ".language-tab" %></li>
+        <li class="active"><%= link_to "タグ別", ".tag-tab" %></li>
       </ul>
 
-      <div class="category-contents">
+      <div class="category-contents2">
         <div class="language-tab tab">
           <ul>
             <% @languages.each do |language| %>
@@ -28,8 +28,8 @@
   <div class="col-md-9">
     <div class="app-index">
       <ul class="nav nav-tabs">
-        <li class="active"><%= link_to "新着順", language_path(@language) %></li>
-        <li><%= link_to "評価順", rate_language_path(@language) %></li>
+        <li class="active"><%= link_to "新着順", tag_apps_path(tag_name: params[:tag_name]) %></li>
+        <li><%= link_to "評価順", rate_tag_apps_path(tag_name: params[:tag_name]) %></li>
       </ul>
 
       <% @apps.each do |app| %>
