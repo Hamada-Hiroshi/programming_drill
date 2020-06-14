@@ -11,7 +11,7 @@
         </div>
         <h1><%= @app.title %></h1>
         <div class="star-rate" data-score="<%= @reviews.average(:rate) %>"></div>
-        <%= @reviews.average(:rate) %>
+        <%= @app.average_rate %>
         <p>開発言語<%= link_to @app.language.name, language_path(@app.language) %></p>
       </section>
     </article>

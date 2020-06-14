@@ -17,13 +17,13 @@
 
 <div class="row">
   <div id="user-app">
-    <ul id="tab-menu" class="nav nav-tabs">
-      <li class="active"><%= link_to "学習#{@user.learnings.count}件", "#tab1" %></li>
-      <li><%= link_to "投稿#{@user.apps.count}件", "#tab2" %></li>
+    <ul id="user-app-menu" class="nav nav-tabs">
+      <li class="active"><%= link_to "学習#{@user.learnings.count}件", "#learning-tab" %></li>
+      <li><%= link_to "投稿#{@user.apps.count}件", "#post-tab" %></li>
     </ul>
 
-    <div id="tab-contents">
-      <div id="tab1" class="tab">
+    <div id="user-app-contents">
+      <div id="learning-tab" class="tab">
         <ul>
           <% @user.learnings.each do |learning| %>
             <li><%= link_to learning.app.title, app_path(learning.app) %></li>
@@ -31,7 +31,7 @@
         </ul>
       </div>
 
-      <div id="tab2" class="tab">
+      <div id="post-tab" class="tab">
         <ul>
           <% @user.apps.each do |app| %>
             <li><%= link_to app.title, app_path(app) %></li>

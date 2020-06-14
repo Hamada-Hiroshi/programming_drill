@@ -30,13 +30,42 @@ $(document).on('turbolinks:load', function(){
 
 
 $(document).on('turbolinks:load', function(){
-  $('#tab-contents .tab[id != "tab1"]').hide();
+  $('#user-app-contents .tab[id != "learning-tab"]').hide();
 });
 
 $(document).on('turbolinks:load', function(){
-  $('#tab-menu a').on('click', function() {
-    $("#tab-contents .tab").hide();
-    $("#tab-menu .active").removeClass("active");
+  $('#user-app-menu a').on('click', function() {
+    $("#user-app-contents .tab").hide();
+    $("#user-app-menu .active").removeClass("active");
+    $(this).addClass("active");
+    $($(this).attr("href")).show();
+    return false;
+  });
+});
+
+
+$(document).on('turbolinks:load', function(){
+  $('.category-contents .tag-tab').hide();
+});
+
+$(document).on('turbolinks:load', function(){
+  $('.category-menu a').on('click', function() {
+    $(".category-contents .tab").hide();
+    $(".category-menu .active").removeClass("active");
+    $(this).addClass("active");
+    $($(this).attr("href")).show();
+    return false;
+  });
+});
+
+$(document).on('turbolinks:load', function(){
+  $('.category-contents2 .language-tab').hide();
+});
+
+$(document).on('turbolinks:load', function(){
+  $('.category-menu2 a').on('click', function() {
+    $(".category-contents2 .tab").hide();
+    $(".category-menu2 .active").removeClass("active");
     $(this).addClass("active");
     $($(this).attr("href")).show();
     return false;

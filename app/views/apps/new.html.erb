@@ -38,6 +38,11 @@
       <%= f.text_area :target %>
     </div>
 
+    <div class="field">
+      <%= f.label :tag_list, "タグ付け" %>
+      <%= f.text_area :tag_list, value: @app.tag_list.join(',') %>
+    </div>
+
     <%= f.submit "確認ページへ進む", class: "btn btn-primary" %>
   <% end %>
 </div>

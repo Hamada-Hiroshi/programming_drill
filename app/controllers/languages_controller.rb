@@ -1,14 +1,20 @@
 class LanguagesController < ApplicationController
-  def show
+  before_action :set_method
+
+  def set_method
     @languages = Language.all
     @language = Language.find(params[:id])
-    @apps = @language.apps.where(status: true).order(created_at: "DESC")
+    @apps = @language.apps.where(status: true).each do |app|
+      app.score = app.average_rate
+    end
+  end
+
+  def show
+    @apps = @apps.sort_by { |app| app.created_at }.reverse
   end
 
   def rate_show
-    @languages = Language.all
-    @language = Language.find(params[:id])
-    @apps = @language.apps.where(status: true) #評価順にソート
+    @apps = @apps.sort_by { |app| app.score.to_i }.reverse
   end
 
 end

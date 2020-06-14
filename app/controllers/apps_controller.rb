@@ -1,6 +1,9 @@
 class AppsController < ApplicationController
   before_action :set_app, only: [:show, :edit, :add_edit, :update, :add_update, :hint, :explanation, :hidden, :cancel]
   before_action :set_learning, only: [:show, :hint, :explanation]
+  before_action :set_languages, only: [:index, :rate_index, :tag, :rate_tag]
+  before_action :set_apps_score, only: [:index, :rate_index]
+  before_action :set_tag_apps_score, only: [:tag, :rate_tag]
 
   def set_app
     @app = App.find(params[:id])
@@ -10,14 +13,37 @@ class AppsController < ApplicationController
     @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
   end
 
-  def index
+  def set_languages
     @languages = Language.all
-    @apps = App.where(status: true).order(created_at: "DESC")
+  end
+
+  def set_apps_score
+    @apps = App.where(status: true).each do |app|
+      app.score = app.average_rate
+    end
+  end
+
+  def set_tag_apps_score
+    @apps = App.tagged_with(params[:tag_name]).where(status: true).each do |app|
+      app.score = app.average_rate
+    end
+  end
+
+
+  def index
+    @apps = @apps.sort_by { |app| app.created_at }.reverse
   end
 
   def rate_index
-    @languages = Language.all
-    @apps = App.where(status: true) #評価順にソートする
+    @apps = @apps.sort_by { |app| app.score.to_i }.reverse
+  end
+
+  def tag
+    @apps = @apps.sort_by { |app| app.created_at }.reverse
+  end
+
+  def rate_tag
+    @apps = @apps.sort_by { |app| app.score.to_i }.reverse
   end
 
   def new
@@ -84,9 +110,10 @@ class AppsController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+
   private
   def app_params
-    params.require(:app).permit(:title, :language_id, :overview, :app_url, :repo_url, :function, :target)
+    params.require(:app).permit(:title, :language_id, :overview, :app_url, :repo_url, :function, :target, :tag_list)
   end
 
   def add_app_params
