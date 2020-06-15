@@ -28,17 +28,17 @@
           <% @user.learnings.each do |learning| %>
             <div class="my-app-box">
               <div class="row">
-                <div class="my-app col-md-8">
+                <div class="my-app col-md-9">
                   <h4><%= link_to learning.app.title, app_path(learning.app) %></h4>
                   <div class="star-rate" data-score="<%= learning.app.average_rate %>"></div>
                   <span>（<%= learning.app.average_rate %>）</span>
                   <p>開発言語：<%= link_to learning.app.language.name, language_path(learning.app.language) %></p>
                   <% learning.app.tag_list.each do |tag| %>
-                    <span><%= link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag" %></span>
+                    <span class="tag-link"><%= link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag" %></span>
                   <% end %>
                 </div>
 
-                <div class="my-learning-status col-md-4">
+                <div class="my-learning-status col-md-3">
                   <p>学習開始日： <%= learning.created_at.strftime("%Y年%m月%d日") %></p>
                   <p>学習状況： <%= learning.status %></p>
                   <% if learning.status == "学習済み" %>
@@ -67,7 +67,7 @@
                 <span>（<%= app.average_rate %>）</span>
                 <p>開発言語：<%= link_to app.language.name, language_path(app.language) %></p>
                 <% app.tag_list.each do |tag| %>
-                  <span><%= link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag" %></span>
+                  <span class="tag-link"><%= link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag" %></span>
                 <% end %>
               </div>
 

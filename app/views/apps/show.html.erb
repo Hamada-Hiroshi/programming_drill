@@ -14,7 +14,7 @@
         <span>（<%= @app.average_rate %>）</span>
         <p>開発言語：<%= link_to @app.language.name, language_path(@app.language) %></p>
         <% @app.tag_list.each do |tag| %>
-          <span><%= link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag" %></span>
+          <span class="tag-link"><%= link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag" %></span>
         <% end %>
       </section>
 
