@@ -44,17 +44,16 @@
 
     <div id="review-index">
       <% @reviews.each do |review| %>
-        <hr>
-        <div id="review-box">
+        <div class="review-box">
           <div class="post-user">
             <%= attachment_image_tag(review.user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
-            <%= review.user.name %>
-            <%= review.created_at.strftime("%Y年%m月%d日") %>
+            <span><%= review.user.name %></span>
+            <span><%= review.created_at.strftime("%Y年%m月%d日") %></span>
           </div>
           <div class="post-content">
             <div class="star-rate" data-score="<%= review.rate %>"></div>
             <%= review.rate %>
-            <%= review.content %>
+            <p class="review-text"><%= review.content %></p>
           </div>
         </div>
       <% end %>
