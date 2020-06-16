@@ -4,12 +4,12 @@
       <article  class="learning-app-info">
         <h1><%= @app.title %></h1>
         <section>
-          <h5>アプリケーションURL</h5>
-          <%= link_to @app.app_url, @app.app_url, target: :_blank %>
+          <h4>アプリケーションURL</h4>
+          <p><%= link_to @app.app_url, @app.app_url, target: :_blank %></p>
         </section>
         <section>
-          <h5>リモートリポジトリURL</h5>
-          <%= link_to @app.repo_url, @app.repo_url, target: :_blank %>
+          <h4>リモートリポジトリURL</h4>
+          <p><%= link_to @app.repo_url, @app.repo_url, target: :_blank %></p>
         </section>
       </article>
 

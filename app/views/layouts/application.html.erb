@@ -11,38 +11,55 @@
 
   <body>
     <header class="navbar navbar-fixed-top">
-      <div id="header-logo">
-        <%= link_to root_path do %>
-          <span>Programming Drill</span>
-          <!-- ロゴ、検索バーを入れる -->
-        <% end %>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5">
+            <div id="header-logo">
+              <%= link_to root_path do %>
+                <span>Programming Drill</span>
+                <!-- ロゴ、検索バーを入れる -->
+              <% end %>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <ul class="nav navbar-nav navbar-right" id="header-link">
+              <% if user_signed_in? %>
+                <li>
+                  <%= link_to user_path(current_user) do %>
+                    <%= attachment_image_tag(current_user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
+                  <% end %>
+                </li>
+                <li><%= link_to "新規投稿", new_app_path %></li>
+                <li><%= link_to "ログアウト",  destroy_user_session_path, method: :delete %></li>
+              <% else %>
+                <li><%= link_to "新規登録", new_user_registration_path %></li>
+                <li><%= link_to "ログイン", new_user_session_path %></li>
+              <% end %>
+            </ul>
+          </div>
+
+          <div class="flash">
+            <p id="notice"><%= flash[:notice] %></p>
+            <p id="success"><%= flash[:success] %></p>
+            <p id="alert"><%= flash[:alert] %></p>
+          </div>
+        </div>
       </div>
-      <ul class="nav navbar-nav navbar-right" id="header-link">
-        <% if user_signed_in? %>
-          <li>
-            <%= link_to user_path(current_user) do %>
-              <%= attachment_image_tag(current_user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
-            <% end %>
-          </li>
-          <li><%= link_to "新規投稿", new_app_path %></li>
-          <li><%= link_to "ログアウト",  destroy_user_session_path, method: :delete %></li>
-        <% else %>
-          <li><%= link_to "新規登録", new_user_registration_path %></li>
-          <li><%= link_to "ログイン", new_user_session_path %></li>
-        <% end %>
-      </ul>
     </header>
 
     <div class="main-body container">
-      <p class="flash" id="notice"><%= flash[:notice] %></p>
-      <p class="flash" id="success"><%= flash[:success] %></p>
-      <p class="flash" id="alert"><%= flash[:alert] %></p>
       <%= yield %>
     </div>
 
     <footer>
       <div id="footer-top">
-        <%= link_to "このサイトについて", about_path %>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <%= link_to "このサイトについて", about_path %>
+            </div>
+          </div>
+        </div>
       </div>
       <div id="footer-bottom">
         <p><small>&copy;</small> hamada_hiroshi</p>
