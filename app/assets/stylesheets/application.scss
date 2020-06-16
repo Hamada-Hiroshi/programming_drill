@@ -61,7 +61,7 @@ body {
 footer {
   #footer-top {
     padding: 50px;
-    margin-top: 70px;
+    margin-top: 30px;
     height: 200px;
     background-color: #FFF;
     border-top: solid 1px #AAA;
@@ -73,6 +73,43 @@ footer {
   #footer-bottom {
     padding: 10px 0;
     text-align: center;
+  }
+}
+
+/* 白背景のボックス、ボーダー */
+.border-box {
+  border: solid 1px #AAA;
+  background-color: #FFF;
+  margin: 0;
+  .border-left {
+    border-left: solid 1px #AAA;
+    min-height: 600px;
+  }
+  .border-space{
+    padding: 30px 40px;
+  }
+}
+.top-bottom-space {
+  padding: 40px 0;
+}
+
+/* 改行を反映 */
+p {
+  white-space: pre-wrap;
+}
+
+/* リンクボタンの間隔 */
+.actions a {
+  margin: 0 20px;
+}
+
+/* 編集ページのリンクバー */
+.edit-link {
+  padding-left: 0;
+  li {
+  list-style: none;
+  font-size: 16px;
+  margin-bottom: 30px;
   }
 }
 
@@ -272,5 +309,117 @@ select {
   background-repeat: no-repeat;
 }
 
+/* マイページ */
+#user-image {
+  margin-top: 20px;
+}
+#user-info {
+  margin-bottom: 40px;
+  #user-acount {
+    h3 {
+      display: inline-block;
+      margin-right: 30px;
+      margin-bottom: 0;
+    }
+    a {
+      vertical-align: bottom;
+    }
+  }
+  #user-introduction {
+    margin: 20px 0;
+  }
+}
+
+/* プロフィール編集 */
+.edit-user {
+  img {
+    float: left;
+  }
+  .edit-user-name {
+    min-height: 150px;
+    margin: 0 0 30px 200px;
+    padding-top: 30px;
+    h3 {
+      margin-top: 0;
+    }
+  }
+}
+
+/* ユーザ情報の入力フォーム */
+.user-form{
+  margin-bottom: 20px;
+  label {
+    width: 130px;
+    vertical-align: top;
+  }
+  input {
+    width: 400px;
+    display: inline-block;
+  }
+  textarea {
+    width: 400px;
+    min-height: 100px;
+    display: inline-block;
+  }
+}
+
+/* パスワード入力フォーム */
+.password-form{
+  margin-bottom: 20px;
+  label {
+    width: 130px;
+    vertical-align: top;
+  }
+  input {
+    width: 300px;
+    display: inline-block;
+  }
+}
+
+/* アプリ投稿フォーム */
+.new-app-form {
+  margin-bottom: 30px;
+  label {
+    font-size: 1.2em;
+    width: 200px;
+    vertical-align: top;
+    text-align: right;
+    margin-right: 30px;
+  }
+  input {
+    width: 600px;
+    display: inline-block;
+  }
+  textarea {
+    width: 600px;
+    min-height: 100px;
+    display: inline-block;
+  }
+  .mini-height {
+    min-height: 54px;
+  }
+  p {
+    display: inline-block;
+    margin: 0 0 0 230px;
+  }
+}
+
+/* アプリ投稿確認 */
+.new-app-confirm {
+  margin-bottom: 40px;
+  h4 {
+    font-weight: bold;
+  }
+}
+
+/* 削除ページ */
+.confirm-message {
+  p {
+    font-size: 17px;
+  }
+  a {
+    margin: 40px 50px 0 0;
+  }
+}
 
 

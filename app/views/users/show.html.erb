@@ -1,17 +1,23 @@
 <div class="row">
-  <div class="col-md-3">
+  <div id="user-image" class="col-md-3 col-md-offset-1">
     <%= attachment_image_tag(@user, :profile_image, size: "150x150", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
   </div>
 
-  <div class="col-md-9">
-    <h3><%= @user.name %></h3>
-    <% if @user == current_user %>
-      <%= link_to "アカウント情報を編集", edit_user_path(@user), class: "btn btn-default" %>
-    <% end %>
-    <h5>自己紹介</h5>
-    <%= @user.introduction %>
-    <h5>学習スキル</h5>
-    <%= @user.skill %>
+  <div id="user-info" class="col-md-7">
+    <div id="user-acount">
+      <h3><%= @user.name %></h3>
+      <% if @user == current_user %>
+        <%= link_to "アカウント情報を編集", edit_user_path(@user), class: "btn btn-default" %>
+      <% end %>
+    </div>
+    <div id="user-introduction">
+      <h4>自己紹介</h4>
+      <%= @user.introduction %>
+    </div>
+    <div id="user-skill">
+      <h4>学習スキル</h4>
+      <%= @user.skill %>
+    </div>
   </div>
 </div>
 
