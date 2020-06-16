@@ -109,3 +109,11 @@ $(document).on('turbolinks:load', function(){
     $(this).height(height  * lines);
   });
 });
+
+//フラッシュメッセージの表示
+$(document).on('turbolinks:load', function(){
+  $('#header-flash').hide();
+});
+$(document).on('turbolinks:load', function(){
+  $('#header-flash').slideDown();
+});

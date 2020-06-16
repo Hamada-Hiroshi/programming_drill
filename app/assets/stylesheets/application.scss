@@ -18,29 +18,40 @@
 
 
 body {
-  padding-top: 70px;
+  padding-top: 80px;
   background-color: #F6F6F6;
 }
 
-header {
+#header-top {
   background-color: #483D8B;
-  height: 55px;
-  #header-logo {
-    display: inline-block;
-    vertical-align: middle;
-  }
-  #header-link {
-    li {
-      margin-left: 30px;
-      a {
-        color: #FFF;
-        padding: 0;
-        &:hover {
-          background-color: transparent;
-        }
+  padding: 8px 0;
+}
+#header-link {
+  margin-right: 0;
+  li {
+    margin-left: 40px;
+    height: 40px;
+    font-size: 1.2em;
+    padding: 10px 0;
+    a {
+      color: #FFF;
+      padding: 0;
+      &:hover {
+        background-color: transparent;
       }
     }
   }
+  #header-mylink {
+    padding: 0;
+  }
+}
+
+/* フラッシュメッセージ */
+#header-flash {
+  background-color: #FFF;
+}
+.flash {
+  margin: 0;
 }
 
 .main-body {
