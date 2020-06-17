@@ -77,9 +77,11 @@
                 <% end %>
               </div>
 
-              <div class="my-app-edit col-md-3">
-                <%= link_to "内容を編集する", edit_app_path(app), class: "btn btn-primary" %>
-              </div>
+              <% if @user == current_user %>
+                <div class="my-app-edit col-md-3">
+                  <%= link_to "内容を編集する", edit_app_path(app), class: "btn btn-primary" %>
+                </div>
+              <% end %>
             </div>
           </div>
         <% end %>

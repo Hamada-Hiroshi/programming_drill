@@ -1,16 +1,21 @@
 class AppsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :confirm, :create,
+   :edit, :add_edit, :update, :add_update, :hint, :explanation, :hidden, :cancel]
   before_action :set_app, only: [:show, :edit, :add_edit, :update, :add_update, :hint, :explanation, :hidden, :cancel]
   before_action :set_learning, only: [:show, :hint, :explanation]
   before_action :set_languages, only: [:index, :rate_index, :tag, :rate_tag]
   before_action :set_apps_score, only: [:index, :rate_index]
   before_action :set_tag_apps_score, only: [:tag, :rate_tag]
+  before_action :ensure_correct_user, only: [:edit, :add_edit, :update, :add_update, :hidden, :cancel]
 
   def set_app
     @app = App.find(params[:id])
   end
 
   def set_learning
-    @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
+    if user_signed_in?
+      @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
+    end
   end
 
   def set_languages
@@ -63,7 +68,7 @@ class AppsController < ApplicationController
       render 'new'
     else
       @app.save
-      flash[:success] = "新規投稿に成功しました。"
+      flash[:success] = "アプリケーションの新規投稿に成功しました。"
       redirect_to app_path(@app)
     end
   end
@@ -79,7 +84,7 @@ class AppsController < ApplicationController
 
   def update
     if @app.update(app_params)
-      flash[:success] = "投稿アプリを更新しました。"
+      flash[:success] = "アプリケーション情報を更新しました。"
       redirect_to app_path(@app)
     else
       render 'edit'
@@ -88,7 +93,7 @@ class AppsController < ApplicationController
 
   def add_update
     if @app.update(add_app_params)
-      flash[:success] = "投稿アプリを更新しました。"
+      flash[:success] = "アプリケーション情報を更新しました。"
       redirect_to app_path(@app)
     else
       render 'add_edit'
@@ -106,10 +111,16 @@ class AppsController < ApplicationController
 
   def cancel
     @app.update(status: false)
-    flash[:alert] = "アプリを非公開にしました。"
+    flash[:alert] = "アプリケーションを非公開にしました。"
     redirect_to user_path(current_user)
   end
 
+  def ensure_correct_user
+    if @app.user != current_user
+      flash[:alert] = "アクセス権限がありません。"
+      redirect_back(fallback_location: root_path)
+    end
+  end
 
   private
   def app_params

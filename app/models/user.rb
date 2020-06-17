@@ -8,4 +8,10 @@ class User < ApplicationRecord
   has_many :learnings, dependent: :destroy
   has_many :questions
   has_many :reviews
+  validates :name, presence: true, length: { maximum: 30 }
+  validates :status, inclusion: { in: [true, false] }
+
+  def active_for_authentication?
+    super && (self.status == true)
+  end
 end

@@ -1,5 +1,7 @@
 class LearningsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_learning, only: [:show, :edit, :update]
+  before_action :ensure_correct_user
 
   def set_learning
     @learning = Learning.find(params[:id])
@@ -8,7 +10,7 @@ class LearningsController < ApplicationController
   def create
     @learning = current_user.learnings.new(app_id: params[:app_id])
     @learning.save
-    flash[:notice] = "学習を開始しました。"
+    flash[:success] = "学習を開始しました。"
     redirect_to app_learning_path(@learning.app, @learning)
   end
 
@@ -17,8 +19,15 @@ class LearningsController < ApplicationController
 
   def update
     @learning.update(learning_params)
-    flash[:notice] = "学習記録を更新しました。"
+    flash[:success] = "学習記録を更新しました。"
     redirect_back(fallback_location: root_path)
+  end
+
+  def ensure_correct_user
+    if @learning.user != current_user
+      flash[:alert] = "アクセス権限がありません。"
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   private

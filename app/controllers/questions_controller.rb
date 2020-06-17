@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!, only: [:create]
+
   def index
     @app = App.find(params[:app_id])
     @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)

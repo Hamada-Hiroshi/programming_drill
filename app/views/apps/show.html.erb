@@ -43,8 +43,10 @@
         <p><%= @app.target %></p>
       </section>
 
-      <% unless @app.user == current_user || Learning.find_by(user_id: current_user.id, app_id: @app.id) %>
-        <%= link_to "このアプリケーションを作成する", app_learnings_path(@app), method: :post, class: "btn btn-primary" %>
+      <% if user_signed_in? %>
+        <% unless @app.user == current_user || Learning.find_by(user_id: current_user.id, app_id: @app.id) %>
+          <%= link_to "このアプリケーションを作成する", app_learnings_path(@app), method: :post, class: "btn btn-primary" %>
+        <% end %>
       <% end %>
     </article>
   </div>
