@@ -117,3 +117,24 @@ $(document).on('turbolinks:load', function(){
 $(document).on('turbolinks:load', function(){
   $('#header-flash').slideDown();
 });
+
+//リンクバー固定
+$(document).on('turbolinks:load', function(){
+  $(function($){
+    var sidebar = $(".link-bar");
+    // サイドバーの位置
+    var sidebar_top = sidebar.offset().top;
+
+    $(window).on('scroll resize', function(){ // スクロールかリサイズ時
+      // 現在の位置
+      var scrollTop = $(document).scrollTop();
+      if (scrollTop > sidebar_top - 80){
+        // 現在位置が、初期位置より下なら、画面上部にサイドバーを固定
+        sidebar.css({'position': 'fixed',
+            'top': 80,
+            'width': sidebar.width()
+        });
+      }
+    });
+  });
+});

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-10">
+  <div class="col-md-10 app-show-box border-space">
     <div id="app-learning">
       <article  class="learning-app-info">
         <h1><%= @learning.app.title %></h1>
@@ -40,17 +40,17 @@
     </div>
   </div>
 
-  <div class="col-md-2">
+  <div class="col-md-1">
     <div class="link-bar">
-      <div class="btn-group-vertical">
+      <div class="group-btn">
         <%= link_to "アプリ詳細", app_path(@learning.app), class: "btn btn-default" %>
-        <%= link_to "学習メモ", app_learning_path(@learning.app, @learning), class: "btn btn-primary" %>
+        <%= link_to "学習メモ", app_learning_path(@learning.app, @learning), class: "btn btn-default btn-active" %>
         <%= link_to "ヒント", hint_app_path(@learning.app), class: "btn btn-default" %>
         <%= link_to "質問", app_questions_path(@learning.app), class: "btn btn-default" %>
         <%= link_to "解説", explanation_app_path(@learning.app), class: "btn btn-default" %>
       </div>
-      <div>
-        <%= link_to "レビュー", app_reviews_path(@learning.app), class: "btn btn-primary" %>
+      <div class="one-btn">
+        <%= link_to "レビュー", app_reviews_path(@learning.app), class: "btn btn-default" %>
       </div>
     </div>
   </div>

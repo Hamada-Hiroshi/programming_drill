@@ -86,12 +86,18 @@ footer {
     border-left: solid 1px #AAA;
     min-height: 600px;
   }
-  .border-space{
-    padding: 30px 40px;
-  }
+}
+.border-space{
+  padding: 30px 40px;
 }
 .top-bottom-space {
   padding: 40px 0;
+}
+.app-show-box {
+  border: solid 1px #AAA;
+  background-color: #FFF;
+  margin-left: 15px;
+  min-height: 600px;
 }
 
 /* 改行を反映 */
@@ -102,6 +108,29 @@ p {
 /* リンクボタンの間隔 */
 .actions a {
   margin: 0 20px;
+}
+
+/* アプリ詳細のリンクバー */
+.group-btn a {
+  width: 130px;
+  border-radius: 0;
+  padding: 15px 0;
+}
+.one-btn {
+  margin-top: 30px;
+  a {
+    width: 130px;
+    border-radius: 0;
+    padding: 15px 0;
+  }
+}
+.btn-active {
+  background-color: #6A5ACD;
+  color: #FFF;
+  &:hover {
+    background-color: #6A5ACD;
+    color: #FFF;
+  }
 }
 
 /* 編集ページのリンクバー */
