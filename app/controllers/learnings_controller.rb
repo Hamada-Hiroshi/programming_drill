@@ -15,10 +15,6 @@ class LearningsController < ApplicationController
   def show
   end
 
-  def edit
-    #メモの記入を詳細ページと分離する場合使用する。
-  end
-
   def update
     @learning.update(learning_params)
     flash[:notice] = "学習記録を更新しました。"

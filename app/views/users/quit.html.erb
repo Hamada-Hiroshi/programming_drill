@@ -1,23 +1,25 @@
-<div class="row">
-  <div class="col-md-3">
-    <ul>
+<div class="row border-box">
+  <div class="col-md-3 border-space">
+    <ul class="edit-link">
       <li><%= link_to "プロフィール編集", edit_user_path(@user) %></li>
       <li><%= link_to "パスワード変更", edit_user_registration_path %></li>
       <li><%= link_to "アカウント削除", quit_user_path(@user) %></li>
     </ul>
   </div>
 
-  <div class="col-md-9">
-    <div>
-      <%= attachment_image_tag(@user, :profile_image, size: "150x150", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
-      <h3><%= @user.name %></h3>
-      <p>
-        現在利用しているアカウントを削除します。<br>
-        削除すると、これまで利用された学習履歴やマイページが全て閲覧できなくなります。<br>
-        本当にアカウントを削除してもよろしいですか？
-      </p>
-      <%= link_to "アカウントを継続", user_path(@user), class: "btn btn-primary" %>
-      <%= link_to "アカウントを削除", cancel_user_path(@user), method: :patch, class: "btn btn-danger" %>
+  <div class="col-md-9  border-left border-space">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="edit-user">
+          <%= attachment_image_tag(@user, :profile_image, size: "150x150", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
+          <h3 class="edit-user-name"><%= @user.name %></h3>
+        </div>
+        <div class="confirm-message">
+          <p>現在利用しているアカウントを削除します。<br>削除すると、これまで利用された学習履歴やマイページが<br>全て閲覧できなくなります。<br><br>本当にアカウントを削除してもよろしいですか？</p>
+          <%= link_to "アカウントを継続", user_path(@user), class: "btn btn-primary" %>
+          <%= link_to "アカウントを削除", cancel_user_path(@user), method: :patch, class: "btn btn-danger" %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

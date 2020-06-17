@@ -18,6 +18,7 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
+//画像アップロード時のプレビュー表示
 $(document).on('turbolinks:load', function(){
   $('#myImage').on('change', function (e) {
       var reader = new FileReader();
@@ -28,7 +29,7 @@ $(document).on('turbolinks:load', function(){
   });
 });
 
-
+//マイページのタブ切り替え
 $(document).on('turbolinks:load', function(){
   $('#user-app-contents .tab[id != "learning-tab"]').hide();
 });
@@ -43,11 +44,10 @@ $(document).on('turbolinks:load', function(){
   });
 });
 
-
+//アプリ一覧ページのタブ切り替え
 $(document).on('turbolinks:load', function(){
   $('.category-contents .tag-tab').hide();
 });
-
 $(document).on('turbolinks:load', function(){
   $('.category-menu a').on('click', function() {
     $(".category-contents .tab").hide();
@@ -61,7 +61,6 @@ $(document).on('turbolinks:load', function(){
 $(document).on('turbolinks:load', function(){
   $('.category-contents2 .language-tab').hide();
 });
-
 $(document).on('turbolinks:load', function(){
   $('.category-menu2 a').on('click', function() {
     $(".category-contents2 .tab").hide();
@@ -72,7 +71,7 @@ $(document).on('turbolinks:load', function(){
   });
 });
 
-
+//レビューの星表示
 $(document).on('turbolinks:load', function(){
   $('#star').raty({
     size: 36,
@@ -94,5 +93,48 @@ $(document).on('turbolinks:load', function(){
     half: true,
     readOnly: true,
     score: $startEl.data('score')
+  });
+});
+
+//テキストエリアの高さ自動調整
+$(document).on('turbolinks:load', function(){
+  var $obj = $('textarea');
+  var height = parseInt($obj.css('lineHeight'));
+  $obj.on('click', function(e) {
+    var lines = ($(this).val() + '\n').match(/\n/g).length;
+    $(this).height(height  * lines);
+  });
+  $obj.on('input', function(e) {
+    var lines = ($(this).val() + '\n').match(/\n/g).length;
+    $(this).height(height  * lines);
+  });
+});
+
+//フラッシュメッセージの表示
+$(document).on('turbolinks:load', function(){
+  $('#header-flash').hide();
+});
+$(document).on('turbolinks:load', function(){
+  $('#header-flash').slideDown();
+});
+
+//リンクバー固定
+$(document).on('turbolinks:load', function(){
+  $(function($){
+    var sidebar = $(".link-bar");
+    // サイドバーの位置
+    var sidebar_top = sidebar.offset().top;
+
+    $(window).on('scroll resize', function(){ // スクロールかリサイズ時
+      // 現在の位置
+      var scrollTop = $(document).scrollTop();
+      if (scrollTop > sidebar_top - 80){
+        // 現在位置が、初期位置より下なら、画面上部にサイドバーを固定
+        sidebar.css({'position': 'fixed',
+            'top': 80,
+            'width': sidebar.width()
+        });
+      }
+    });
   });
 });
