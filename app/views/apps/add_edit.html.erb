@@ -8,26 +8,26 @@
   </div>
 
   <div class="col-md-9 border-left border-space">
-    <div>
-      <%= @app.updated_at.strftime("%Y年%m月%d日更新") %>
-      <h1><%= @app.title %></h1>
-      <p>開発言語<%= link_to @app.language.name, language_path(@app.language) %></p>
+    <div class="edit-app-title">
+      <h2><%= @app.title %></h2>
     </div>
 
     <%= form_with(model: @app, url: add_update_app_path, local: true) do |f| %>
     <%= render 'layouts/error_messages', model: @app %>
 
-    <div class="field">
+    <div class="field add-edit-app-form">
       <%= f.label :hint, "ヒント" %>
-      <%= f.text_area :hint %>
+      <%= f.text_area :hint, class: "form-control" %>
     </div>
 
-    <div class="field">
+    <div class="field add-edit-app-form">
       <%= f.label :explanation, "解説" %>
-      <%= f.text_area :explanation %>
+      <%= f.text_area :explanation, class: "form-control" %>
     </div>
 
-    <%= f.submit "更新する", class: "btn btn-primary" %>
+    <div class="actions text-center">
+      <%= f.submit "更新する", class: "btn btn-primary" %>
+    </div>
   <% end %>
   </div>
 </div>

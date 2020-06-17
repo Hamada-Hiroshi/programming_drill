@@ -8,56 +8,59 @@
   </div>
 
   <div class="col-md-9 border-left border-space">
-    <div>
-      <%= @app.updated_at.strftime("%Y年%m月%d日更新") %>
-      <h1><%= @app.title %></h1>
+    <div class="edit-app-title">
+      <h2><%= @app.title %></h2>
     </div>
 
     <%= form_with(model: @app, local: true) do |f| %>
     <%= render 'layouts/error_messages', model: @app %>
 
-    <div class="field">
+    <div class="field edit-app-form">
       <%= f.label :title, "アプリケーション名" %>
-      <%= f.text_field :title %>
+      <%= f.text_field :title, class: "form-control" %>
     </div>
 
-    <div class="field">
+    <div class="field edit-app-form">
       <%= f.label :language_id, "開発言語" %>
       <%= f.collection_select :language_id, Language.all, :id, :name, include_blank: "選択してください" %>
       <!-- プロパティ名, オブジェクトの配列, value属性（何を返すか）, テキストの項目（何を選択肢として表示するか） [, オプション] -->
+      <p>最もメインで使用した言語を選択してください。</p>
     </div>
 
-    <div class="field">
+    <div class="field edit-app-form">
       <%= f.label :overview, "アプリケーションの概要" %>
-      <%= f.text_area :overview %>
+      <%= f.text_area :overview, class: "form-control" %>
     </div>
 
-    <div class="field">
+    <div class="field edit-app-form">
       <%= f.label :app_url, "アプリケーションURL" %>
-      <%= f.text_area :app_url %>
+      <%= f.text_area :app_url, class: "form-control mini-height" %>
     </div>
 
-    <div class="field">
+    <div class="field edit-app-form">
       <%= f.label :repo_url, "リポジトリURL" %>
-      <%= f.text_area :repo_url %>
+      <%= f.text_area :repo_url, class: "form-control mini-height" %>
     </div>
 
-    <div class="field">
+    <div class="field edit-app-form">
       <%= f.label :function, "機能" %>
-      <%= f.text_area :function %>
+      <%= f.text_area :function, class: "form-control" %>
     </div>
 
-    <div class="field">
+    <div class="field edit-app-form">
       <%= f.label :target, "対象者" %>
-      <%= f.text_area :target %>
+      <%= f.text_area :target, class: "form-control mini-height" %>
     </div>
 
-    <div class="field">
+    <div class="field edit-app-form">
       <%= f.label :tag_list, "タグ付け" %>
-      <%= f.text_area :tag_list, value: @app.tag_list.join(',') %>
+      <%= f.text_area :tag_list, value: @app.tag_list.join(','), class: "form-control mini-height" %>
+      <p>「,」で区切ることで複数入力できます。例）Ruby, Ruby on Rails, JavaScript</p>
     </div>
 
-    <%= f.submit "更新する", class: "btn btn-primary" %>
+    <div class="actions text-center">
+      <%= f.submit "更新する", class: "btn btn-primary" %>
+    </div>
   <% end %>
   </div>
 </div>

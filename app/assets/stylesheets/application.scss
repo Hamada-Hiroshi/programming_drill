@@ -81,6 +81,7 @@ footer {
   border: solid 1px #AAA;
   background-color: #FFF;
   margin: 0;
+  min-height: 600px;
   .border-left {
     border-left: solid 1px #AAA;
     min-height: 600px;
@@ -330,6 +331,35 @@ select {
   }
 }
 
+/* 新規登録・ログイン */
+.new-user {
+  padding: 0 20px;
+  width: 500px;
+  margin: 50px auto;
+  h3 {
+    margin-bottom: 40px;
+  }
+  .actions {
+    margin: 30px 0 20px 0;
+  }
+}
+
+/* パスワード入力フォーム(新規登録・ログイン) */
+.new-password-form {
+  margin-bottom: 20px;
+  label {
+    width: 150px;
+    vertical-align: top;
+  }
+  input {
+    width: 300px;
+    display: inline-block;
+  }
+  p {
+    margin-left: 155px;
+  }
+}
+
 /* プロフィール編集 */
 .edit-user {
   img {
@@ -363,21 +393,24 @@ select {
   }
 }
 
-/* パスワード入力フォーム */
-.password-form{
+/* パスワード入力フォーム(再設定) */
+.password-form {
   margin-bottom: 20px;
   label {
-    width: 130px;
+    width: 190px;
     vertical-align: top;
   }
   input {
     width: 300px;
     display: inline-block;
   }
+  p {
+    margin-left: 195px;
+  }
 }
 
-/* アプリ投稿フォーム */
-.new-app-form {
+/* アプリ入力フォーム（共通） */
+.new-app-form, .edit-app-form {
   margin-bottom: 30px;
   label {
     font-size: 1.2em;
@@ -387,11 +420,9 @@ select {
     margin-right: 30px;
   }
   input {
-    width: 600px;
     display: inline-block;
   }
   textarea {
-    width: 600px;
     min-height: 100px;
     display: inline-block;
   }
@@ -401,6 +432,33 @@ select {
   p {
     display: inline-block;
     margin: 0 0 0 230px;
+  }
+}
+
+/* アプリ入力フォーム（新規・編集） */
+.new-app-form {
+  input, textarea {
+    width: 600px;
+  }
+}
+.edit-app-title h2 {
+  margin: 10px 15px 50px 15px;
+}
+.edit-app-form {
+  input, textarea {
+    width: 450px;
+  }
+}
+
+/* アプリ入力フォーム（ヒント・解説編集） */
+.add-edit-app-form {
+  width: 95%;
+  margin: 0 auto 40px;
+  label {
+    font-size: 1.2em;
+  }
+  textarea {
+    min-height: 400px;
   }
 }
 
@@ -420,6 +478,9 @@ select {
   a {
     margin: 40px 50px 0 0;
   }
+}
+#app-hidden {
+  margin: 0 15px;
 }
 
 
