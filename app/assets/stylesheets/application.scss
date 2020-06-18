@@ -47,11 +47,21 @@ body {
 }
 
 /* フラッシュメッセージ */
-#header-flash {
-  background-color: #FFF;
+.header-flash {
+  border-bottom: solid 1px #AAA;
+}
+#notice-flash {
+  background-color: #DDD;
+}
+#success-flash {
+  background-color: #CBFFD3;
+}
+#alert-flash {
+  background-color: #FFAD90;
 }
 .flash {
   margin: 0;
+  padding: 5px 0;
 }
 
 .main-body {

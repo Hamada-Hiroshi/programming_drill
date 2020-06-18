@@ -42,16 +42,37 @@
         </div>
       </div>
 
-      <div id="header-flash">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <p class="flash" id="notice"><%= flash[:notice] %></p>
-              <p class="flash" id="success"><%= flash[:success] %></p>
-              <p class="flash" id="alert"><%= flash[:alert] %></p>
+      <% if flash[:notice] %>
+        <div class="header-flash" id="notice-flash">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <p class="flash" id="notice"><%= flash[:notice] %></p>
+              </div>
             </div>
           </div>
-      </div>
+        </div>
+      <% elsif flash[:success] %>
+        <div class="header-flash" id="success-flash">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <p class="flash" id="success"><%= flash[:success] %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="header-flash" id="alert-flash">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <p class="flash" id="alert"><%= flash[:alert] %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
 
     </header>
 

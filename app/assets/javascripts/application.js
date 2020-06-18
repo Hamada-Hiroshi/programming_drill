@@ -21,53 +21,11 @@
 //画像アップロード時のプレビュー表示
 $(document).on('turbolinks:load', function(){
   $('#myImage').on('change', function (e) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-          $("#profilePreview").attr('src', e.target.result);
-      }
-      reader.readAsDataURL(e.target.files[0]);
-  });
-});
-
-//マイページのタブ切り替え
-$(document).on('turbolinks:load', function(){
-  $('#user-app-contents .tab[id != "learning-tab"]').hide();
-});
-
-$(document).on('turbolinks:load', function(){
-  $('#user-app-menu a').on('click', function() {
-    $("#user-app-contents .tab").hide();
-    $("#user-app-menu .active").removeClass("active");
-    $(this).addClass("active");
-    $($(this).attr("href")).show();
-    return false;
-  });
-});
-
-//アプリ一覧ページのタブ切り替え
-$(document).on('turbolinks:load', function(){
-  $('.category-contents .tag-tab').hide();
-});
-$(document).on('turbolinks:load', function(){
-  $('.category-menu a').on('click', function() {
-    $(".category-contents .tab").hide();
-    $(".category-menu .active").removeClass("active");
-    $(this).addClass("active");
-    $($(this).attr("href")).show();
-    return false;
-  });
-});
-
-$(document).on('turbolinks:load', function(){
-  $('.category-contents2 .language-tab').hide();
-});
-$(document).on('turbolinks:load', function(){
-  $('.category-menu2 a').on('click', function() {
-    $(".category-contents2 .tab").hide();
-    $(".category-menu2 .active").removeClass("active");
-    $(this).addClass("active");
-    $($(this).attr("href")).show();
-    return false;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $("#profilePreview").attr('src', e.target.result);
+    }
+    reader.readAsDataURL(e.target.files[0]);
   });
 });
 
@@ -112,19 +70,16 @@ $(document).on('turbolinks:load', function(){
 
 //フラッシュメッセージの表示
 $(document).on('turbolinks:load', function(){
-  $('#header-flash').hide();
-});
-$(document).on('turbolinks:load', function(){
-  $('#header-flash').slideDown();
+  $('.header-flash').hide();
+  $('.header-flash').slideDown();
 });
 
 //リンクバー固定
 $(document).on('turbolinks:load', function(){
-  $(function($){
-    var sidebar = $(".link-bar");
+  var sidebar = $('.link-bar');
+  if(sidebar.length){
     // サイドバーの位置
     var sidebar_top = sidebar.offset().top;
-
     $(window).on('scroll resize', function(){ // スクロールかリサイズ時
       // 現在の位置
       var scrollTop = $(document).scrollTop();
@@ -136,5 +91,5 @@ $(document).on('turbolinks:load', function(){
         });
       }
     });
-  });
+  }
 });
