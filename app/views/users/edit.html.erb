@@ -10,7 +10,7 @@
   <div class="col-md-9 border-left border-space">
     <div class="row">
       <div class="col-md-9 col-md-offset-1">
-        <%= form_with(model: @user) do |f| %>
+        <%= form_with(model: @user, local: true) do |f| %>
           <div class="field edit-user">
             <%= attachment_image_tag(@user, :profile_image, size: "150x150", format: "jpeg", fallback: "no_image.jpg", class: "img-circle", id: "profilePreview") %>
             <div class="edit-user-name">
@@ -19,6 +19,7 @@
             </div>
           </div>
 
+          <%= render 'layouts/error_messages', model: @user %>
 
           <div class="field user-form">
             <%= f.label :name, "ユーザーネーム" %>

@@ -115,6 +115,19 @@ p {
   white-space: pre-wrap;
 }
 
+/* エラーメッセージ */
+#error-explanation {
+  border: solid 1px red;
+  border-radius: 4px;
+  background-color: rgba(255, 0, 0, 0.2);
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+.field_with_errors {
+  display: contents;
+  @extend .has-error;
+}
+
 /* リンクボタンの間隔 */
 .actions a {
   margin: 0 20px;
@@ -288,8 +301,11 @@ span {
 }
 
 /* 質問、レビュー投稿 */
-#review-form p {
+#review-form {
   margin-top: 30px;
+  p {
+    margin-top: 30px;
+  }
 }
 .question-box, .review-box {
   border-top: solid 1px #C0C0C0;

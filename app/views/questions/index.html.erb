@@ -32,7 +32,8 @@
 
       <div id="question-contents">
         <div id="question-form" class="field">
-          <%= form_with(model: [@app, @question]) do |f| %>
+          <%= form_with(model: [@app, @question], local: true) do |f| %>
+            <%= render 'layouts/error_messages', model: @question %>
             <h4>質問</h4>
             <%= f.text_area :content, placeholder: "質問内容を記入してください。", class: "textarea-form" %>
             <%= f.submit "質問を投稿", class: "btn btn-default" %>
@@ -73,7 +74,7 @@
                     質問に回答する
                   </a>
                   <div class="collapse" id="collapseReply-<%= question.id %>">
-                    <%= form_with(model: [@app, @question]) do |f| %>
+                    <%= form_with(model: [@app, @question], local: true) do |f| %>
                       <%= f.text_area :content, placeholder: "返信内容を記入してください。", class: "textarea-form" %>
                       <%= f.hidden_field :parent_id, value: question.id  %>
                       <%= f.submit "回答を送信", class: "btn btn-default" %>

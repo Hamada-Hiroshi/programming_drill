@@ -22,7 +22,8 @@
       <div id="review-form" class="field">
         <% unless @my_review.present? %>
           <% if @learning.present? && @learning.status == "学習済み" %>
-              <%= form_with(model: [@app, @review]) do |f| %>
+              <%= form_with(model: [@app, @review], local: true) do |f| %>
+                <%= render 'layouts/error_messages', model: @review %>
                 <h4>レビュー</h4>
                 <div id="star">
                   <%= f.label :rate, "評価" %>

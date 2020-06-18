@@ -1,6 +1,6 @@
 <% if model.errors.any? %>
   <div id="error-explanation">
-    <h2>正しく入力されていない項目があります。</h2>
+    <h4>正しく入力されていない項目があります。</h4>
     <ul>
       <% model.errors.full_messages.each do |message| %>
         <li><%= message %></li>
