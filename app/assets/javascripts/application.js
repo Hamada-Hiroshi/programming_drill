@@ -31,6 +31,7 @@ $(document).on('turbolinks:load', function(){
 
 //レビューの星表示
 $(document).on('turbolinks:load', function(){
+  $('#star').html('');
   $('#star').raty({
     size: 36,
     starOff: "/assets/star-off.png",
@@ -43,6 +44,7 @@ $(document).on('turbolinks:load', function(){
 
 $(document).on('turbolinks:load', function(){
   var $startEl = $('.star-rate')
+  $startEl.html('');
   $startEl.raty({
     size: 36,
     starOff: "/assets/star-off.png",

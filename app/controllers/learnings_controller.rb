@@ -1,7 +1,7 @@
 class LearningsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_learning, only: [:show, :edit, :update]
-  before_action :ensure_correct_user
+  before_action :ensure_correct_user, only: [:show, :update]
 
   def set_learning
     @learning = Learning.find(params[:id])
