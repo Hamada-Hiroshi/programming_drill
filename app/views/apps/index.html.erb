@@ -2,25 +2,28 @@
   <div class="col-md-3">
     <div class="category-bar">
       <ul class="category-menu nav nav-tabs">
-        <li class="active"><%= link_to "言語別", ".language-tab" %></li>
-        <li><%= link_to "タグ別", ".tag-tab" %></li>
+        <li class="active"><%= link_to "言語別", "#language-tab", data: { toggle: "tab"}  %></li>
+        <li><%= link_to "タグ別", "#tag-tab", data: { toggle: "tab"}  %></li>
       </ul>
 
-      <div class="category-contents">
-        <div class="language-tab tab">
+      <div class="tab-content category-contents">
+
+        <div class="tab-pane active" id="language-tab">
           <ul>
             <% @languages.each do |language| %>
               <li><%= link_to "#{language.name}（#{language.apps.count}）", language_path(language) %></li>
             <% end %>
           </ul>
         </div>
-        <div class="tag-tab tab">
+
+        <div class="tab-pane" id="tag-tab">
           <ul>
             <% ActsAsTaggableOn::Tag.most_used.each do |tag| %>
               <li><%= link_to  "#{tag}（#{tag.taggings_count}）", tag_apps_path(tag_name: tag.name) %></li>
             <% end %>
           </ul>
         </div>
+
       </div>
     </div>
   </div>
