@@ -74,6 +74,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem 'dotenv-rails'
+gem 'rails-i18n'
 
 group :production do
   gem 'mysql2'
