@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user
+  before_action :ensure_correct_user, only: [:edit, :update, :quit, :cancel]
 
   def set_user
     @user = User.find(params[:id])
@@ -27,6 +29,13 @@ class UsersController < ApplicationController
     @user.update(status: false)
     flash[:alert] = "アカウントを削除しました。"
     redirect_to root_path
+  end
+
+  def ensure_correct_user
+    if @user != current_user
+      flash[:alert] = "アクセス権限がありません。"
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   private

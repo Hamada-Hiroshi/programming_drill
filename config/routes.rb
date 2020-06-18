@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update]
 
   get 'apps/rate' => 'apps#rate_index', as: 'rate_apps'
+  get 'apps/tag' => 'apps#tag', as: 'tag_apps'
+  get 'apps/tag/rate' => 'apps#rate_tag', as: 'rate_tag_apps'
   post 'apps/confirm' => 'apps#confirm', as: 'confirm_apps'
   get 'apps/:id/add_edit' => 'apps#add_edit', as: 'add_edit_app'
   patch 'apps/:id/add' => 'apps#add_update', as: 'add_update_app'
@@ -16,7 +18,7 @@ Rails.application.routes.draw do
   get 'apps/:id/hidden' => 'apps#hidden', as: 'hidden_app'
   patch 'apps/:id/cancel' => 'apps#cancel', as: 'cancel_app'
   resources :apps, only: [:new, :create, :show, :edit, :update] do
-    resources :learnings, only: [:create, :show, :edit, :update]
+    resources :learnings, only: [:create, :show, :update]
     resources :questions, only: [:index, :create]
     resources :reviews, only: [:index, :create]
   end

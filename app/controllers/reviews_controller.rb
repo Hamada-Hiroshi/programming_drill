@@ -1,8 +1,12 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!, only: [:create]
+
   def index
     @app = App.find(params[:app_id])
-    @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
-    @my_review = Review.find_by(user_id: current_user.id, app_id: @app.id)
+    if user_signed_in?
+      @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
+      @my_review = Review.find_by(user_id: current_user.id, app_id: @app.id)
+    end
     @review = Review.new
     @reviews = @app.reviews.order(created_at: "DESC")
   end

@@ -2,13 +2,13 @@
   <div class="col-md-3">
     <div class="category-bar">
       <ul class="category-menu nav nav-tabs">
-        <li class="active"><%= link_to "言語別", "#language-tab", data: { toggle: "tab"}  %></li>
-        <li><%= link_to "タグ別", "#tag-tab", data: { toggle: "tab"}  %></li>
+        <li><%= link_to "言語別", "#language-tab", data: { toggle: "tab"}  %></li>
+        <li class="active"><%= link_to "タグ別", "#tag-tab", data: { toggle: "tab"}  %></li>
       </ul>
 
       <div class="tab-content category-contents">
 
-        <div class="tab-pane active" id="language-tab">
+        <div class="tab-pane" id="language-tab">
           <ul>
             <% @languages.each do |language| %>
               <li><%= link_to "#{language.name}（#{language.apps.count}）", language_path(language) %></li>
@@ -16,7 +16,7 @@
           </ul>
         </div>
 
-        <div class="tab-pane" id="tag-tab">
+        <div class="tab-pane active" id="tag-tab">
           <ul>
             <% ActsAsTaggableOn::Tag.most_used.each do |tag| %>
               <li><%= link_to  "#{tag}（#{tag.taggings_count}）", tag_apps_path(tag_name: tag.name) %></li>
@@ -31,8 +31,8 @@
   <div class="col-md-9">
     <div class="app-index">
       <ul class="nav nav-tabs">
-        <li class="active"><%= link_to "新着順", language_path(@language) %></li>
-        <li><%= link_to "評価順", rate_language_path(@language) %></li>
+        <li><%= link_to "新着順", tag_apps_path(tag_name: params[:tag_name]) %></li>
+        <li class="active"><%= link_to "評価順", rate_tag_apps_path(tag_name: params[:tag_name]) %></li>
       </ul>
 
       <% @apps.each do |app| %>

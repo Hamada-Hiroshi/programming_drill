@@ -18,32 +18,18 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
+//画像アップロード時のプレビュー表示
 $(document).on('turbolinks:load', function(){
   $('#myImage').on('change', function (e) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-          $("#profilePreview").attr('src', e.target.result);
-      }
-      reader.readAsDataURL(e.target.files[0]);
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $("#profilePreview").attr('src', e.target.result);
+    }
+    reader.readAsDataURL(e.target.files[0]);
   });
 });
 
-
-$(document).on('turbolinks:load', function(){
-  $('#tab-contents .tab[id != "tab1"]').hide();
-});
-
-$(document).on('turbolinks:load', function(){
-  $('#tab-menu a').on('click', function() {
-    $("#tab-contents .tab").hide();
-    $("#tab-menu .active").removeClass("active");
-    $(this).addClass("active");
-    $($(this).attr("href")).show();
-    return false;
-  });
-});
-
-
+//レビューの星表示
 $(document).on('turbolinks:load', function(){
   $('#star').raty({
     size: 36,
@@ -66,4 +52,44 @@ $(document).on('turbolinks:load', function(){
     readOnly: true,
     score: $startEl.data('score')
   });
+});
+
+//テキストエリアの高さ自動調整
+$(document).on('turbolinks:load', function(){
+  var $obj = $('textarea');
+  var height = parseInt($obj.css('lineHeight'));
+  $obj.on('click', function(e) {
+    var lines = ($(this).val() + '\n').match(/\n/g).length;
+    $(this).height(height  * lines);
+  });
+  $obj.on('input', function(e) {
+    var lines = ($(this).val() + '\n').match(/\n/g).length;
+    $(this).height(height  * lines);
+  });
+});
+
+//フラッシュメッセージの表示
+$(document).on('turbolinks:load', function(){
+  $('.header-flash').hide();
+  $('.header-flash').slideDown();
+});
+
+//リンクバー固定
+$(document).on('turbolinks:load', function(){
+  var sidebar = $('.link-bar');
+  if(sidebar.length){
+    // サイドバーの位置
+    var sidebar_top = sidebar.offset().top;
+    $(window).on('scroll resize', function(){ // スクロールかリサイズ時
+      // 現在の位置
+      var scrollTop = $(document).scrollTop();
+      if (scrollTop > sidebar_top - 80){
+        // 現在位置が、初期位置より下なら、画面上部にサイドバーを固定
+        sidebar.css({'position': 'fixed',
+            'top': 80,
+            'width': sidebar.width()
+        });
+      }
+    });
+  }
 });
