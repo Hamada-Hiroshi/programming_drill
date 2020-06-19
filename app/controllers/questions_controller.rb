@@ -21,9 +21,6 @@ class QuestionsController < ApplicationController
       end
       @question = Question.new
 
-    else
-      @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
-      render 'index'
     end
   end
 

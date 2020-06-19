@@ -1,6 +1,16 @@
 $('#average-rate').html("<%= j(render 'reviews/average_rate', app: @app) %>");
-$('#review-form').html("<p>このアプリケーションはすでにレビュー済みです。</p>");
+$('#review-form').html("<%= j(render 'review_form', my_review: @my_review, learning: @learning, app: @app) %>");
+$('#error-messages').html("<%= j(render 'layouts/error_messages', model: @review) %>");
 $('#review-index').html("<%= j(render 'review_index', reviews: @reviews) %>");
+
+$('#star').raty({
+  size: 36,
+  starOff: "/assets/star-off.png",
+  starOn: "/assets/star-on.png",
+  starHalf: "/assets/star-half.png",
+  scoreName: 'review[rate]',
+  half: true,
+});
 
 $('.star-rate').raty({
   size: 36,

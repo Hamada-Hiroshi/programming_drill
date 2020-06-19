@@ -13,16 +13,16 @@ class ReviewsController < ApplicationController
 
   def create
     @app = App.find(params[:app_id])
+    @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
+    @my_review = Review.find_by(user_id: current_user.id, app_id: @app.id)
     @review = current_user.reviews.new(review_params)
     @review.app_id = @app.id
     @reviews = @app.reviews.order(created_at: "DESC")
     if @review.save
+      #レビューを投稿した後にもう一度@my_reviewを取得し、form部分の条件分岐に利用する。
+      @my_review = Review.find_by(user_id: current_user.id, app_id: @app.id)
       flash[:success] = "レビューを投稿しました。"
 
-    else
-      @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
-      @my_review = Review.find_by(user_id: current_user.id, app_id: @app.id)
-      render 'index'
     end
   end
 

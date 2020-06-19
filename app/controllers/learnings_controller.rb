@@ -20,7 +20,7 @@ class LearningsController < ApplicationController
   def update
     @learning.update(learning_params)
     flash[:success] = "学習記録を更新しました。"
-    redirect_back(fallback_location: root_path)
+
   end
 
   def ensure_correct_user

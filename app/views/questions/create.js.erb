@@ -1,2 +1,3 @@
-$('textarea').val('');
+$('#error-messages').html("<%= j(render 'layouts/error_messages', model: @question) %>");
 $('#question-index').html("<%= j(render 'question_index', questions: @questions) %>");
+$('textarea').val('');
