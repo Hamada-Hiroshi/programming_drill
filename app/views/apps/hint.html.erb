@@ -32,7 +32,11 @@
 
       <div id="hint-info">
         <h4>ヒント</h4>
-        <%= @app.hint %>
+        <% if @app.hint.present? %>
+          <%= @app.hint %>
+        <% else %>
+          <p>ヒントは投稿されていません。</p>
+        <% end %>
       </div>
     </div>
   </div>

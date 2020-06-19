@@ -44,19 +44,23 @@
     </div>
 
     <div id="review-index">
-      <% @reviews.each do |review| %>
-        <div class="review-box">
-          <div class="post-user">
-            <%= attachment_image_tag(review.user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
-            <span><%= review.user.name %></span>
-            <span><%= review.created_at.strftime("%Y年%m月%d日") %></span>
+      <% if @reviews.present? %>
+        <% @reviews.each do |review| %>
+          <div class="review-box">
+            <div class="post-user">
+              <%= attachment_image_tag(review.user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
+              <span><%= review.user.name %></span>
+              <span><%= review.created_at.strftime("%Y年%m月%d日") %></span>
+            </div>
+            <div class="post-content">
+              <div class="star-rate" data-score="<%= review.rate %>"></div>
+              <%= review.rate %>
+              <p class="review-text"><%= review.content %></p>
+            </div>
           </div>
-          <div class="post-content">
-            <div class="star-rate" data-score="<%= review.rate %>"></div>
-            <%= review.rate %>
-            <p class="review-text"><%= review.content %></p>
-          </div>
-        </div>
+        <% end %>
+      <% else %>
+        <p>このアプリケーションは、まだレビューがありません。</p>
       <% end %>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-3 sidebar">
     <div class="category-bar">
       <ul class="category-menu nav nav-tabs">
         <li class="active"><%= link_to "言語別", "#language-tab", data: { toggle: "tab"}  %></li>
@@ -9,17 +9,21 @@
       <div class="tab-content category-contents">
 
         <div class="tab-pane active" id="language-tab">
-          <ul>
+          <ul id="language-index">
             <% @languages.each do |language| %>
-              <li><%= link_to "#{language.name}（#{language.apps.count}）", language_path(language) %></li>
+              <%= link_to language_path(language) do %>
+                <li>
+                  <p><%= language.name %><span>（<%= language.apps.count %>）</span></p>
+                </li>
+              <% end %>
             <% end %>
           </ul>
         </div>
 
         <div class="tab-pane" id="tag-tab">
-          <ul>
+          <ul id="tag-index">
             <% ActsAsTaggableOn::Tag.most_used.each do |tag| %>
-              <li><%= link_to  "#{tag}（#{tag.taggings_count}）", tag_apps_path(tag_name: tag.name) %></li>
+              <li class="tag-link"><%= link_to  "#{tag}（#{tag.taggings_count}）", tag_apps_path(tag_name: tag.name), class: "btn-xs btn-default btn-tag" %></li>
             <% end %>
           </ul>
         </div>
@@ -29,7 +33,7 @@
   </div>
 
   <div class="col-md-9">
-    <div class="app-index">
+    <div class="app-index back-white">
       <ul class="nav nav-tabs">
         <li><%= link_to "新着順", language_path(@language) %></li>
         <li class="active"><%= link_to "評価順", rate_language_path(@language) %></li>

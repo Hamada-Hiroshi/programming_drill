@@ -32,7 +32,11 @@
 
       <div id="explanation-info">
         <h4>解説</h4>
-        <%= @app.explanation %>
+        <% if @app.explanation.present? %>
+          <%= @app.explanation %>
+        <% else %>
+          <p>解説は投稿されていません。</p>
+        <% end %>
       </div>
     </div>
   </div>
