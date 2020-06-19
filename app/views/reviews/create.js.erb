@@ -1,0 +1,13 @@
+$('#average-rate').html("<%= j(render 'reviews/average_rate', app: @app) %>");
+$('#review-form').html("<p>このアプリケーションはすでにレビュー済みです。</p>");
+$('#review-index').html("<%= j(render 'review_index', reviews: @reviews) %>");
+
+$('.star-rate').raty({
+  size: 36,
+  starOff: "/assets/star-off.png",
+  starOn: "/assets/star-on.png",
+  starHalf: "/assets/star-half.png",
+  half: true,
+  readOnly: true,
+  //scoreはデータ属性で渡している
+});

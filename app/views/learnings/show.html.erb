@@ -1,32 +1,7 @@
 <div class="row">
   <div class="col-md-10 app-show-box border-space">
     <div id="app-learning">
-      <article  class="learning-app-info">
-        <h1><%= @learning.app.title %></h1>
-        <section>
-          <h4>アプリケーションURL</h4>
-          <p><%= link_to @learning.app.app_url, @learning.app.app_url, target: :_blank %></p>
-        </section>
-        <section>
-          <h4>リモートリポジトリURL</h4>
-          <p><%= link_to @learning.app.repo_url, @learning.app.repo_url, target: :_blank %></p>
-        </section>
-      </article>
-
-      <div class="learning-status">
-        <div class="row">
-          <div class="col-md-5">
-            <h4>学習開始日 <%= @learning.created_at.strftime("%Y年%m月%d日") %></h4>
-          </div>
-          <div class="col-md-7 field">
-            <h4>学習状況</h4>
-            <%= form_with(model: [@learning.app, @learning]) do |f| %>
-              <%= f.select :status, ["学習中", "学習済み", "学習中断"] %>
-              <%= f.submit "更新", class: "btn btn-default" %>
-            <% end %>
-          </div>
-        </div>
-      </div>
+      <%= render 'learning_status', app: @learning.app, learning: @learning %>
 
       <div id="learning-memo">
         <div class="field">

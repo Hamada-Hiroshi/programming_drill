@@ -53,6 +53,7 @@ $(document).on('turbolinks:load', function(){
     half: true,
     readOnly: true,
     score: $startEl.data('score')
+    //scoreは無くても機能する。（データ属性で'score'をそのまま渡しているため）
   });
 });
 

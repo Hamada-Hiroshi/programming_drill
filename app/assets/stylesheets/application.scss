@@ -35,9 +35,9 @@ body {
 #header-link {
   margin-right: 0;
   li {
-    margin-left: 40px;
+    margin-left: 30px;
     height: 40px;
-    font-size: 1.2em;
+    font-size: 1.1em;
     padding: 10px 0;
     a {
       color: #FFF;
@@ -331,15 +331,14 @@ span {
     margin-top: 30px;
   }
 }
-#question-index {
-  .question-box, .review-box {
-    border-top: solid 1px #C0C0C0;
-    margin-top: 30px;
-    padding-top: 20px;
-  }
-  p {
-    margin-top: 30px;
-  }
+
+#question-index > p, #review-index > p {
+  margin-top: 30px;
+}
+.question-box, .review-box {
+  border-top: solid 1px #C0C0C0;
+  margin-top: 30px;
+  padding-top: 20px;
 }
 .post-user {
   span {

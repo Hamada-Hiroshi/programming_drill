@@ -48,8 +48,7 @@
           </div>
           <div class="link-app-info">
             <h4><%= link_to app.title, app_path(app) %></h4>
-            <div class="star-rate" data-score="<%= app.average_rate %>"></div>
-            <span>（<%= app.average_rate %>）</span>
+            <%= render 'reviews/average_rate', app: app %>
             <p>開発言語：<%= link_to app.language.name, language_path(app.language) %></p>
             <% app.tag_list.each do |tag| %>
               <span class="tag-link"><%= link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag" %></span>
