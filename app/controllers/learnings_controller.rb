@@ -19,8 +19,7 @@ class LearningsController < ApplicationController
 
   def update
     @learning.update(learning_params)
-    flash[:success] = "学習記録を更新しました。"
-
+    flash.now[:success] = "学習記録を更新しました。"
   end
 
   def ensure_correct_user

@@ -15,12 +15,12 @@ class QuestionsController < ApplicationController
     @questions = @app.questions.where(parent_id: nil).order(created_at: "DESC")
     if @question.save
       if @question.parent_id == nil
-        flash[:success] = "質問を投稿しました。"
+        flash.now[:success] = "質問を投稿しました。"
       else
-        flash[:success] = "質問への回答を投稿しました。"
+        flash.now[:success] = "質問への回答を投稿しました。"
       end
+      #新しい質問投稿フォームを表示するためにインスタンスメソッドを空にする。
       @question = Question.new
-
     end
   end
 

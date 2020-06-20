@@ -21,3 +21,7 @@ $('.star-rate').raty({
   readOnly: true,
   //scoreはデータ属性で渡している
 });
+
+$("#flash-message").html("<%= j(render 'layouts/flash_message') %>");
+$('.header-flash').hide();
+$('.header-flash').slideDown();

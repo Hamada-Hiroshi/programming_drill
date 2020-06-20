@@ -21,8 +21,7 @@ class ReviewsController < ApplicationController
     if @review.save
       #レビューを投稿した後にもう一度@my_reviewを取得し、form部分の条件分岐に利用する。
       @my_review = Review.find_by(user_id: current_user.id, app_id: @app.id)
-      flash[:success] = "レビューを投稿しました。"
-
+      flash.now[:success] = "レビューを投稿しました。"
     end
   end
 
