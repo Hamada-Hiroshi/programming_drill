@@ -7,27 +7,12 @@
       </ul>
 
       <div class="tab-content category-contents">
-
         <div class="tab-pane" id="language-tab">
-          <ul id="language-index">
-            <% @languages.each do |language| %>
-              <%= link_to language_path(language) do %>
-                <li>
-                  <p><%= language.name %><span>（<%= language.apps.count %>）</span></p>
-                </li>
-              <% end %>
-            <% end %>
-          </ul>
+          <%= render 'languages/language_index', languages: @languages %>
         </div>
-
         <div class="tab-pane active" id="tag-tab">
-          <ul id="tag-index">
-            <% ActsAsTaggableOn::Tag.most_used.each do |tag| %>
-              <li class="tag-link"><%= link_to  "#{tag}（#{tag.taggings_count}）", tag_apps_path(tag_name: tag.name), class: "btn-xs btn-default btn-tag" %></li>
-            <% end %>
-          </ul>
+          <%= render 'tag_index' %>
         </div>
-
       </div>
     </div>
   </div>
@@ -38,24 +23,7 @@
         <li class="active"><%= link_to "新着順", tag_apps_path(tag_name: params[:tag_name]) %></li>
         <li><%= link_to "評価順", rate_tag_apps_path(tag_name: params[:tag_name]) %></li>
       </ul>
-
-      <% @apps.each do |app| %>
-        <div class="link-app-box">
-          <div class="link-app-user">
-            <%= link_to user_path(app.user) do %>
-              <%= attachment_image_tag(app.user, :profile_image, size: "60x60", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
-            <% end %>
-          </div>
-          <div class="link-app-info">
-            <h4><%= link_to app.title, app_path(app) %></h4>
-            <%= render 'reviews/average_rate', app: app %>
-            <p>開発言語：<%= link_to app.language.name, language_path(app.language) %></p>
-            <% app.tag_list.each do |tag| %>
-              <span class="tag-link"><%= link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag" %></span>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+      <%= render 'apps/app_index', apps: @apps %>
     </div>
   </div>
 
