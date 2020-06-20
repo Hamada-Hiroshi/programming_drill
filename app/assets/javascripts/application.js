@@ -77,8 +77,11 @@ $(document).on('turbolinks:load', function(){
   $('.header-flash').slideDown();
 });
 
-//リンクバー固定
+//リンクバー固定、current表示
 $(document).on('turbolinks:load', function(){
+  var url = window.location.pathname;
+  $('.current-btn a[href="'+url+'"]').addClass('btn-active');
+
   var sidebar = $('.link-bar');
   if(sidebar.length){
     // サイドバーの位置

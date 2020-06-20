@@ -16,17 +16,6 @@
   </div>
 
   <div class="col-md-1">
-    <div class="link-bar">
-      <div class="group-btn">
-        <%= link_to "アプリ詳細", app_path(@learning.app), class: "btn btn-default" %>
-        <%= link_to "学習メモ", app_learning_path(@learning.app, @learning), class: "btn btn-default btn-active" %>
-        <%= link_to "ヒント", hint_app_path(@learning.app), class: "btn btn-default" %>
-        <%= link_to "質問", app_questions_path(@learning.app), class: "btn btn-default" %>
-        <%= link_to "解説", explanation_app_path(@learning.app), class: "btn btn-default" %>
-      </div>
-      <div class="one-btn">
-        <%= link_to "レビュー", app_reviews_path(@learning.app), class: "btn btn-default" %>
-      </div>
-    </div>
+    <%= render 'learning_linkbar', app: @learning.app, learning: @learning %>
   </div>
 </div>

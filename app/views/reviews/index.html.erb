@@ -21,41 +21,6 @@
   </div>
 
   <div class="col-md-1">
-    <div class="link-bar">
-      <% if @app.user == current_user %>
-        <div class="group-btn">
-          <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-default" %>
-          <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
-          <%= link_to "質問", app_questions_path(@app), class: "btn btn-default" %>
-          <%= link_to "解説", explanation_app_path(@app), class: "btn btn-default" %>
-        </div>
-        <div class="one-btn">
-          <%= link_to "レビュー", app_reviews_path(@app), class: "btn btn-default btn-active" %>
-        </div>
-        <div class="one-btn">
-          <%= link_to "編集", edit_app_path(@app), class: "btn btn-primary" %>
-        </div>
-      <% else %>
-        <% if @learning.present? %>
-          <div class="group-btn">
-            <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-default" %>
-            <%= link_to "学習メモ", app_learning_path(@app, @learning), class: "btn btn-default" %>
-            <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
-            <%= link_to "質問", app_questions_path(@app), class: "btn btn-default" %>
-            <%= link_to "解説", explanation_app_path(@app), class: "btn btn-default" %>
-          </div>
-        <% else %>
-          <div class="one-btn">
-            <%= link_to "学習開始", app_learnings_path(@app), method: :post, class: "btn btn-primary" %>
-          </div>
-          <div class="one-btn">
-            <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-default" %>
-          </div>
-        <% end %>
-        <div class="one-btn">
-          <%= link_to "レビュー", app_reviews_path(@app), class: "btn btn-default btn-active" %>
-        </div>
-      <% end %>
-    </div>
+    <%= render 'learnings/learning_linkbar', app: @app, learning: @learning %>
   </div>
 </div>

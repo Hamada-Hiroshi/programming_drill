@@ -149,18 +149,13 @@ p {
 }
 
 /* アプリ詳細のリンクバー */
-.group-btn a {
+.one-btn {
+  margin-top: 30px;
+}
+.current-btn a, .one-btn a {
   width: 130px;
   border-radius: 0;
   padding: 15px 0;
-}
-.one-btn {
-  margin-top: 30px;
-  a {
-    width: 130px;
-    border-radius: 0;
-    padding: 15px 0;
-  }
 }
 .btn-active {
   background-color: #6A5ACD;
