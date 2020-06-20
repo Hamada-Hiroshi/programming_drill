@@ -21,7 +21,15 @@
                   <!-- ロゴ、検索バーを入れる -->
                 <% end %>
               </div>
+
+              <div id="search-form">
+                <%= search_form_for @q do |f| %>
+                  <%= f.search_field :title_cont, placeholder: "アプリ名から検索" %>
+                  <%= f.submit "検索" %>
+                <% end %>
+              </div>
             </div>
+
             <div class="col-md-7">
               <ul class="nav navbar-nav navbar-right" id="header-link">
                 <% if user_signed_in? %>
@@ -30,9 +38,11 @@
                       <%= attachment_image_tag(current_user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
                     <% end %>
                   </li>
+                  <li><%= link_to "アプリ一覧", root_path %></li>
                   <li><%= link_to "新規投稿", new_app_path %></li>
                   <li><%= link_to "ログアウト",  destroy_user_session_path, method: :delete %></li>
                 <% else %>
+                  <li><%= link_to "アプリ一覧", root_path %></li>
                   <li><%= link_to "新規登録", new_user_registration_path %></li>
                   <li><%= link_to "ログイン", new_user_session_path %></li>
                 <% end %>
@@ -42,37 +52,9 @@
         </div>
       </div>
 
-      <% if flash[:notice] %>
-        <div class="header-flash" id="notice-flash">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <p class="flash" id="notice"><%= flash[:notice] %></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% elsif flash[:success] %>
-        <div class="header-flash" id="success-flash">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <p class="flash" id="success"><%= flash[:success] %></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% elsif flash[:alert] %>
-        <div class="header-flash" id="alert-flash">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <p class="flash" id="alert"><%= flash[:alert] %></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <div id="flash-message">
+        <%= render 'layouts/flash_message' %>
+      </div>
 
     </header>
 
@@ -95,4 +77,5 @@
       </div>
     </footer>
   </body>
+
 </html>

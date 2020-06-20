@@ -6,7 +6,6 @@ class App < ApplicationRecord
   has_many :reviews, dependent: :destroy
   acts_as_taggable
 
-  validates :language_id, acceptance: true
   validates :title, presence: true, length: { maximum: 25 }, uniqueness: true
   validates :overview, presence: true
   validates :app_url, presence: true, format: /\A#{URI::regexp(%w(http https))}\z/

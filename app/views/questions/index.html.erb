@@ -1,38 +1,13 @@
 <div class="row">
   <div class="col-md-10 app-show-box border-space">
     <div id="app-question">
-      <article  class="learning-app-info">
-        <h1><%= @app.title %></h1>
-        <section>
-          <h4>アプリケーションURL</h4>
-          <p><%= link_to @app.app_url, @app.app_url, target: :_blank %></p>
-        </section>
-        <section>
-          <h4>リモートリポジトリURL</h4>
-          <p><%= link_to @app.repo_url, @app.repo_url, target: :_blank %></p>
-        </section>
-      </article>
-
-      <% if @app.user != current_user %>
-        <div class="learning-status">
-          <div class="row">
-            <div class="col-md-5">
-              <h4>学習開始日 <%= @learning.created_at.strftime("%Y年%m月%d日") %></h4>
-            </div>
-            <div class="col-md-7 field">
-              <h4>学習状況</h4>
-              <%= form_with(model: [@learning.app, @learning]) do |f| %>
-                <%= f.select :status, ["学習中", "学習済み", "学習中断"] %>
-                <%= f.submit "更新", class: "btn btn-default" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <%= render 'learnings/learning_status', app: @app, learning: @learning %>
 
       <div id="question-contents">
         <div id="question-form" class="field">
           <%= form_with(model: [@app, @question]) do |f| %>
+            <div id="error-messages"></div>
+            <%= render 'layouts/error_messages', model: @question %>
             <h4>質問</h4>
             <%= f.text_area :content, placeholder: "質問内容を記入してください。", class: "textarea-form" %>
             <%= f.submit "質問を投稿", class: "btn btn-default" %>
@@ -40,83 +15,19 @@
         </div>
 
         <div id="question-index">
-          <% @questions.each do |question| %>
-            <div class="question-box">
-              <div class="question">
-                <div class="post-user">
-                  <%= attachment_image_tag(question.user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
-                  <span><%= question.user.name %></span>
-                  <span><%= question.created_at.strftime("%Y年%m月%d日") %></span>
-                </div>
-                <div class="post-content">
-                  <p><%= question.content %></p>
-                </div>
-              </div>
-
-              <div class="reply-box">
-                <ul class="reply-index">
-                  <% question.replies.each do |reply| %>
-                    <li class="reply">
-                      <div class="post-user">
-                        <%= attachment_image_tag(reply.user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
-                        <span><%= reply.user.name %></span>
-                        <span><%= reply.created_at.strftime("%Y年%m月%d日") %></span>
-                      </div>
-                      <div class="post-content">
-                        <p><%= reply.content %></p>
-                      </div>
-                    </li>
-                  <% end %>
-                </ul>
-                <div class="reply-form field">
-                  <a class="btn btn-default" data-toggle="collapse" href="#collapseReply-<%= question.id %>">
-                    質問に回答する
-                  </a>
-                  <div class="collapse" id="collapseReply-<%= question.id %>">
-                    <%= form_with(model: [@app, @question]) do |f| %>
-                      <%= f.text_area :content, placeholder: "返信内容を記入してください。", class: "textarea-form" %>
-                      <%= f.hidden_field :parent_id, value: question.id  %>
-                      <%= f.submit "回答を送信", class: "btn btn-default" %>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+          <% if @questions.present? %>
+            <%= render 'question_index', questions: @questions %>
+          <% else %>
+            <p>質問履歴はありません。</p>
           <% end %>
         </div>
+
       </div>
     </div>
   </div>
 
   <div class="col-md-1">
-    <div class="link-bar">
-      <% if @app.user == current_user %>
-        <div class="group-btn">
-          <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-default" %>
-          <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
-          <%= link_to "質問",  app_questions_path(@app), class: "btn btn-default btn-active" %>
-          <%= link_to "解説", explanation_app_path(@app), class: "btn btn-default" %>
-        </div>
-        <div class="one-btn">
-          <%= link_to "レビュー", app_reviews_path(@app), class: "btn btn-default" %>
-        </div>
-        <div class="one-btn">
-          <%= link_to "編集", edit_app_path(@app), class: "btn btn-primary" %>
-        </div>
-      <% else %>
-        <div class="group-btn">
-          <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-default" %>
-          <%= link_to "学習メモ", app_learning_path(@app, @learning), class: "btn btn-default" %>
-          <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
-          <%= link_to "質問", app_questions_path(@app), class: "btn btn-default btn-active" %>
-          <%= link_to "解説", explanation_app_path(@app), class: "btn btn-default" %>
-        </div>
-        <div class="one-btn">
-          <%= link_to "レビュー", app_reviews_path(@app), class: "btn btn-default" %>
-        </div>
-      <% end %>
-    </div>
+    <%= render 'learnings/learning_linkbar', app: @app, learning: @learning %>
   </div>
 </div>
 

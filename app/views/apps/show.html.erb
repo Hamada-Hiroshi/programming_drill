@@ -1,22 +1,7 @@
 <div class="row">
   <div class="col-md-10 app-show-box border-space">
     <article class="app-info">
-      <section class="app-info-top">
-        <div class="app-post">
-          <%= link_to user_path(@app.user) do %>
-            <%= attachment_image_tag(@app.user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
-          <% end %>
-          <span><%= @app.user.name %></span>
-          <span><%= @app.updated_at.strftime("%Y年%m月%d日更新") %></span>
-        </div>
-        <h1><%= @app.title %></h1>
-        <div class="star-rate" data-score="<%= @app.average_rate %>"></div>
-        <span>（<%= @app.average_rate %>）</span>
-        <p>開発言語：<%= link_to @app.language.name, language_path(@app.language) %></p>
-        <% @app.tag_list.each do |tag| %>
-          <span class="tag-link"><%= link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag" %></span>
-        <% end %>
-      </section>
+      <%= render 'app_info_top', app: @app %>
 
       <section class="app-contents">
         <h3>概要</h3>
@@ -52,38 +37,6 @@
   </div>
 
   <div class="col-md-1">
-    <div class="link-bar">
-      <% if @app.user == current_user %>
-        <div class="group-btn">
-          <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-default btn-active" %>
-          <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
-          <%= link_to "質問", app_questions_path(@app), class: "btn btn-default" %>
-          <%= link_to "解説", explanation_app_path(@app), class: "btn btn-default" %>
-        </div>
-        <div class="one-btn">
-          <%= link_to "レビュー", app_reviews_path(@app), class: "btn btn-default" %>
-        </div>
-        <div class="one-btn">
-          <%= link_to "編集", edit_app_path(@app), class: "btn btn-primary" %>
-        </div>
-      <% else %>
-        <% if @learning.present? %>
-          <div class="group-btn">
-            <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-default btn-active" %>
-            <%= link_to "学習メモ", app_learning_path(@app, @learning), class: "btn btn-default" %>
-            <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
-            <%= link_to "質問", app_questions_path(@app), class: "btn btn-default" %>
-            <%= link_to "解説", explanation_app_path(@app), class: "btn btn-default" %>
-          </div>
-        <% else %>
-          <div class="one-btn">
-            <%= link_to "学習開始", app_learnings_path(@app), method: :post, class: "btn btn-primary" %>
-          </div>
-        <% end %>
-        <div class="one-btn">
-          <%= link_to "レビュー", app_reviews_path(@app), class: "btn btn-default" %>
-        </div>
-      <% end %>
-    </div>
+    <%= render 'learnings/learning_linkbar', app: @app, learning: @learning %>
   </div>
 </div>

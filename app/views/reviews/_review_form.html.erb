@@ -1,0 +1,20 @@
+<% unless my_review.present? %>
+  <% if learning.present? && learning.status == "学習済み" %>
+    <%= form_with(model: [@app, @review]) do |f| %>
+      <div id="error-messages"></div>
+      <h4>レビュー</h4>
+      <div id="star">
+        <%= f.label :rate, "評価" %>
+        <%= f.hidden_field :rate, id: "review_star" %>
+      </div>
+      <span>星の数を選択してください。</span>
+      <%= f.text_area :content, placeholder: "レビューを記入してください。", class: "textarea-form" %>
+      <%= f.submit "レビューを投稿", class: "btn btn-default" %>
+    <% end %>
+  <% elsif app.user != current_user %>
+  <!-- 投稿者ではないユーザのうち、まだ学習を始めていない、または学習ステータスが”学習済み”ではないユーザ -->
+    <p>学習済みのアプリケーションのみ、レビューを投稿できます。</p>
+  <% end %>
+<% else %>
+  <p>このアプリケーションはすでにレビュー済みです。</p>
+<% end %>

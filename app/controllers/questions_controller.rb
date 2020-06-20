@@ -12,17 +12,15 @@ class QuestionsController < ApplicationController
     @app = App.find(params[:app_id])
     @question = current_user.questions.new(question_params)
     @question.app_id = @app.id
+    @questions = @app.questions.where(parent_id: nil).order(created_at: "DESC")
     if @question.save
       if @question.parent_id == nil
-        flash[:success] = "質問を投稿しました。"
+        flash.now[:success] = "質問を投稿しました。"
       else
-        flash[:success] = "質問への回答を投稿しました。"
+        flash.now[:success] = "質問への回答を投稿しました。"
       end
-      redirect_to app_questions_path(@app)
-    else
-      @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
-      @questions = @app.questions.where(parent_id: nil).order(created_at: "DESC")
-      render 'index'
+      #新しい質問投稿フォームを表示するためにインスタンスメソッドを空にする。
+      @question = Question.new
     end
   end
 

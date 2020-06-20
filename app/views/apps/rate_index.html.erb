@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-3 sidebar">
     <div class="category-bar">
       <ul class="category-menu nav nav-tabs">
         <li class="active"><%= link_to "言語別", "#language-tab", data: { toggle: "tab"}  %></li>
@@ -7,52 +7,23 @@
       </ul>
 
       <div class="tab-content category-contents">
-
         <div class="tab-pane active" id="language-tab">
-          <ul>
-            <% @languages.each do |language| %>
-              <li><%= link_to "#{language.name}（#{language.apps.count}）", language_path(language) %></li>
-            <% end %>
-          </ul>
+          <%= render 'languages/language_index', languages: @languages %>
         </div>
-
         <div class="tab-pane" id="tag-tab">
-          <ul>
-            <% ActsAsTaggableOn::Tag.most_used.each do |tag| %>
-              <li><%= link_to  "#{tag}（#{tag.taggings_count}）", tag_apps_path(tag_name: tag.name) %></li>
-            <% end %>
-          </ul>
+          <%= render 'tag_index' %>
         </div>
-
       </div>
     </div>
   </div>
 
   <div class="col-md-9">
-    <div class="app-index">
+    <div class="app-index back-white">
       <ul class="nav nav-tabs">
         <li><%= link_to "新着順", root_path %></li>
         <li class="active"><%= link_to "評価順", rate_apps_path %></li>
       </ul>
-
-      <% @apps.each do |app| %>
-        <div class="link-app-box">
-          <div class="link-app-user">
-            <%= link_to user_path(app.user) do %>
-              <%= attachment_image_tag(app.user, :profile_image, size: "60x60", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
-            <% end %>
-          </div>
-          <div class="link-app-info">
-            <h4><%= link_to app.title, app_path(app) %></h4>
-            <div class="star-rate" data-score="<%= app.average_rate %>"></div>
-            <span>（<%= app.average_rate %>）</span>
-            <p>開発言語：<%= link_to app.language.name, language_path(app.language) %></p>
-            <% app.tag_list.each do |tag| %>
-              <span class="tag-link"><%= link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag" %></span>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+      <%= render 'app_index', apps: @apps %>
     </div>
   </div>
 
