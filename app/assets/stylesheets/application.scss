@@ -17,6 +17,12 @@
 @import "bootstrap";
 
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   padding-top: 80px;
   background-color: #F6F6F6;
@@ -29,9 +35,9 @@ body {
 #header-link {
   margin-right: 0;
   li {
-    margin-left: 40px;
+    margin-left: 30px;
     height: 40px;
-    font-size: 1.2em;
+    font-size: 1.1em;
     padding: 10px 0;
     a {
       color: #FFF;
@@ -54,7 +60,7 @@ body {
   background-color: #DDD;
 }
 #success-flash {
-  background-color: #CBFFD3;
+  background-color: #D9E5FF;
 }
 #alert-flash {
   background-color: #FFAD90;
@@ -103,11 +109,20 @@ footer {
 .top-bottom-space {
   padding: 40px 0;
 }
+
+/* アプリ詳細ページの白背景ボックス、ボーダー */
 .app-show-box {
   border: solid 1px #AAA;
   background-color: #FFF;
   margin-left: 15px;
   min-height: 600px;
+}
+
+/* 白背景のみ */
+.back-white {
+  background-color: #FFF;
+  margin: 0;
+  padding: 30px 40px;
 }
 
 /* 改行を反映 */
@@ -120,7 +135,7 @@ p {
   border: solid 1px red;
   border-radius: 4px;
   background-color: rgba(255, 0, 0, 0.2);
-  padding: 0 20px;
+  padding: 0 50px;
   margin-bottom: 30px;
 }
 .field_with_errors {
@@ -134,18 +149,13 @@ p {
 }
 
 /* アプリ詳細のリンクバー */
-.group-btn a {
+.one-btn {
+  margin-top: 30px;
+}
+.current-btn a, .one-btn a {
   width: 130px;
   border-radius: 0;
   padding: 15px 0;
-}
-.one-btn {
-  margin-top: 30px;
-  a {
-    width: 130px;
-    border-radius: 0;
-    padding: 15px 0;
-  }
 }
 .btn-active {
   background-color: #6A5ACD;
@@ -173,6 +183,9 @@ p {
   .btn-tag {
     background-color: #CCC;
     padding: 4px 8px;
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 
@@ -216,15 +229,21 @@ span {
 .my-app-box {
   border-bottom: solid 1px #C0C0C0;
   padding: 10px 20px 15px;
+}
+.my-app {
   h4 {
-    margin: 5px 30px 15px 0;
-    display: inline-block;
+    margin: 5px 0 10px 0;
   }
   .star-rate {
+    display: inline-block;
     img {
       width: 13px;
       height: 13px;
     }
+  }
+  p {
+    display: inline-block;
+    margin-left: 20px;
   }
 }
 .my-learning-status {
@@ -306,6 +325,10 @@ span {
   p {
     margin-top: 30px;
   }
+}
+
+#question-index > p, #review-index > p {
+  margin-top: 30px;
 }
 .question-box, .review-box {
   border-top: solid 1px #C0C0C0;
@@ -538,4 +561,64 @@ select {
   margin: 0 15px;
 }
 
+/* 検索バー全体 */
+.sidebar {
+  padding: 30px 60px 0 15px;
+}
+
+/* 言語別検索バー */
+#language-index {
+  padding: 0;
+  a {
+    color: #000;
+    &:hover {
+      color: #483D8B;
+      text-decoration: none;
+    }
+    li {
+      list-style: none;
+      padding: 20px 30px;
+      border-bottom: solid 1px #DDD;
+      &:hover {
+        background-color: #EEE;
+        border-bottom: solid 3px #6A5ACD;
+      }
+      p {
+        margin: 0;
+        font-size: 18px;
+        span {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
+
+/* タグ別検索バー */
+#tag-index {
+  padding: 0;
+  li {
+    list-style: none;
+    margin-top: 5px;
+    margin-left: 10px;
+    a:hover {
+      border: solid 1px #6A5ACD;
+      color: #6A5ACD;
+    }
+  }
+}
+
+/* タブメニュー */
+.nav-tabs > li.active > a {
+  background-color: #D9E5FF;
+  border-radius: 0;
+  border: none;
+  border-bottom: solid 3px #6A5ACD;
+  &:hover, &:focus {
+    background-color: #D9E5FF;
+    border-radius: 0;
+    border: none;
+    border-bottom: solid 3px #6A5ACD;
+  }
+}
 

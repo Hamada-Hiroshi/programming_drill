@@ -1,0 +1,28 @@
+ja:
+  activerecord:
+    models:
+      user:
+      language:
+      app:
+      question:
+      review:
+    attributes:
+      user:
+        name: ユーザーネーム
+        email: メールアドレス
+        encrypted_password: パスワード
+      language:
+        name: 言語名
+      app:
+        title: アプリケーション名
+        language: 開発言語
+        overview: 概要
+        app_url: アプリケーションURL
+        repo_url: リモートリポジトリURL
+        function: 機能
+        target: 対象者
+      question :
+        content: 質問（回答）内容
+      review:
+        rate: 評価点
+        content: レビュー内容

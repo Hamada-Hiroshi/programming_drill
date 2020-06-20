@@ -1,69 +1,20 @@
 <div class="row">
   <div class="col-md-10 app-show-box border-space">
     <div id="app-explanation">
-      <article  class="learning-app-info">
-        <h1><%= @app.title %></h1>
-        <section>
-          <h4>アプリケーションURL</h4>
-          <p><%= link_to @app.app_url, @app.app_url, target: :_blank %></p>
-        </section>
-        <section>
-          <h4>リモートリポジトリURL</h4>
-          <p><%= link_to @app.repo_url, @app.repo_url, target: :_blank %></p>
-        </section>
-      </article>
-
-      <% if @app.user != current_user %>
-        <div class="learning-status">
-          <div class="row">
-            <div class="col-md-5">
-              <h4>学習開始日 <%= @learning.created_at.strftime("%Y年%m月%d日") %></h4>
-            </div>
-            <div class="col-md-7 field">
-              <h4>学習状況</h4>
-              <%= form_with(model: [@learning.app, @learning]) do |f| %>
-                <%= f.select :status, ["学習中", "学習済み", "学習中断"] %>
-                <%= f.submit "更新", class: "btn btn-default" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <%= render 'learnings/learning_status', app: @app, learning: @learning %>
 
       <div id="explanation-info">
         <h4>解説</h4>
-        <%= @app.explanation %>
+        <% if @app.explanation.present? %>
+          <%= @app.explanation %>
+        <% else %>
+          <p>解説は投稿されていません。</p>
+        <% end %>
       </div>
     </div>
   </div>
 
   <div class="col-md-1">
-    <div class="link-bar">
-      <% if @app.user == current_user %>
-        <div class="group-btn">
-          <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-default" %>
-          <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
-          <%= link_to "質問", app_questions_path(@app), class: "btn btn-default" %>
-          <%= link_to "解説", explanation_app_path(@app), class: "btn btn-default btn-active" %>
-        </div>
-        <div class="one-btn">
-          <%= link_to "レビュー", app_reviews_path(@app), class: "btn btn-default" %>
-        </div>
-        <div class="one-btn">
-          <%= link_to "編集", edit_app_path(@app), class: "btn btn-primary" %>
-        </div>
-      <% else %>
-        <div class="group-btn">
-          <%= link_to "アプリ詳細", app_path(@app), class: "btn btn-default" %>
-          <%= link_to "学習メモ", app_learning_path(@app, @learning), class: "btn btn-default" %>
-          <%= link_to "ヒント", hint_app_path(@app), class: "btn btn-default" %>
-          <%= link_to "質問", app_questions_path(@app), class: "btn btn-default" %>
-          <%= link_to "解説", explanation_app_path(@app), class: "btn btn-default btn-active" %>
-        </div>
-        <div class="one-btn">
-          <%= link_to "レビュー", app_reviews_path(@app), class: "btn btn-default" %>
-        </div>
-      <% end %>
-    </div>
+    <%= render 'learnings/learning_linkbar', app: @app, learning: @learning %>
   </div>
 </div>

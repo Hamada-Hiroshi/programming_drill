@@ -21,7 +21,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row back-white">
   <div id="user-app">
     <ul class="user-app-menu nav nav-tabs">
       <li class="active"><%= link_to "学習#{@user.learnings.count}件", "#learning-tab", data: { toggle: "tab"} %></li>
@@ -33,16 +33,10 @@
       <div class="tab-pane active" id="learning-tab">
         <% if @user == current_user %>
           <% @user.learnings.each do |learning| %>
-            <div c lass="my-app-box">
+            <div class="my-app-box">
               <div class="row">
                 <div class="my-app col-md-9">
-                  <h4><%= link_to learning.app.title, app_path(learning.app) %></h4>
-                  <div class="star-rate" data-score="<%= learning.app.average_rate %>"></div>
-                  <span>（<%= learning.app.average_rate %>）</span>
-                  <p>開発言語：<%= link_to learning.app.language.name, language_path(learning.app.language) %></p>
-                  <% learning.app.tag_list.each do |tag| %>
-                    <span class="tag-link"><%= link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag" %></span>
-                  <% end %>
+                  <%= render 'user_app_index', app: learning.app %>
                 </div>
 
                 <div class="my-learning-status col-md-3">
@@ -68,18 +62,12 @@
         <% @user.apps.each do |app| %>
           <div class="my-app-box">
             <div class="row">
-              <div class="my-app col-md-9">
-                <h4><%= link_to app.title, app_path(app) %></h4>
-                <div class="star-rate" data-score="<%= app.average_rate %>"></div>
-                <span>（<%= app.average_rate %>）</span>
-                <p>開発言語：<%= link_to app.language.name, language_path(app.language) %></p>
-                <% app.tag_list.each do |tag| %>
-                  <span class="tag-link"><%= link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag" %></span>
-                <% end %>
+              <div class="my-app col-md-10">
+                <%= render 'user_app_index', app: app %>
               </div>
 
               <% if @user == current_user %>
-                <div class="my-app-edit col-md-3">
+                <div class="my-app-edit col-md-2">
                   <%= link_to "内容を編集する", edit_app_path(app), class: "btn btn-primary" %>
                 </div>
               <% end %>

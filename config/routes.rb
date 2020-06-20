@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get 'apps/:id/explanation' => 'apps#explanation', as: 'explanation_app'
   get 'apps/:id/hidden' => 'apps#hidden', as: 'hidden_app'
   patch 'apps/:id/cancel' => 'apps#cancel', as: 'cancel_app'
-  resources :apps, only: [:new, :create, :show, :edit, :update] do
+  resources :apps, only: [:index, :new, :create, :show, :edit, :update] do
     resources :learnings, only: [:create, :show, :update]
     resources :questions, only: [:index, :create]
     resources :reviews, only: [:index, :create]

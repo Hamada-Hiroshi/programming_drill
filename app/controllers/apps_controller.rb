@@ -23,7 +23,7 @@ class AppsController < ApplicationController
   end
 
   def set_apps_score
-    @apps = App.where(status: true).each do |app|
+    @apps = @q.result(distinct: true).where(status: true).each do |app|
       app.score = app.average_rate
     end
   end
