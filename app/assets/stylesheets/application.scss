@@ -82,11 +82,11 @@ footer {
     padding: 50px;
     margin-top: 30px;
     height: 200px;
-    background-color: #FFF;
+    background-color: #483D8B;
     border-top: solid 1px #AAA;
     border-bottom: solid 1px #AAA;
     a {
-      margin-top: 30px;
+      color: #FFF;
     }
   }
   #footer-bottom {
@@ -647,6 +647,18 @@ select {
     padding-top: 180px;
     font-size: 45px;
     font-weight: bold;
+  }
+}
+#about-body {
+  section {
+    margin: 30px auto 80px;
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    p {
+      font-size: 1.3em;
+    }
   }
 }
 
