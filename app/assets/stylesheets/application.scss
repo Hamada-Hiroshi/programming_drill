@@ -30,24 +30,15 @@ body {
 
 #header-top {
   background-color: #483D8B;
-  padding: 8px 0;
 }
-#header-logo img {
+.header-logo img {
   width: 230px;
   height: 30px;
-  margin-top: 5px;
-  margin-right: 50px;
-}
-#search-form {
-  display: inline-block;
 }
 #header-link {
-  margin-right: 0;
   li {
-    margin-left: 30px;
-    height: 40px;
+    padding: 18px 15px 0  15px;
     font-size: 1.1em;
-    padding: 10px 0;
     a {
       color: #FFF;
       padding: 0;
@@ -56,9 +47,16 @@ body {
       }
     }
   }
-  #header-mylink {
-    padding: 0;
-  }
+}
+#header-mylink {
+  padding: 8px 15px !important;
+}
+#app_search {
+  padding: 13px 0px;
+  margin: 0;
+}
+#q_title_cont {
+  height: 30px;
 }
 
 /* フラッシュメッセージ */
@@ -88,7 +86,7 @@ body {
 
 footer {
   #footer-top {
-    padding: 50px;
+    padding-top: 50px;
     margin-top: 30px;
     height: 200px;
     background-color: #483D8B;
@@ -687,4 +685,15 @@ select {
 /*ホバー時のデザイン*/
 .pagination>li>a:hover {
   border-radius: 15px;    /*角を丸くする*/
+}
+
+
+/* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+@media screen and (max-width:768px) {
+
+}
+
+/* スマートフォンサイズ（425px）以下の際に適用される設定 */
+@media screen and (max-width:425px) {
+
 }
