@@ -32,6 +32,9 @@
 
             <div class="col-md-7">
               <ul class="nav navbar-nav navbar-right" id="header-link">
+                <% if admin_signed_in? %>
+                  <li><%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete %></li>
+                <% end %>
                 <% if user_signed_in? %>
                   <li id="header-mylink">
                     <%= link_to user_path(current_user) do %>
