@@ -1,30 +1,32 @@
-<div class="row">
-  <div class="col-md-3 sidebar">
-    <div class="category-bar">
-      <ul class="category-menu nav nav-tabs">
-        <li class="active"><%= link_to "言語別", "#language-tab", data: { toggle: "tab"}  %></li>
-        <li><%= link_to "タグ別", "#tag-tab", data: { toggle: "tab"}  %></li>
-      </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 sidebar">
+      <div class="category-bar">
+        <ul class="category-menu nav nav-tabs">
+          <li class="active"><%= link_to "言語別", "#language-tab", data: { toggle: "tab"}  %></li>
+          <li><%= link_to "タグ別", "#tag-tab", data: { toggle: "tab"}  %></li>
+        </ul>
 
-      <div class="tab-content category-contents">
-        <div class="tab-pane active" id="language-tab">
-          <%= render 'language_index', languages: @languages %>
-        </div>
-        <div class="tab-pane" id="tag-tab">
-          <%= render 'apps/tag_index' %>
+        <div class="tab-content category-contents">
+          <div class="tab-pane active" id="language-tab">
+            <%= render 'language_index', languages: @languages %>
+          </div>
+          <div class="tab-pane" id="tag-tab">
+            <%= render 'apps/tag_index' %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-md-9">
-    <div class="app-index back-white">
-      <ul class="nav nav-tabs">
-        <li class="active"><%= link_to "新着順", language_path(@language) %></li>
-        <li><%= link_to "評価順", rate_language_path(@language) %></li>
-      </ul>
-      <%= render 'apps/app_index', apps: @apps %>
+    <div class="col-md-9">
+      <div class="app-index back-white">
+        <ul class="nav nav-tabs">
+          <li class="active"><%= link_to "新着順", language_path(@language) %></li>
+          <li><%= link_to "評価順", rate_language_path(@language) %></li>
+        </ul>
+        <%= render 'apps/app_index', apps: @apps %>
+      </div>
     </div>
-  </div>
 
+  </div>
 </div>

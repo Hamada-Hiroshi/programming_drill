@@ -1,20 +1,22 @@
-<div class="row">
-  <div class="col-md-10 app-show-box border-space">
-    <div id="app-explanation">
-      <%= render 'learnings/learning_status', app: @app, learning: @learning %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 app-show-box border-space">
+      <div id="app-explanation">
+        <%= render 'learnings/learning_status', app: @app, learning: @learning %>
 
-      <div id="explanation-info">
-        <h4>解説</h4>
-        <% if @app.explanation.present? %>
-          <%= @app.explanation %>
-        <% else %>
-          <p>解説は投稿されていません。</p>
-        <% end %>
+        <div id="explanation-info">
+          <h4>解説</h4>
+          <% if @app.explanation.present? %>
+            <%= @app.explanation %>
+          <% else %>
+            <p>解説は投稿されていません。</p>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-md-1">
-    <%= render 'learnings/learning_linkbar', app: @app, learning: @learning %>
+    <div class="col-md-1">
+      <%= render 'learnings/learning_linkbar', app: @app, learning: @learning %>
+    </div>
   </div>
 </div>

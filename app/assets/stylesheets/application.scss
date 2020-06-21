@@ -24,21 +24,21 @@
 }
 
 body {
-  padding-top: 80px;
+  padding-top: 55px;
   background-color: #F6F6F6;
 }
 
 #header-top {
   background-color: #483D8B;
-  padding: 8px 0;
+}
+.header-logo img {
+  width: 230px;
+  height: 30px;
 }
 #header-link {
-  margin-right: 0;
   li {
-    margin-left: 30px;
-    height: 40px;
+    padding: 18px 15px 0  15px;
     font-size: 1.1em;
-    padding: 10px 0;
     a {
       color: #FFF;
       padding: 0;
@@ -47,9 +47,16 @@ body {
       }
     }
   }
-  #header-mylink {
-    padding: 0;
-  }
+}
+#header-mylink {
+  padding: 8px 15px !important;
+}
+#app_search {
+  padding: 13px 0px;
+  margin: 0;
+}
+#q_title_cont {
+  height: 30px;
 }
 
 /* フラッシュメッセージ */
@@ -76,18 +83,21 @@ body {
 
 .main-body {
   min-height: 600px;
+  .container {
+    margin-top: 20px;
+  }
 }
 
 footer {
   #footer-top {
-    padding: 50px;
+    padding-top: 50px;
     margin-top: 30px;
     height: 200px;
-    background-color: #FFF;
+    background-color: #483D8B;
     border-top: solid 1px #AAA;
     border-bottom: solid 1px #AAA;
     a {
-      margin-top: 30px;
+      color: #FFF;
     }
   }
   #footer-bottom {
@@ -626,3 +636,68 @@ select {
   }
 }
 
+/* アバウトページ */
+#top-image {
+  background-image: url(priscilla-du-preez-XkKCui44iM0-unsplash.jpg);
+  background-size: cover;
+  background-position: bottom;
+  width: 100%;
+  height: 500px;
+  position: relative;
+}
+#top-message {
+  width: 100%;
+  height: 500px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #FFF;
+  text-align: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  h1 {
+    padding-top: 180px;
+    font-size: 45px;
+    font-weight: bold;
+  }
+}
+#about-body {
+  section {
+    margin: 30px auto 80px;
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    p {
+      font-size: 1.3em;
+    }
+  }
+}
+
+/* ページネーション */
+.paginate {
+  text-align: center;
+}
+.pagination>li>a {
+  border: none;     /*枠線をなくす*/
+  color: #696969;   /*文字の色を変える*/
+}
+/* 表示しているページ番号のデザイン */
+.pagination>.active>a {
+  background: #93c9ff;     /*背景の色を変える*/
+  border-radius: 15px;     /*角を丸くする*/
+}
+/*ホバー時のデザイン*/
+.pagination>li>a:hover {
+  border-radius: 15px;    /*角を丸くする*/
+}
+
+
+/* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+@media screen and (max-width:768px) {
+
+}
+
+/* スマートフォンサイズ（425px）以下の際に適用される設定 */
+@media screen and (max-width:425px) {
+
+}
