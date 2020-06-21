@@ -11,11 +11,12 @@ class LanguagesController < ApplicationController
   end
 
   def show
-    @apps = @apps.sort_by { |app| app.created_at }.reverse
+    @apps = @apps.page(params[:page]).reverse_order
   end
 
   def rate_show
     @apps = @apps.sort_by { |app| app.score.to_i }.reverse
+    @apps = Kaminari.paginate_array(@apps).page(params[:page])
   end
 
 end
