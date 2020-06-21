@@ -1,0 +1,29 @@
+<div class="row border-box border-space">
+  <div class="col-md-5">
+    <h3>開発言語 新規登録</h3>
+    <%= form_with(model: [:admin, @language], local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: @language %>
+
+      <div class="field language-form">
+        <%= f.label :name, "言語名" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "登録", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-md-5 col-md-offset-1">
+    <h3>開発言語一覧</h3>
+    <ul id="language-index">
+      <% @languages.each do |language| %>
+        <li>
+          <%= language.name %>
+          <span>（<%= language.apps.count %>）</span>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
