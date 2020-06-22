@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   root 'apps#index'
   get 'about' => 'home#about'
 
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions:      'users/sessions',
+    passwords:     'users/passwords',
+    registrations: 'users/registrations'
+  }
   get 'users/:id/quit' => 'users#quit', as: 'quit_user'
   patch 'users/:id/cancel' => 'users#cancel', as: 'cancel_user'
   resources :users, only: [:show, :edit, :update]
@@ -25,4 +29,16 @@ Rails.application.routes.draw do
 
   get 'languages/:id/rate' => 'languages#rate_show', as: 'rate_language'
   resources :languages, only: [:show]
+
+
+  devise_for :admins, skip: :all
+  devise_scope :admin do
+    get 'admin/sign_in' => 'admins/sessions#new', as: 'new_admin_session'
+    post 'admin/sign_in' => 'admins/sessions#create', as: 'admin_session'
+    delete 'admin/sign_out' => 'admins/sessions#destroy', as: 'destroy_admin_session'
+  end
+  namespace :admin do
+    root 'languages#index'
+    resources :languages, only: [:create, :destroy]
+  end
 end

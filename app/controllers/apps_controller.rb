@@ -23,32 +23,36 @@ class AppsController < ApplicationController
   end
 
   def set_apps_score
-    @apps = @q.result(distinct: true).where(status: true).each do |app|
+    @apps = @q.result(distinct: true).where(status: true)
+    @apps.each do |app|
       app.score = app.average_rate
     end
   end
 
   def set_tag_apps_score
-    @apps = App.tagged_with(params[:tag_name]).where(status: true).each do |app|
+    @apps = App.tagged_with(params[:tag_name]).where(status: true)
+    @apps.each do |app|
       app.score = app.average_rate
     end
   end
 
 
   def index
-    @apps = @apps.sort_by { |app| app.created_at }.reverse
+    @apps = @apps.page(params[:page]).reverse_order
   end
 
   def rate_index
     @apps = @apps.sort_by { |app| app.score.to_i }.reverse
+    @apps = Kaminari.paginate_array(@apps).page(params[:page])
   end
 
   def tag
-    @apps = @apps.sort_by { |app| app.created_at }.reverse
+    @apps = @apps.page(params[:page]).reverse_order
   end
 
   def rate_tag
     @apps = @apps.sort_by { |app| app.score.to_i }.reverse
+    @apps = Kaminari.paginate_array(@apps).page(params[:page])
   end
 
   def new
