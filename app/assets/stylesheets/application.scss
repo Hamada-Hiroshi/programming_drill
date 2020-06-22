@@ -59,7 +59,7 @@ body {
   height: 30px;
 }
 
-/* フラッシュメッセージ */
+//フラッシュメッセージ
 .header-flash {
   border-bottom: solid 1px #AAA;
 }
@@ -97,6 +97,7 @@ footer {
     border-top: solid 1px #AAA;
     border-bottom: solid 1px #AAA;
     a {
+      font-size: 1.1em;
       color: #FFF;
     }
   }
@@ -106,7 +107,7 @@ footer {
   }
 }
 
-/* 白背景のボックス、ボーダー */
+//白背景のボックス、ボーダー
 .border-box {
   border: solid 1px #AAA;
   background-color: #FFF;
@@ -124,27 +125,26 @@ footer {
   padding: 40px 0;
 }
 
-/* アプリ詳細ページの白背景ボックス、ボーダー */
+//アプリ詳細ページの白背景ボックス、ボーダー
 .app-show-box {
   border: solid 1px #AAA;
   background-color: #FFF;
-  margin-left: 15px;
   min-height: 600px;
 }
 
-/* 白背景のみ */
+//白背景のみ
 .back-white {
   background-color: #FFF;
   margin: 0;
   padding: 30px 40px;
 }
 
-/* 改行を反映 */
+//改行を反映
 p {
   white-space: pre-wrap;
 }
 
-/* エラーメッセージ */
+//エラーメッセージ
 #error-explanation {
   border: solid 1px red;
   border-radius: 4px;
@@ -157,17 +157,17 @@ p {
   @extend .has-error;
 }
 
-/* リンクボタンの間隔 */
+//リンクボタンの間隔
 .actions a {
   margin: 0 20px;
 }
 
-/* アプリ詳細のリンクバー */
+//アプリ詳細のリンクバー
 .one-btn {
   margin-top: 30px;
 }
 .current-btn a, .one-btn a {
-  width: 130px;
+  width: 80%;
   border-radius: 0;
   padding: 15px 0;
 }
@@ -180,7 +180,7 @@ p {
   }
 }
 
-/* 編集ページのリンクバー */
+//編集ページのリンクバー
 .edit-link {
   padding-left: 0;
   li {
@@ -190,7 +190,7 @@ p {
   }
 }
 
-/* タグ */
+//タグ
 .tag-link {
   display: inline-block;
   margin: 0 5px 7px 0;
@@ -203,7 +203,7 @@ p {
   }
 }
 
-/* レビュー星 */
+//レビュー星
 #star {
   display: inline-block;
   margin: 0 20px 10px 0;
@@ -216,7 +216,7 @@ span {
   font-size: 0.9em;
 }
 
-/* アプリ一覧の各アプリ */
+//アプリ一覧の各アプリ
 .link-app-box {
   border-bottom: solid 1px #C0C0C0;
   padding: 10px 0;
@@ -239,7 +239,7 @@ span {
   }
 }
 
-/* マイページのアプリ一覧の各アプリ */
+//マイページのアプリ一覧の各アプリ
 .my-app-box {
   border-bottom: solid 1px #C0C0C0;
   padding: 10px 20px 15px;
@@ -273,7 +273,7 @@ span {
   margin-top: 20px;
 }
 
-/* アプリ詳細 */
+//アプリ詳細
 .app-info {
   .app-info-top {
     .app-post {
@@ -298,11 +298,12 @@ span {
     }
     p, a {
       font-size: 1.2em;
+      word-wrap: break-word;
     }
   }
 }
 
-/* アプリ詳細の学習関連ページ */
+//アプリ詳細の学習関連ページ
 .learning-app-info {
   h1 {
     margin-bottom: 30px;
@@ -327,13 +328,13 @@ span {
   }
 }
 
-/* 横幅いっぱいの投稿フォーム */
+//横幅いっぱいの投稿フォーム
 .textarea-form {
   width: 100%;
   min-height: 150px;
 }
 
-/* 質問、レビュー投稿 */
+//質問、レビュー投稿
 #review-form {
   margin-top: 30px;
   p {
@@ -362,7 +363,7 @@ span {
   }
 }
 
-/* 質問返信 */
+//質問返信
 .reply-index {
   padding-left: 35px;
   .reply {
@@ -380,7 +381,7 @@ span {
   margin-left: 35px;
 }
 
-/* セレクトボックス */
+//セレクトボックス
 select {
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -402,7 +403,7 @@ select {
   background-repeat: no-repeat;
 }
 
-/* マイページ */
+//マイページ
 #user-image {
   margin-top: 20px;
 }
@@ -423,9 +424,8 @@ select {
   }
 }
 
-/* 新規登録・ログイン */
+//新規登録・ログイン
 .new-user {
-  padding: 0 20px;
   width: 500px;
   margin: 50px auto;
   h3 {
@@ -436,15 +436,15 @@ select {
   }
 }
 
-/* パスワード入力フォーム(新規登録・ログイン) */
+//パスワード入力フォーム(新規登録・ログイン)
 .new-password-form {
   margin-bottom: 20px;
   label {
-    width: 150px;
+    width: 30%;
     vertical-align: top;
   }
   input {
-    width: 300px;
+    width: 65%;
     display: inline-block;
   }
   p {
@@ -452,7 +452,7 @@ select {
   }
 }
 
-/* プロフィール編集 */
+//プロフィール編集画面のユーザ情報
 .edit-user {
   img {
     float: left;
@@ -467,54 +467,70 @@ select {
   }
 }
 
-/* ユーザ情報の入力フォーム */
+//ユーザ情報編集
+.edit-user-form {
+  width: 500px;
+}
+
+//ユーザ情報の入力フォーム
 .user-form{
   margin-bottom: 20px;
   label {
-    width: 130px;
+    width: 20%;
     vertical-align: top;
   }
   input {
-    width: 400px;
+    width: 75%;
     display: inline-block;
   }
   textarea {
-    width: 400px;
+    width: 75%;
     min-height: 100px;
     display: inline-block;
   }
 }
 
-/* パスワード入力フォーム(再設定) */
+//パスワード変更
+.edit-password-form {
+  width: 500px;
+}
+
+//パスワード入力フォーム(変更・再設定)
 .password-form {
   margin-bottom: 20px;
   label {
-    width: 190px;
+    width: 40%;
     vertical-align: top;
   }
   input {
-    width: 300px;
+    width: 55%;
     display: inline-block;
   }
   p {
-    margin-left: 195px;
+    margin-left: 205px;
   }
 }
 
-/* アプリ入力フォーム（共通） */
+//アプリ入力フォーム（共通）
+.app-form {
+  width: 90%;
+  margin: 0 auto;
+}
 .new-app-form, .edit-app-form {
   margin-bottom: 30px;
   label {
     font-size: 1.2em;
-    width: 200px;
+    width: 25%;
     vertical-align: top;
     text-align: right;
-    margin-right: 30px;
+    margin-right: 5%;
   }
   input {
+    width: 65%;
     display: inline-block;
   }
   textarea {
+    width: 65%;
     min-height: 100px;
     display: inline-block;
   }
@@ -522,27 +538,16 @@ select {
     min-height: 54px;
   }
   p {
-    display: inline-block;
-    margin: 0 0 0 230px;
+    margin: 0 0 0 30%;
   }
 }
 
-/* アプリ入力フォーム（新規・編集） */
-.new-app-form {
-  input, textarea {
-    width: 600px;
-  }
-}
+//アプリ編集
 .edit-app-title h2 {
   margin: 10px 15px 50px 15px;
 }
-.edit-app-form {
-  input, textarea {
-    width: 450px;
-  }
-}
 
-/* アプリ入力フォーム（ヒント・解説編集） */
+//アプリ入力フォーム（ヒント・解説編集）
 .add-edit-app-form {
   width: 95%;
   margin: 0 auto 40px;
@@ -554,7 +559,7 @@ select {
   }
 }
 
-/* アプリ投稿確認 */
+//アプリ投稿確認
 .new-app-confirm {
   margin-bottom: 40px;
   h4 {
@@ -562,7 +567,7 @@ select {
   }
 }
 
-/* 削除ページ */
+//削除ページ
 .confirm-message {
   p {
     font-size: 17px;
@@ -575,12 +580,13 @@ select {
   margin: 0 15px;
 }
 
-/* 検索バー全体 */
-.sidebar {
-  padding: 30px 60px 0 15px;
+//検索バー全体
+.category-bar {
+  padding-top: 30px;
+  width: 90%;
 }
 
-/* 言語別検索バー */
+//言語別検索バー
 #language-index {
   padding: 0;
   a {
@@ -591,7 +597,7 @@ select {
     }
     li {
       list-style: none;
-      padding: 20px 30px;
+      padding: 20px 10%;
       border-bottom: solid 1px #DDD;
       &:hover {
         background-color: #EEE;
@@ -608,7 +614,7 @@ select {
   }
 }
 
-/* タグ別検索バー */
+//タグ別検索バー
 #tag-index {
   padding: 0;
   li {
@@ -622,7 +628,7 @@ select {
   }
 }
 
-/* タブメニュー */
+//タブメニュー
 .nav-tabs > li.active > a {
   background-color: #D9E5FF;
   border-radius: 0;
@@ -636,7 +642,7 @@ select {
   }
 }
 
-/* アバウトページ */
+//アバウトページ
 #top-image {
   background-image: url(priscilla-du-preez-XkKCui44iM0-unsplash.jpg);
   background-size: cover;
@@ -673,7 +679,7 @@ select {
   }
 }
 
-/* ページネーション */
+//ページネーション
 .paginate {
   text-align: center;
 }
@@ -681,23 +687,83 @@ select {
   border: none;     /*枠線をなくす*/
   color: #696969;   /*文字の色を変える*/
 }
-/* 表示しているページ番号のデザイン */
 .pagination>.active>a {
   background: #93c9ff;     /*背景の色を変える*/
   border-radius: 15px;     /*角を丸くする*/
 }
-/*ホバー時のデザイン*/
 .pagination>li>a:hover {
   border-radius: 15px;    /*角を丸くする*/
 }
 
 
-/* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
 @media screen and (max-width:768px) {
-
+  .new-app-form, .edit-app-form {
+    label {
+      width: 100%;
+      text-align: left;
+    }
+    input, textarea {
+      width: 100%;
+    }
+    p {
+      margin: 0;
+    }
+  }
 }
 
-/* スマートフォンサイズ（425px）以下の際に適用される設定 */
-@media screen and (max-width:425px) {
+@media screen and (max-width:580px) {
+  .new-user {
+    width: 100%;
+  }
+  .new-password-form {
+    label {
+      min-width: 100%;
+    }
+    input {
+      min-width: 100%;
+    }
+    p {
+      margin-left: 0;
+    }
+  }
 
+  .edit-user {
+    width: 100%;
+    img {
+      float: none;
+    }
+    .edit-user-name {
+      margin: 0;
+    }
+  }
+  .edit-user-form {
+    width: 100%;
+  }
+  .user-form{
+    label {
+      width: 100%;
+    }
+    input {
+      width: 100%;
+    }
+    textarea {
+      width: 100%;
+    }
+  }
+
+  .edit-password-form {
+    width: 100%;
+  }
+  .password-form {
+    label {
+      width: 100%;
+    }
+    input {
+      width: 100%;
+      display: inline-block;
+    }
+    p {
+      margin-left: 0;
+    }
+  }
 }

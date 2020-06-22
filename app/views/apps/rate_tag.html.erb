@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3 sidebar">
+    <div class="col-sm-3 sidebar">
       <div class="category-bar">
         <ul class="category-menu nav nav-tabs">
           <li><%= link_to "言語別", "#language-tab", data: { toggle: "tab"}  %></li>
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-sm-9">
       <div class="app-index back-white">
         <ul class="nav nav-tabs">
           <li><%= link_to "新着順", tag_apps_path(tag_name: params[:tag_name]) %></li>

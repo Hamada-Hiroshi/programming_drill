@@ -1,33 +1,34 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-10 app-show-box border-space">
-      <div id="app-question">
-        <%= render 'learnings/learning_status', app: @app, learning: @learning %>
+    <div class="col-sm-10">
+      <div class="app-show-box border-space">
+        <div id="app-question">
+          <%= render 'learnings/learning_status', app: @app, learning: @learning %>
 
-        <div id="question-contents">
-          <div id="question-form" class="field">
-            <%= form_with(model: [@app, @question]) do |f| %>
-              <div id="error-messages"></div>
-              <%= render 'layouts/error_messages', model: @question %>
-              <h4>質問</h4>
-              <%= f.text_area :content, placeholder: "質問内容を記入してください。", class: "textarea-form" %>
-              <%= f.submit "質問を投稿", class: "btn btn-default" %>
-            <% end %>
+          <div id="question-contents">
+            <div id="question-form" class="field">
+              <%= form_with(model: [@app, @question]) do |f| %>
+                <div id="error-messages"></div>
+                <%= render 'layouts/error_messages', model: @question %>
+                <h4>質問</h4>
+                <%= f.text_area :content, placeholder: "質問内容を記入してください。", class: "textarea-form" %>
+                <%= f.submit "質問を投稿", class: "btn btn-default" %>
+              <% end %>
+            </div>
+
+            <div id="question-index">
+              <% if @questions.present? %>
+                <%= render 'question_index', questions: @questions %>
+              <% else %>
+                <p>質問履歴はありません。</p>
+              <% end %>
+            </div>
           </div>
-
-          <div id="question-index">
-            <% if @questions.present? %>
-              <%= render 'question_index', questions: @questions %>
-            <% else %>
-              <p>質問履歴はありません。</p>
-            <% end %>
-          </div>
-
         </div>
       </div>
     </div>
 
-    <div class="col-md-1">
+    <div class="col-sm-2">
       <%= render 'learnings/learning_linkbar', app: @app, learning: @learning %>
     </div>
   </div>
