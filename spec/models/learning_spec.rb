@@ -8,7 +8,7 @@ RSpec.describe Learning, type: :model do
 
     it "ユーザIDとアプリIDのみで有効" do
       learning.memo = ''
-      expect(learning.valid?).to eq true;
+      expect(learning.valid?).to eq true
     end
   end
 end

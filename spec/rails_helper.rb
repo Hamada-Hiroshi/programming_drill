@@ -10,7 +10,6 @@ require 'selenium-webdriver'
 require 'devise'
 Faker::Config.locale = :ja
 
-
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -38,7 +37,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   config.before(:each, type: :system) do
-    #driven_by :selenium_chrome_headless
+    # driven_by :selenium_chrome_headless
     driven_by :rack_test
   end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

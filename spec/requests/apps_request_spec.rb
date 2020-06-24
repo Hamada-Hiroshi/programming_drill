@@ -13,6 +13,7 @@ RSpec.describe "Apps", type: :request do
     before do
       get root_path
     end
+
     it 'リクエストが成功する' do
       expect(response.status).to eq 200
     end
@@ -25,6 +26,7 @@ RSpec.describe "Apps", type: :request do
     before do
       sign_in user
     end
+
     context '正常なパラメータの場合' do
       it 'リクエストが成功する' do
         post confirm_apps_path, params: { user_id: user, language_id: language, app: attributes_for(:app) }
@@ -39,5 +41,4 @@ RSpec.describe "Apps", type: :request do
       end
     end
   end
-
 end

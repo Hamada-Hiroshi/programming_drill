@@ -15,6 +15,7 @@ describe 'レビューのテスト' do
       before do
         visit app_reviews_path(learned_app)
       end
+
       it 'スコア入力フォームは表示されない' do
         expect(page).not_to have_text '星の数を選択'
       end
@@ -34,6 +35,7 @@ describe 'レビューのテスト' do
         click_button 'ログイン'
         visit app_reviews_path(post_app)
       end
+
       it 'スコア入力フォームは表示されない' do
         expect(page).not_to have_text '星の数を選択'
       end
@@ -53,6 +55,7 @@ describe 'レビューのテスト' do
         click_button 'ログイン'
         visit app_reviews_path(learning_app)
       end
+
       it 'スコア入力フォームは表示されない' do
         expect(page).not_to have_text '星の数を選択'
       end
@@ -72,6 +75,7 @@ describe 'レビューのテスト' do
         click_button 'ログイン'
         visit app_reviews_path(learned_app)
       end
+
       it 'スコア入力フォームが表示される' do
         expect(page).to have_text '星の数を選択'
       end
@@ -82,6 +86,5 @@ describe 'レビューのテスト' do
         expect(page).not_to have_text '学習済みのアプリケーションのみ、レビューを投稿できます。'
       end
     end
-
   end
 end

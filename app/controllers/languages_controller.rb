@@ -18,5 +18,4 @@ class LanguagesController < ApplicationController
     @apps = @apps.sort_by { |app| app.score.to_i }.reverse
     @apps = Kaminari.paginate_array(@apps).page(params[:page])
   end
-
 end

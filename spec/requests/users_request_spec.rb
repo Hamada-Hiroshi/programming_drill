@@ -9,6 +9,7 @@ RSpec.describe "Users", type: :request do
         sign_in user
         get user_path(user)
       end
+
       it 'リクエストが成功する' do
         expect(response.status).to eq 200
       end
@@ -18,6 +19,7 @@ RSpec.describe "Users", type: :request do
       before do
         get user_path(user)
       end
+
       it 'リクエストが失敗する' do
         expect(response.status).not_to eq 200
       end
@@ -29,6 +31,7 @@ RSpec.describe "Users", type: :request do
       before do
         sign_in user
       end
+
       it 'リクエストが成功する' do
         patch user_path(user), params: { id: user, user: attributes_for(:update_user) }
         expect(response.status).to eq 302
@@ -56,6 +59,4 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
-
 end
-

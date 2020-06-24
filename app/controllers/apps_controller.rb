@@ -1,6 +1,8 @@
 class AppsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :confirm, :create,
-   :edit, :add_edit, :update, :add_update, :hint, :explanation, :hidden, :cancel]
+  before_action :authenticate_user!, only: [
+    :new, :confirm, :create,
+    :edit, :add_edit, :update, :add_update, :hint, :explanation, :hidden, :cancel,
+  ]
   before_action :set_app, only: [:show, :edit, :add_edit, :update, :add_update, :hint, :explanation, :hidden, :cancel]
   before_action :set_learning, only: [:show, :hint, :explanation]
   before_action :set_languages, only: [:index, :rate_index, :tag, :rate_tag]
@@ -35,7 +37,6 @@ class AppsController < ApplicationController
       app.score = app.average_rate
     end
   end
-
 
   def index
     @apps = @apps.page(params[:page]).reverse_order
@@ -127,6 +128,7 @@ class AppsController < ApplicationController
   end
 
   private
+
   def app_params
     params.require(:app).permit(:title, :language_id, :overview, :app_url, :repo_url, :function, :target, :tag_list)
   end

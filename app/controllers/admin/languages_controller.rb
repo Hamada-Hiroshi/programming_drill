@@ -23,6 +23,7 @@ class Admin::LanguagesController < ApplicationController
   end
 
   private
+
   def language_params
     params.require(:language).permit(:name)
   end

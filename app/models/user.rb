@@ -12,6 +12,6 @@ class User < ApplicationRecord
   validates :status, inclusion: { in: [true, false] }
 
   def active_for_authentication?
-    super && (self.status == true)
+    super && (status == true)
   end
 end

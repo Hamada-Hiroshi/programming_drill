@@ -13,6 +13,7 @@ describe 'アプリケーションのテスト' do
       before do
         visit app_path(post_app)
       end
+
       it 'アプリ詳細へのリンクが表示される' do
         expect(page).to have_link 'アプリ詳細', href: app_path(post_app)
       end
@@ -54,6 +55,7 @@ describe 'アプリケーションのテスト' do
         click_button 'ログイン'
         visit app_path(post_app)
       end
+
       it 'アプリ詳細へのリンクが表示される' do
         expect(page).to have_link 'アプリ詳細', href: app_path(post_app)
       end
@@ -91,6 +93,7 @@ describe 'アプリケーションのテスト' do
         click_button 'ログイン'
         visit app_path(learning_app)
       end
+
       it 'アプリ詳細へのリンクが表示される' do
         expect(page).to have_link 'アプリ詳細', href: app_path(learning_app)
       end
@@ -130,6 +133,7 @@ describe 'アプリケーションのテスト' do
         click_button 'ログイン'
         visit edit_app_path(post_app)
       end
+
       it 'アプリケーション名編集フォームにタイトルが表示される' do
         expect(page).to have_field 'app[title]', with: post_app.title
       end
@@ -151,6 +155,7 @@ describe 'アプリケーションのテスト' do
         fill_in 'user[password]', with: test_user_2.password
         click_button 'ログイン'
       end
+
       it 'ページ遷移できない' do
         visit edit_app_path(post_app)
         expect(current_path).to eq(root_path)
@@ -164,5 +169,4 @@ describe 'アプリケーションのテスト' do
       end
     end
   end
-
 end
