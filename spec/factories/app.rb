@@ -6,9 +6,11 @@ FactoryBot.define do
     repo_url { Faker::Internet.url }
     function { Faker::Lorem.characters(number:100) }
     target { Faker::Lorem.characters(number:20) }
-    hint { Faker::Lorem.characters(number:50) }
-    explanation { Faker::Lorem.characters(number:50) }
     user
     language
+
+    trait :invalid do
+      title { nil }
+    end
   end
 end

@@ -1,60 +1,42 @@
 require 'rails_helper'
 
 RSpec.describe "Apps", type: :request do
+  let(:language) { create(:language) }
+  let(:user) { create(:user) }
+  let(:test_app) { create(:app, user_id: user.id, language_id: language.id) }
+  let(:review_2_user) { create(:user) }
+  let(:review_4_user) { create(:user) }
+  let!(:review_2) { create(:review_2, user_id: review_2_user.id, app_id: test_app.id) }
+  let!(:review_4) { create(:review_4, user_id: review_4_user.id, app_id: test_app.id) }
 
-  describe "GET /index" do
-    it "returns http success" do
-      get "/apps/index"
-      expect(response).to have_http_status(:success)
+  describe 'GET index' do
+    before do
+      get root_path
+    end
+    it 'リクエストが成功する' do
+      expect(response.status).to eq 200
+    end
+    it '平均評価が表示される' do
+      expect(response.body).to include('3.0')
     end
   end
 
-  describe "GET /new" do
-    it "returns http success" do
-      get "/apps/new"
-      expect(response).to have_http_status(:success)
+  describe 'POST confirm' do
+    before do
+      sign_in user
     end
-  end
-
-  describe "GET /confirm" do
-    it "returns http success" do
-      get "/apps/confirm"
-      expect(response).to have_http_status(:success)
+    context '正常なパラメータの場合' do
+      it 'リクエストが成功する' do
+        post confirm_apps_path, params: { user_id: user, language_id: language, app: attributes_for(:app) }
+        expect(response.status).to eq 200
+      end
     end
-  end
 
-  describe "GET /show" do
-    it "returns http success" do
-      get "/apps/show"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET /edit" do
-    it "returns http success" do
-      get "/apps/edit"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET /add_edit" do
-    it "returns http success" do
-      get "/apps/add_edit"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET /hint" do
-    it "returns http success" do
-      get "/apps/hint"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET /explanation" do
-    it "returns http success" do
-      get "/apps/explanation"
-      expect(response).to have_http_status(:success)
+    context '不正なパラメータの場合' do
+      it 'リクエストが成功する' do
+        post confirm_apps_path, params: { user_id: user, language_id: language, app: attributes_for(:app, :invalid) }
+        expect(response.status).to eq 200
+      end
     end
   end
 
