@@ -34,7 +34,9 @@ $(document).on('turbolinks:load', function(){
   $('#star').html('');
   $('#star').raty({
     size: 36,
-    path: '/public/assets/',
+    starOff: "/assets/star-off.png",
+    starOn: "/assets/star-on.png",
+    starHalf: "/assets/star-half.png",
     scoreName: 'review[rate]',
     half: true,
   });
@@ -45,7 +47,9 @@ $(document).on('turbolinks:load', function(){
   $startEl.html('');
   $startEl.raty({
     size: 36,
-    path: '/public/assets/',
+    starOff: "/assets/star-off.png",
+    starOn: "/assets/star-on.png",
+    starHalf: "/assets/star-half.png",
     half: true,
     readOnly: true,
     score: $startEl.data('score')
