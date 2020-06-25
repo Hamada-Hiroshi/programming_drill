@@ -13,6 +13,10 @@ AddMissingUniqueIndices.class_eval do
     add_index ActsAsTaggableOn.taggings_table,
               [:tag_id, :taggable_id, :taggable_type, :context, :tagger_id, :tagger_type],
               unique: true, name: 'taggings_idx'
+    if index_exists?(ActsAsTaggableOn.taggings_table, :tag_id)
+      remove_foreign_key :taggings, :tags
+      remove_index ActsAsTaggableOn.taggings_table, :tag_id
+    end
   end
 
   def self.down
@@ -24,3 +28,5 @@ AddMissingUniqueIndices.class_eval do
     add_index ActsAsTaggableOn.taggings_table, [:taggable_id, :taggable_type, :context], name: 'taggings_taggable_context_idx'
   end
 end
+
+
