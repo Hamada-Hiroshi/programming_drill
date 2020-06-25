@@ -14,7 +14,6 @@
 //= require activestorage
 //= require turbolinks
 //= require jquery
-//= require jquery.raty
 //= require bootstrap-sprockets
 //= require_tree .
 
@@ -34,7 +33,9 @@ $(document).on('turbolinks:load', function(){
   $('#star').html('');
   $('#star').raty({
     size: 36,
-    path: '/public/assets/',
+    starOff: "/star-off.png",
+    starOn: "/star-on.png",
+    starHalf: "/star-half.png",
     scoreName: 'review[rate]',
     half: true,
   });
@@ -45,7 +46,9 @@ $(document).on('turbolinks:load', function(){
   $startEl.html('');
   $startEl.raty({
     size: 36,
-    path: '/public/assets/',
+    starOff: "/star-off.png",
+    starOn: "/star-on.png",
+    starHalf: "/star-half.png",
     half: true,
     readOnly: true,
     score: $startEl.data('score')
