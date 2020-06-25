@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   get 'about' => 'home#about'
 
   devise_for :users, controllers: {
-    sessions:      'users/sessions',
-    passwords:     'users/passwords',
-    registrations: 'users/registrations'
+    sessions: 'users/sessions',
+    passwords: 'users/passwords',
+    registrations: 'users/registrations',
   }
   get 'users/:id/quit' => 'users#quit', as: 'quit_user'
   patch 'users/:id/cancel' => 'users#cancel', as: 'cancel_user'
@@ -29,7 +29,6 @@ Rails.application.routes.draw do
 
   get 'languages/:id/rate' => 'languages#rate_show', as: 'rate_language'
   resources :languages, only: [:show]
-
 
   devise_for :admins, skip: :all
   devise_scope :admin do
