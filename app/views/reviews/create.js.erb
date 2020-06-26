@@ -3,6 +3,7 @@ $('#review-form').html("<%= j(render 'review_form', my_review: @my_review, learn
 $('#error-messages').html("<%= j(render 'layouts/error_messages', model: @review) %>");
 $('#review-index').html("<%= j(render 'review_index', reviews: @reviews) %>");
 
+//（投稿用）レビュー投稿に失敗した時にもう一度レビューフォームを表示するため必要
 $('#star').raty({
   size: 36,
   starOff: "/star-off.png",
@@ -12,6 +13,7 @@ $('#star').raty({
   half: true,
 });
 
+//（表示用）
 $('.star-rate').raty({
   size: 36,
   starOff: "/star-off.png",
