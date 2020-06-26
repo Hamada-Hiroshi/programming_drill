@@ -5,18 +5,18 @@ $('#review-index').html("<%= j(render 'review_index', reviews: @reviews) %>");
 
 $('#star').raty({
   size: 36,
-  starOff: "/assets/star-off.png",
-  starOn: "/assets/star-on.png",
-  starHalf: "/assets/star-half.png",
+  starOff: "/public/star-off.png",
+  starOn: "/public/star-on.png",
+  starHalf: "/public/star-half.png",
   scoreName: 'review[rate]',
   half: true,
 });
 
 $('.star-rate').raty({
   size: 36,
-  starOff: "/assets/star-off.png",
-  starOn: "/assets/star-on.png",
-  starHalf: "/assets/star-half.png",
+  starOff: "/public/star-off.png",
+  starOn: "/public/star-on.png",
+  starHalf: "/public/star-half.png",
   half: true,
   readOnly: true,
   //scoreはデータ属性で渡している
