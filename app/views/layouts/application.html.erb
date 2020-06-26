@@ -46,9 +46,8 @@
 
           <%= search_form_for @q, class: "navbar-form navbar-left hidden-sm" do |f| %>
             <div class="form-group">
-              <%= f.search_field :title_cont, placeholder: "アプリ名から検索", class: "form-control" %>
+              <%= f.search_field :title_cont, placeholder: "アプリ名から検索", class: "search" %>
             </div>
-            <%= f.submit "検索", class: "btn-sm btn-default" %>
           <% end %>
         </div>
 

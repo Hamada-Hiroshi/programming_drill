@@ -34,6 +34,7 @@ body {
 .header-logo img {
   width: 230px;
   height: 30px;
+  margin-right: 45px;
 }
 #header-link {
   li {
@@ -134,6 +135,19 @@ footer {
   }
 }
 
+//検索バー
+.search {
+  padding:6px 15px 6px 30px;
+  margin:3px;
+  background: image-url("search_icon.png") no-repeat 8px 6px;
+  background-size: 15px;
+  border-radius:15px;
+  -moz-border-radius:15px;
+  -webkit-border-radius:15px;
+  border:1px solid #d0d0d0;
+  background-color:#fcfcfc;
+}
+
 //白背景のボックス、ボーダー
 .border-box {
   border: solid 1px #AAA;
@@ -166,9 +180,45 @@ footer {
   padding: 30px 40px;
 }
 
+//グレー背景のみ
+.back-grey {
+  background-color: #F6F6F6;;
+  padding: 20px 20px;
+}
+
 //改行を反映
 p {
   white-space: pre-wrap;
+}
+
+//オリジナルボタン
+.btn-original {
+  background-color: #FFD700;
+  color: #000;
+  font-size: 1.2em;
+  padding: 5px 30px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border: solid 1px #808080;
+  border-radius: 20px;
+  &:hover {
+    background-color: #FF8C00;
+  }
+}
+
+//オリジナルボタン2
+.btn-original2 {
+  background-color: #FFF;
+  color: #000;
+  font-size: 1.2em;
+  padding: 5px 30px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border: solid 1px #808080;
+  border-radius: 20px;
+  &:hover {
+    background-color: #AAA;
+  }
 }
 
 //エラーメッセージ
@@ -359,6 +409,11 @@ span {
 .textarea-form {
   width: 100%;
   min-height: 150px;
+}
+
+//ヒント・解説
+#hint-info, #explanation-info p {
+  font-size: 1.2em;
 }
 
 //質問、レビュー投稿
@@ -592,6 +647,11 @@ select {
   h4 {
     font-weight: bold;
   }
+  p, a {
+    margin: 15px 0 5px;
+    font-size: 1.2em;
+    word-wrap: break-word;
+  }
 }
 
 //削除ページ
@@ -711,15 +771,20 @@ select {
   text-align: center;
 }
 .pagination>li>a {
-  border: none;     /*枠線をなくす*/
-  color: #696969;   /*文字の色を変える*/
+  border: none;
+  color: #696969;
 }
 .pagination>.active>a {
-  background: #93c9ff;     /*背景の色を変える*/
-  border-radius: 15px;     /*角を丸くする*/
+  background: #FFD700;
+  border-radius: 15px;
+  color: #696969;
+  &:hover {
+    background: #FFD700;
+    color: #696969;
+  }
 }
 .pagination>li>a:hover {
-  border-radius: 15px;    /*角を丸くする*/
+  border-radius: 15px;
 }
 
 
