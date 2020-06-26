@@ -59,6 +59,33 @@ body {
   height: 30px;
 }
 
+//管理者用ヘッダ
+#admin-header {
+  background-color: #FFF;
+  border-bottom: solid 1px #AAA;
+  padding: 5px 0;
+}
+#header-admin-link {
+  margin: 0;
+  span {
+    font-size: 1.1em;
+  }
+  #admin-success {
+    color: green;
+  }
+  #admin-alert {
+    color: red;
+  }
+  li {
+    float: right;
+    list-style: none;
+    font-size: 1.1em;
+    a {
+      color: #000;
+    }
+  }
+}
+
 //フラッシュメッセージ
 .header-flash {
   border-bottom: solid 1px #AAA;

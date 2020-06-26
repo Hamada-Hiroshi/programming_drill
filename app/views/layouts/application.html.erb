@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <header id="header-top" class="navbar  navbar-default navbar-fixed-top">
+    <header id="header-top" class="navbar navbar-default navbar-fixed-top">
       <div class="container">
 
         <div class="navbar-header">
@@ -54,9 +54,24 @@
 
       </div>
 
-      <div id="flash-message">
-        <%= render 'layouts/flash_message' %>
-      </div>
+      <% if admin_signed_in? %>
+        <div id="admin-header">
+           <div class="container">
+            <ul id="header-admin-link">
+              <span id="admin-notice"><%= flash[:notice] %></span>
+              <span id="admin-success"><%= flash[:success] %></span>
+              <span id="admin-alert"><%= flash[:alert] %></span>
+              <li><%= link_to "管理者ログアウト",  destroy_admin_session_path, method: :delete %></li>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+
+      <% unless admin_signed_in? %>
+        <div id="flash-message">
+          <%= render 'layouts/flash_message' %>
+        </div>
+      <% end %>
     </header>
 
     <div class="main-body">
