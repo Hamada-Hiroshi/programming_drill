@@ -7,3 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Admin.create!(email: "admin@gmail.com", password: "aaaaaa" )
+
+Language.create!(name: "HTML/CSS")
+Language.create!(name: "Ruby")
+Language.create!(name: "JavaScript")
+Language.create!(name: "Python")
+Language.create!(name: "PHP")
+Language.create!(name: "Java")
+Language.create!(name: "その他")
