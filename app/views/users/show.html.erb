@@ -1,10 +1,10 @@
 <div class="container">
-  <div class="row">
-    <div id="user-image" class="col-md-3 col-md-offset-1">
+  <div class="row user-edit">
+    <div id="user-image" class="col-sm-3 col-sm-offset-1">
       <%= attachment_image_tag(@user, :profile_image, size: "150x150", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
     </div>
 
-    <div id="user-info" class="col-md-7">
+    <div id="user-info" class="col-sm-7">
       <div id="user-acount">
         <h3><%= @user.name %></h3>
         <% if @user == current_user %>
