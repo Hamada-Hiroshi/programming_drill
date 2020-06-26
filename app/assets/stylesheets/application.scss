@@ -30,6 +30,7 @@ body {
 
 #header-top {
   background-color: #483D8B;
+  min-height: 62px;
 }
 .header-logo img {
   width: 230px;
@@ -789,6 +790,21 @@ select {
 
 
 @media screen and (max-width:768px) {
+  .category-bar {
+    width: 100%;
+  }
+
+  #language-index {
+    padding: 0;
+    a {
+      li {
+        display: inline-block;
+        width: 49%;
+        padding: 10px 10%;
+      }
+    }
+  }
+
   .new-app-form, .edit-app-form {
     label {
       width: 100%;
@@ -799,6 +815,15 @@ select {
     }
     p {
       margin: 0;
+    }
+  }
+
+  //アプリ詳細のリンクバー
+  .one-btn, .current-btn {
+    margin-top: 10px;
+    a {
+      width: 20%;
+      float: left;
     }
   }
 }
