@@ -1,4 +1,6 @@
 class Admin::LanguagesController < ApplicationController
+  before_action :authenticate_admin!
+
   def index
     @languages = Language.all
     @language = Language.new
