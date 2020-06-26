@@ -19,13 +19,14 @@ class ReviewsController < ApplicationController
     @review.app_id = @app.id
     @reviews = @app.reviews.order(created_at: "DESC")
     if @review.save
-      #レビューを投稿した後にもう一度@my_reviewを取得し、form部分の条件分岐に利用する。
+      # レビューを投稿した後にもう一度@my_reviewを取得し、form部分の条件分岐に利用する。
       @my_review = Review.find_by(user_id: current_user.id, app_id: @app.id)
       flash.now[:success] = "レビューを投稿しました。"
     end
   end
 
   private
+
   def review_params
     params.require(:review).permit(:rate, :content)
   end

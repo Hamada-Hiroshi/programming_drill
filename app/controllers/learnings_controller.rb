@@ -30,6 +30,7 @@ class LearningsController < ApplicationController
   end
 
   private
+
   def learning_params
     params.require(:learning).permit(:status, :memo)
   end

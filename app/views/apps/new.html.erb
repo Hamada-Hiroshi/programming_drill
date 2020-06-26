@@ -1,54 +1,56 @@
-<div class="row border-box top-bottom-space">
-  <div class="col-md-10 col-md-offset-1">
-    <%= form_with(model: @app, url: confirm_apps_path, local: true) do |f| %>
-      <%= render 'layouts/error_messages', model: @app %>
+<div class="container">
+  <div class="row border-box top-bottom-space">
+    <div class="app-form">
+      <%= form_with(model: @app, url: confirm_apps_path, local: true) do |f| %>
+        <%= render 'layouts/error_messages', model: @app %>
 
-      <div class="field new-app-form">
-        <%= f.label :title, "アプリケーション名" %>
-        <%= f.text_field :title, class: "form-control" %>
-      </div>
+        <div class="field new-app-form">
+          <%= f.label :title, "アプリケーション名" %>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
 
-      <div class="field new-app-form">
-        <%= f.label :language_id, "開発言語" %>
-        <%= f.collection_select :language_id, Language.all, :id, :name, include_blank: "選択してください" %>
-        <!-- プロパティ名, オブジェクトの配列, value属性（何を返すか）, テキストの項目（何を選択肢として表示するか） [, オプション] -->
-        <p>最もメインで使用した言語を選択してください。</p>
-      </div>
+        <div class="field new-app-form">
+          <%= f.label :language_id, "開発言語" %>
+          <%= f.collection_select :language_id, Language.all, :id, :name, include_blank: "選択してください" %>
+          <!-- プロパティ名, オブジェクトの配列, value属性（何を返すか）, テキストの項目（何を選択肢として表示するか） [, オプション] -->
+          <p>最もメインで使用した言語を選択してください。</p>
+        </div>
 
-      <div class="field new-app-form">
-        <%= f.label :overview, "アプリケーションの概要" %>
-        <%= f.text_area :overview, class: "form-control" %>
-      </div>
+        <div class="field new-app-form">
+          <%= f.label :overview, "アプリケーションの概要" %>
+          <%= f.text_area :overview, class: "form-control" %>
+        </div>
 
-      <div class="field new-app-form">
-        <%= f.label :app_url, "アプリケーションURL" %>
-        <%= f.text_area :app_url, class: "form-control mini-height" %>
-      </div>
+        <div class="field new-app-form">
+          <%= f.label :app_url, "アプリケーションURL" %>
+          <%= f.text_area :app_url, class: "form-control mini-height" %>
+        </div>
 
-      <div class="field new-app-form">
-        <%= f.label :repo_url, "リポジトリURL" %>
-        <%= f.text_area :repo_url, class: "form-control mini-height" %>
-      </div>
+        <div class="field new-app-form">
+          <%= f.label :repo_url, "リポジトリURL" %>
+          <%= f.text_area :repo_url, class: "form-control mini-height" %>
+        </div>
 
-      <div class="field new-app-form">
-        <%= f.label :function, "機能" %>
-        <%= f.text_area :function, class: "form-control" %>
-      </div>
+        <div class="field new-app-form">
+          <%= f.label :function, "機能" %>
+          <%= f.text_area :function, class: "form-control" %>
+        </div>
 
-      <div class="field new-app-form">
-        <%= f.label :target, "対象者" %>
-        <%= f.text_area :target, class: "form-control mini-height" %>
-      </div>
+        <div class="field new-app-form">
+          <%= f.label :target, "対象者" %>
+          <%= f.text_area :target, class: "form-control mini-height" %>
+        </div>
 
-      <div class="field new-app-form">
-        <%= f.label :tag_list, "タグ付け" %>
-        <%= f.text_area :tag_list, value: @app.tag_list.join(','), class: "form-control mini-height" %>
-        <p>「,」で区切ることで複数入力できます。例）Ruby, Ruby on Rails, JavaScript</p>
-      </div>
+        <div class="field new-app-form">
+          <%= f.label :tag_list, "タグ付け" %>
+          <%= f.text_area :tag_list, value: @app.tag_list.join(','), class: "form-control mini-height" %>
+          <p>「,」で区切ることで複数入力できます。例）Ruby, Ruby on Rails, JavaScript</p>
+        </div>
 
-      <div class="actions text-center">
-        <%= f.submit "確認ページへ進む", class: "btn btn-primary btn-center" %>
-      </div>
-    <% end %>
+        <div class="actions text-center">
+          <%= f.submit "確認ページへ進む", class: "btn btn-primary btn-center" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

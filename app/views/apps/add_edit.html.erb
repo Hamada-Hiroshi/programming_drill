@@ -1,33 +1,35 @@
-<div class="row border-box">
-  <div class="col-md-3 border-space">
-    <ul class="edit-link">
-      <li><%= link_to "基本情報を編集", edit_app_path(@app) %></li>
-      <li><%= link_to "ヒント・解説を追加・編集", add_edit_app_path(@app) %></li>
-      <li><%= link_to "アプリを非公開にする", hidden_app_path(@app) %></li>
-    </ul>
-  </div>
-
-  <div class="col-md-9 border-left border-space">
-    <div class="edit-app-title">
-      <h2><%= @app.title %></h2>
+<div class="container">
+  <div class="row border-box">
+    <div class="col-md-3 border-space">
+      <ul class="edit-link">
+        <li><%= link_to "基本情報を編集", edit_app_path(@app) %></li>
+        <li><%= link_to "ヒント・解説を追加・編集", add_edit_app_path(@app) %></li>
+        <li><%= link_to "アプリを非公開にする", hidden_app_path(@app) %></li>
+      </ul>
     </div>
 
-    <%= form_with(model: @app, url: add_update_app_path, local: true) do |f| %>
-    <%= render 'layouts/error_messages', model: @app %>
+    <div class="col-md-9 border-left border-space">
+      <div class="edit-app-title">
+        <h2><%= @app.title %></h2>
+      </div>
 
-    <div class="field add-edit-app-form">
-      <%= f.label :hint, "ヒント" %>
-      <%= f.text_area :hint, class: "form-control" %>
-    </div>
+      <%= form_with(model: @app, url: add_update_app_path, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: @app %>
 
-    <div class="field add-edit-app-form">
-      <%= f.label :explanation, "解説" %>
-      <%= f.text_area :explanation, class: "form-control" %>
-    </div>
+      <div class="field add-edit-app-form">
+        <%= f.label :hint, "ヒント" %>
+        <%= f.text_area :hint, class: "form-control" %>
+      </div>
 
-    <div class="actions text-center">
-      <%= f.submit "更新する", class: "btn btn-primary" %>
+      <div class="field add-edit-app-form">
+        <%= f.label :explanation, "解説" %>
+        <%= f.text_area :explanation, class: "form-control" %>
+      </div>
+
+      <div class="actions text-center">
+        <%= f.submit "更新する", class: "btn btn-primary" %>
+      </div>
+    <% end %>
     </div>
-  <% end %>
   </div>
 </div>
