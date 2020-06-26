@@ -355,6 +355,9 @@ span {
 .app-info {
   .app-info-top {
     .app-post {
+      a {
+        text-decoration: none;
+      }
       span {
         font-size: 1.1em;
         vertical-align: bottom;
@@ -599,7 +602,7 @@ select {
   width: 90%;
   margin: 0 auto;
 }
-.new-app-form, .edit-app-form {
+.new-app-form {
   margin-bottom: 30px;
   label {
     font-size: 1.2em;
@@ -630,16 +633,23 @@ select {
   margin: 10px 15px 50px 15px;
 }
 
-//アプリ入力フォーム（ヒント・解説編集）
-.add-edit-app-form {
+//アプリ入力フォーム（編集）
+.edit-app-form, .add-edit-app-form {
   width: 95%;
   margin: 0 auto 40px;
   label {
     font-size: 1.2em;
   }
   textarea {
-    min-height: 400px;
+    min-height: 100px;
   }
+  .mini-height {
+    min-height: 54px;
+  }
+}
+
+.add-edit-app-form textarea {
+  min-height: 400px;
 }
 
 //アプリ投稿確認
@@ -719,12 +729,12 @@ select {
 //タブメニュー
 .nav-tabs > li.active > a {
   background-color: #D9E5FF;
-  border-radius: 0;
+
   border: none;
   border-bottom: solid 3px #6A5ACD;
   &:hover, &:focus {
     background-color: #D9E5FF;
-    border-radius: 0;
+
     border: none;
     border-bottom: solid 3px #6A5ACD;
   }
@@ -789,6 +799,12 @@ select {
 }
 
 
+@media screen and (max-width:991px) {
+  .border-left {
+    border-left: initial !important;
+  }
+}
+
 @media screen and (max-width:768px) {
   .category-bar {
     width: 100%;
@@ -818,13 +834,16 @@ select {
     }
   }
 
-  //アプリ詳細のリンクバー
   .one-btn, .current-btn {
     margin-top: 10px;
     a {
       width: 20%;
       float: left;
     }
+  }
+
+  .user-edit {
+    padding-left: 30px;
   }
 }
 
