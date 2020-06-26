@@ -7,11 +7,13 @@
 
           <div id="hint-info">
             <h4>ヒント</h4>
-            <% if @app.hint.present? %>
-              <%= @app.hint %>
-            <% else %>
-              <p>ヒントは投稿されていません。</p>
-            <% end %>
+            <div class="back-grey">
+              <% if @app.hint.present? %>
+                <p><%= @app.hint %></p>
+              <% else %>
+                <p>ヒントは投稿されていません。</p>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row border-box top-bottom-space">
     <div class="col-md-10 col-md-offset-1">
+
       <div class="new-app-confirm">
         <h4>アプリケーション名</h4>
         <p><%= session[:app]["title"] %></p>
@@ -18,12 +19,12 @@
 
       <div class="new-app-confirm">
         <h4>アプリケーションURL</h4>
-        <p><%= session[:app]["app_url"] %></p>
+        <%= link_to session[:app]["app_url"], session[:app]["app_url"], target: :_blank %>
       </div>
 
       <div class="new-app-confirm">
         <h4>リポジトリURL</h4>
-        <p><%= session[:app]["repo_url"] %></p>
+        <%= link_to session[:app]["repo_url"], session[:app]["repo_url"], target: :_blank %>
       </div>
 
       <div class="new-app-confirm">
@@ -40,14 +41,14 @@
         <h4>タグ付け</h4>
         <% if session[:app]["tag_list"] %>
           <% session[:app]["tag_list"].each do |tag| %>
-            <span class="tag-link"><p class="btn-tag"><%= tag %></p></span>
+            <span class="tag-link"><p class="btn btn-tag"><%= tag %></p></span>
           <% end %>
         <% end %>
       </div>
 
       <div class="actions text-center">
-        <%= link_to "投稿する", apps_path, method: :post, class: "btn btn-primary" %>
-        <%= link_to "入力ページに戻る", apps_path(back: "render"), method: :post, class: "btn btn-primary" %>
+        <%= link_to "投稿する", apps_path, method: :post, class: "btn btn-original" %>
+        <%= link_to "入力ページに戻る", apps_path(back: "render"), method: :post, class: "btn btn-original2" %>
       </div>
     </div>
   </div>

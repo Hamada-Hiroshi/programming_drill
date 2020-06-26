@@ -7,11 +7,13 @@
 
           <div id="explanation-info">
             <h4>解説</h4>
-            <% if @app.explanation.present? %>
-              <%= @app.explanation %>
-            <% else %>
-              <p>解説は投稿されていません。</p>
-            <% end %>
+            <div class="back-grey">
+              <% if @app.explanation.present? %>
+                <p><%= @app.explanation %></p>
+              <% else %>
+                <p>解説は投稿されていません。</p>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
