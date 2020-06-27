@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container admin-space">
   <div class="row">
     <div class="col-md-5">
-      <h3>開発言語 新規登録</h3>
+      <h3 class="admin-title">開発言語 新規登録</h3>
       <%= form_with(model: [:admin, @language], local: true) do |f| %>
         <%= render 'layouts/error_messages', model: @language %>
 
@@ -17,15 +17,27 @@
     </div>
 
     <div class="col-md-5 col-md-offset-1">
-      <h3>開発言語一覧</h3>
-      <ul id="language-index">
-        <% @languages.each do |language| %>
-          <li>
-            <%= language.name %>
-            <span>（<%= language.apps.count %>）</span>
-          </li>
-        <% end %>
-      </ul>
+      <h3 class="admin-title">開発言語一覧</h3>
+      <table class="table language-index">
+        <thead>
+          <tr>
+            <th>言語名</th>
+            <th>登録アプリ数</th>
+            <th>全体に占める割合</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @languages.each do |language| %>
+            <tr>
+              <td><%= language.name %></td>
+              <td class="text-center"><%= language.apps.count %></td>
+              <th class="text-center"><%= "#{language.apps.count * 100 / @apps.count }％" %></th>
+              <td><%= link_to "詳細・編集", admin_language_path(language), class: "btn btn-sm btn-default" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

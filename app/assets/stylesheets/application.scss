@@ -82,6 +82,7 @@ body {
     float: right;
     list-style: none;
     font-size: 1.1em;
+    margin-left: 40px;
     a {
       color: #000;
     }
@@ -115,6 +116,11 @@ body {
   .container {
     margin-top: 20px;
   }
+}
+
+//管理者ページ用余白
+.admin-space {
+  padding-top: 40px;
 }
 
 footer {
@@ -768,13 +774,40 @@ select {
   section {
     margin: 30px auto 80px;
     h1 {
-      text-align: center;
-      margin-bottom: 30px;
+      width: 200px;
+      margin: 0 auto 30px;
+      position: relative;
+      &:after {
+        content: "";
+        display: block;
+        height: 8px;
+        background: -webkit-linear-gradient(to right, #FF8C00, transparent);
+        background: linear-gradient(to right, #FF8C00, transparent);
+      }
     }
     p {
       font-size: 1.3em;
     }
   }
+}
+.flow-box {
+  margin: 25px 0;
+  h4 {
+    font-weight: bold;
+  }
+  p {
+    font-size: 16px !important;
+  }
+}
+.panel a:hover, a:focus {
+  text-decoration: none;
+}
+.panel-heading {
+  background-color: #FFD700;
+}
+.panel-title {
+  text-align: center;
+  color: #000;
 }
 
 //ページネーション
@@ -846,6 +879,15 @@ select {
     padding-left: 30px;
   }
 }
+
+//管理者言語登録ページ
+.admin-title {
+  margin-bottom: 30px;
+}
+.language-index > tbody > tr > td {
+  font-size: 1.2em;
+}
+
 
 @media screen and (max-width:580px) {
   .new-user {

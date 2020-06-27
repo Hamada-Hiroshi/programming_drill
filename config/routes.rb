@@ -38,6 +38,6 @@ Rails.application.routes.draw do
   end
   namespace :admin do
     root 'languages#index'
-    resources :languages, only: [:create, :destroy]
+    resources :languages, only: [:show, :create, :update, :destroy]
   end
 end
