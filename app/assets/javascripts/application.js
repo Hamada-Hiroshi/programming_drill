@@ -98,3 +98,14 @@ $(document).on('turbolinks:load', function(){
     });
   }
 });
+
+//リンク先プレビュー表示
+$(document).on('turbolinks:load', function(){
+  $('.URL').miniPreview({
+    width: 256,
+    height: 144,
+    scale: .25,
+    prefetch: 'pageload'
+  });
+});
+
