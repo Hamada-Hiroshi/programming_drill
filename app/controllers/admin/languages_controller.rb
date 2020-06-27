@@ -1,9 +1,15 @@
 class Admin::LanguagesController < ApplicationController
   before_action :authenticate_admin!
+  before_action :set_language, only: [:show, :update, :destroy]
+
+  def set_language
+    @language = Language.find(params[:id])
+  end
 
   def index
     @languages = Language.all
     @language = Language.new
+    @apps = App.where(status: true)
   end
 
   def create
@@ -17,11 +23,22 @@ class Admin::LanguagesController < ApplicationController
     end
   end
 
+  def show
+  end
+
+  def update
+    if @language.update(language_params)
+      flash[:success] = "開発言語名を更新しました。"
+      redirect_back(fallback_location: admin_root_path)
+    else
+      render 'show'
+    end
+  end
+
   def destroy
-    @language = Language.find(params[:id])
     @language.destroy
     flash[:success] = "登録済みの開発言語を削除しました。"
-    redirect_back(fallback_location: admin_root_path)
+    redirect_to admin_root_path
   end
 
   private
