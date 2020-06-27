@@ -4,6 +4,7 @@ class Admin::LanguagesController < ApplicationController
   def index
     @languages = Language.all
     @language = Language.new
+    @apps = App.where(status: true)
   end
 
   def create

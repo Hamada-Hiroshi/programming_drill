@@ -117,6 +117,11 @@ body {
   }
 }
 
+//管理者ページ用余白
+.admin-space {
+  padding-top: 40px;
+}
+
 footer {
   #footer-top {
     padding-top: 50px;
@@ -873,6 +878,15 @@ select {
     padding-left: 30px;
   }
 }
+
+//管理者言語登録ページ
+.admin-title {
+  margin-bottom: 30px;
+}
+.language-index > tbody > tr > td {
+  font-size: 1.2em;
+}
+
 
 @media screen and (max-width:580px) {
   .new-user {
