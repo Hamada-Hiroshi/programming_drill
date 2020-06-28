@@ -251,7 +251,9 @@ p {
   margin-top: 30px;
 }
 .current-btn a, .one-btn a {
-  width: 80%;
+  width: 100%;
+  max-width: 135px;
+  min-width: 110px;
   border-radius: 0;
   padding: 15px 0;
 }
@@ -262,6 +264,9 @@ p {
     background-color: #6A5ACD;
     color: #FFF;
   }
+}
+.app-link {
+  font-size: 1.1em;
 }
 
 //編集ページのリンクバー
