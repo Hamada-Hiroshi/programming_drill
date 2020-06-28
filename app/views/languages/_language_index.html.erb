@@ -2,7 +2,7 @@
   <% languages.each do |language| %>
     <%= link_to language_path(language) do %>
       <li>
-        <p><%= language.name %><span>（<%= language.apps.count %>）</span></p>
+        <p><%= language.name %><span>（<%= language.apps.pluck(:status).count(true) %>）</span></p>
       </li>
     <% end %>
   <% end %>
