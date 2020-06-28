@@ -251,17 +251,22 @@ p {
   margin-top: 30px;
 }
 .current-btn a, .one-btn a {
-  width: 80%;
+  width: 100%;
+  max-width: 135px;
+  min-width: 110px;
   border-radius: 0;
   padding: 15px 0;
 }
 .btn-active {
-  background-color: #6A5ACD;
-  color: #FFF;
+  background-color: #FFD700;
+  color: #000;
   &:hover {
-    background-color: #6A5ACD;
-    color: #FFF;
+    background-color: #FFD700;
+    color: #000;
   }
+}
+.app-link {
+  font-size: 1.1em;
 }
 
 //編集ページのリンクバー
@@ -355,6 +360,10 @@ span {
 }
 .my-app-edit {
   margin-top: 20px;
+  p {
+    display: inline-block;
+    padding: 5px 20px;
+  }
 }
 
 //アプリ詳細
