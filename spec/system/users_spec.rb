@@ -133,7 +133,7 @@ describe 'ユーザのテスト' do
         expect(page).to have_link 'パスワード変更', href: edit_user_registration_path
       end
       it 'アカウント削除ページリンクが表示される' do
-        expect(page).to have_link 'アカウント削除', href: quit_user_path(test_user)
+        expect(page).to have_link 'アカウント停止', href: quit_user_path(test_user)
       end
     end
 
