@@ -35,26 +35,30 @@
 
           <div class="tab-pane active" id="learning-tab">
             <% if @user == current_user %>
-              <% @user.learnings.each do |learning| %>
-                <div class="my-app-box">
-                  <div class="row">
-                    <div class="my-app col-md-9">
-                      <%= render 'user_app_index', app: learning.app %>
-                    </div>
+              <% if @user.learnings.present? %>
+                <% @user.learnings.each do |learning| %>
+                  <div class="my-app-box">
+                    <div class="row">
+                      <div class="my-app col-md-9">
+                        <%= render 'user_app_index', app: learning.app %>
+                      </div>
 
-                    <div class="my-learning-status col-md-3">
-                      <p>学習開始日： <%= learning.created_at.strftime("%Y年%m月%d日") %></p>
-                      <p>学習状況： <%= learning.status %></p>
-                      <% if learning.status == "学習済み" %>
-                        <% if Review.find_by(user_id: @user.id, app_id: learning.app.id).present? %>
-                          <p>レビュー済み</p>
-                        <% else %>
-                            <%= link_to "レビューを投稿する", app_reviews_path(learning.app), class: "btn btn-primary" %>
+                      <div class="my-learning-status col-md-3">
+                        <p>学習開始日： <%= learning.created_at.strftime("%Y年%m月%d日") %></p>
+                        <p>学習状況： <%= learning.status %></p>
+                        <% if learning.status == "学習済み" %>
+                          <% if Review.find_by(user_id: @user.id, app_id: learning.app.id).present? %>
+                            <p>レビュー済み</p>
+                          <% else %>
+                              <%= link_to "レビューを投稿する", app_reviews_path(learning.app), class: "btn btn-primary" %>
+                          <% end %>
                         <% end %>
-                      <% end %>
+                      </div>
                     </div>
                   </div>
-                </div>
+                <% end %>
+              <% else %>
+                <h4>学習中・学習済みのアプリケーションはありません。</h4>
               <% end %>
             <% else %>
               <h4>他のユーザーの学習内容は閲覧できません。</h4>
@@ -62,25 +66,29 @@
           </div>
 
           <div class="tab-pane" id="post-tab">
-            <% @user.apps.each do |app| %>
-              <div class="my-app-box">
-                <div class="row">
-                  <div class="my-app col-md-9">
-                    <%= render 'user_app_index', app: app %>
-                  </div>
+            <% if @user.apps.present? %>
+              <% @user.apps.each do |app| %>
+                <div class="my-app-box">
+                  <div class="row">
+                    <div class="my-app col-md-9">
+                      <%= render 'user_app_index', app: app %>
+                    </div>
 
-                  <% if @user == current_user %>
-                      <div class="my-app-edit col-md-3">
-                        <% if app.status == true %>
-                          <%= link_to "内容を編集する", edit_app_path(app), class: "btn btn-primary" %>
-                        <% else %>
-                          <p class="btn-danger">非公開済みのアプリです</p>
-                        <% end %>
-                      </div>
-                    <% else %>
-                  <% end %>
+                    <% if @user == current_user %>
+                        <div class="my-app-edit col-md-3">
+                          <% if app.status == true %>
+                            <%= link_to "内容を編集する", edit_app_path(app), class: "btn btn-primary" %>
+                          <% else %>
+                            <p class="btn-danger">非公開済みのアプリです</p>
+                          <% end %>
+                        </div>
+                      <% else %>
+                    <% end %>
+                  </div>
                 </div>
-              </div>
+              <% end %>
+            <% else %>
+              <h4>投稿したアプリケーションはありません。</h4>
             <% end %>
           </div>
 
