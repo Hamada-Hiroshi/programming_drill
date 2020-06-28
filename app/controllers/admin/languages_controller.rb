@@ -19,6 +19,7 @@ class Admin::LanguagesController < ApplicationController
       redirect_back(fallback_location: admin_root_path)
     else
       @languages = Language.all
+      @apps = App.where(status: true)
       render 'index'
     end
   end
