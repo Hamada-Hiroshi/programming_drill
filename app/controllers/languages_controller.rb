@@ -18,4 +18,9 @@ class LanguagesController < ApplicationController
     @apps = @apps.sort_by { |app| app.score.to_f }.reverse
     @apps = Kaminari.paginate_array(@apps).page(params[:page])
   end
+
+  def popular_show
+    @apps = @apps.sort_by { |app| app.learnings.count }.reverse
+    @apps = Kaminari.paginate_array(@apps).page(params[:page])
+  end
 end

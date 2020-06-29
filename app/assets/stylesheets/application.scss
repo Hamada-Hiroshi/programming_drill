@@ -325,6 +325,9 @@ span {
         height: 13px;
       }
     }
+    .learning-count {
+      margin-left: 20px;
+    }
   }
 }
 
@@ -787,8 +790,7 @@ select {
   section {
     margin: 30px auto 80px;
     h1 {
-      width: 200px;
-      margin: 0 auto 30px;
+      margin-bottom: 30px;
       position: relative;
       &:after {
         content: "";
@@ -816,7 +818,7 @@ select {
   text-decoration: none;
 }
 .panel-heading {
-  background-color: #FFD700;
+  background-color: #FDA149;
 }
 .panel-title {
   text-align: center;

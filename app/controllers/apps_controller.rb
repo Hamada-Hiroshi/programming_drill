@@ -5,9 +5,9 @@ class AppsController < ApplicationController
   ]
   before_action :set_app, only: [:show, :edit, :add_edit, :update, :add_update, :hint, :explanation, :hidden, :cancel]
   before_action :set_learning, only: [:show, :hint, :explanation]
-  before_action :set_languages, only: [:index, :rate_index, :tag, :rate_tag]
-  before_action :set_apps_score, only: [:index, :rate_index]
-  before_action :set_tag_apps_score, only: [:tag, :rate_tag]
+  before_action :set_languages, only: [:index, :rate_index, :popular_index, :tag, :rate_tag, :popular_tag]
+  before_action :set_apps_score, only: [:index, :rate_index, :popular_index]
+  before_action :set_tag_apps_score, only: [:tag, :rate_tag, :popular_tag]
   before_action :ensure_correct_user, only: [:edit, :add_edit, :update, :add_update, :hidden, :cancel]
 
   def set_app
@@ -47,12 +47,22 @@ class AppsController < ApplicationController
     @apps = Kaminari.paginate_array(@apps).page(params[:page])
   end
 
+  def popular_index
+    @apps = @apps.sort_by { |app| app.learnings.count }.reverse
+    @apps = Kaminari.paginate_array(@apps).page(params[:page])
+  end
+
   def tag
     @apps = @apps.page(params[:page]).reverse_order
   end
 
   def rate_tag
     @apps = @apps.sort_by { |app| app.score.to_f }.reverse
+    @apps = Kaminari.paginate_array(@apps).page(params[:page])
+  end
+
+  def popular_tag
+    @apps = @apps.sort_by { |app| app.learnings.count }.reverse
     @apps = Kaminari.paginate_array(@apps).page(params[:page])
   end
 
