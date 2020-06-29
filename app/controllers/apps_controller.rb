@@ -43,7 +43,7 @@ class AppsController < ApplicationController
   end
 
   def rate_index
-    @apps = @apps.sort_by { |app| app.score.to_i }.reverse
+    @apps = @apps.sort_by { |app| app.score.to_f }.reverse
     @apps = Kaminari.paginate_array(@apps).page(params[:page])
   end
 
@@ -52,7 +52,7 @@ class AppsController < ApplicationController
   end
 
   def rate_tag
-    @apps = @apps.sort_by { |app| app.score.to_i }.reverse
+    @apps = @apps.sort_by { |app| app.score.to_f }.reverse
     @apps = Kaminari.paginate_array(@apps).page(params[:page])
   end
 
