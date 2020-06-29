@@ -23,6 +23,7 @@
         <ul class="nav nav-tabs">
           <li class="active"><%= link_to "新着順", language_path(@language) %></li>
           <li><%= link_to "評価順", rate_language_path(@language) %></li>
+          <li><%= link_to "人気順", popular_language_path(@language) %></li>
         </ul>
         <%= render 'apps/app_index', apps: @apps %>
       </div>
