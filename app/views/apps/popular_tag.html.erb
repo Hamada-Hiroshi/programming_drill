@@ -21,9 +21,9 @@
     <div class="col-sm-9">
       <div class="app-index back-white">
         <ul class="nav nav-tabs">
-          <li class="active"><%= link_to "新着順", tag_apps_path(tag_name: params[:tag_name]) %></li>
+          <li><%= link_to "新着順", tag_apps_path(tag_name: params[:tag_name]) %></li>
           <li><%= link_to "評価順", rate_tag_apps_path(tag_name: params[:tag_name]) %></li>
-          <li><%= link_to "人気順", popular_tag_apps_path(tag_name: params[:tag_name]) %></li>
+          <li class="active"><%= link_to "人気順", popular_tag_apps_path(tag_name: params[:tag_name]) %></li>
         </ul>
         <%= render 'apps/app_index', apps: @apps %>
       </div>

@@ -13,8 +13,10 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update]
 
   get 'apps/rate' => 'apps#rate_index', as: 'rate_apps'
+  get 'apps/popular' => 'apps#popular_index', as: 'popular_apps'
   get 'apps/tag' => 'apps#tag', as: 'tag_apps'
   get 'apps/tag/rate' => 'apps#rate_tag', as: 'rate_tag_apps'
+  get 'apps/tag/popular' => 'apps#popular_tag', as: 'popular_tag_apps'
   post 'apps/confirm' => 'apps#confirm', as: 'confirm_apps'
   get 'apps/:id/add_edit' => 'apps#add_edit', as: 'add_edit_app'
   patch 'apps/:id/add' => 'apps#add_update', as: 'add_update_app'
@@ -29,6 +31,7 @@ Rails.application.routes.draw do
   end
 
   get 'languages/:id/rate' => 'languages#rate_show', as: 'rate_language'
+  get 'languages/:id/popular' => 'languages#popular_show', as: 'popular_language'
   resources :languages, only: [:show]
 
   devise_for :admins, skip: :all
