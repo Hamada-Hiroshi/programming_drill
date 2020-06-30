@@ -103,17 +103,18 @@ $(document).on('turbolinks:load', function(){
 
 //タグ付け自動補完
 $(document).on('turbolinks:load', function(){
-  $('#app-tags').tagit({
-    fieldName: 'app[tag_list]',
-    singleField: true,
-    availableTags: gon.available_tags
-  });
-
-  var i, len, tag;
-  if (gon.app_tags != null) {
-    for (i = 0, len = gon.app_tags.length; i < len; i++) {
-      tag = gon.app_tags[i];
-      $('#app-tags').tagit('createTag', tag);
+  if($('#app-tags').length){
+    $('#app-tags').tagit({
+      fieldName: 'app[tag_list]',
+      singleField: true,
+      availableTags: gon.available_tags
+    });
+    var i, len, tag;
+    if (gon.app_tags != null) {
+      for (i = 0, len = gon.app_tags.length; i < len; i++) {
+        tag = gon.app_tags[i];
+        $('#app-tags').tagit('createTag', tag);
+      }
     }
   }
 });
