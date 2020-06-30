@@ -12,8 +12,10 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require jquery
+//= require jquery-ui
+//= require tag-it
+//= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
 
@@ -98,3 +100,12 @@ $(document).on('turbolinks:load', function(){
     });
   }
 });
+
+//タグ付け自動補完
+$(document).on('turbolinks:load', function(){
+  $('#app-tags').tagit({
+    fieldName: 'app[tag_list]',
+    singleField: true
+  });
+});
+

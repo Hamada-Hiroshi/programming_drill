@@ -82,6 +82,7 @@ gem 'omniauth-google-oauth2'
 gem 'dotenv-rails'
 gem 'rails-i18n'
 gem 'rubocop-airbnb'
+gem 'jquery-ui-rails'
 
 group :production do
   gem 'mysql2'
