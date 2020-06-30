@@ -8,6 +8,7 @@ class AppsController < ApplicationController
   before_action :set_languages, only: [:index, :rate_index, :popular_index, :tag, :rate_tag, :popular_tag]
   before_action :set_apps_score, only: [:index, :rate_index, :popular_index]
   before_action :set_tag_apps_score, only: [:tag, :rate_tag, :popular_tag]
+  before_action :set_available_tags_to_gon, only: [:new, :confirm, :edit, :update]
   before_action :ensure_correct_user, only: [:edit, :add_edit, :update, :add_update, :hidden, :cancel]
 
   def set_app
@@ -37,6 +38,12 @@ class AppsController < ApplicationController
       app.score = app.average_rate
     end
   end
+
+  def set_available_tags_to_gon
+    gon.available_tags = App.tags_on(:tags).pluck(:name)
+  end
+
+
 
   def index
     @apps = @apps.page(params[:page]).reverse_order
@@ -73,6 +80,7 @@ class AppsController < ApplicationController
   def confirm
     @app = session[:app] = current_user.apps.new(app_params)
     unless @app.valid?
+      gon.app_tags = @app.tag_list
       render 'new'
     end
   end
@@ -92,6 +100,7 @@ class AppsController < ApplicationController
   end
 
   def edit
+    gon.app_tags = @app.tag_list
   end
 
   def add_edit
@@ -102,6 +111,7 @@ class AppsController < ApplicationController
       flash[:success] = "アプリケーション情報を更新しました。"
       redirect_to app_path(@app)
     else
+      gon.app_tags = @app.tag_list
       render 'edit'
     end
   end
