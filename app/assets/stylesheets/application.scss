@@ -11,8 +11,11 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require jquery.tagit
+ *= require tagit.ui-zendesk
  *= require_self
  */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -290,6 +293,10 @@ p {
       text-decoration: none;
     }
   }
+}
+
+.ui-helper-hidden-accessible {
+  display: none;
 }
 
 //レビュー星
@@ -648,7 +655,14 @@ select {
   p {
     margin: 0 0 0 30%;
   }
+  .tagit {
+    display: inline-block;
+    width: 65%;
+    height: 68px;
+    margin-bottom: 0;
+  }
 }
+
 
 //アプリ編集
 .edit-app-title h2 {
@@ -667,6 +681,10 @@ select {
   }
   .mini-height {
     min-height: 54px;
+  }
+  .tagit {
+    height: 68px;
+    margin-bottom: 0;
   }
 }
 
@@ -847,6 +865,8 @@ select {
 }
 
 
+
+
 @media screen and (max-width:991px) {
   .border-left {
     border-left: initial !important;
@@ -880,6 +900,9 @@ select {
     p {
       margin: 0;
     }
+  }
+  .tagit {
+    width: 100%;
   }
 
   .one-btn, .current-btn {

@@ -43,8 +43,8 @@
 
         <div class="field new-app-form">
           <%= f.label :tag_list, "タグ付け" %>
-          <%= f.text_area :tag_list, value: @app.tag_list.join(','), class: "form-control mini-height" %>
-          <p>「,」で区切ることで複数入力できます。例）Ruby, Ruby on Rails, JavaScript</p>
+          <ul id="app-tags" class="form-control"></ul>
+          <p>複数入力が可能です。</p>
         </div>
 
         <div class="actions text-center">
