@@ -864,6 +864,13 @@ select {
   border-radius: 15px;
 }
 
+//管理者言語登録ページ
+.admin-title {
+  margin-bottom: 30px;
+}
+.language-index > tbody > tr > td {
+  font-size: 1.2em;
+}
 
 
 
@@ -916,14 +923,6 @@ select {
   .user-edit {
     padding-left: 30px;
   }
-}
-
-//管理者言語登録ページ
-.admin-title {
-  margin-bottom: 30px;
-}
-.language-index > tbody > tr > td {
-  font-size: 1.2em;
 }
 
 
