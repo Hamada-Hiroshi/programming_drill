@@ -655,13 +655,14 @@ select {
   p {
     margin: 0 0 0 30%;
   }
+  .tagit {
+    display: inline-block;
+    width: 65%;
+    height: 68px;
+    margin-bottom: 0;
+  }
 }
-.tagit {
-  display: inline-block;
-  width: 65%;
-  height: 68px;
-  margin-bottom: 0;
-}
+
 
 //アプリ編集
 .edit-app-title h2 {
@@ -680,6 +681,10 @@ select {
   }
   .mini-height {
     min-height: 54px;
+  }
+  .tagit {
+    height: 68px;
+    margin-bottom: 0;
   }
 }
 

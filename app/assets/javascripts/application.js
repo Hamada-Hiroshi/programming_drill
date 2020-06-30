@@ -105,7 +105,16 @@ $(document).on('turbolinks:load', function(){
 $(document).on('turbolinks:load', function(){
   $('#app-tags').tagit({
     fieldName: 'app[tag_list]',
-    singleField: true
+    singleField: true,
+    availableTags: gon.available_tags
   });
+
+  var i, len, tag;
+  if (gon.app_tags != null) {
+    for (i = 0, len = gon.app_tags.length; i < len; i++) {
+      tag = gon.app_tags[i];
+      $('#app-tags').tagit('createTag', tag);
+    }
+  }
 });
 
