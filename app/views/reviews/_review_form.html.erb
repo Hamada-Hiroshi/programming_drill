@@ -3,11 +3,11 @@
     <%= form_with(model: [@app, @review]) do |f| %>
       <div id="error-messages"></div>
       <h4>レビュー</h4>
-      <div id="star">
+      <!--<div id="star">
         <%= f.label :rate, "評価" %>
         <%= f.hidden_field :rate, id: "review_star" %>
       </div>
-      <span>星の数を選択してください。</span>
+      <span>星の数を選択してください。</span>-->
       <%= f.text_area :content, placeholder: "レビューを記入してください。", class: "textarea-form" %>
       <%= f.submit "レビューを投稿", class: "btn btn-default" %>
     <% end %>

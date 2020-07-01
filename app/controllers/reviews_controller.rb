@@ -17,6 +17,8 @@ class ReviewsController < ApplicationController
     @my_review = Review.find_by(user_id: current_user.id, app_id: @app.id)
     @review = current_user.reviews.new(review_params)
     @review.app_id = @app.id
+    score = Language.get_data(review_params[:content])
+    @review.rate = (score + 1.5) * 2
     @reviews = @app.reviews.order(created_at: "DESC")
     if @review.save
       # レビューを投稿した後にもう一度@my_reviewを取得し、form部分の条件分岐に利用する。
@@ -28,6 +30,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:rate, :content)
+    params.require(:review).permit(:content)
   end
 end
