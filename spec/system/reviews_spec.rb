@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 describe 'レビューのテスト' do
-  let(:language) { create(:language) }
+  let(:lang) { create(:lang) }
   let(:test_user) { create(:user) }
-  let!(:post_app) { create(:app, user_id: test_user.id, language_id: language.id) }
+  let!(:post_app) { create(:app, user_id: test_user.id, lang_id: lang.id) }
   let(:test_user_2) { create(:user) }
-  let(:learning_app) { create(:app, user_id: test_user_2.id, language_id: language.id) }
+  let(:learning_app) { create(:app, user_id: test_user_2.id, lang_id: lang.id) }
   let!(:learning) { create(:learning, user_id: test_user.id, app_id: learning_app.id) }
-  let(:learned_app) { create(:app, user_id: test_user_2.id, language_id: language.id) }
+  let(:learned_app) { create(:app, user_id: test_user_2.id, lang_id: lang.id) }
   let!(:learned) { create(:learning, user_id: test_user.id, app_id: learned_app.id, status: '学習済み') }
 
   describe 'レビュー画面のテスト' do

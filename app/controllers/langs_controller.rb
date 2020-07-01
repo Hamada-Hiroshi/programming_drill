@@ -1,10 +1,10 @@
-class LanguagesController < ApplicationController
+class LangsController < ApplicationController
   before_action :set_method
 
   def set_method
-    @languages = Language.all
-    @language = Language.find(params[:id])
-    @apps = @language.apps.where(status: true)
+    @langs = Lang.all
+    @lang = Lang.find(params[:id])
+    @apps = @lang.apps.where(status: true)
     @apps.each do |app|
       app.score = app.average_rate
     end

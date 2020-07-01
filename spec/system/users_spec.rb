@@ -51,11 +51,11 @@ describe 'ユーザ認証のテスト' do
 end
 
 describe 'ユーザのテスト' do
-  let(:language) { create(:language) }
+  let(:lang) { create(:lang) }
   let(:test_user) { create(:user) }
-  let!(:post_app) { create(:app, user_id: test_user.id, language_id: language.id) }
+  let!(:post_app) { create(:app, user_id: test_user.id, lang_id: lang.id) }
   let(:test_user_2) { create(:user) }
-  let(:learning_app) { create(:app, user_id: test_user_2.id, language_id: language.id) }
+  let(:learning_app) { create(:app, user_id: test_user_2.id, lang_id: lang.id) }
   let!(:learning) { create(:learning, user_id: test_user.id, app_id: learning_app.id) }
 
   describe '詳細画面のテスト' do

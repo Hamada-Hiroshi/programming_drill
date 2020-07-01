@@ -30,9 +30,9 @@ Rails.application.routes.draw do
     resources :reviews, only: [:index, :create]
   end
 
-  get 'languages/:id/rate' => 'languages#rate_show', as: 'rate_language'
-  get 'languages/:id/popular' => 'languages#popular_show', as: 'popular_language'
-  resources :languages, only: [:show]
+  get 'langs/:id/rate' => 'langs#rate_show', as: 'rate_lang'
+  get 'langs/:id/popular' => 'langs#popular_show', as: 'popular_lang'
+  resources :langs, only: [:show]
 
   devise_for :admins, skip: :all
   devise_scope :admin do
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     delete 'admin/sign_out' => 'admins/sessions#destroy', as: 'destroy_admin_session'
   end
   namespace :admin do
-    root 'languages#index'
-    resources :languages, only: [:show, :create, :update, :destroy]
+    root 'langs#index'
+    resources :langs, only: [:show, :create, :update, :destroy]
   end
 end

@@ -60,7 +60,7 @@ body {
   padding: 13px 0px;
   margin: 0;
 }
-#q_title_or_language_name_or_tags_name_cont {
+#q_title_or_lang_name_or_tags_name_cont {
   height: 30px;
 }
 
@@ -725,7 +725,7 @@ select {
 }
 
 //言語別検索バー
-#language-index {
+#lang-index {
   padding: 0;
   a {
     color: #000;
@@ -868,7 +868,7 @@ select {
 .admin-title {
   margin-bottom: 30px;
 }
-.language-index > tbody > tr > td {
+.lang-index > tbody > tr > td {
   font-size: 1.2em;
 }
 
@@ -885,7 +885,7 @@ select {
     width: 100%;
   }
 
-  #language-index {
+  #lang-index {
     padding: 0;
     a {
       li {

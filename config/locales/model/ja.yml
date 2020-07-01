@@ -2,7 +2,7 @@ ja:
   activerecord:
     models:
       user:
-      language:
+      lang:
       app:
       question:
       review:
@@ -11,11 +11,11 @@ ja:
         name: ユーザーネーム
         email: メールアドレス
         encrypted_password: パスワード
-      language:
+      lang:
         name: 言語名
       app:
         title: アプリケーション名
-        language: 開発言語
+        lang: 開発言語
         overview: 概要
         app_url: アプリケーションURL
         repo_url: リモートリポジトリURL

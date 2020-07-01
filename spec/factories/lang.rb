@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :language do
+  factory :lang do
     name { 'Ruby' }
   end
 end
