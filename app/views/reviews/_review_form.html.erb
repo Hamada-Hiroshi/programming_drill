@@ -1,6 +1,6 @@
 <% unless my_review.present? %>
   <% if learning.present? && learning.status == "学習済み" %>
-    <%= form_with(model: [@app, @review], local: true) do |f| %>
+    <%= form_with(model: [@app, @review]) do |f| %>
       <div id="error-messages"></div>
       <h4>レビュー</h4>
       <!--<div id="star">
