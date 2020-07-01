@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Apps", type: :request do
-  let(:language) { create(:language) }
+  let(:lang) { create(:lang) }
   let(:user) { create(:user) }
-  let(:test_app) { create(:app, user_id: user.id, language_id: language.id) }
+  let(:test_app) { create(:app, user_id: user.id, lang_id: lang.id) }
   let(:review_2_user) { create(:user) }
   let(:review_4_user) { create(:user) }
   let!(:review_2) { create(:review_2, user_id: review_2_user.id, app_id: test_app.id) }
@@ -29,14 +29,14 @@ RSpec.describe "Apps", type: :request do
 
     context '正常なパラメータの場合' do
       it 'リクエストが成功する' do
-        post confirm_apps_path, params: { user_id: user, language_id: language, app: attributes_for(:app) }
+        post confirm_apps_path, params: { user_id: user, lang_id: lang, app: attributes_for(:app) }
         expect(response.status).to eq 200
       end
     end
 
     context '不正なパラメータの場合' do
       it 'リクエストが成功する' do
-        post confirm_apps_path, params: { user_id: user, language_id: language, app: attributes_for(:app, :invalid) }
+        post confirm_apps_path, params: { user_id: user, lang_id: lang, app: attributes_for(:app, :invalid) }
         expect(response.status).to eq 200
       end
     end

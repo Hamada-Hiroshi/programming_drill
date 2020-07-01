@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe Language, type: :model do
+RSpec.describe Lang, type: :model do
   describe 'バリデーションのテスト' do
-    subject { language.valid? }
+    subject { lang.valid? }
 
-    let(:language) { build(:language) }
+    let(:lang) { build(:lang) }
 
     it "言語名があれば有効" do
       is_expected.to eq true
@@ -12,11 +12,11 @@ RSpec.describe Language, type: :model do
 
     context 'nameカラム' do
       it '空欄でないこと' do
-        language.name = ''
+        lang.name = ''
         is_expected.to eq false
       end
       it '重複して登録できない' do
-        language_2 = create(:language)
+        lang_2 = create(:lang)
         is_expected.to eq false
       end
     end

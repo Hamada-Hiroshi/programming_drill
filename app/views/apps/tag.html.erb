@@ -3,13 +3,13 @@
     <div class="col-sm-3 sidebar">
       <div class="category-bar">
         <ul class="category-menu nav nav-tabs">
-          <li><%= link_to "言語別", "#language-tab", data: { toggle: "tab"}  %></li>
+          <li><%= link_to "言語別", "#lang-tab", data: { toggle: "tab"}  %></li>
           <li class="active"><%= link_to "タグ別", "#tag-tab", data: { toggle: "tab"}  %></li>
         </ul>
 
         <div class="tab-content category-contents">
-          <div class="tab-pane" id="language-tab">
-            <%= render 'languages/language_index', languages: @languages %>
+          <div class="tab-pane" id="lang-tab">
+            <%= render 'langs/lang_index', langs: @langs %>
           </div>
           <div class="tab-pane active" id="tag-tab">
             <%= render 'tag_index' %>

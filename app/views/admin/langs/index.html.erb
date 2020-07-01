@@ -2,10 +2,10 @@
   <div class="row">
     <div class="col-md-5">
       <h3 class="admin-title">開発言語 新規登録</h3>
-      <%= form_with(model: [:admin, @language], local: true) do |f| %>
-        <%= render 'layouts/error_messages', model: @language %>
+      <%= form_with(model: [:admin, @lang], local: true) do |f| %>
+        <%= render 'layouts/error_messages', model: @lang %>
 
-        <div class="field language-form">
+        <div class="field lang-form">
           <%= f.label :name, "言語名" %>
           <%= f.text_field :name, class: "form-control" %>
         </div>
@@ -18,7 +18,7 @@
 
     <div class="col-md-5 col-md-offset-1">
       <h3 class="admin-title">開発言語一覧</h3>
-      <table class="table language-index">
+      <table class="table lang-index">
         <thead>
           <tr>
             <th>言語名</th>
@@ -28,12 +28,12 @@
           </tr>
         </thead>
         <tbody>
-          <% @languages.each do |language| %>
+          <% @langs.each do |lang| %>
             <tr>
-              <td><%= language.name %></td>
-              <td class="text-center"><%= language.apps.count %></td>
-              <th class="text-center"><%= "#{language.apps.pluck(:status).count(true) * 100 / @apps.count }％" %></th>
-              <td><%= link_to "詳細・編集", admin_language_path(language), class: "btn btn-sm btn-default" %></td>
+              <td><%= lang.name %></td>
+              <td class="text-center"><%= lang.apps.count %></td>
+              <th class="text-center"><%= "#{lang.apps.pluck(:status).count(true) * 100 / @apps.count }％" %></th>
+              <td><%= link_to "詳細・編集", admin_lang_path(lang), class: "btn btn-sm btn-default" %></td>
             </tr>
           <% end %>
         </tbody>

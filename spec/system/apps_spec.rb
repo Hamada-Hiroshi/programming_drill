@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 describe 'アプリケーションのテスト' do
-  let(:language) { create(:language) }
+  let(:lang) { create(:lang) }
   let(:test_user) { create(:user) }
-  let!(:post_app) { create(:app, user_id: test_user.id, language_id: language.id) }
+  let!(:post_app) { create(:app, user_id: test_user.id, lang_id: lang.id) }
   let(:test_user_2) { create(:user) }
-  let(:learning_app) { create(:app, user_id: test_user_2.id, language_id: language.id) }
+  let(:learning_app) { create(:app, user_id: test_user_2.id, lang_id: lang.id) }
   let!(:learning) { create(:learning, user_id: test_user.id, app_id: learning_app.id) }
 
   describe '詳細画面リンクバーのテスト' do
@@ -138,7 +138,7 @@ describe 'アプリケーションのテスト' do
         expect(page).to have_field 'app[title]', with: post_app.title
       end
       it '開発言語編集フォームが表示される' do
-        expect(page).to have_select 'app[language_id]'
+        expect(page).to have_select 'app[lang_id]'
       end
       it 'ヒント・解説編集ページリンクが表示される' do
         expect(page).to have_link 'ヒント・解説を追加・編集', href: add_edit_app_path(post_app)

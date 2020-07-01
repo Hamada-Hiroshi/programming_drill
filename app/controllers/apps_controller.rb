@@ -5,7 +5,7 @@ class AppsController < ApplicationController
   ]
   before_action :set_app, only: [:show, :edit, :add_edit, :update, :add_update, :hint, :explanation, :hidden, :cancel]
   before_action :set_learning, only: [:show, :hint, :explanation]
-  before_action :set_languages, only: [:index, :rate_index, :popular_index, :tag, :rate_tag, :popular_tag]
+  before_action :set_langs, only: [:index, :rate_index, :popular_index, :tag, :rate_tag, :popular_tag]
   before_action :set_apps_score, only: [:index, :rate_index, :popular_index]
   before_action :set_tag_apps_score, only: [:tag, :rate_tag, :popular_tag]
   before_action :set_available_tags_to_gon, only: [:new, :confirm, :edit, :update]
@@ -21,8 +21,8 @@ class AppsController < ApplicationController
     end
   end
 
-  def set_languages
-    @languages = Language.all
+  def set_langs
+    @langs = Lang.all
   end
 
   def set_apps_score
@@ -150,7 +150,7 @@ class AppsController < ApplicationController
   private
 
   def app_params
-    params.require(:app).permit(:title, :language_id, :overview, :app_url, :repo_url, :function, :target, :tag_list)
+    params.require(:app).permit(:title, :lang_id, :overview, :app_url, :repo_url, :function, :target, :tag_list)
   end
 
   def add_app_params

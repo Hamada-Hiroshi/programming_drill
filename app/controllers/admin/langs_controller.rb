@@ -1,24 +1,24 @@
-class Admin::LanguagesController < ApplicationController
+class Admin::LangsController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_language, only: [:show, :update, :destroy]
+  before_action :set_lang, only: [:show, :update, :destroy]
 
-  def set_language
-    @language = Language.find(params[:id])
+  def set_lang
+    @lang = Lang.find(params[:id])
   end
 
   def index
-    @languages = Language.all
-    @language = Language.new
+    @langs = Lang.all
+    @lang = Lang.new
     @apps = App.where(status: true)
   end
 
   def create
-    @language = Language.new(language_params)
-    if @language.save
+    @lang = Lang.new(lang_params)
+    if @lang.save
       flash[:success] = "新しい開発言語を登録しました。"
       redirect_back(fallback_location: admin_root_path)
     else
-      @languages = Language.all
+      @langs = Lang.all
       @apps = App.where(status: true)
       render 'index'
     end
@@ -28,7 +28,7 @@ class Admin::LanguagesController < ApplicationController
   end
 
   def update
-    if @language.update(language_params)
+    if @lang.update(lang_params)
       flash[:success] = "開発言語名を更新しました。"
       redirect_back(fallback_location: admin_root_path)
     else
@@ -37,14 +37,14 @@ class Admin::LanguagesController < ApplicationController
   end
 
   def destroy
-    @language.destroy
+    @lang.destroy
     flash[:success] = "登録済みの開発言語を削除しました。"
     redirect_to admin_root_path
   end
 
   private
 
-  def language_params
-    params.require(:language).permit(:name)
+  def lang_params
+    params.require(:lang).permit(:name)
   end
 end
