@@ -10,8 +10,8 @@
         </div>
 
         <div class="field new-app-form">
-          <%= f.label :language_id, "開発言語" %>
-          <%= f.collection_select :language_id, Language.all, :id, :name, include_blank: "選択してください" %>
+          <%= f.label :lang_id, "開発言語" %>
+          <%= f.collection_select :lang_id, Lang.all, :id, :name, include_blank: "選択してください" %>
           <!-- プロパティ名, オブジェクトの配列, value属性（何を返すか）, テキストの項目（何を選択肢として表示するか） [, オプション] -->
           <p>最もメインで使用した言語を選択してください。</p>
         </div>

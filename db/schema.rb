@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_27_083251) do
+ActiveRecord::Schema.define(version: 2020_07_01_070030) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2020_06_27_083251) do
 
   create_table "apps", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "language_id", null: false
+    t.integer "lang_id", null: false
     t.string "title", null: false
     t.text "overview", null: false
     t.text "app_url", null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2020_06_27_083251) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "languages", force: :cascade do |t|
+  create_table "langs", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
