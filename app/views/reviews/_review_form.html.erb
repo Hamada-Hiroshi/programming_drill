@@ -3,12 +3,12 @@
     <%= form_with(model: [@app, @review]) do |f| %>
       <div id="error-messages"></div>
       <h4>レビュー</h4>
+      <h5>※評価点は、手動入力とレビュー内容からの自動判定の２つから選択が可能です。</h5>
       <div id="manual-rating">
         <span>評価</span>
         <div id="star">
           <%= f.hidden_field :rate, id: "review_star" %>
         </div>
-        <span>星の数を選択してください。</span>
       </div>
       <div id="auto-rating">
         <%= check_box_tag :auto_rate %>

@@ -322,44 +322,45 @@ span {
 
 //自動レビューチェックボックス
 input[type=checkbox] {
-    display: none;
+  display: none;
 }
 .checkbox01 {
-    box-sizing: border-box;
-    cursor: pointer;
-    display: inline-block;
-    padding: 5px 30px;
-    position: relative;
-    width: auto;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 30px;
+  position: relative;
+  width: auto;
+  font-size: 15px;
 }
 .checkbox01::before {
-    background: #fff;
-    border: 1px solid #231815;
-    content: '';
-    display: block;
-    height: 16px;
-    left: 5px;
-    margin-top: -8px;
-    position: absolute;
-    top: 50%;
-    width: 16px;
+  background: #fff;
+  border: 1px solid #231815;
+  content: '';
+  display: block;
+  height: 16px;
+  left: 5px;
+  margin-top: -8px;
+  position: absolute;
+  top: 50%;
+  width: 16px;
 }
 .checkbox01::after {
-    border-right: 3px solid #FF8C00;
-    border-bottom: 3px solid #FF8C00;
-    content: '';
-    display: block;
-    height: 12px;
-    left: 10px;
-    margin-top: -7px;
-    opacity: 0;
-    position: absolute;
-    top: 50%;
-    transform: rotate(45deg);
-    width: 8px;
+  border-right: 3px solid #FF8C00;
+  border-bottom: 3px solid #FF8C00;
+  content: '';
+  display: block;
+  height: 12px;
+  left: 10px;
+  margin-top: -7px;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: rotate(45deg);
+  width: 8px;
 }
 input[type=checkbox]:checked + .checkbox01::after {
-    opacity: 1;
+  opacity: 1;
 }
 
 //アプリ一覧の各アプリ
