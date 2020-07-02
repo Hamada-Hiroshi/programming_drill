@@ -3,11 +3,17 @@
     <%= form_with(model: [@app, @review]) do |f| %>
       <div id="error-messages"></div>
       <h4>レビュー</h4>
-      <!--<div id="star">
-        <%= f.label :rate, "評価" %>
-        <%= f.hidden_field :rate, id: "review_star" %>
+      <div id="manual-rating">
+        <span>評価</span>
+        <div id="star">
+          <%= f.hidden_field :rate, id: "review_star" %>
+        </div>
+        <span>星の数を選択してください。</span>
       </div>
-      <span>星の数を選択してください。</span>-->
+      <div id="auto-rating">
+        <%= check_box_tag :auto_rate %>
+        <%= label_tag :auto_rate, "レビュー内容から自動で評価を判定する。", class: "checkbox01" %>
+      </div>
       <%= f.text_area :content, placeholder: "レビューを記入してください。", class: "textarea-form" %>
       <%= f.submit "レビューを投稿", class: "btn btn-default" %>
     <% end %>
