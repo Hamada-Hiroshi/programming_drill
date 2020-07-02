@@ -598,7 +598,18 @@ select {
     margin-bottom: 40px;
   }
   .actions {
-    margin: 30px 0 20px 0;
+    margin-bottom: 20px;
+    .btn {
+      margin-top: 10px;
+      margin-bottom: 5px;
+      width: 280px;
+    }
+    .btn-original {
+      background-color: #AAA;
+    }
+    .btn-original2 {
+      background-color: #F54F4FD9;
+    }
   }
 }
 
