@@ -8,7 +8,7 @@ class AppsController < ApplicationController
   before_action :set_langs, only: [:index, :rate_index, :popular_index, :tag, :rate_tag, :popular_tag]
   before_action :set_apps_score, only: [:index, :rate_index, :popular_index]
   before_action :set_tag_apps_score, only: [:tag, :rate_tag, :popular_tag]
-  before_action :set_available_tags_to_gon, only: [:new, :confirm, :edit, :update]
+  before_action :set_available_tags_to_gon, only: [:new, :confirm, :create, :edit, :update]
   before_action :ensure_correct_user, only: [:edit, :add_edit, :update, :add_update, :hidden, :cancel]
 
   def set_app
@@ -88,6 +88,7 @@ class AppsController < ApplicationController
   def create
     @app = App.new(session[:app])
     if params[:back]
+      gon.app_tags = @app.tag_list
       render 'new'
     else
       @app.save
