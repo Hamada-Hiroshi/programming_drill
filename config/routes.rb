@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     get 'admin/sign_in' => 'admins/sessions#new', as: 'new_admin_session'
     post 'admin/sign_in' => 'admins/sessions#create', as: 'admin_session'
     delete 'admin/sign_out' => 'admins/sessions#destroy', as: 'destroy_admin_session'
+    post 'admin/guest_sign_in' => 'admins/sessions#new_guest'
   end
   namespace :admin do
     root 'langs#index'

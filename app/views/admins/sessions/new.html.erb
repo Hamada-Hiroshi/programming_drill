@@ -24,6 +24,8 @@
         <div class="actions text-center">
           <%= f.submit "ログイン", class: "btn btn-original" %>
         </div>
+
+        <p><%= link_to '簡単ログイン', admin_guest_sign_in_path, method: :post %></p>
       <% end %>
 
     </div>
