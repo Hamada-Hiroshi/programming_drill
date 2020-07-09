@@ -63,7 +63,10 @@
               <span id="admin-success"><%= flash[:success] %></span>
               <span id="admin-alert"><%= flash[:alert] %></span>
               <li><%= link_to "管理者ログアウト",  destroy_admin_session_path, method: :delete %></li>
-              <li><%= link_to "開発言語一覧", admin_root_path %></li>
+              <li><%= link_to "開発言語", admin_langs_path %></li>
+              <li><%= link_to "アプリ一覧", admin_apps_path %></li>
+              <li><%= link_to "会員一覧", admin_users_path %></li>
+              <li><%= link_to "ダッシュボード", admin_root_path %></li>
             </ul>
           </div>
         </div>

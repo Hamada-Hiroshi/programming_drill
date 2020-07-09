@@ -7,8 +7,8 @@ class Admin::LangsController < ApplicationController
   end
 
   def index
-    @langs = Lang.all
     @lang = Lang.new
+    @langs = Lang.all
     @apps = App.where(status: true)
   end
 
@@ -16,7 +16,7 @@ class Admin::LangsController < ApplicationController
     @lang = Lang.new(lang_params)
     if @lang.save
       flash[:success] = "新しい開発言語を登録しました。"
-      redirect_back(fallback_location: admin_root_path)
+      redirect_to admin_lang_path(@lang)
     else
       @langs = Lang.all
       @apps = App.where(status: true)
@@ -25,6 +25,8 @@ class Admin::LangsController < ApplicationController
   end
 
   def show
+    @langs = Lang.all
+    @apps = App.where(status: true)
   end
 
   def update
@@ -38,8 +40,8 @@ class Admin::LangsController < ApplicationController
 
   def destroy
     @lang.destroy
-    flash[:success] = "登録済みの開発言語を削除しました。"
-    redirect_to admin_root_path
+    flash[:alert] = "登録済みの開発言語を削除しました。"
+    redirect_to admin_langs_path
   end
 
   private
