@@ -16,6 +16,12 @@ class User < ApplicationRecord
     super && (status == true)
   end
 
+  def self.guest
+    find_or_create_by!(name: "ゲストユーザー", email: "guest@example.com") do |user|
+      user.password = SecureRandom.urlsafe_base64
+    end
+  end
+
   def self.without_sns_data(auth)
     user = User.where(email: auth.info.email).first
     if user.present?
