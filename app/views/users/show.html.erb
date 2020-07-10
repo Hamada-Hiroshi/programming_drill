@@ -34,7 +34,7 @@
         <div class="tab-content" id="user-app-contents">
 
           <div class="tab-pane active" id="learning-tab">
-            <% if @user == current_user || Admin %>
+            <% if @user == current_user || admin_signed_in? %>
               <% if @user.learnings.present? %>
                 <% @user.learnings.each do |learning| %>
                   <div class="my-app-box">
@@ -50,7 +50,11 @@
                           <% if Review.find_by(user_id: @user.id, app_id: learning.app.id).present? %>
                             <p>レビュー済み</p>
                           <% else %>
+                            <% if admin_signed_in? %>
+                              <p>レビュー未投稿</p>
+                            <% else %>
                               <%= link_to "レビューを投稿する", app_reviews_path(learning.app), class: "btn btn-primary" %>
+                            <% end %>
                           <% end %>
                         <% end %>
                       </div>

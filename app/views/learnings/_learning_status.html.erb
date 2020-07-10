@@ -10,7 +10,8 @@
   </section>
 </article>
 
-<% if app.user != current_user %>
+<!-- ログインユーザがそのアプリの投稿者または管理者である場合は以下表示しない -->
+<% unless app.user == current_user || admin_signed_in? %>
   <div class="learning-status">
     <div class="row">
       <div class="col-md-5">
