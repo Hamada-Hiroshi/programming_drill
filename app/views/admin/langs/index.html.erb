@@ -16,7 +16,7 @@
             <tr>
               <td><%= lang.name %></td>
               <td class="text-center"><%= lang.apps.count %></td>
-              <th class="text-center"><%= "#{lang.apps.pluck(:status).count(true) * 100 / @apps.count }％" %></th>
+              <td class="text-center"><%= "#{lang.apps.pluck(:status).count(true) * 100 / @apps.count }％" %></th>
               <td><%= link_to "詳細・編集", admin_lang_path(lang), class: "btn btn-sm btn-default" %></td>
             </tr>
           <% end %>

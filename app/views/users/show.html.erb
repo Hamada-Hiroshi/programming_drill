@@ -34,7 +34,7 @@
         <div class="tab-content" id="user-app-contents">
 
           <div class="tab-pane active" id="learning-tab">
-            <% if @user == current_user %>
+            <% if @user == current_user || Admin %>
               <% if @user.learnings.present? %>
                 <% @user.learnings.each do |learning| %>
                   <div class="my-app-box">
