@@ -8,13 +8,14 @@
             <th>言語名</th>
             <th>登録アプリ数</th>
             <th>全体に占める割合</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <% @langs.each do |lang| %>
             <tr>
               <td><%= lang.name %></td>
-              <td class="text-center"><%= lang.apps.count %></td>
+              <td class="text-center"><%= lang.apps.pluck(:status).count(true) %></td>
               <td class="text-center"><%= "#{lang.apps.pluck(:status).count(true) * 100 / @apps.count }％" %></th>
               <td><%= link_to "詳細・編集", admin_lang_path(lang), class: "btn btn-sm btn-default" %></td>
             </tr>
