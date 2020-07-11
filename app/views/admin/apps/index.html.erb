@@ -1,0 +1,46 @@
+<div class="container admin-space">
+  <h3 class="admin-title">アプリ一覧</h3>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>タイトル</th>
+        <th>開発言語</th>
+        <th>投稿者</th>
+        <th>登録日</th>
+        <th>最終更新日</th>
+        <th>ステータス</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @apps.each do |app| %>
+        <tr>
+          <td><%= app.id %></td>
+          <td><%= app.title %></td>
+          <td><%= app.lang.name %></td>
+          <td><%= app.user.name %></td>
+          <td><%= app.created_at.strftime("%Y/%m/%d") %></td>
+          <td><%= app.updated_at.strftime("%Y/%m/%d") %></td>
+          <td>
+            <% if app.status == true %>
+              有効
+            <% else %>
+              非公開
+            <% end %>
+          </td>
+            <td>
+              <%= link_to "詳細", app_path(app), class: "btn btn-sm btn-default" %>
+            </td>
+            <td>
+              <% if app.status == true %>
+                <%= link_to "強制非公開", admin_cancel_app_path(app), method: :patch, class: "btn btn-sm btn-default", "data-confirm" => "この投稿アプリを強制的に非公開にしますか？" %>
+              <% end %>
+            </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

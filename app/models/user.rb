@@ -22,6 +22,12 @@ class User < ApplicationRecord
     end
   end
 
+  def self.admin
+    find_or_create_by!(name: "管理者", email: "admin@example.com") do |user|
+      user.password = SecureRandom.urlsafe_base64
+    end
+  end
+
   def self.without_sns_data(auth)
     user = User.where(email: auth.info.email).first
     if user.present?

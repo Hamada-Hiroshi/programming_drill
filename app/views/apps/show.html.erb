@@ -31,7 +31,8 @@
           </section>
 
           <% if user_signed_in? %>
-            <% unless @app.user == current_user || Learning.find_by(user_id: current_user.id, app_id: @app.id) %>
+            <!-- ログインユーザがそのアプリの投稿者ではなく、管理者でもなく、まだ学習を開始していないユーザの場合 -->
+            <% unless @app.user == current_user || Learning.find_by(user_id: current_user.id, app_id: @app.id) || admin_signed_in? %>
               <div id="make-app">
                 <%= link_to "このアプリケーションを作成する", app_learnings_path(@app), method: :post, class: "btn-lg btn-primary" %>
               </div>
