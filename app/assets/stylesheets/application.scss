@@ -934,6 +934,19 @@ select {
   font-size: 1.2em;
 }
 
+//管理者ダッシュボード
+.chart {
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f2DEDE4D;
+  h4 {
+    margin-left: 40px;
+  }
+  p {
+    margin-left: 40px;
+    margin-bottom: 20px;
+  }
+}
 
 
 @media screen and (max-width:991px) {
