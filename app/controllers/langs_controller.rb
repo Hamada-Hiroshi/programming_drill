@@ -4,7 +4,7 @@ class LangsController < ApplicationController
   def set_method
     @langs = Lang.all
     @lang = Lang.find(params[:id])
-    @apps = @lang.apps.where(status: true)
+    @apps = @lang.apps.where(status: true).includes(:user, :reviews, :taggings)
     @apps.each do |app|
       app.score = app.average_rate
     end

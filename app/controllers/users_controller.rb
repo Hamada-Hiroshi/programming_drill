@@ -8,6 +8,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @learnings = @user.learnings.includes({:app => :lang}, {:app => :reviews}, {:app => :taggings})
+    @post_apps = @user.apps.includes(:lang, :reviews, :taggings)
   end
 
   def edit
