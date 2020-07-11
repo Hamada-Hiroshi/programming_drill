@@ -35,8 +35,8 @@
 
           <div class="tab-pane active" id="learning-tab">
             <% if @user == current_user || admin_signed_in? %>
-              <% if @user.learnings.present? %>
-                <% @user.learnings.each do |learning| %>
+              <% if @learnings.present? %>
+                <% @learnings.each do |learning| %>
                   <div class="my-app-box">
                     <div class="row">
                       <div class="my-app col-md-9">
@@ -70,8 +70,8 @@
           </div>
 
           <div class="tab-pane" id="post-tab">
-            <% if @user.apps.present? %>
-              <% @user.apps.each do |app| %>
+            <% if @post_apps.present? %>
+              <% @post_apps.each do |app| %>
                 <div class="my-app-box">
                   <div class="row">
                     <div class="my-app col-md-9">

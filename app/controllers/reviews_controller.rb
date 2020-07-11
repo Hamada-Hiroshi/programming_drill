@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
       @my_review = Review.find_by(user_id: current_user.id, app_id: @app.id)
     end
     @review = Review.new
-    @reviews = @app.reviews.order(created_at: "DESC")
+    @reviews = @app.reviews.order(created_at: "DESC").includes(:user)
   end
 
   def create
