@@ -84,6 +84,8 @@ gem 'rails-i18n'
 gem 'rubocop-airbnb'
 gem 'jquery-ui-rails'
 gem 'gon'
+gem 'chartkick'
+gem 'groupdate'
 
 group :production do
   gem 'mysql2'

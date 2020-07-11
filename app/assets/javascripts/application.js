@@ -15,6 +15,8 @@
 //= require jquery
 //= require jquery-ui
 //= require tag-it
+//= require chartkick
+//= require Chart.bundle
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
@@ -90,10 +92,10 @@ $(document).on('turbolinks:load', function(){
     $(window).on('scroll resize', function(){ // スクロールかリサイズ時
       // 現在の位置
       var scrollTop = $(document).scrollTop();
-      if (scrollTop > sidebar_top - 80){
+      if (scrollTop > sidebar_top - 100){
         // 現在位置が、初期位置より下なら、画面上部にサイドバーを固定
         sidebar.css({'position': 'fixed',
-            'top': 80,
+            'top': 100,
             'width': sidebar.width()
         });
       }

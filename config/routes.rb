@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'apps/index'
+  end
+  namespace :admin do
+    get 'users/index'
+  end
   root 'apps#index'
   get 'about' => 'home#about'
 
@@ -45,7 +51,11 @@ Rails.application.routes.draw do
     post 'admin/guest_sign_in' => 'admins/sessions#new_guest'
   end
   namespace :admin do
-    root 'langs#index'
-    resources :langs, only: [:show, :create, :update, :destroy]
+    root 'dashboards#index'
+    resources :langs, only: [:index, :show, :create, :update, :destroy]
+    patch 'users/:id/cancel' => 'users#cancel', as: 'cancel_user'
+    resources :users, only: [:index]
+    patch 'apps/:id/cancel' => 'apps#cancel', as: 'cancel_app'
+    resources :apps, only: [:index]
   end
 end
