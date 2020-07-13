@@ -10,9 +10,11 @@
               <%= form_with(model: [@app, @question]) do |f| %>
                 <div id="error-messages"></div>
                 <%= render 'layouts/error_messages', model: @question %>
-                <h4>質問</h4>
-                <%= f.text_area :content, placeholder: "質問内容を記入してください。", class: "textarea-form" %>
-                <%= f.submit "質問を投稿", class: "btn btn-default" %>
+                <% if @app.user != current_user %>
+                  <h4>質問</h4>
+                  <%= f.text_area :content, placeholder: "質問内容を記入してください。", class: "textarea-form" %>
+                  <%= f.submit "質問を投稿", class: "btn btn-default" %>
+                <% end %>
               <% end %>
             </div>
 

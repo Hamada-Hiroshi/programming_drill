@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   patch 'users/:id/cancel' => 'users#cancel', as: 'cancel_user'
   resources :users, only: [:show, :edit, :update] do
     resources :notifications, only: :index
+    delete 'notifications' => 'notifications#destroy_all'
   end
 
   get 'apps/rate' => 'apps#rate_index', as: 'rate_apps'

@@ -36,6 +36,12 @@
                   <%= attachment_image_tag(current_user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
                 <% end %>
               </li>
+              <li>
+                <% if unchecked_notifications.any? %>
+                  <span class="n-circle"><i class="fa fa-circle"></i></span>
+                <% end %>
+                <%= link_to "通知", user_notifications_path(current_user) %>
+              </li>
               <li><%= link_to "アプリ一覧", root_path %></li>
               <li><%= link_to "新規投稿", new_app_path %></li>
               <% if admin_signed_in? %>
