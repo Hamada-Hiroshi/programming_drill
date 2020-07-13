@@ -42,8 +42,15 @@ body {
 }
 #header-link {
   li {
+    position: relative;
     padding: 18px 15px 0  15px;
     font-size: 1.1em;
+    .n-circle {
+      position: absolute;
+      left: 4rem;
+      top: 1.5rem;
+      color: #efa04c;
+    }
     a {
       color: #FFF;
       padding: 0;
@@ -500,7 +507,7 @@ input[type=checkbox]:checked + .checkbox01::after {
   font-size: 1.2em;
 }
 
-//質問、レビュー投稿
+//質問、レビュー投稿、通知
 #review-form {
   margin-top: 30px;
   p {
@@ -511,7 +518,7 @@ input[type=checkbox]:checked + .checkbox01::after {
 #question-index > p, #review-index > p {
   margin-top: 30px;
 }
-.question-box, .review-box {
+.question-box, .review-box, .notification-box {
   border-top: solid 1px #C0C0C0;
   margin-top: 30px;
   padding-top: 20px;
@@ -545,6 +552,33 @@ input[type=checkbox]:checked + .checkbox01::after {
 }
 .reply-form {
   margin-left: 35px;
+}
+
+//通知
+.notification-delete a span {
+  color: #000;
+  font-size: 1.2em;
+  margin-right: 20px;
+}
+
+.notification-box {
+  .visitor-img {
+    height: 60px;
+    float: left;
+  }
+  a {
+    text-decoration: none;
+  }
+  .notification-info {
+    margin: 15px 0 0 50px;
+    .notification-form {
+      font-size: 16px;
+    }
+  }
+  .notification-content {
+    padding: 20px 10px 0 50px;
+    color: #565454D1;
+  }
 }
 
 //セレクトボックス

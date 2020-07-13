@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :learnings, dependent: :destroy
   has_many :questions
   has_many :reviews
+  has_many :active_notifications, class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
+  has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
   validates :name, presence: true, length: { maximum: 30 }
   validates :status, inclusion: { in: [true, false] }
 

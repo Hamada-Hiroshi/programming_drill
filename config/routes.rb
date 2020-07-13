@@ -19,7 +19,10 @@ Rails.application.routes.draw do
   end
   get 'users/:id/quit' => 'users#quit', as: 'quit_user'
   patch 'users/:id/cancel' => 'users#cancel', as: 'cancel_user'
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update] do
+    resources :notifications, only: :index
+    delete 'notifications' => 'notifications#destroy_all'
+  end
 
   get 'apps/rate' => 'apps#rate_index', as: 'rate_apps'
   get 'apps/popular' => 'apps#popular_index', as: 'popular_apps'
@@ -41,7 +44,7 @@ Rails.application.routes.draw do
 
   get 'langs/:id/rate' => 'langs#rate_show', as: 'rate_lang'
   get 'langs/:id/popular' => 'langs#popular_show', as: 'popular_lang'
-  resources :langs, only: [:show]
+  resources :langs, only: :show
 
   devise_for :admins, skip: :all
   devise_scope :admin do
@@ -54,8 +57,8 @@ Rails.application.routes.draw do
     root 'dashboards#index'
     resources :langs, only: [:index, :show, :create, :update, :destroy]
     patch 'users/:id/cancel' => 'users#cancel', as: 'cancel_user'
-    resources :users, only: [:index]
+    resources :users, only: :index
     patch 'apps/:id/cancel' => 'apps#cancel', as: 'cancel_app'
-    resources :apps, only: [:index]
+    resources :apps, only: :index
   end
 end
