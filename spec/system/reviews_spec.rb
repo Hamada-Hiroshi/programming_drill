@@ -77,7 +77,7 @@ describe 'レビューのテスト' do
       end
 
       it 'スコア入力フォームが表示される' do
-        expect(page).to have_text '星の数を選択'
+        expect(page).to have_text 'レビュー内容から自動で評価を判定する。'
       end
       it 'レビュー入力フォームが表示される' do
         expect(page).to have_field 'review[content]'
