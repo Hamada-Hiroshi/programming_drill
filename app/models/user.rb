@@ -5,17 +5,27 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[google_oauth2]
   attachment :profile_image
+
   has_many :apps
   has_many :learnings, dependent: :destroy
   has_many :questions
   has_many :reviews
-  has_many :active_notifications, class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
-  has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
+  has_many :active_relationships, class_name: "Relationship", foreign_key: :following_id, dependent: :destroy
+  has_many :followings, through: :active_relationships, source: :follower
+  has_many :passive_relationships, class_name: "Relationship", foreign_key: :follower_id, dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :following
+  has_many :active_notifications, class_name: "Notification", foreign_key: :visitor_id, dependent: :destroy
+  has_many :passive_notifications, class_name: "Notification", foreign_key: :visited_id, dependent: :destroy
+
   validates :name, presence: true, length: { maximum: 30 }
   validates :status, inclusion: { in: [true, false] }
 
   def active_for_authentication?
     super && (status == true)
+  end
+
+  def following?(other_user)
+    self.followings.include?(other_user)
   end
 
   def self.guest

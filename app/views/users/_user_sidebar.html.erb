@@ -1,0 +1,30 @@
+<% if user_signed_in? %>
+  <div id="my-info-bar">
+    <%= link_to user_path(user), id: "my-img" do %>
+      <div id="my-name">
+        <%= attachment_image_tag(user, :profile_image, size: "60x60", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
+        <span><%= user.name %></span>
+      </div>
+    <% end %>
+
+    <hr>
+
+    <%= link_to user_path(user) do %>
+      <div id="my-app">
+        <h5>マイアプリ</h5>
+        <span>学習：<%= user.learnings.count %>件</span><span>投稿：<%= user.learnings.count %>件</span>
+      </div>
+    <% end %>
+
+    <hr>
+
+    <ul id="my-follow">
+      <%= link_to followings_user_path(user) do %>
+        <li>フォロー：<%= user.followings.count %>人</li>
+      <% end %>
+      <%= link_to followers_user_path(user) do %>
+        <li>フォロワー：<%= user.followers.count %>人</li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
