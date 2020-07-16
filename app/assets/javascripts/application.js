@@ -94,9 +94,10 @@ $(document).on('turbolinks:load', function(){
       var scrollTop = $(document).scrollTop();
       if (scrollTop > sidebar_top - 100){
         // 現在位置が、初期位置より下なら、画面上部にサイドバーを固定
-        sidebar.css({'position': 'fixed',
-            'top': 100,
-            'width': sidebar.width()
+        sidebar.css({
+          'position': 'fixed',
+          'top': 100,
+          'width': sidebar.width()
         });
       }
     });
