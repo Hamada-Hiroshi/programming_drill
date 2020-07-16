@@ -6,6 +6,17 @@
     <span><%= app.user.name %></span>
     <span><%= app.updated_at.strftime("%Y年%m月%d日更新") %></span>
   </div>
+  <span id="stock-form">
+    <% if @app.stocked?(current_user) %>
+      <%= link_to app_stocks_path(@app), method: :delete do %>
+        <i class="fas fa-folder-plus fa-3x"></i>
+      <% end %>
+    <% else %>
+      <%= link_to app_stocks_path(@app), method: :post do %>
+        <i class="far fa-folder fa-3x"></i>
+      <% end %>
+    <% end %>
+  </span>
   <h1><%= app.title %></h1>
   <div id="average-rate">
     <%= render 'reviews/average_rate', app: @app %>

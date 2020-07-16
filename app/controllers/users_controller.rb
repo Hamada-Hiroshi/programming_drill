@@ -41,6 +41,12 @@ class UsersController < ApplicationController
     @users = @user.followers
   end
 
+  def learnings
+  end
+
+  def stocks
+  end
+
   def ensure_correct_user
     if @user != current_user
       flash[:alert] = "アクセス権限がありません。"
