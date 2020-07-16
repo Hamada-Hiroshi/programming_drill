@@ -11,8 +11,11 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require jquery.tagit
+ *= require tagit.ui-zendesk
  *= require_self
  */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -24,12 +27,12 @@
 }
 
 body {
-  padding-top: 55px;
+  padding-top: 80px;
   background-color: #F6F6F6;
 }
 
 #header-top {
-  background-color: #483D8B;
+  background-color: #494275;
   min-height: 62px;
 }
 .header-logo img {
@@ -39,8 +42,15 @@ body {
 }
 #header-link {
   li {
+    position: relative;
     padding: 18px 15px 0  15px;
     font-size: 1.1em;
+    .n-circle {
+      position: absolute;
+      left: 4rem;
+      top: 1.5rem;
+      color: #efa04c;
+    }
     a {
       color: #FFF;
       padding: 0;
@@ -57,7 +67,7 @@ body {
   padding: 13px 0px;
   margin: 0;
 }
-#q_title_cont {
+#q_title_or_lang_name_or_tags_name_cont {
   height: 30px;
 }
 
@@ -120,7 +130,7 @@ body {
 
 //管理者ページ用余白
 .admin-space {
-  padding-top: 40px;
+  padding-top: 10px;
 }
 
 footer {
@@ -128,7 +138,7 @@ footer {
     padding-top: 50px;
     margin-top: 30px;
     height: 200px;
-    background-color: #483D8B;
+    background-color: #48484A;
     border-top: solid 1px #AAA;
     border-bottom: solid 1px #AAA;
     a {
@@ -291,18 +301,73 @@ p {
     }
   }
 }
-
-//レビュー星
-#star {
-  display: inline-block;
-  margin: 0 20px 10px 0;
+.ui-helper-hidden-accessible {
+  display: none;
 }
 
+//レビュー星表示（共通）
 .star-rate {
   display: inline-block;
 }
 span {
   font-size: 0.9em;
+}
+
+//レビュー星（手動入力）
+#manual-rating {
+  vertical-align: bottom;
+  #star {
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 15px;
+  }
+  span {
+    font-size: 15px;
+    font-weight: bold;
+  }
+}
+
+//自動レビューチェックボックス
+input[type=checkbox] {
+  display: none;
+}
+.checkbox01 {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 30px;
+  position: relative;
+  width: auto;
+  font-size: 15px;
+}
+.checkbox01::before {
+  background: #fff;
+  border: 1px solid #231815;
+  content: '';
+  display: block;
+  height: 16px;
+  left: 5px;
+  margin-top: -8px;
+  position: absolute;
+  top: 50%;
+  width: 16px;
+}
+.checkbox01::after {
+  border-right: 3px solid #FF8C00;
+  border-bottom: 3px solid #FF8C00;
+  content: '';
+  display: block;
+  height: 12px;
+  left: 10px;
+  margin-top: -7px;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: rotate(45deg);
+  width: 8px;
+}
+input[type=checkbox]:checked + .checkbox01::after {
+  opacity: 1;
 }
 
 //アプリ一覧の各アプリ
@@ -324,6 +389,9 @@ span {
         width: 13px;
         height: 13px;
       }
+    }
+    .learning-count {
+      margin-left: 20px;
     }
   }
 }
@@ -360,12 +428,17 @@ span {
 }
 .my-app-edit {
   margin-top: 20px;
+  p {
+    display: inline-block;
+    padding: 5px 20px;
+  }
 }
 
 //アプリ詳細
 .app-info {
   .app-info-top {
     .app-post {
+      display: inline-block;
       a {
         text-decoration: none;
       }
@@ -392,6 +465,18 @@ span {
       font-size: 1.2em;
       word-wrap: break-word;
     }
+  }
+  #make-app {
+    margin: 50px 0 20px 0;
+    text-align: center;
+  }
+}
+
+//ストックアイコン
+.stock-button {
+  float: right;
+  i {
+    color: #48484A;
   }
 }
 
@@ -431,7 +516,7 @@ span {
   font-size: 1.2em;
 }
 
-//質問、レビュー投稿
+//質問、レビュー投稿、通知
 #review-form {
   margin-top: 30px;
   p {
@@ -442,7 +527,7 @@ span {
 #question-index > p, #review-index > p {
   margin-top: 30px;
 }
-.question-box, .review-box {
+.question-box, .review-box, .notification-box {
   border-top: solid 1px #C0C0C0;
   margin-top: 30px;
   padding-top: 20px;
@@ -478,6 +563,33 @@ span {
   margin-left: 35px;
 }
 
+//通知
+.notification-delete a span {
+  color: #000;
+  font-size: 1.2em;
+  margin-right: 20px;
+}
+
+.notification-box {
+  .visitor-img {
+    height: 60px;
+    float: left;
+  }
+  a {
+    text-decoration: none;
+  }
+  .notification-info {
+    margin: 15px 0 0 50px;
+    .notification-form {
+      font-size: 16px;
+    }
+  }
+  .notification-content {
+    padding: 20px 10px 0 50px;
+    color: #565454D1;
+  }
+}
+
 //セレクトボックス
 select {
   -moz-appearance: none;
@@ -501,9 +613,6 @@ select {
 }
 
 //マイページ
-#user-image {
-  margin-top: 20px;
-}
 #user-info {
   margin-bottom: 40px;
   #user-acount {
@@ -516,8 +625,28 @@ select {
       vertical-align: bottom;
     }
   }
+  #user-follow a {
+    display: inline-block;
+    font-size: 1.1em;
+    color: #000;
+    margin: 15px 30px 0 20px;
+  }
   #user-introduction {
     margin: 20px 0;
+  }
+}
+
+//フォロー、フォロワー一覧
+.follow-user-img {
+  float: left;
+}
+.follow-user-info {
+  margin-left: 80px;
+  h4 {
+    margin-top: initial;
+  }
+  p {
+    white-space: initial;
   }
 }
 
@@ -529,7 +658,18 @@ select {
     margin-bottom: 40px;
   }
   .actions {
-    margin: 30px 0 20px 0;
+    margin-bottom: 20px;
+    .btn {
+      margin-top: 10px;
+      margin-bottom: 5px;
+      width: 280px;
+    }
+    .btn-original {
+      background-color: #AAA;
+    }
+    .btn-original2 {
+      background-color: #F54F4FD9;
+    }
   }
 }
 
@@ -637,7 +777,14 @@ select {
   p {
     margin: 0 0 0 30%;
   }
+  .tagit {
+    display: inline-block;
+    width: 65%;
+    height: 68px;
+    margin-bottom: 0;
+  }
 }
+
 
 //アプリ編集
 .edit-app-title h2 {
@@ -656,6 +803,10 @@ select {
   }
   .mini-height {
     min-height: 54px;
+  }
+  .tagit {
+    height: 68px;
+    margin-bottom: 0;
   }
 }
 
@@ -692,25 +843,24 @@ select {
 //検索バー全体
 .category-bar {
   padding-top: 30px;
-  width: 90%;
+  width: 95%;
+  margin-bottom: 70px;
 }
 
 //言語別検索バー
-#language-index {
+#lang-index {
   padding: 0;
   a {
     color: #000;
     &:hover {
-      color: #483D8B;
       text-decoration: none;
     }
     li {
       list-style: none;
-      padding: 20px 10%;
+      padding: 18px 10%;
       border-bottom: solid 1px #DDD;
       &:hover {
-        background-color: #EEE;
-        border-bottom: solid 3px #6A5ACD;
+        background-color: #D9E5FF;
       }
       p {
         margin: 0;
@@ -731,8 +881,63 @@ select {
     margin-top: 5px;
     margin-left: 10px;
     a:hover {
-      border: solid 1px #6A5ACD;
-      color: #6A5ACD;
+      color: #FFF;
+      background-color: #6A5ACD;
+    }
+  }
+}
+
+//ユーザ情報バー
+#my-info-bar {
+  width: 95%;
+  padding: 20px 10px;
+  background-color: #FFF;
+  border: solid 0.5px #6A5ACD;
+  ul {
+    margin-bottom: initial;
+  }
+  li {
+    list-style: none;
+    color: #000;
+  }
+  #my-img {
+    text-decoration: none;
+    #my-name {
+      img {
+        margin-right: 10px;
+      }
+      span {
+        display: inline-block;
+        font-size: 1.3em;
+        color: #000;
+        margin-top: 15px;
+      }
+    }
+  }
+  #my-app {
+    h5 {
+      margin-bottom: 5px;
+      color: #000;
+    }
+    span {
+      font-size: 1.0em;
+      color: #000;
+      margin: 0 10px;
+    }
+  }
+}
+
+//フォロー・フォロワー一覧
+.user-box {
+  border-bottom: solid 1px #C0C0C0;
+  padding: 10px 0;
+  min-height: 80px;
+  .follow-user-info {
+    h4 {
+      display: inline-block;
+    }
+    span {
+      float: right;
     }
   }
 }
@@ -740,7 +945,6 @@ select {
 //タブメニュー
 .nav-tabs > li.active > a {
   background-color: #D9E5FF;
-
   border: none;
   border-bottom: solid 3px #6A5ACD;
   &:hover, &:focus {
@@ -749,6 +953,9 @@ select {
     border: none;
     border-bottom: solid 3px #6A5ACD;
   }
+}
+.nav-tabs > li > a {
+  margin-right: initial;
 }
 
 //アバウトページ
@@ -759,6 +966,7 @@ select {
   width: 100%;
   height: 500px;
   position: relative;
+  margin-top: -20px;
 }
 #top-message {
   width: 100%;
@@ -779,8 +987,7 @@ select {
   section {
     margin: 30px auto 80px;
     h1 {
-      width: 200px;
-      margin: 0 auto 30px;
+      margin-bottom: 30px;
       position: relative;
       &:after {
         content: "";
@@ -808,7 +1015,7 @@ select {
   text-decoration: none;
 }
 .panel-heading {
-  background-color: #FFD700;
+  background-color: #FDA149;
 }
 .panel-title {
   text-align: center;
@@ -824,16 +1031,38 @@ select {
   color: #696969;
 }
 .pagination>.active>a {
-  background: #FFD700;
+  background: #878796;
   border-radius: 15px;
-  color: #696969;
+  color: #FFF;
   &:hover {
-    background: #FFD700;
-    color: #696969;
+    background: #494275;
+    color: #FFF;
   }
 }
 .pagination>li>a:hover {
   border-radius: 15px;
+}
+
+//管理者言語登録ページ
+.admin-title {
+  margin-bottom: 30px;
+}
+.lang-index > tbody > tr > td {
+  font-size: 1.2em;
+}
+
+//管理者ダッシュボード
+.chart {
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f2DEDE4D;
+  h4 {
+    margin-left: 40px;
+  }
+  p {
+    margin-left: 40px;
+    margin-bottom: 20px;
+  }
 }
 
 
@@ -844,11 +1073,21 @@ select {
 }
 
 @media screen and (max-width:768px) {
-  .category-bar {
-    width: 100%;
+  .navbar-toggle {
+    margin-top: 14px;
   }
 
-  #language-index {
+  .category-bar {
+    width: 100%;
+    padding-top: initial;
+    margin-bottom: initial;
+  }
+
+  #my-info-bar {
+    display: none;
+  }
+
+  #lang-index {
     padding: 0;
     a {
       li {
@@ -870,6 +1109,9 @@ select {
     p {
       margin: 0;
     }
+    .tagit {
+      width: 100%;
+    }
   }
 
   .one-btn, .current-btn {
@@ -883,14 +1125,6 @@ select {
   .user-edit {
     padding-left: 30px;
   }
-}
-
-//管理者言語登録ページ
-.admin-title {
-  margin-bottom: 30px;
-}
-.language-index > tbody > tr > td {
-  font-size: 1.2em;
 }
 
 

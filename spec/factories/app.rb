@@ -7,7 +7,7 @@ FactoryBot.define do
     function { Faker::Lorem.characters(number: 100) }
     target { Faker::Lorem.characters(number: 20) }
     user
-    language
+    lang
 
     trait :invalid do
       title { nil }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_27_083251) do
+ActiveRecord::Schema.define(version: 2020_07_16_022336) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2020_06_27_083251) do
 
   create_table "apps", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "language_id", null: false
+    t.integer "lang_id", null: false
     t.string "title", null: false
     t.text "overview", null: false
     t.text "app_url", null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2020_06_27_083251) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "languages", force: :cascade do |t|
+  create_table "langs", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -55,6 +55,17 @@ ActiveRecord::Schema.define(version: 2020_06_27_083251) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "question_id"
+    t.integer "review_id"
+    t.string "action", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "questions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "app_id", null: false
@@ -63,6 +74,13 @@ ActiveRecord::Schema.define(version: 2020_06_27_083251) do
     t.datetime "updated_at", null: false
     t.integer "parent_id"
     t.index ["parent_id"], name: "index_questions_on_parent_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "following_id", null: false
+    t.integer "follower_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -81,6 +99,14 @@ ActiveRecord::Schema.define(version: 2020_06_27_083251) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_sns_credentials_on_user_id"
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.string "user_id", null: false
+    t.string "app_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "app_id"], name: "index_stocks_on_user_id_and_app_id", unique: true
   end
 
   create_table "taggings", force: :cascade do |t|

@@ -8,7 +8,7 @@
         <span class="app-link"><i class="fas fa-book-open"></i> 学習メモ</span>
       <% end %>
     <% end %>
-    <% if learning.present? || app.user == current_user %>
+    <% if learning.present? || app.user == current_user || admin_signed_in? %>
       <%= link_to hint_app_path(app), class: "btn btn-default" do %>
         <span class="app-link"><i class="fas fa-question-circle"></i> ヒント</span>
       <% end %>
@@ -28,9 +28,12 @@
     </div>
 
   <% if app.user == current_user %>
-    <div class="one-btn">
-      <%= link_to "編集", edit_app_path(app), class: "btn btn-primary app-link" %>
-    </div>
+    <% if app.status == true %>
+      <div class="one-btn">
+        <%= link_to "編集", edit_app_path(app), class: "btn btn-primary app-link" %>
+      </div>
+    <% end %>
+  <% elsif admin_signed_in? %>
   <% elsif learning.blank? %>
     <div class="one-btn">
       <%= link_to "学習開始", app_learnings_path(app), method: :post, class: "btn btn-primary app-link" %>

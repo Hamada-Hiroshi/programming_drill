@@ -1,9 +1,11 @@
 class App < ApplicationRecord
   belongs_to :user
-  belongs_to :language
+  belongs_to :lang
   has_many :learnings, dependent: :destroy
   has_many :questions, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :stocks, dependent: :destroy
+  has_many :stock_users, through: :stocks, source: :user
   acts_as_taggable
 
   validates :title, presence: true, length: { maximum: 25 }, uniqueness: true
@@ -22,5 +24,9 @@ class App < ApplicationRecord
     else
       "評価なし"
     end
+  end
+
+  def stocked?(user)
+    self.stock_users.include?(user)
   end
 end

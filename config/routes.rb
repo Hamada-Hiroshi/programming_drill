@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'apps/index'
+  end
+  namespace :admin do
+    get 'users/index'
+  end
   root 'apps#index'
   get 'about' => 'home#about'
 
@@ -8,13 +14,28 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
+  devise_scope :user do
+    post 'users/guest_sign_in' => 'users/sessions#new_guest'
+  end
   get 'users/:id/quit' => 'users#quit', as: 'quit_user'
   patch 'users/:id/cancel' => 'users#cancel', as: 'cancel_user'
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update] do
+    resources :notifications, only: :index
+    resource :relationships, only: [:create, :destroy]
+    member do
+      get :following
+      get :followers
+      get :learnings
+      get :stocks
+    end
+    delete 'notifications' => 'notifications#destroy_all'
+  end
 
   get 'apps/rate' => 'apps#rate_index', as: 'rate_apps'
+  get 'apps/popular' => 'apps#popular_index', as: 'popular_apps'
   get 'apps/tag' => 'apps#tag', as: 'tag_apps'
   get 'apps/tag/rate' => 'apps#rate_tag', as: 'rate_tag_apps'
+  get 'apps/tag/popular' => 'apps#popular_tag', as: 'popular_tag_apps'
   post 'apps/confirm' => 'apps#confirm', as: 'confirm_apps'
   get 'apps/:id/add_edit' => 'apps#add_edit', as: 'add_edit_app'
   patch 'apps/:id/add' => 'apps#add_update', as: 'add_update_app'
@@ -26,19 +47,26 @@ Rails.application.routes.draw do
     resources :learnings, only: [:create, :show, :update]
     resources :questions, only: [:index, :create]
     resources :reviews, only: [:index, :create]
+    resource :stocks, only: [:create, :destroy]
   end
 
-  get 'languages/:id/rate' => 'languages#rate_show', as: 'rate_language'
-  resources :languages, only: [:show]
+  get 'langs/:id/rate' => 'langs#rate_show', as: 'rate_lang'
+  get 'langs/:id/popular' => 'langs#popular_show', as: 'popular_lang'
+  resources :langs, only: :show
 
   devise_for :admins, skip: :all
   devise_scope :admin do
     get 'admin/sign_in' => 'admins/sessions#new', as: 'new_admin_session'
     post 'admin/sign_in' => 'admins/sessions#create', as: 'admin_session'
     delete 'admin/sign_out' => 'admins/sessions#destroy', as: 'destroy_admin_session'
+    post 'admin/guest_sign_in' => 'admins/sessions#new_guest'
   end
   namespace :admin do
-    root 'languages#index'
-    resources :languages, only: [:show, :create, :update, :destroy]
+    root 'dashboards#index'
+    resources :langs, only: [:index, :show, :create, :update, :destroy]
+    patch 'users/:id/cancel' => 'users#cancel', as: 'cancel_user'
+    resources :users, only: :index
+    patch 'apps/:id/cancel' => 'apps#cancel', as: 'cancel_app'
+    resources :apps, only: :index
   end
 end

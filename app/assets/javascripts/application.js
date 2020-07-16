@@ -12,8 +12,12 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require jquery
+//= require jquery-ui
+//= require tag-it
+//= require chartkick
+//= require Chart.bundle
+//= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
 
@@ -88,13 +92,32 @@ $(document).on('turbolinks:load', function(){
     $(window).on('scroll resize', function(){ // スクロールかリサイズ時
       // 現在の位置
       var scrollTop = $(document).scrollTop();
-      if (scrollTop > sidebar_top - 80){
+      if (scrollTop > sidebar_top - 100){
         // 現在位置が、初期位置より下なら、画面上部にサイドバーを固定
         sidebar.css({'position': 'fixed',
-            'top': 80,
+            'top': 100,
             'width': sidebar.width()
         });
       }
     });
   }
 });
+
+//タグ付け自動補完
+$(document).on('turbolinks:load', function(){
+  if($('#app-tags').length){
+    $('#app-tags').tagit({
+      fieldName: 'app[tag_list]',
+      singleField: true,
+      availableTags: gon.available_tags
+    });
+    var i, len, tag;
+    if (gon.app_tags != null) {
+      for (i = 0, len = gon.app_tags.length; i < len; i++) {
+        tag = gon.app_tags[i];
+        $('#app-tags').tagit('createTag', tag);
+      }
+    }
+  }
+});
+
