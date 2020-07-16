@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   get 'users/:id/quit' => 'users#quit', as: 'quit_user'
   patch 'users/:id/cancel' => 'users#cancel', as: 'cancel_user'
   resources :users, only: [:show, :edit, :update] do
+    resource :relationships, only: [:create, :destroy]
+    get :following, on: :member
+    get :followers, on: :member
     resources :notifications, only: :index
     delete 'notifications' => 'notifications#destroy_all'
   end

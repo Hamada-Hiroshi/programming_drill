@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_12_062406) do
+ActiveRecord::Schema.define(version: 2020_07_14_063722) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -74,6 +74,13 @@ ActiveRecord::Schema.define(version: 2020_07_12_062406) do
     t.datetime "updated_at", null: false
     t.integer "parent_id"
     t.index ["parent_id"], name: "index_questions_on_parent_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "following_id", null: false
+    t.integer "follower_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reviews", force: :cascade do |t|
