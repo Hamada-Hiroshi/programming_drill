@@ -7,7 +7,7 @@
     <div class="col-sm-9">
       <div class="user-index back-white">
         <ul class="nav nav-tabs">
-          <li><%= link_to "フォロー中", followings_user_path(@user) %></li>
+          <li><%= link_to "フォロー中", following_user_path(@user) %></li>
           <li class="active"><%= link_to "フォロワー", followers_user_path(@user) %></li>
         </ul>
         <% if @users.present? %>

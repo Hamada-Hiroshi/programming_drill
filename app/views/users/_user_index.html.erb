@@ -9,11 +9,9 @@
     <div class="follow-user-info">
       <h4><%= user.name %></h4>
       <% if current_user != user %>
-        <% if current_user.following?(user) %>
-          <span class="text-right"><%=link_to "フォロー中", user_relationships_path(user), method: :delete, class: "btn btn-sm btn-primary" %></span>
-        <% else %>
-          <span class="text-right"><%=link_to "フォローする", user_relationships_path(user), method: :post, class: "btn  btn-sm btn-default" %></span>
-        <% end %>
+        <span id="follow-form-<%= user.id %>" class="text-right">
+          <%= render 'relationships/follow_form', user: user %>
+        </span>
       <% end %>
       <p><%= user.introduction %></p>
       <p><%= user.skill %></p>

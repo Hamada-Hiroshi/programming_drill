@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   patch 'users/:id/cancel' => 'users#cancel', as: 'cancel_user'
   resources :users, only: [:show, :edit, :update] do
     resource :relationships, only: [:create, :destroy]
-    get :followings, on: :member
+    get :following, on: :member
     get :followers, on: :member
     resources :notifications, only: :index
     delete 'notifications' => 'notifications#destroy_all'

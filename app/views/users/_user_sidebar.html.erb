@@ -18,13 +18,8 @@
 
     <hr>
 
-    <ul id="my-follow">
-      <%= link_to followings_user_path(user) do %>
-        <li>フォロー：<%= user.followings.count %>人</li>
-      <% end %>
-      <%= link_to followers_user_path(user) do %>
-        <li>フォロワー：<%= user.followers.count %>人</li>
-      <% end %>
-    </ul>
+    <div id="follow-count">
+      <%= render 'relationships/follow_count', user: user %>
+    </div>
   </div>
 <% end %>
