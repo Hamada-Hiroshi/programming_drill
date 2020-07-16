@@ -33,6 +33,14 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def following
+    @users = @user.followings
+  end
+
+  def followers
+    @users = @user.followers
+  end
+
   def ensure_correct_user
     if @user != current_user
       flash[:alert] = "アクセス権限がありません。"
