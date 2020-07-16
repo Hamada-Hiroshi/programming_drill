@@ -1,0 +1,2 @@
+$("#stock-form-<%= @app.id %>").html("<%= j(render 'stocks/stock_form', app: @app) %>");
+$("#stock-count").html("<%= j(render 'stocks/stock_count', user: current_user) %>");

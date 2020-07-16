@@ -1,14 +1,13 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
-  before_action :ensure_correct_user, only: [:edit, :update, :quit, :cancel]
+  before_action :ensure_correct_user, only: [:learnings, :stocks, :edit, :update, :quit, :cancel]
 
   def set_user
     @user = User.find(params[:id])
   end
 
   def show
-    @learnings = @user.learnings.includes({:app => :lang}, {:app => :reviews}, {:app => :taggings})
     @post_apps = @user.apps.includes(:lang, :reviews, :taggings)
   end
 
@@ -41,8 +40,16 @@ class UsersController < ApplicationController
     @users = @user.followers
   end
 
+  def learnings
+    @learnings = @user.learnings.includes({:app => :lang}, {:app => :reviews}, {:app => :taggings})
+  end
+
+  def stocks
+    @stocks = @user.stocks.includes({:app => :lang}, {:app => :reviews}, {:app => :taggings})
+  end
+
   def ensure_correct_user
-    if @user != current_user
+    unless @user == current_user || admin_signed_in?
       flash[:alert] = "アクセス権限がありません。"
       redirect_back(fallback_location: root_path)
     end
