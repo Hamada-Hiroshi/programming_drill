@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_14_063722) do
+ActiveRecord::Schema.define(version: 2020_07_16_022336) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -99,6 +99,14 @@ ActiveRecord::Schema.define(version: 2020_07_14_063722) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_sns_credentials_on_user_id"
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.string "user_id", null: false
+    t.string "app_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "app_id"], name: "index_stocks_on_user_id_and_app_id", unique: true
   end
 
   create_table "taggings", force: :cascade do |t|

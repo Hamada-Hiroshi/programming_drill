@@ -6,6 +6,9 @@
     <span><%= app.user.name %></span>
     <span><%= app.updated_at.strftime("%Y年%m月%d日更新") %></span>
   </div>
+  <span class="stock-button" id="stock-form-<%= app.id %>">
+    <%= render 'stocks/stock_form', app: @app %>
+  </span>
   <h1><%= app.title %></h1>
   <div id="average-rate">
     <%= render 'reviews/average_rate', app: @app %>

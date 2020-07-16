@@ -438,6 +438,7 @@ input[type=checkbox]:checked + .checkbox01::after {
 .app-info {
   .app-info-top {
     .app-post {
+      display: inline-block;
       a {
         text-decoration: none;
       }
@@ -468,6 +469,14 @@ input[type=checkbox]:checked + .checkbox01::after {
   #make-app {
     margin: 50px 0 20px 0;
     text-align: center;
+  }
+}
+
+//ストックアイコン
+.stock-button {
+  float: right;
+  i {
+    color: #48484A;
   }
 }
 
