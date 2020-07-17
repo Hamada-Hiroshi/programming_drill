@@ -6,14 +6,17 @@
           <%= render 'learning_status', app: @learning.app, learning: @learning %>
 
           <div id="learning-memo">
-            <div class="field">
-              <%= form_with(model: [@learning.app, @learning]) do |f| %>
-                <h4>学習メモ</h4>
-                <div><%= f.text_area :memo, placeholder: "ご自由に記入してください。", class: "textarea-form", style: "min-height: 300px" %></div>
-                <%= f.submit "メモを保存", class: "btn btn-default" %>
+            <h4>学習メモ</h4>
+            <div class="back-grey">
+              <% if @learning.memo.present? %>
+                <%= markdown(@learning.memo) %>
+              <% else %>
+                <p>学習メモはありません。</p>
               <% end %>
             </div>
+            <%= link_to "学習メモを編集する", edit_app_learning_path(@learning.app), class: "btn btn-primary" %>
           </div>
+
         </div>
       </div>
     </div>
