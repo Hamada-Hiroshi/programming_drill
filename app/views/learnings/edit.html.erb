@@ -1,14 +1,25 @@
-<div class="container">
+<div id="leraning-wrapper">
+  <h3>学習メモ</h3>
+  <%= form_with(model: [@learning.app, @learning]) do |f| %>
+    <div id="learning-form">
+      <div class="row">
 
-  <div class="field">
-    <%= form_with(model: [@learning.app, @learning]) do |f| %>
-      <h4>学習メモ</h4>
-      <div id='editor'>
-        <%= f.text_area :memo, placeholder: "ご自由に記入してください。", class: "textarea-form", style: "min-height: 300px" %>
-        <div id="marked-area"></div>
-        <%= f.submit "メモを保存", class: "btn btn-default" %>
+        <div class="col-md-6">
+          <h5>記入欄（マークダウン記法で記述できます）</h5>
+          <div class="field">
+            <div id='editor'>
+              <%= f.text_area :memo, placeholder: "ご自由に記入してください。", class: "textarea-form form-control", style: "min-height: 480px" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <h5>プレビュー</h5>
+          <div id="marked-area"></div>
+        </div>
+
       </div>
-    <% end %>
-  </div>
-
+    </div>
+    <%= f.submit "メモを保存", class: "btn btn-original" %>
+  <% end %>
 </div>
