@@ -1,7 +1,7 @@
 class LearningsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_learning, only: [:show, :edit, :update]
-  before_action :ensure_correct_user, only: [:show, :update]
+  before_action :ensure_correct_user, only: [:show, :edit, :update]
 
   def set_learning
     @learning = Learning.find(params[:id])
@@ -17,9 +17,18 @@ class LearningsController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
   def update
-    @learning.update(learning_params)
-    flash.now[:success] = "学習記録を更新しました。"
+    if params[:learning][:status]
+      @learning.update(learning_params)
+      flash.now[:success] = "学習状況を更新しました。"
+    else
+      @learning.update(learning_params)
+      redirect_to app_learning_path(@learning.app)
+      flash[:success] = "学習メモを更新しました。"
+    end
   end
 
   def ensure_correct_user

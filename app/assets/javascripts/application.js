@@ -17,9 +17,11 @@
 //= require tag-it
 //= require chartkick
 //= require Chart.bundle
+//= require marked
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
 
 //画像アップロード時のプレビュー表示
 $(document).on('turbolinks:load', function(){
@@ -31,6 +33,7 @@ $(document).on('turbolinks:load', function(){
     reader.readAsDataURL(e.target.files[0]);
   });
 });
+
 
 //レビューの星表示
 $(document).on('turbolinks:load', function(){
@@ -60,6 +63,7 @@ $(document).on('turbolinks:load', function(){
   });
 });
 
+
 //テキストエリアの高さ自動調整
 $(document).on('turbolinks:load', function(){
   var $obj = $('textarea');
@@ -74,11 +78,13 @@ $(document).on('turbolinks:load', function(){
   });
 });
 
+
 //フラッシュメッセージの表示
 $(document).on('turbolinks:load', function(){
   $('.header-flash').hide();
   $('.header-flash').slideDown();
 });
+
 
 //リンクバー固定、current表示
 $(document).on('turbolinks:load', function(){
@@ -104,6 +110,7 @@ $(document).on('turbolinks:load', function(){
   }
 });
 
+
 //タグ付け自動補完
 $(document).on('turbolinks:load', function(){
   if($('#app-tags').length){
@@ -121,4 +128,39 @@ $(document).on('turbolinks:load', function(){
     }
   }
 });
+
+
+//マークダウン記法
+$(document).on('turbolinks:load', function(){
+  if($("#marked-text").length){
+    var text = $("#marked-text").html();
+    $("#marked-text").html(marked(text));
+  }
+});
+
+$(document).on('turbolinks:load', function(){
+  if($("#marked-area").length){
+    var html = $("#editor textarea").val();
+    $("#marked-area").html(marked(html));
+
+    $(function() {
+      $("#editor textarea").each(function () {
+        $(this).on('keyup', replaceMarkdown(this));
+      });
+
+      function replaceMarkdown(elm) {
+        var v, old = elm.value;
+        return function () {
+          if (old != (v = elm.value)) {
+          old = v;
+          str = $(this).val();
+          $("#marked-area").html(marked(str));
+          }
+        }
+      }
+    });
+  }
+});
+
+
 
