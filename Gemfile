@@ -87,8 +87,7 @@ gem 'jquery-ui-rails'
 gem 'gon'
 gem 'chartkick'
 gem 'groupdate'
-gem 'redcarpet'
-gem 'coderay'
+gem 'marked-rails'
 
 group :production do
   gem 'mysql2'

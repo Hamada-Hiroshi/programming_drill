@@ -3,8 +3,11 @@
   <div class="field">
     <%= form_with(model: [@learning.app, @learning]) do |f| %>
       <h4>学習メモ</h4>
-      <div><%= f.text_area :memo, placeholder: "ご自由に記入してください。", class: "textarea-form", style: "min-height: 300px" %></div>
-      <%= f.submit "メモを保存", class: "btn btn-default" %>
+      <div id='editor'>
+        <%= f.text_area :memo, placeholder: "ご自由に記入してください。", class: "textarea-form", style: "min-height: 300px" %>
+        <div id="marked-area"></div>
+        <%= f.submit "メモを保存", class: "btn btn-default" %>
+      </div>
     <% end %>
   </div>
 

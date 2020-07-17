@@ -9,7 +9,7 @@
             <h4>学習メモ</h4>
             <div class="back-grey">
               <% if @learning.memo.present? %>
-                <%= markdown(@learning.memo) %>
+                <div id="marked-text"><%= @learning.memo %></div>
               <% else %>
                 <p>学習メモはありません。</p>
               <% end %>
