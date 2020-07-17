@@ -3,7 +3,8 @@
     <div class="col-md-3 border-space">
       <ul class="edit-link">
         <li><%= link_to "基本情報を編集", edit_app_path(@app) %></li>
-        <li><%= link_to "ヒント・解説を追加・編集", add_edit_app_path(@app) %></li>
+        <li><%= link_to "ヒントを追加・編集", hint_edit_app_path(@app) %></li>
+        <li><%= link_to "解説を追加・編集", explanation_edit_app_path(@app) %></li>
         <li>アプリを非公開にする</li>
       </ul>
     </div>

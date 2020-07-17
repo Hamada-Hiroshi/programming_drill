@@ -37,14 +37,18 @@ Rails.application.routes.draw do
   get 'apps/tag/rate' => 'apps#rate_tag', as: 'rate_tag_apps'
   get 'apps/tag/popular' => 'apps#popular_tag', as: 'popular_tag_apps'
   post 'apps/confirm' => 'apps#confirm', as: 'confirm_apps'
-  get 'apps/:id/add_edit' => 'apps#add_edit', as: 'add_edit_app'
+
   patch 'apps/:id/add' => 'apps#add_update', as: 'add_update_app'
   get 'apps/:id/hint' => 'apps#hint', as: 'hint_app'
   get 'apps/:id/explanation' => 'apps#explanation', as: 'explanation_app'
   get 'apps/:id/hidden' => 'apps#hidden', as: 'hidden_app'
   patch 'apps/:id/cancel' => 'apps#cancel', as: 'cancel_app'
   resources :apps, only: [:index, :new, :create, :show, :edit, :update] do
-    resources :learnings, only: [:create, :show, :update]
+    member do
+      get :hint_edit
+      get :explanation_edit
+    end
+    resources :learnings, only: [:create, :show, :edit, :update]
     resources :questions, only: [:index, :create]
     resources :reviews, only: [:index, :create]
     resource :stocks, only: [:create, :destroy]

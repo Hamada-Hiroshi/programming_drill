@@ -200,7 +200,7 @@ footer {
 //グレー背景のみ
 .back-grey {
   background-color: #F6F6F6;;
-  padding: 20px 20px;
+  padding: 10px 20px;
 }
 
 //改行を反映
@@ -504,6 +504,35 @@ input[type=checkbox]:checked + .checkbox01::after {
     }
   }
 }
+
+//マークダウン編集ページ
+.marked-wrapper {
+  padding: 0 2%;
+  span {
+    float: right;
+  }
+  .marked-form {
+    border: solid 1px #AAA;
+    padding: 15px;
+    #marked-area {
+      background-color: #FFF;
+      padding: 1px 20px;
+      min-height: 480px;
+      overflow :scroll;
+      list-style: inside;
+    }
+  }
+}
+#learning-memo {
+  #marked-text {
+    overflow :scroll;
+    list-style: inside;
+  }
+  a {
+    margin-top: 10px;
+  }
+}
+
 
 //横幅いっぱいの投稿フォーム
 .textarea-form {
@@ -891,7 +920,6 @@ select {
 
 //ユーザ情報バー
 #my-info-bar {
-
   padding: 20px 10px;
   background-color: #FFF;
   border: solid 0.5px #6A5ACD;
