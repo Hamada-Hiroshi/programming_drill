@@ -505,10 +505,13 @@ input[type=checkbox]:checked + .checkbox01::after {
   }
 }
 
-//学習メモ（マークダウン）
-#leraning-wrapper {
+//マークダウン編集ページ
+.marked-wrapper {
   padding: 0 2%;
-  #learning-form {
+  span {
+    float: right;
+  }
+  .marked-form {
     border: solid 1px #AAA;
     padding: 15px;
     #marked-area {

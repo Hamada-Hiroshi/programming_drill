@@ -1,15 +1,15 @@
 class AppsController < ApplicationController
   before_action :authenticate_user!, only: [
     :new, :confirm, :create,
-    :edit, :add_edit, :update, :add_update, :hint, :explanation, :hidden, :cancel,
+    :edit, :hint_edit, :explanation_edit, :update, :add_update, :hint, :explanation, :hidden, :cancel,
   ]
-  before_action :set_app, only: [:show, :edit, :add_edit, :update, :add_update, :hint, :explanation, :hidden, :cancel]
+  before_action :set_app, only: [:show, :edit, :hint_edit, :explanation_edit, :update, :add_update, :hint, :explanation, :hidden, :cancel]
   before_action :set_learning, only: [:show, :hint, :explanation]
   before_action :set_langs, only: [:index, :rate_index, :popular_index, :tag, :rate_tag, :popular_tag]
   before_action :set_apps_score, only: [:index, :rate_index, :popular_index]
   before_action :set_tag_apps_score, only: [:tag, :rate_tag, :popular_tag]
   before_action :set_available_tags_to_gon, only: [:new, :confirm, :create, :edit, :update]
-  before_action :ensure_correct_user, only: [:edit, :add_edit, :update, :add_update, :hidden, :cancel]
+  before_action :ensure_correct_user, only: [:edit, :hint_edit, :explanation_edit, :update, :add_update, :hidden, :cancel]
 
   def set_app
     @app = App.find(params[:id])
@@ -104,7 +104,10 @@ class AppsController < ApplicationController
     gon.app_tags = @app.tag_list
   end
 
-  def add_edit
+  def hint_edit
+  end
+
+  def explanation_edit
   end
 
   def update
@@ -118,11 +121,14 @@ class AppsController < ApplicationController
   end
 
   def add_update
-    if @app.update(add_app_params)
-      flash[:success] = "アプリケーション情報を更新しました。"
-      redirect_to app_path(@app)
+    if params[:app][:hint]
+      @app.update(add_app_params)
+      flash[:success] = "アプリケーションのヒントを更新しました。"
+      redirect_to hint_app_path(@app)
     else
-      render 'add_edit'
+      @app.update(add_app_params)
+      flash[:success] = "アプリケーションの解説を更新しました。"
+      redirect_to explanation_app_path(@app)
     end
   end
 
@@ -151,7 +157,7 @@ class AppsController < ApplicationController
   private
 
   def app_params
-    params.require(:app).permit(:title, :lang_id, :overview, :app_url, :repo_url, :function, :target, :tag_list)
+    params.require(:app).permit(:title, :lang_id, :overview, :app_url, :repo_url, :function, :target, :tag_list, :hint, :explanation)
   end
 
   def add_app_params
