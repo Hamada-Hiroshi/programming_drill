@@ -66,23 +66,24 @@ $(document).on('turbolinks:load', function(){
 
 //テキストエリアの高さ自動調整
 $(document).on('turbolinks:load', function(){
-  var $obj = $('textarea');
-  var height = parseInt($obj.css('lineHeight'));
-  $obj.on('click', function(e) {
-    var lines = ($(this).val() + '\n').match(/\n/g).length;
-    $(this).height(height  * lines);
-  });
-  $obj.on('input', function(e) {
-    var lines = ($(this).val() + '\n').match(/\n/g).length;
-    $(this).height(height  * lines);
+  $('textarea').on('click input paste cut', function(){
+    if ($(this).outerHeight() > this.scrollHeight){
+      $(this).height(1)
+    }
+    while ($(this).outerHeight() < this.scrollHeight){
+      $(this).height($(this).height() + 1)
+    }
   });
 });
 
 
-//フラッシュメッセージの表示
+//フラッシュメッセージの表示、一定時間で非表示
 $(document).on('turbolinks:load', function(){
   $('.header-flash').hide();
   $('.header-flash').slideDown();
+  $(function(){
+    setTimeout("$('.header-flash').slideUp('slow')", 4000);
+  });
 });
 
 
@@ -111,9 +112,10 @@ $(document).on('turbolinks:load', function(){
 });
 
 
-//タグ付け自動補完
+//タグ付け、自動補完
 $(document).on('turbolinks:load', function(){
   if($('#app-tags').length){
+    $('#app-tags').html('');
     $('#app-tags').tagit({
       fieldName: 'app[tag_list]',
       singleField: true,
