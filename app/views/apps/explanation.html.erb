@@ -9,7 +9,7 @@
             <h4>解説</h4>
             <div class="back-grey">
               <% if @app.explanation.present? %>
-                <p><%= @app.explanation %></p>
+                <div id="marked-text"><%= @app.explanation %></div>
               <% else %>
                 <p>解説は投稿されていません。</p>
               <% end %>

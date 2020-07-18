@@ -9,7 +9,7 @@
             <h4>ヒント</h4>
             <div class="back-grey">
               <% if @app.hint.present? %>
-                <p><%= @app.hint %></p>
+                <div id="marked-text"><%= @app.hint %></div>
               <% else %>
                 <p>ヒントは投稿されていません。</p>
               <% end %>
