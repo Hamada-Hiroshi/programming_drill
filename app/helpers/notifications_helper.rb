@@ -20,6 +20,8 @@ module NotificationsHelper
       @app = @review.app
       @content_path = app_reviews_path(@app)
       tag.a(@visitor.name, href: user_path(@visitor)) + "さんがあなたのアプリケーション（" + tag.a(@app.title, href: app_path(@app)) + "）にレビューを投稿しました。"
+    when "follow" then
+      tag.a(@visitor.name, href: user_path(@visitor)) + "さんにフォローされました。"
     end
   end
 
