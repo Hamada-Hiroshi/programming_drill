@@ -19,6 +19,15 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+$theme-color: #494275;
+$theme-color2: #6A5ACD;
+$back-grey: #F6F6F6;
+$dark-grey: #48484A;
+$original-btn: #FFD700;
+$dark-orange: #FF8C00;
+$index-border: #C0C0C0;
+$back-blue: #D9E5FF;
+
 
 * {
   margin: 0;
@@ -28,12 +37,12 @@
 
 body {
   padding-top: 80px;
-  background-color: #F6F6F6;
+  background-color: $back-grey;
 }
 
 #header-top {
-  background-color: #494275;
-  min-height: 62px;
+  background-color: $theme-color;
+  min-height: 56px;
 }
 .header-logo img {
   width: 230px;
@@ -138,7 +147,7 @@ footer {
     padding-top: 50px;
     margin-top: 30px;
     height: 200px;
-    background-color: #48484A;
+    background-color: $dark-grey;
     border-top: solid 1px #AAA;
     border-bottom: solid 1px #AAA;
     a {
@@ -155,7 +164,6 @@ footer {
 //検索バー
 .search {
   padding:6px 15px 6px 30px;
-  margin:3px;
   background: image-url("search_icon.png") no-repeat 8px 6px;
   background-size: 15px;
   border-radius:15px;
@@ -199,7 +207,7 @@ footer {
 
 //グレー背景のみ
 .back-grey {
-  background-color: #F6F6F6;;
+  background-color: $back-grey;;
   padding: 10px 20px;
 }
 
@@ -210,7 +218,7 @@ p {
 
 //オリジナルボタン
 .btn-original {
-  background-color: #FFD700;
+  background-color: $original-btn;
   color: #000;
   font-size: 1.2em;
   padding: 5px 30px;
@@ -219,7 +227,7 @@ p {
   border: solid 1px #808080;
   border-radius: 20px;
   &:hover {
-    background-color: #FF8C00;
+    background-color: $dark-orange;
   }
 }
 
@@ -268,10 +276,10 @@ p {
   padding: 15px 0;
 }
 .btn-active {
-  background-color: #FFD700;
+  background-color: $original-btn;
   color: #000;
   &:hover {
-    background-color: #FFD700;
+    background-color: $original-btn;
     color: #000;
   }
 }
@@ -341,7 +349,7 @@ input[type=checkbox] {
   font-size: 15px;
 }
 .checkbox01::before {
-  background: #fff;
+  background: #FFF;
   border: 1px solid #231815;
   content: '';
   display: block;
@@ -353,8 +361,8 @@ input[type=checkbox] {
   width: 16px;
 }
 .checkbox01::after {
-  border-right: 3px solid #FF8C00;
-  border-bottom: 3px solid #FF8C00;
+  border-right: 3px solid $dark-orange;
+  border-bottom: 3px solid $dark-orange;
   content: '';
   display: block;
   height: 12px;
@@ -372,7 +380,7 @@ input[type=checkbox]:checked + .checkbox01::after {
 
 //アプリ一覧の各アプリ
 .link-app-box {
-  border-bottom: solid 1px #C0C0C0;
+  border-bottom: solid 1px $index-border;
   padding: 10px 0;
   .link-app-user {
     float: left;
@@ -398,7 +406,7 @@ input[type=checkbox]:checked + .checkbox01::after {
 
 //マイページのアプリ一覧の各アプリ
 .my-app-box {
-  border-bottom: solid 1px #C0C0C0;
+  border-bottom: solid 1px $index-border;
   padding: 10px 20px 15px;
 }
 .my-app {
@@ -476,7 +484,7 @@ input[type=checkbox]:checked + .checkbox01::after {
 .stock-button {
   float: right;
   i {
-    color: #48484A;
+    color: $dark-grey;
   }
 }
 
@@ -526,9 +534,9 @@ input[type=checkbox]:checked + .checkbox01::after {
 #marked-text {
   overflow :scroll;
   list-style: inside;
-}
-a {
-  margin-top: 10px;
+  a {
+    margin-top: 10px;
+  }
 }
 
 
@@ -555,7 +563,7 @@ a {
   margin-top: 30px;
 }
 .question-box, .review-box, .notification-box {
-  border-top: solid 1px #C0C0C0;
+  border-top: solid 1px $index-border;
   margin-top: 30px;
   padding-top: 20px;
 }
@@ -578,11 +586,11 @@ a {
   .reply {
     list-style: none;
     padding: 10px;
-    border-top: solid 1px #C0C0C0;
-    border-right: solid 1px #C0C0C0;
-    border-left: solid 1px #C0C0C0;
+    border-top: solid 1px $index-border;
+    border-right: solid 1px $index-border;
+    border-left: solid 1px $index-border;
     &:last-child {
-      border-bottom: solid 1px #C0C0C0;
+      border-bottom: solid 1px $index-border;
     }
   }
 }
@@ -629,7 +637,7 @@ select {
   line-height: 14px; /* 行高 */
   font-size: 15px; /* フォントサイズ */
   border-radius: 4px; /* 角丸 */
-  border: solid 1px #C0C0C0; /* 枠線 */
+  border: solid 1px $index-border; /* 枠線 */
   background-color: #FFF;
   background-image:
     linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.4) 50%),
@@ -889,7 +897,7 @@ select {
       padding: 18px 10%;
       border-bottom: solid 1px #DDD;
       &:hover {
-        background-color: #D9E5FF;
+        background-color: $back-blue;
       }
       p {
         margin: 0;
@@ -911,7 +919,7 @@ select {
     margin-left: 10px;
     a:hover {
       color: #FFF;
-      background-color: #6A5ACD;
+      background-color: $theme-color2;
     }
   }
 }
@@ -920,7 +928,7 @@ select {
 #my-info-bar {
   padding: 20px 10px;
   background-color: #FFF;
-  border: solid 0.5px #6A5ACD;
+  border: solid 0.5px $theme-color2;
   ul {
     margin-bottom: initial;
   }
@@ -959,7 +967,7 @@ select {
 
 //フォロー・フォロワー一覧
 .user-box {
-  border-bottom: solid 1px #C0C0C0;
+  border-bottom: solid 1px $index-border;
   padding: 10px 0;
   min-height: 80px;
   .follow-user-info {
@@ -974,14 +982,14 @@ select {
 
 //タブメニュー
 .nav-tabs > li.active > a {
-  background-color: #D9E5FF;
+  background-color: $back-blue;
   border: none;
-  border-bottom: solid 3px #6A5ACD;
+  border-bottom: solid 3px $theme-color2;
   &:hover, &:focus {
-    background-color: #D9E5FF;
+    background-color: $back-blue;
 
     border: none;
-    border-bottom: solid 3px #6A5ACD;
+    border-bottom: solid 3px $theme-color2;
   }
 }
 .nav-tabs > li > a {
@@ -996,7 +1004,7 @@ select {
   width: 100%;
   height: 500px;
   position: relative;
-  margin-top: -20px;
+  margin-top: -23px;
 }
 #top-message {
   width: 100%;
@@ -1023,8 +1031,8 @@ select {
         content: "";
         display: block;
         height: 8px;
-        background: -webkit-linear-gradient(to right, #FF8C00, transparent);
-        background: linear-gradient(to right, #FF8C00, transparent);
+        background: -webkit-linear-gradient(to right, $dark-orange, transparent);
+        background: linear-gradient(to right, $dark-orange, transparent);
       }
     }
     p {
@@ -1065,7 +1073,7 @@ select {
   border-radius: 15px;
   color: #FFF;
   &:hover {
-    background: #494275;
+    background: $theme-color;
     color: #FFF;
   }
 }
@@ -1085,7 +1093,7 @@ select {
 .chart {
   padding: 20px;
   margin-bottom: 20px;
-  background-color: #f2DEDE4D;
+  background-color: #F2DEDE4D;
   h4 {
     margin-left: 40px;
   }
@@ -1104,7 +1112,7 @@ select {
 
 @media screen and (max-width:768px) {
   .navbar-toggle {
-    margin-top: 14px;
+    margin-top: 11px;
   }
 
   .category-bar {
