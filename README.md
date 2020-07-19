@@ -22,13 +22,13 @@
 - jQuery, Bootstrap3
 - MySQL 5.5.62
 - Nginx, Puma
-- AWS(EC2, RDS, Route53)
+- AWS（EC2, RDS, Route53）
 - Capistrano
 
 ## 機能一覧
 #### ユーザ関連
 - 新規登録、ログイン、ログアウト（devise使用）
-- Googleアカウントでのログイン機能(devise、Omniauth使用)
+- Googleアカウントでのログイン機能（devise、Omniauth使用）
 - パスワード再設定（devise、ActionMailer使用）
 - マイページ、ユーザ情報編集機能
 - プロフィールの画像投稿機能（Refile使用）
@@ -40,7 +40,7 @@
 - ストック機能
 - 学習アプリとしての登録、学習管理機能
 - 学習者は追加詳細ページ（ヒント、解説ページ等）へのアクセスが可能
-- 学習管理、追加詳細ページはマークダウン記法で記述（marked.js使用）
+- 学習メモ、追加詳細ページはマークダウン記法で記述（marked.js使用）
 - タグ機能、入力時自動補完機能（acts-as-taggable-on、tag-it使用）
 - 非公開設定機能
 
@@ -50,7 +50,7 @@
 
 #### レビュー関連
 - アプリへのレビュー投稿機能（1.0〜5.0の採点及びコメント）
-- 点数を星で表示（raty.js使用）
+- 点数を☆で表示（raty.js使用）
 - 全レビューの平均点をアプリの評価点として表示
 - レビューコメントから感情分析による点数自動算出機能（Natural Language API使用）
 
@@ -74,7 +74,7 @@
 - レスポンシブ対応
 
 ## 設計書
-- ワイヤーフレーム：https://app.diagrams.net/#G1KerphBwD831cXAGqX6NqlAjefhU4aI78
+- ワイヤーフレーム：<%= link_to "draw.io", https://app.diagrams.net/#G1KerphBwD831cXAGqX6NqlAjefhU4aI78 %>
 - ER図：https://app.diagrams.net/#G1xx9iVmerwVWF2ggC4ToCzU41lyFmU63l
 - データベース設計：https://docs.google.com/spreadsheets/d/1YYXot30SttwSTz31akqoLq9ylPBteUbJpoN9FY035bk/edit#gid=135053792
 - アプリケーション詳細設計：https://docs.google.com/spreadsheets/d/1gScOPmAEcORheQypo-hjmbxNT4ODyXPp8TsA6_r9dAI/edit#gid=0
@@ -84,5 +84,5 @@
 アプリが利用される毎に投稿者に還元される仕組みを構築します。
 その結果、先輩エンジニアは自身がこれまでに学習目的で作成したアプリを「作って終わり」とするのではなく、
 将来のエンジニアのための学習教材として活用することができるようになります。
-最終的には、このサイトによってエンジニア業界全体のレベルアップ・活性化に繋がることを期待します。
+最終的には、このサイトによってITエンジニア業界全体のレベルアップ・活性化に繋がることを期待します。
 
