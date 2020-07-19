@@ -74,10 +74,10 @@
 - レスポンシブ対応
 
 ## 設計書
-- ワイヤーフレーム：[draw.io](https://app.diagrams.net/#G1KerphBwD831cXAGqX6NqlAjefhU4aI78){:target="_blank"}
-- ER図：[draw.io](https://app.diagrams.net/#G1xx9iVmerwVWF2ggC4ToCzU41lyFmU63l){:target="_blank"}
-- データベース設計：[スプレッドシート](https://docs.google.com/spreadsheets/d/1YYXot30SttwSTz31akqoLq9ylPBteUbJpoN9FY035bk/edit#gid=135053792){:target="_blank"}
-- アプリケーション詳細設計：[スプレッドシート](https://docs.google.com/spreadsheets/d/1gScOPmAEcORheQypo-hjmbxNT4ODyXPp8TsA6_r9dAI/edit#gid=0){:target="_blank"}
+- ワイヤーフレーム：[draw.io](https://app.diagrams.net/#G1KerphBwD831cXAGqX6NqlAjefhU4aI78){:target="blank"}
+- ER図：[draw.io](https://app.diagrams.net/#G1xx9iVmerwVWF2ggC4ToCzU41lyFmU63l){:target="blank"}
+- データベース設計：[スプレッドシート](https://docs.google.com/spreadsheets/d/1YYXot30SttwSTz31akqoLq9ylPBteUbJpoN9FY035bk/edit#gid=135053792){:target="blank"}
+- アプリケーション詳細設計：[スプレッドシート](https://docs.google.com/spreadsheets/d/1gScOPmAEcORheQypo-hjmbxNT4ODyXPp8TsA6_r9dAI/edit#gid=0){:target="brank"}
 
 ## 今後の運用・ビジョン
 サイトの運用においては積極的かつ良質なアプリの投稿が必須となるため、将来的には投稿アプリの参照を有料（または有料会員制）にし、
