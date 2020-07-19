@@ -523,14 +523,12 @@ input[type=checkbox]:checked + .checkbox01::after {
     }
   }
 }
-#learning-memo {
-  #marked-text {
-    overflow :scroll;
-    list-style: inside;
-  }
-  a {
-    margin-top: 10px;
-  }
+#marked-text {
+  overflow :scroll;
+  list-style: inside;
+}
+a {
+  margin-top: 10px;
 }
 
 
