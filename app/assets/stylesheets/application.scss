@@ -19,7 +19,17 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+$theme-color: #494275;
+$theme-color2: #6A5ACD;
+$back-grey: #F6F6F6;
+$dark-grey: #48484A;
+$original-btn: #FFD700;
+$dark-orange: #FF8C00;
+$index-border: #C0C0C0;
+$back-blue: #D9E5FF;
 
+
+//共通 -----------------------------------------------------
 * {
   margin: 0;
   padding: 0;
@@ -28,12 +38,20 @@
 
 body {
   padding-top: 80px;
-  background-color: #F6F6F6;
+  background-color: $back-grey;
 }
 
+.main-body {
+  min-height: 600px;
+  .container {
+    margin-top: 20px;
+  }
+}
+
+//ヘッダ
 #header-top {
-  background-color: #494275;
-  min-height: 62px;
+  background-color: $theme-color;
+  min-height: 56px;
 }
 .header-logo img {
   width: 230px;
@@ -121,24 +139,25 @@ body {
   color: #BB0000;
 }
 
-.main-body {
-  min-height: 600px;
-  .container {
-    margin-top: 20px;
-  }
+//検索バー
+.search {
+  padding:6px 15px 6px 30px;
+  background: image-url("search_icon.png") no-repeat 8px 6px;
+  background-size: 15px;
+  border-radius:15px;
+  -moz-border-radius:15px;
+  -webkit-border-radius:15px;
+  border:1px solid #d0d0d0;
+  background-color:#fcfcfc;
 }
 
-//管理者ページ用余白
-.admin-space {
-  padding-top: 10px;
-}
-
+//フッタ
 footer {
   #footer-top {
     padding-top: 50px;
     margin-top: 30px;
     height: 200px;
-    background-color: #48484A;
+    background-color: $dark-grey;
     border-top: solid 1px #AAA;
     border-bottom: solid 1px #AAA;
     a {
@@ -150,19 +169,6 @@ footer {
     padding: 10px 0;
     text-align: center;
   }
-}
-
-//検索バー
-.search {
-  padding:6px 15px 6px 30px;
-  margin:3px;
-  background: image-url("search_icon.png") no-repeat 8px 6px;
-  background-size: 15px;
-  border-radius:15px;
-  -moz-border-radius:15px;
-  -webkit-border-radius:15px;
-  border:1px solid #d0d0d0;
-  background-color:#fcfcfc;
 }
 
 //白背景のボックス、ボーダー
@@ -199,8 +205,13 @@ footer {
 
 //グレー背景のみ
 .back-grey {
-  background-color: #F6F6F6;;
+  background-color: $back-grey;;
   padding: 10px 20px;
+}
+
+//管理者ページ用余白
+.admin-space {
+  padding-top: 10px;
 }
 
 //改行を反映
@@ -210,7 +221,7 @@ p {
 
 //オリジナルボタン
 .btn-original {
-  background-color: #FFD700;
+  background-color: $original-btn;
   color: #000;
   font-size: 1.2em;
   padding: 5px 30px;
@@ -219,7 +230,7 @@ p {
   border: solid 1px #808080;
   border-radius: 20px;
   &:hover {
-    background-color: #FF8C00;
+    background-color: $dark-orange;
   }
 }
 
@@ -238,6 +249,11 @@ p {
   }
 }
 
+//リンクボタンの間隔
+.actions a {
+  margin: 0 20px;
+}
+
 //エラーメッセージ
 #error-explanation {
   border: solid 1px red;
@@ -251,83 +267,29 @@ p {
   @extend .has-error;
 }
 
-//リンクボタンの間隔
-.actions a {
-  margin: 0 20px;
-}
-
-//アプリ詳細のリンクバー
-.one-btn {
-  margin-top: 30px;
-}
-.current-btn a, .one-btn a {
-  width: 100%;
-  max-width: 135px;
-  min-width: 110px;
-  border-radius: 0;
-  padding: 15px 0;
-}
-.btn-active {
-  background-color: #FFD700;
-  color: #000;
-  &:hover {
-    background-color: #FFD700;
-    color: #000;
-  }
-}
-.app-link {
-  font-size: 1.1em;
-}
-
-//編集ページのリンクバー
-.edit-link {
-  padding-left: 0;
-  li {
-  list-style: none;
-  font-size: 16px;
-  margin-bottom: 30px;
-  }
-}
-
-//タグ
-.tag-link {
+//セレクトボックス
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
   display: inline-block;
-  margin: 0 5px 7px 0;
-  .btn-tag {
-    background-color: #CCC;
-    padding: 4px 8px;
-    &:hover {
-      text-decoration: none;
-    }
-  }
-}
-.ui-helper-hidden-accessible {
-  display: none;
-}
-
-//レビュー星表示（共通）
-.star-rate {
-  display: inline-block;
-}
-span {
-  font-size: 0.9em;
+  vertical-align: middle;
+  padding: 0.6em 2.0em 0.6em 0.5em; /* 文字周りの余白 */
+  cursor: pointer; /* カーソルを指に */
+  line-height: 14px; /* 行高 */
+  font-size: 15px; /* フォントサイズ */
+  border-radius: 4px; /* 角丸 */
+  border: solid 1px $index-border; /* 枠線 */
+  background-color: #FFF;
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.4) 50%),
+    linear-gradient(135deg, rgba(0,0,0,0.4) 50%, transparent 50%);
+  background-size: 5px 5px, 5px 5px;
+  background-position: calc(100% - 15px) 50%, calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
 }
 
-//レビュー星（手動入力）
-#manual-rating {
-  vertical-align: bottom;
-  #star {
-    display: inline-block;
-    margin-left: 5px;
-    margin-right: 15px;
-  }
-  span {
-    font-size: 15px;
-    font-weight: bold;
-  }
-}
-
-//自動レビューチェックボックス
+//チェックボックス
 input[type=checkbox] {
   display: none;
 }
@@ -341,7 +303,7 @@ input[type=checkbox] {
   font-size: 15px;
 }
 .checkbox01::before {
-  background: #fff;
+  background: #FFF;
   border: 1px solid #231815;
   content: '';
   display: block;
@@ -353,8 +315,8 @@ input[type=checkbox] {
   width: 16px;
 }
 .checkbox01::after {
-  border-right: 3px solid #FF8C00;
-  border-bottom: 3px solid #FF8C00;
+  border-right: 3px solid $dark-orange;
+  border-bottom: 3px solid $dark-orange;
   content: '';
   display: block;
   height: 12px;
@@ -370,9 +332,126 @@ input[type=checkbox]:checked + .checkbox01::after {
   opacity: 1;
 }
 
+//横幅いっぱいの投稿フォーム
+.textarea-form {
+  width: 100%;
+  min-height: 150px;
+}
+
+//ページネーション
+.paginate {
+  text-align: center;
+}
+.pagination>li>a {
+  border: none;
+  color: #696969;
+}
+.pagination>.active>a {
+  background: #878796;
+  border-radius: 15px;
+  color: #FFF;
+  &:hover {
+    background: $theme-color;
+    color: #FFF;
+  }
+}
+.pagination>li>a:hover {
+  border-radius: 15px;
+}
+
+
+
+//アプリ関連ページ -------------------------------------------
+//アプリ入力フォーム（共通）
+.app-form {
+  width: 90%;
+  margin: 0 auto;
+}
+.new-app-form {
+  margin-bottom: 30px;
+  label {
+    font-size: 1.2em;
+    width: 25%;
+    vertical-align: top;
+    text-align: right;
+    margin-right: 5%;
+  }
+  input {
+    width: 65%;
+    display: inline-block;
+  }
+  textarea {
+    width: 65%;
+    min-height: 100px;
+    display: inline-block;
+  }
+  .mini-height {
+    min-height: 54px;
+  }
+  p {
+    margin: 0 0 0 30%;
+  }
+  .tagit {
+    display: inline-block;
+    width: 65%;
+    height: 68px;
+    margin-bottom: 0;
+  }
+}
+
+//アプリ入力フォーム（編集ページのみ）
+.edit-app-form, .add-edit-app-form {
+  width: 95%;
+  margin: 0 auto 40px;
+  label {
+    font-size: 1.2em;
+  }
+  textarea {
+    min-height: 100px;
+  }
+  .mini-height {
+    min-height: 54px;
+  }
+  .tagit {
+    height: 68px;
+    margin-bottom: 0;
+  }
+}
+.add-edit-app-form textarea {
+  min-height: 400px;
+}
+
+//アプリ編集
+.edit-app-title h2 {
+  margin: 10px 15px 50px 15px;
+}
+
+//編集ページのリンクバー
+.edit-link {
+  padding-left: 0;
+  li {
+  list-style: none;
+  font-size: 16px;
+  margin-bottom: 30px;
+  }
+}
+
+//アプリ投稿確認
+.new-app-confirm {
+  margin-bottom: 40px;
+  h4 {
+    font-weight: bold;
+  }
+  p, a {
+    margin: 15px 0 5px;
+    font-size: 1.2em;
+    word-wrap: break-word;
+  }
+}
+
 //アプリ一覧の各アプリ
 .link-app-box {
-  border-bottom: solid 1px #C0C0C0;
+  border-bottom: solid 1px $index-border;
   padding: 10px 0;
   .link-app-user {
     float: left;
@@ -398,7 +477,7 @@ input[type=checkbox]:checked + .checkbox01::after {
 
 //マイページのアプリ一覧の各アプリ
 .my-app-box {
-  border-bottom: solid 1px #C0C0C0;
+  border-bottom: solid 1px $index-border;
   padding: 10px 20px 15px;
 }
 .my-app {
@@ -432,6 +511,29 @@ input[type=checkbox]:checked + .checkbox01::after {
     display: inline-block;
     padding: 5px 20px;
   }
+}
+
+//アプリ詳細のリンクバー
+.one-btn {
+  margin-top: 30px;
+}
+.current-btn a, .one-btn a {
+  width: 100%;
+  max-width: 135px;
+  min-width: 110px;
+  border-radius: 0;
+  padding: 15px 0;
+}
+.btn-active {
+  background-color: $original-btn;
+  color: #000;
+  &:hover {
+    background-color: $original-btn;
+    color: #000;
+  }
+}
+.app-link {
+  font-size: 1.1em;
 }
 
 //アプリ詳細
@@ -472,15 +574,39 @@ input[type=checkbox]:checked + .checkbox01::after {
   }
 }
 
+
+
+//アプリ付随機能 ---------------------------------------------
 //ストックアイコン
 .stock-button {
   float: right;
   i {
-    color: #48484A;
+    color: $dark-grey;
   }
 }
 
-//アプリ詳細の学習関連ページ
+//タグ
+.tag-link {
+  display: inline-block;
+  margin: 0 5px 7px 0;
+  .btn-tag {
+    background-color: #CCC;
+    padding: 4px 8px;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+//ヒント・解説
+#hint-info, #explanation-info p {
+  font-size: 1.2em;
+}
+
+//学習関連ページ
 .learning-app-info {
   h1 {
     margin-bottom: 30px;
@@ -526,36 +652,17 @@ input[type=checkbox]:checked + .checkbox01::after {
 #marked-text {
   overflow :scroll;
   list-style: inside;
-}
-a {
-  margin-top: 10px;
-}
-
-
-//横幅いっぱいの投稿フォーム
-.textarea-form {
-  width: 100%;
-  min-height: 150px;
-}
-
-//ヒント・解説
-#hint-info, #explanation-info p {
-  font-size: 1.2em;
-}
-
-//質問、レビュー投稿、通知
-#review-form {
-  margin-top: 30px;
-  p {
-    margin-top: 30px;
+  a {
+    margin-top: 10px;
   }
 }
 
+//質問、レビュー、通知一覧
 #question-index > p, #review-index > p {
   margin-top: 30px;
 }
 .question-box, .review-box, .notification-box {
-  border-top: solid 1px #C0C0C0;
+  border-top: solid 1px $index-border;
   margin-top: 30px;
   padding-top: 20px;
 }
@@ -578,16 +685,46 @@ a {
   .reply {
     list-style: none;
     padding: 10px;
-    border-top: solid 1px #C0C0C0;
-    border-right: solid 1px #C0C0C0;
-    border-left: solid 1px #C0C0C0;
+    border-top: solid 1px $index-border;
+    border-right: solid 1px $index-border;
+    border-left: solid 1px $index-border;
     &:last-child {
-      border-bottom: solid 1px #C0C0C0;
+      border-bottom: solid 1px $index-border;
     }
   }
 }
 .reply-form {
   margin-left: 35px;
+}
+
+//レビュー星表示（共通）
+.star-rate {
+  display: inline-block;
+}
+span {
+  font-size: 0.9em;
+}
+
+//レビュー星（手動入力）
+#manual-rating {
+  vertical-align: bottom;
+  #star {
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 15px;
+  }
+  span {
+    font-size: 15px;
+    font-weight: bold;
+  }
+}
+
+//レビューフォーム
+#review-form {
+  margin-top: 30px;
+  p {
+    margin-top: 30px;
+  }
 }
 
 //通知
@@ -596,7 +733,6 @@ a {
   font-size: 1.2em;
   margin-right: 20px;
 }
-
 .notification-box {
   .visitor-img {
     height: 60px;
@@ -617,69 +753,115 @@ a {
   }
 }
 
-//セレクトボックス
-select {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
-  display: inline-block;
-  vertical-align: middle;
-  padding: 0.6em 2.0em 0.6em 0.5em; /* 文字周りの余白 */
-  cursor: pointer; /* カーソルを指に */
-  line-height: 14px; /* 行高 */
-  font-size: 15px; /* フォントサイズ */
-  border-radius: 4px; /* 角丸 */
-  border: solid 1px #C0C0C0; /* 枠線 */
-  background-color: #FFF;
-  background-image:
-    linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.4) 50%),
-    linear-gradient(135deg, rgba(0,0,0,0.4) 50%, transparent 50%);
-  background-size: 5px 5px, 5px 5px;
-  background-position: calc(100% - 15px) 50%, calc(100% - 10px) 50%;
-  background-repeat: no-repeat;
+
+
+//サイドバー（言語・タグ検索、ユーザ情報） ---------------------------
+//検索サイドバー全体
+.category-bar {
+  padding-top: 30px;
+  margin-bottom: 40px;
 }
 
-//マイページ
-#user-info {
-  margin-bottom: 40px;
-  #user-acount {
-    h3 {
-      display: inline-block;
-      margin-right: 30px;
-      margin-bottom: 0;
+//言語別検索バー
+#lang-index {
+  padding: 0;
+  a {
+    color: #000;
+    &:hover {
+      text-decoration: none;
     }
-    a {
-      vertical-align: bottom;
+    li {
+      list-style: none;
+      padding: 18px 10%;
+      border-bottom: solid 1px #DDD;
+      &:hover {
+        background-color: $back-blue;
+      }
+      p {
+        margin: 0;
+        font-size: 18px;
+        span {
+          font-size: 13px;
+        }
+      }
     }
   }
-  #user-follow li {
+}
+
+//タグ別検索バー
+#tag-index {
+  padding: 0;
+  li {
     list-style: none;
-    display: inline-block;
-    font-size: 1.2em;
-    margin: 15px 30px 0 20px;
+    margin-top: 5px;
+    margin-left: 10px;
+    a:hover {
+      color: #FFF;
+      background-color: $theme-color2;
+    }
+  }
+}
+
+//ユーザ情報バー
+#my-info-bar {
+  padding: 20px 10px;
+  background-color: #FFF;
+  border: solid 0.5px $theme-color2;
+  ul {
+    margin-bottom: initial;
+  }
+  li {
+    list-style: none;
+    color: #000;
+  }
+  #my-img {
+    text-decoration: none;
+    #my-name {
+      img {
+        margin-right: 10px;
+      }
+      span {
+        display: inline-block;
+        font-size: 1.3em;
+        color: #000;
+        margin-top: 15px;
+      }
+    }
+  }
+  #my-app > #app-count >li, #my-user > #follow-count > li {
+    margin: 0 0 10px 20px;
+    font-size: 1.1em;
     a {
       color: #000;
     }
   }
-  #user-introduction {
-    margin: 20px 0;
-  }
 }
 
-//フォロー、フォロワー一覧
-.follow-user-img {
-  float: left;
-}
-.follow-user-info {
-  margin-left: 80px;
-  h4 {
-    margin-top: initial;
-  }
-  p {
-    white-space: initial;
-  }
+//ユーザーバー固定
+.fixed {
+  position: sticky;
+  top: 100px;
 }
 
+//タブメニュー
+.nav-tabs > li.active > a {
+  background-color: $back-blue;
+  border: none;
+  border-bottom: solid 3px $theme-color2;
+  &:hover, &:focus {
+    background-color: $back-blue;
+
+    border: none;
+    border-bottom: solid 3px $theme-color2;
+  }
+}
+.nav-tabs > li > a {
+  margin-right: initial;
+}
+
+
+
+//ユーザ関連ページ -----------------------------------------
 //新規登録・ログイン
 .new-user {
   width: 500px;
@@ -719,27 +901,12 @@ select {
   }
 }
 
-//プロフィール編集画面のユーザ情報
-.edit-user {
-  img {
-    float: left;
-  }
-  .edit-user-name {
-    min-height: 150px;
-    margin: 0 0 30px 200px;
-    padding-top: 30px;
-    h3 {
-      margin-top: 0;
-    }
-  }
-}
-
 //ユーザ情報編集
 .edit-user-form {
   width: 500px;
 }
 
-//ユーザ情報の入力フォーム
+//ユーザ情報の入力フォーム（編集）
 .user-form{
   margin-bottom: 20px;
   label {
@@ -778,188 +945,65 @@ select {
   }
 }
 
-//アプリ入力フォーム（共通）
-.app-form {
-  width: 90%;
-  margin: 0 auto;
-}
-.new-app-form {
-  margin-bottom: 30px;
-  label {
-    font-size: 1.2em;
-    width: 25%;
-    vertical-align: top;
-    text-align: right;
-    margin-right: 5%;
-  }
-  input {
-    width: 65%;
-    display: inline-block;
-  }
-  textarea {
-    width: 65%;
-    min-height: 100px;
-    display: inline-block;
-  }
-  .mini-height {
-    min-height: 54px;
-  }
-  p {
-    margin: 0 0 0 30%;
-  }
-  .tagit {
-    display: inline-block;
-    width: 65%;
-    height: 68px;
-    margin-bottom: 0;
-  }
-}
-
-
-//アプリ編集
-.edit-app-title h2 {
-  margin: 10px 15px 50px 15px;
-}
-
-//アプリ入力フォーム（編集）
-.edit-app-form, .add-edit-app-form {
-  width: 95%;
-  margin: 0 auto 40px;
-  label {
-    font-size: 1.2em;
-  }
-  textarea {
-    min-height: 100px;
-  }
-  .mini-height {
-    min-height: 54px;
-  }
-  .tagit {
-    height: 68px;
-    margin-bottom: 0;
-  }
-}
-
-.add-edit-app-form textarea {
-  min-height: 400px;
-}
-
-//アプリ投稿確認
-.new-app-confirm {
+//マイページ
+#user-info {
   margin-bottom: 40px;
-  h4 {
-    font-weight: bold;
+  #user-acount {
+    h3 {
+      display: inline-block;
+      margin-right: 30px;
+      margin-bottom: 0;
+    }
+    a {
+      vertical-align: bottom;
+    }
   }
-  p, a {
-    margin: 15px 0 5px;
+  #user-follow li {
+    list-style: none;
+    display: inline-block;
     font-size: 1.2em;
-    word-wrap: break-word;
-  }
-}
-
-//削除ページ
-.confirm-message {
-  p {
-    font-size: 17px;
-  }
-  a {
-    margin: 40px 50px 0 0;
-  }
-}
-#app-hidden {
-  margin: 0 15px;
-}
-
-//検索バー全体
-.category-bar {
-  padding-top: 30px;
-  margin-bottom: 40px;
-}
-
-//言語別検索バー
-#lang-index {
-  padding: 0;
-  a {
-    color: #000;
-    &:hover {
-      text-decoration: none;
-    }
-    li {
-      list-style: none;
-      padding: 18px 10%;
-      border-bottom: solid 1px #DDD;
-      &:hover {
-        background-color: #D9E5FF;
-      }
-      p {
-        margin: 0;
-        font-size: 18px;
-        span {
-          font-size: 13px;
-        }
-      }
-    }
-  }
-}
-
-//タグ別検索バー
-#tag-index {
-  padding: 0;
-  li {
-    list-style: none;
-    margin-top: 5px;
-    margin-left: 10px;
-    a:hover {
-      color: #FFF;
-      background-color: #6A5ACD;
-    }
-  }
-}
-
-//ユーザ情報バー
-#my-info-bar {
-  padding: 20px 10px;
-  background-color: #FFF;
-  border: solid 0.5px #6A5ACD;
-  ul {
-    margin-bottom: initial;
-  }
-  li {
-    list-style: none;
-    color: #000;
-  }
-  #my-img {
-    text-decoration: none;
-    #my-name {
-      img {
-        margin-right: 10px;
-      }
-      span {
-        display: inline-block;
-        font-size: 1.3em;
-        color: #000;
-        margin-top: 15px;
-      }
-    }
-  }
-  #my-app > #app-count >li, #my-user > #follow-count > li {
-    margin: 0 0 10px 20px;
-    font-size: 1.1em;
+    margin: 15px 30px 0 20px;
     a {
       color: #000;
     }
   }
+  #user-introduction {
+    margin: 20px 0;
+  }
 }
 
-//ユーザーバー固定
-.fixed {
-  position: sticky;
-  top: 100px;
+//プロフィール編集画面のユーザ情報
+.edit-user {
+  img {
+    float: left;
+  }
+  .edit-user-name {
+    min-height: 150px;
+    margin: 0 0 30px 200px;
+    padding-top: 30px;
+    h3 {
+      margin-top: 0;
+    }
+  }
 }
 
-//フォロー・フォロワー一覧
+//フォロー、フォロワー一覧
+.follow-user-img {
+  float: left;
+}
+.follow-user-info {
+  margin-left: 80px;
+  h4 {
+    margin-top: initial;
+  }
+  p {
+    white-space: initial;
+  }
+}
+
+//フォロー・フォロワー一覧の各ユーザ
 .user-box {
-  border-bottom: solid 1px #C0C0C0;
+  border-bottom: solid 1px $index-border;
   padding: 10px 0;
   min-height: 80px;
   .follow-user-info {
@@ -972,20 +1016,20 @@ select {
   }
 }
 
-//タブメニュー
-.nav-tabs > li.active > a {
-  background-color: #D9E5FF;
-  border: none;
-  border-bottom: solid 3px #6A5ACD;
-  &:hover, &:focus {
-    background-color: #D9E5FF;
 
-    border: none;
-    border-bottom: solid 3px #6A5ACD;
+
+//その他 -----------------------------------------------
+//削除ページ(ユーザ・アプリ)
+.confirm-message {
+  p {
+    font-size: 17px;
+  }
+  a {
+    margin: 40px 50px 0 0;
   }
 }
-.nav-tabs > li > a {
-  margin-right: initial;
+#app-hidden {
+  margin: 0 15px;
 }
 
 //アバウトページ
@@ -996,7 +1040,7 @@ select {
   width: 100%;
   height: 500px;
   position: relative;
-  margin-top: -20px;
+  margin-top: -23px;
 }
 #top-message {
   width: 100%;
@@ -1023,8 +1067,8 @@ select {
         content: "";
         display: block;
         height: 8px;
-        background: -webkit-linear-gradient(to right, #FF8C00, transparent);
-        background: linear-gradient(to right, #FF8C00, transparent);
+        background: -webkit-linear-gradient(to right, $dark-orange, transparent);
+        background: linear-gradient(to right, $dark-orange, transparent);
       }
     }
     p {
@@ -1052,27 +1096,9 @@ select {
   color: #000;
 }
 
-//ページネーション
-.paginate {
-  text-align: center;
-}
-.pagination>li>a {
-  border: none;
-  color: #696969;
-}
-.pagination>.active>a {
-  background: #878796;
-  border-radius: 15px;
-  color: #FFF;
-  &:hover {
-    background: #494275;
-    color: #FFF;
-  }
-}
-.pagination>li>a:hover {
-  border-radius: 15px;
-}
 
+
+//管理者ページ ----------------------------------------------
 //管理者言語登録ページ
 .admin-title {
   margin-bottom: 30px;
@@ -1085,7 +1111,7 @@ select {
 .chart {
   padding: 20px;
   margin-bottom: 20px;
-  background-color: #f2DEDE4D;
+  background-color: #F2DEDE4D;
   h4 {
     margin-left: 40px;
   }
@@ -1096,6 +1122,9 @@ select {
 }
 
 
+
+
+//レスポンシブ対応 ----------------------------------------------
 @media screen and (max-width:991px) {
   .border-left {
     border-left: initial !important;
@@ -1104,7 +1133,7 @@ select {
 
 @media screen and (max-width:768px) {
   .navbar-toggle {
-    margin-top: 14px;
+    margin-top: 11px;
   }
 
   .category-bar {
