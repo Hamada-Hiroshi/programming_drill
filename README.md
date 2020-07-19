@@ -74,7 +74,7 @@
 - レスポンシブ対応
 
 ## 設計書
-- ワイヤーフレーム：<%= link_to "draw.io", https://app.diagrams.net/#G1KerphBwD831cXAGqX6NqlAjefhU4aI78 %>
+- ワイヤーフレーム：[draw.io](https://app.diagrams.net/#G1KerphBwD831cXAGqX6NqlAjefhU4aI78)
 - ER図：https://app.diagrams.net/#G1xx9iVmerwVWF2ggC4ToCzU41lyFmU63l
 - データベース設計：https://docs.google.com/spreadsheets/d/1YYXot30SttwSTz31akqoLq9ylPBteUbJpoN9FY035bk/edit#gid=135053792
 - アプリケーション詳細設計：https://docs.google.com/spreadsheets/d/1gScOPmAEcORheQypo-hjmbxNT4ODyXPp8TsA6_r9dAI/edit#gid=0
