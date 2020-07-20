@@ -26,7 +26,7 @@
 - Capistrano
 
 ## 機能一覧
-- 機能一覧：[スプレッドシート](https://docs.google.com/spreadsheets/d/1BeDFPT9XnqasDAUF5jbDraDXg5rhDRHrpklPOQHjV10/edit#gid=0)
+- チャレンジ要素一覧：[スプレッドシート](https://docs.google.com/spreadsheets/d/1BeDFPT9XnqasDAUF5jbDraDXg5rhDRHrpklPOQHjV10/edit#gid=0)
 
 #### ユーザ関連
 - 新規登録、ログイン、ログアウト（devise使用）
