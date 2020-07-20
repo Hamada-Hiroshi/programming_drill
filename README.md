@@ -26,8 +26,6 @@
 - Capistrano
 
 ## 機能一覧
-- チャレンジ要素一覧：[スプレッドシート](https://docs.google.com/spreadsheets/d/1BeDFPT9XnqasDAUF5jbDraDXg5rhDRHrpklPOQHjV10/edit#gid=0)
-
 #### ユーザ関連
 - 新規登録、ログイン、ログアウト（devise使用）
 - Googleアカウントでのログイン機能（devise、Omniauth使用）
@@ -75,16 +73,19 @@
 - 非同期通信（フォロー、ストック、学習状況、質問・回答、レビュー時）
 - レスポンシブ対応
 
-## 設計書
-- ワイヤーフレーム：[draw.io](https://app.diagrams.net/#G1KerphBwD831cXAGqX6NqlAjefhU4aI78)
-- ER図：[draw.io](https://app.diagrams.net/#G1xx9iVmerwVWF2ggC4ToCzU41lyFmU63l)
-- データベース設計：[スプレッドシート](https://docs.google.com/spreadsheets/d/1YYXot30SttwSTz31akqoLq9ylPBteUbJpoN9FY035bk/edit#gid=135053792)
-- アプリケーション詳細設計：[スプレッドシート](https://docs.google.com/spreadsheets/d/1gScOPmAEcORheQypo-hjmbxNT4ODyXPp8TsA6_r9dAI/edit#gid=0)
-
 ## 今後の運用・ビジョン
 サイトの運用においては積極的かつ良質なアプリの投稿が必須となるため、将来的には投稿アプリの参照を有料（または有料会員制）にし、
 アプリが利用される毎に投稿者に還元される仕組みを構築します。
 その結果、先輩エンジニアは自身がこれまでに学習目的で作成したアプリを「作って終わり」とするのではなく、
 将来のエンジニアのための学習教材として活用することができるようになります。
 最終的には、このサイトによってITエンジニア業界全体のレベルアップ・活性化に繋がることを期待します。
+
+## 設計書
+- ワイヤーフレーム：[draw.io](https://app.diagrams.net/#G1KerphBwD831cXAGqX6NqlAjefhU4aI78)
+- ER図：[draw.io](https://app.diagrams.net/#G1xx9iVmerwVWF2ggC4ToCzU41lyFmU63l)
+- データベース設計：[スプレッドシート](https://docs.google.com/spreadsheets/d/1YYXot30SttwSTz31akqoLq9ylPBteUbJpoN9FY035bk/edit#gid=135053792)
+- アプリケーション詳細設計：[スプレッドシート](https://docs.google.com/spreadsheets/d/1gScOPmAEcORheQypo-hjmbxNT4ODyXPp8TsA6_r9dAI/edit#gid=0)
+- チャレンジ要素一覧：[スプレッドシート](https://docs.google.com/spreadsheets/d/1BeDFPT9XnqasDAUF5jbDraDXg5rhDRHrpklPOQHjV10/edit#gid=0)
+
+
 
