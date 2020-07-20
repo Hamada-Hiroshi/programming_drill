@@ -5,7 +5,7 @@
     <div id="notification-index">
       <% if @notifications.present? %>
         <div class="notification-delete text-right">
-          <%= link_to user_notifications_path, method: :delete do %>
+          <%= link_to destroy_all_user_notifications_path, method: :delete do %>
             <span><i class="fas fa-trash"></i> 通知を全消去</span>
           <% end %>
         </div>

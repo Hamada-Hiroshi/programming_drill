@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'apps/index'
-  end
-  namespace :admin do
-    get 'users/index'
-  end
   root 'apps#index'
   get 'about' => 'home#about'
 
@@ -17,36 +11,39 @@ Rails.application.routes.draw do
   devise_scope :user do
     post 'users/guest_sign_in' => 'users/sessions#new_guest'
   end
-  get 'users/:id/quit' => 'users#quit', as: 'quit_user'
-  patch 'users/:id/cancel' => 'users#cancel', as: 'cancel_user'
+
   resources :users, only: [:show, :edit, :update] do
-    resources :notifications, only: :index
-    resource :relationships, only: [:create, :destroy]
     member do
+      get :quit
+      patch :cancel
       get :following
       get :followers
       get :learnings
       get :stocks
     end
-    delete 'notifications' => 'notifications#destroy_all'
+    resource :relationships, only: [:create, :destroy]
+    resources :notifications, only: :index do
+      delete :destroy_all, on: :collection
+    end
   end
 
-  get 'apps/rate' => 'apps#rate_index', as: 'rate_apps'
-  get 'apps/popular' => 'apps#popular_index', as: 'popular_apps'
-  get 'apps/tag' => 'apps#tag', as: 'tag_apps'
-  get 'apps/tag/rate' => 'apps#rate_tag', as: 'rate_tag_apps'
-  get 'apps/tag/popular' => 'apps#popular_tag', as: 'popular_tag_apps'
-  post 'apps/confirm' => 'apps#confirm', as: 'confirm_apps'
-
-  patch 'apps/:id/add' => 'apps#add_update', as: 'add_update_app'
-  get 'apps/:id/hint' => 'apps#hint', as: 'hint_app'
-  get 'apps/:id/explanation' => 'apps#explanation', as: 'explanation_app'
-  get 'apps/:id/hidden' => 'apps#hidden', as: 'hidden_app'
-  patch 'apps/:id/cancel' => 'apps#cancel', as: 'cancel_app'
   resources :apps, only: [:index, :new, :create, :show, :edit, :update] do
+    collection do
+      post :confirm
+      get :rate_index
+      get :popular_index
+      get :tag
+      get :rate_tag
+      get :popular_tag
+    end
     member do
+      get :hint
+      get :explanation
       get :hint_edit
       get :explanation_edit
+      patch :add_update
+      get :hidden
+      patch :cancel
     end
     resources :learnings, only: [:create, :show, :edit, :update]
     resources :questions, only: [:index, :create]
@@ -54,9 +51,12 @@ Rails.application.routes.draw do
     resource :stocks, only: [:create, :destroy]
   end
 
-  get 'langs/:id/rate' => 'langs#rate_show', as: 'rate_lang'
-  get 'langs/:id/popular' => 'langs#popular_show', as: 'popular_lang'
-  resources :langs, only: :show
+  resources :langs, only: :show do
+    member do
+      get :rate_show
+      get :popular_show
+    end
+  end
 
   devise_for :admins, skip: :all
   devise_scope :admin do
@@ -65,12 +65,15 @@ Rails.application.routes.draw do
     delete 'admin/sign_out' => 'admins/sessions#destroy', as: 'destroy_admin_session'
     post 'admin/guest_sign_in' => 'admins/sessions#new_guest'
   end
+
   namespace :admin do
     root 'dashboards#index'
     resources :langs, only: [:index, :show, :create, :update, :destroy]
-    patch 'users/:id/cancel' => 'users#cancel', as: 'cancel_user'
-    resources :users, only: :index
-    patch 'apps/:id/cancel' => 'apps#cancel', as: 'cancel_app'
-    resources :apps, only: :index
+    resources :users, only: :index do
+      patch :cancel, on: :member
+    end
+    resources :apps, only: :index do
+      patch :cancel, on: :member
+    end
   end
 end
