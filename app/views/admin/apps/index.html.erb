@@ -36,7 +36,7 @@
             </td>
             <td>
               <% if app.status == true %>
-                <%= link_to "強制非公開", admin_cancel_app_path(app), method: :patch, class: "btn btn-sm btn-default", "data-confirm" => "この投稿アプリを強制的に非公開にしますか？" %>
+                <%= link_to "強制非公開", cancel_admin_app_path(app), method: :patch, class: "btn btn-sm btn-default", "data-confirm" => "この投稿アプリを強制的に非公開にしますか？" %>
               <% end %>
             </td>
         </tr>
