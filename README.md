@@ -22,7 +22,7 @@
 - jQuery, Bootstrap3
 - MySQL 5.5.62
 - Nginx, Puma
-- AWS（EC2, RDS, Route53）
+- AWS（EC2, RDS）
 - Capistrano
 
 ## 機能一覧
@@ -85,7 +85,6 @@
 - ER図：[draw.io](https://app.diagrams.net/#G1xx9iVmerwVWF2ggC4ToCzU41lyFmU63l)
 - データベース設計：[スプレッドシート](https://docs.google.com/spreadsheets/d/1YYXot30SttwSTz31akqoLq9ylPBteUbJpoN9FY035bk/edit#gid=135053792)
 - アプリケーション詳細設計：[スプレッドシート](https://docs.google.com/spreadsheets/d/1gScOPmAEcORheQypo-hjmbxNT4ODyXPp8TsA6_r9dAI/edit#gid=0)
-- チャレンジ要素一覧：[スプレッドシート](https://docs.google.com/spreadsheets/d/1BeDFPT9XnqasDAUF5jbDraDXg5rhDRHrpklPOQHjV10/edit#gid=0)
 
 
 
