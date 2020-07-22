@@ -81,9 +81,11 @@ $(document).on('turbolinks:load', function(){
 $(document).on('turbolinks:load', function(){
   $('.header-flash').hide();
   $('.header-flash').slideDown();
+  /*
   $(function(){
     setTimeout("$('.header-flash').slideUp('slow')", 4000);
   });
+  */
 });
 
 
@@ -163,6 +165,8 @@ $(document).on('turbolinks:load', function(){
     });
   }
 });
+
+
 
 
 
