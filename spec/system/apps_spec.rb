@@ -140,8 +140,11 @@ describe 'アプリケーションのテスト' do
       it '開発言語編集フォームが表示される' do
         expect(page).to have_select 'app[lang_id]'
       end
-      it 'ヒント・解説編集ページリンクが表示される' do
-        expect(page).to have_link 'ヒント・解説を追加・編集', href: add_edit_app_path(post_app)
+      it 'ヒント編集ページリンクが表示される' do
+        expect(page).to have_link 'ヒントを追加・編集', href: hint_edit_app_path(post_app)
+      end
+      it '解説編集ページリンクが表示される' do
+        expect(page).to have_link '解説を追加・編集', href: explanation_edit_app_path(post_app)
       end
       it 'アプリ非公開ページリンクが表示される' do
         expect(page).to have_link 'アプリを非公開にする', href: hidden_app_path(post_app)
