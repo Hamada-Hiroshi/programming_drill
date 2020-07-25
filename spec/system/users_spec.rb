@@ -71,9 +71,6 @@ describe 'ユーザのテスト' do
       it 'プロフィール編集リンクが表示される' do
         expect(page).to have_link 'アカウント情報を編集', href: edit_user_path(test_user)
       end
-      it '学習アプリ一覧が表示される' do
-        expect(page).to have_content(learning_app.title)
-      end
       it '投稿アプリ一覧が表示される' do
         expect(page).to have_content(post_app.title)
       end
