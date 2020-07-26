@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
     name { 'test_user_a' }
-    email { Faker::Internet.email }
+    email { Faker::Internet.unique.email }
     password { 'password' }
     password_confirmation { 'password' }
 
@@ -12,7 +12,7 @@ FactoryBot.define do
 
   factory :update_user, class: User do
     name { 'test_user_b' }
-    email { Faker::Internet.email }
+    email { Faker::Internet.unique.email }
     password { 'password' }
     password_confirmation { 'password' }
 

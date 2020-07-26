@@ -12,4 +12,5 @@ FactoryBot.define do
     user
     app
   end
+
 end
