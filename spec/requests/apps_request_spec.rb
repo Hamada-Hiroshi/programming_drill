@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Apps", type: :request do
-  let(:test_app) { create(:app) }
+  let(:test_user) { create(:user) }
+  let(:test_app) { create(:app, user: test_user) }
   let!(:review_2) { create(:review_2, app: test_app) }
   let!(:review_4) { create(:review_4, app: test_app) }
 
@@ -18,23 +19,22 @@ RSpec.describe "Apps", type: :request do
     end
   end
 
-  xdescribe 'POST confirm' do
+  describe 'POST confirm' do
     before do
-      sign_in user
+      sign_in test_user
     end
 
-    context '正常なパラメータの場合' do
+    context '有効なパラメータの場合' do
       it 'リクエストが成功する' do
-        pending
-        post confirm_apps_path, params: { user_id: user, lang_id: lang, app: attributes_for(:app) }
+        post confirm_apps_path, params: { app: attributes_for(:app) }
         expect(response.status).to eq 200
       end
     end
 
-    context '不正なパラメータの場合' do
-      it 'リクエストが成功する' do
-        post confirm_apps_path, params: { user_id: user, lang_id: lang, app: attributes_for(:app, :invalid) }
-        expect(response.status).to eq 200
+    context '無効なパラメータの場合' do
+      it 'エラーメッセージが表示される' do
+        post confirm_apps_path, params: { app: attributes_for(:app, :invalid) }
+        expect(response.body).to include "正しく入力されていない項目があります。"
       end
     end
   end
