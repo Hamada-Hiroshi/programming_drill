@@ -1,45 +1,71 @@
 <div class="container admin-space">
   <h3 class="admin-title">会員一覧</h3>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>ユーザーネーム</th>
-        <th>メールアドレス</th>
-        <th>登録日</th>
-        <th>ステータス</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @users.each do |user| %>
+  <div>
+    <%= search_form_for [:admin, @user_q] do |f| %>
+      <div>
+        <%= f.label :name_or_email, "ユーザーネームまたはメールアドレス" %>
+        <%= f.search_field :name_or_email_cont %>
+      </div>
+      <div>
+        <%= f.label :status, "ステータス" %>
+        <%= f.radio_button :status_eq,'', checked: true %>
+        <%= f.label :status_eq, "指定なし", value: '' %>
+        <%= f.radio_button :status_eq, true %>
+        <%= f.label :status_eq, "有効", value: true %>
+        <%= f.radio_button :status_eq, false %>
+        <%= f.label :status_eq, "退会済み", value: false %>
+      </div>
+      <div>
+        <%= f.submit "検索", class: "btn btn-sm btn-default" %>
+        <%= link_to "検索リセット", admin_users_path, class: "btn btn-sm btn-default" %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @users.present? %>
+    <table class="table">
+      <thead>
         <tr>
-          <td><%= user.id %></td>
-          <td><%= user.name %></td>
-          <td><%= user.email %></td>
-          <td><%= user.created_at.strftime("%Y/%m/%d") %></td>
-          <td>
-            <% if user.status == true %>
-              有効
-            <% else %>
-              退会済み
-            <% end %>
-          </td>
-            <td>
-              <% if user.status == true %>
-                <%= link_to "詳細", user_path(user), class: "btn btn-sm btn-default" %>
-              <% end %>
-            </td>
-            <td>
-              <% if user.status == true %>
-                <%= link_to "強制退会", cancel_admin_user_path(user), method: :patch, class: "btn btn-sm btn-default", "data-confirm" => "このユーザーを強制的に退会させますか？" %>
-              <% end %>
-            </td>
+          <th><%= sort_link(@user_q, :id, "ID") %></th>
+          <th><%= sort_link(@user_q, :name, "ユーザーネーム") %></th>
+          <th><%= sort_link(@user_q, :email, "メールアドレス") %></th>
+          <th><%= sort_link(@user_q, :created_at, "登録日") %></th>
+          <th>ステータス</th>
+          <th></th>
+          <th></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="paginate"><%= paginate @users %></div>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.created_at.strftime("%Y/%m/%d") %></td>
+            <td>
+              <% if user.status == true %>
+                有効
+              <% else %>
+                退会済み
+              <% end %>
+            </td>
+              <td>
+                <% if user.status == true %>
+                  <%= link_to "詳細", user_path(user), class: "btn btn-sm btn-default" %>
+                <% end %>
+              </td>
+              <td>
+                <% if user.status == true %>
+                  <%= link_to "強制退会", cancel_admin_user_path(user), method: :patch, class: "btn btn-sm btn-default", "data-confirm" => "このユーザーを強制的に退会させますか？" %>
+                <% end %>
+              </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="paginate"><%= paginate @users %></div>
+  <% else %>
+    <p>検索に一致するデータはありません。</p>
+  <% end %>
 </div>
