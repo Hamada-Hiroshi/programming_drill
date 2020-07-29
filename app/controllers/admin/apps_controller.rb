@@ -2,7 +2,7 @@ class Admin::AppsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @apps = App.all.includes(:user, :lang)
+    @apps = App.includes(:user, :lang).page(params[:page]).per(10)
   end
 
   def cancel

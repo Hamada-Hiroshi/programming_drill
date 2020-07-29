@@ -346,18 +346,20 @@ input[type=checkbox]:checked + .checkbox01::after {
 .pagination>li>a {
   border: none;
   color: #696969;
+  background-color: initial;
 }
 .pagination>.active>a {
-  background: #878796;
+  background: $theme-color;
   border-radius: 15px;
   color: #FFF;
   &:hover {
     background: $theme-color;
-    color: #FFF;
   }
 }
 .pagination>li>a:hover {
   border-radius: 15px;
+  background-color: #878796;
+  color: #FFF
 }
 
 
