@@ -2,9 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Review, type: :model do
   describe 'バリデーションのテスト' do
-    let(:user) { create(:user) }
-    let(:app) { create(:app) }
-    let!(:review) { build(:review_2, user_id: user.id, app_id: app.id) }
+    let(:review) { build(:review_2) }
 
     it "ユーザID、アプリID、レビュー内容、評価点があれば有効" do
       expect(review.valid?).to eq true
@@ -22,12 +20,12 @@ RSpec.describe Review, type: :model do
         review.content = ''
         expect(review.valid?).to eq false
       end
-      it '1未満でないこと' do
-        review.rate = 0.5
+      it '1以上であること' do
+        review.rate = 0.9
         expect(review.valid?).to eq false
       end
       it '5以下であること' do
-        review.rate = 6.0
+        review.rate = 5.1
         expect(review.valid?).to eq false
       end
     end

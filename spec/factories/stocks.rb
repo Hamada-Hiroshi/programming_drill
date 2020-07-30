@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :stock do
-    user_id { "MyString" }
-    app_id { "MyString" }
+    association :user
+    association :app
   end
 end
