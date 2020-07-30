@@ -16,9 +16,9 @@
         <h4>アプリ情報</h4>
       <% end %>
       <ul id="app-count">
-        <li><%= link_to "投稿 #{user.apps.count}件", user_path(user) %></li>
-        <li><%= link_to "学習 #{user.learnings.count}件", learnings_user_path(user) %></li>
-        <li><%= link_to "ストック #{user.stocks.count}件", stocks_user_path(user) %></li>
+        <li><%= link_to "投稿 #{user.apps.count}件", user_path(user), class: "btn-original3" %></li>
+        <li><%= link_to "学習 #{user.learnings.count}件", learnings_user_path(user), class: "btn-original3" %></li>
+        <li><%= link_to "ストック #{user.stocks.count}件", stocks_user_path(user), class: "btn-original3" %></li>
       </ul>
     </div>
 
