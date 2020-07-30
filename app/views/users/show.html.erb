@@ -15,12 +15,12 @@
             <% @post_apps.each do |app| %>
               <div class="my-app-box">
                 <div class="row">
-                  <div class="my-app col-md-9">
+                  <div class="my-app col-md-10">
                     <%= render 'user_app_index', app: app %>
                   </div>
 
                   <% if @user == current_user %>
-                    <div class="my-app-edit col-md-3">
+                    <div class="my-app-edit col-md-2">
                       <% if app.status == true %>
                         <%= link_to "内容を編集する", edit_app_path(app), class: "btn btn-primary" %>
                       <% else %>
