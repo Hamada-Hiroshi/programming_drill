@@ -1,28 +1,47 @@
 <div class="container admin-space">
-  <h3 class="admin-title">アプリ一覧</h3>
+  <h3 class="admin-title">アプリケーション一覧</h3>
 
-  <div>
+  <div id="admin-search" class="cp_form">
     <%= search_form_for [:admin, @app_q] do |f| %>
-      <div>
-        <%= f.label :title_or_user_name, "アプリ名または投稿者名" %>
-        <%= f.search_field :title_or_user_name_cont %>
+      <h4>検索</h4>
+      <div class="cp_group">
+        <%= f.search_field :title_cont %>
+        <%= f.label :title_cont, "アプリケーション名", class: "cp_label" %>
+        <i class="bar"></i>
       </div>
-      <div>
-        <%= f.label :lang_id_eq, "開発言語" %>
-        <%= f.collection_select :lang_id_eq, Lang.all, :id, :name, include_blank: "選択してください" %>
+      <div class="cp_group">
+        <%= f.search_field :user_name_cont %>
+        <%= f.label :user_name_cont, "投稿者名", class: "cp_label" %>
+        <i class="bar"></i>
       </div>
-      <div>
-        <%= f.label :status, "ステータス" %>
-        <%= f.radio_button :status_eq,'', checked: true %>
-        <%= f.label :status_eq, "指定なし", value: '' %>
-        <%= f.radio_button :status_eq, true %>
-        <%= f.label :status_eq, "有効", value: true %>
-        <%= f.radio_button :status_eq, false %>
-        <%= f.label :status_eq, "非公開", value: false %>
+      <div class="cp_group cp_ipselect">
+        <%= f.collection_select :lang_id_eq, Lang.all, :id, :name, { include_blank: "選択してください" }, { class: "cp_sl" } %>
+        <%= f.label :lang_id_eq, "開発言語", class: "cp_sl_selectlabel" %>
+        <i class="bar"></i>
       </div>
-      <div>
-        <%= f.submit "検索", class: "btn btn-sm btn-default" %>
-        <%= link_to "検索リセット", admin_apps_path, class: "btn btn-sm btn-default" %>
+      <div class="cp_radio">
+        <div class="radio">
+          <%= f.label :status_eq, value: '' do %>
+            <%= f.radio_button :status_eq, '', checked: true %>
+            <i class="ch_bar"></i>全て
+          <% end %>
+        </div>
+        <div class="radio">
+          <%= f.label :status_eq, value: true do %>
+            <%= f.radio_button :status_eq, true %>
+            <i class="ch_bar"></i>有効のみ
+          <% end %>
+        </div>
+        <div class="radio">
+          <%= f.label :status_eq, value: false do %>
+            <%= f.radio_button :status_eq, false %>
+            <i class="ch_bar"></i>非公開のみ
+          <% end %>
+        </div>
+      </div>
+      <div class="btn_cont clearfix">
+        <%= f.submit "検索", class: "btn" %>
+        <%= link_to "検索リセット", admin_apps_path, class: "btn" %>
       </div>
     <% end %>
   </div>
@@ -37,7 +56,7 @@
           <th><%= sort_link(@app_q, :user_name, "投稿者") %></th>
           <th><%= sort_link(@app_q, :created_at, "登録日") %></th>
           <th><%= sort_link(@app_q, :updated_at, "最終更新日") %></th>
-          <th>ステータス</th>
+          <th><%= sort_link(@app_q, :status, "ステータス") %></th>
           <th></th>
           <th></th>
         </tr>

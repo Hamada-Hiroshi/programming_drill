@@ -1,24 +1,42 @@
 <div class="container admin-space">
   <h3 class="admin-title">会員一覧</h3>
 
-  <div>
+  <div id="admin-search" class="cp_form">
     <%= search_form_for [:admin, @user_q] do |f| %>
-      <div>
-        <%= f.label :name_or_email, "ユーザーネームまたはメールアドレス" %>
-        <%= f.search_field :name_or_email_cont %>
+      <h4>検索</h4>
+      <div class="cp_group">
+        <%= f.search_field :name_cont %>
+        <%= f.label :name_cont, "ユーザーネーム", class: "cp_label" %>
+        <i class="bar"></i>
       </div>
-      <div>
-        <%= f.label :status, "ステータス" %>
-        <%= f.radio_button :status_eq,'', checked: true %>
-        <%= f.label :status_eq, "指定なし", value: '' %>
-        <%= f.radio_button :status_eq, true %>
-        <%= f.label :status_eq, "有効", value: true %>
-        <%= f.radio_button :status_eq, false %>
-        <%= f.label :status_eq, "退会済み", value: false %>
+      <div class="cp_group">
+        <%= f.search_field :email_cont %>
+        <%= f.label :email_cont, "メールアドレス", class: "cp_label" %>
+        <i class="bar"></i>
       </div>
-      <div>
-        <%= f.submit "検索", class: "btn btn-sm btn-default" %>
-        <%= link_to "検索リセット", admin_users_path, class: "btn btn-sm btn-default" %>
+      <div class="cp_radio">
+        <div class="radio">
+          <%= f.label :status_eq, value: '' do %>
+            <%= f.radio_button :status_eq, '', checked: true %>
+            <i class="ch_bar"></i>全て
+          <% end %>
+        </div>
+        <div class="radio">
+          <%= f.label :status_eq, value: true do %>
+            <%= f.radio_button :status_eq, true %>
+            <i class="ch_bar"></i>有効のみ
+          <% end %>
+        </div>
+        <div class="radio">
+          <%= f.label :status_eq, value: false do %>
+            <%= f.radio_button :status_eq, false %>
+            <i class="ch_bar"></i>退会済みのみ
+          <% end %>
+        </div>
+      </div>
+      <div class="btn_cont clearfix">
+        <%= f.submit "検索", class: "btn" %>
+        <%= link_to "検索リセット", admin_users_path, class: "btn" %>
       </div>
     <% end %>
   </div>
@@ -31,7 +49,7 @@
           <th><%= sort_link(@user_q, :name, "ユーザーネーム") %></th>
           <th><%= sort_link(@user_q, :email, "メールアドレス") %></th>
           <th><%= sort_link(@user_q, :created_at, "登録日") %></th>
-          <th>ステータス</th>
+          <th><%= sort_link(@user_q, :status, "ステータス") %></th>
           <th></th>
           <th></th>
         </tr>

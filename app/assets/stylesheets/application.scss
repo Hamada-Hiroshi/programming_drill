@@ -81,7 +81,7 @@ body {
 #header-mylink {
   padding: 8px 15px !important;
 }
-#app_search {
+#app_search, #user_search {
   padding: 13px 0px;
   margin: 0;
 }
@@ -269,7 +269,7 @@ p {
 }
 
 //セレクトボックス
-select {
+.field select {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
@@ -1245,4 +1245,278 @@ span {
       margin-left: 0;
     }
   }
+}
+
+
+
+//管理者ページ検索フォーム-------------------------------------------
+.cp_form {
+  position: relative;
+  width: 100%;
+  margin: -10px auto 30px;
+  padding-left: 2em;
+  background-color: #FFF;
+  box-shadow:0px 0px 3px 2px #ededed;
+}
+.cp_group {
+  position: relative;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  width: 45%;
+  margin-right: 5%;
+  float: left;
+}
+.cp_form .cp_ipselect {
+  position: relative;
+  margin-top: 2em;
+  margin-right: 5%;
+}
+.cp_form .cp_radio {
+  position: relative;
+  margin-top: 10px;
+  float: left;
+}
+
+.cp_form .cp_group input {
+  font-family: inherit;
+  height: 3.0rem;
+}
+.cp_form .cp_group select {
+  font-family: inherit;
+}
+.cp_form .cp_sl {
+  position: relative;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: transparent;
+  width: 100%;
+  padding: 4px 0px;
+  border-radius: 0;
+  border: none;
+  -webkit-appearance: none;
+  appearance: none;
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid rgba(0,0,0, 0);
+  }
+}
+//セレクトボックス逆三角
+.cp_form .cp_ipselect:after {
+  position: absolute;
+  top: 13px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  padding: 0;
+  content: '';
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.cp_form .cp_sl_selectlabel {
+  color: #b3b3b3;
+  position: absolute;
+  pointer-events: none;
+  left: 0;
+  top: 10px;
+  transition: 0.2s ease all;
+  font-weight: initial;
+}
+.cp_form .cp_sl:focus ~ .cp_sl_selectlabel,
+.cp_form .cp_sl:valid ~ .cp_sl_selectlabel {
+  font-size: 14px;
+  color: #da3c41;
+  top: -20px;
+  transition: 0.2s ease all;
+}
+.cp_form .cp_group .cp_label {
+  position: absolute;
+  top: 0.25rem;
+  pointer-events: none;
+  padding-left: 0.125rem;
+  z-index: 1;
+  color: #b3b3b3;
+  font-size: 1rem;
+  font-weight: normal;
+  -webkit-transition: all 0.28s ease;
+  transition: all 0.28s ease;
+}
+.cp_form .cp_group .bar {
+  position: relative;
+  border-bottom: 0.0625rem solid #999999;
+  display: block;
+}
+.cp_form .cp_group .bar::before {
+  content: '';
+  height: 0.125rem;
+  width: 0;
+  left: 50%;
+  bottom: -0.0625rem;
+  position: absolute;
+  background: #da3c41;
+  -webkit-transition: left 0.28s ease, width 0.28s ease;
+  transition: left 0.28s ease, width 0.28s ease;
+  z-index: 2;
+}
+.cp_form .cp_group input {
+  display: block;
+  background: none;
+  padding: 0.125rem 0.125rem 0.0625rem;
+  font-size: 16px;
+  border-width: 0;
+  border-color: transparent;
+  line-height: 1.9;
+  width: 100%;
+  color: transparent;
+  -webkit-transition: all 0.28s ease;
+  transition: all 0.28s ease;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.cp_form .cp_group select,
+.cp_form .cp_group input:focus,
+.cp_form .cp_group input:valid {
+  color: #333333;
+}
+.cp_form .cp_group select ~ .cp_label,
+.cp_form .cp_group input:focus ~ .cp_label,
+.cp_form .cp_group input:valid ~ .cp_label {
+  font-size: 14px;
+  color: #da3c41;
+  top: -1.7rem;
+  left: 0;
+}
+.cp_form .cp_group select:hover,
+.cp_form .cp_group input:focus {
+  outline: none;
+}
+.cp_form .cp_group select:hover ~ .cp_label,
+.cp_form .cp_group input:focus ~ .cp_label {
+  color: #da3c41;
+}
+.cp_form .cp_group select:hover ~ .bar::before,
+.cp_form .cp_group input:focus ~ .bar::before {
+  width: 100%;
+  left: 0;
+}
+.cp_form .cp_radio label {
+  position: relative;
+  cursor: pointer;
+  padding-left: 2rem;
+  text-align: left;
+  color: #333333;
+  font-size: 16px;
+  float: left;
+}
+.cp_form .cp_radio input {
+  width: auto;
+  opacity: 0.00000001;
+  position: absolute;
+  left: 0;
+}
+.cp_form .radio {
+  margin-bottom: initial;
+  margin-right: 20px;
+  float: left;
+}
+.cp_form .radio .ch_bar {
+  position: absolute;
+  top: -0.25rem;
+  left: -0.25rem;
+  cursor: pointer;
+  display: block;
+  font-size: 1rem;
+  -webkit-user-select: none;
+  user-select: none;
+  color: #999999;
+}
+.cp_form .radio .ch_bar::before,
+.cp_form .radio .ch_bar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.3rem;
+  margin: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  -webkit-transition: -webkit-transform 0.28s ease;
+  transition:         transform 0.28s ease;
+  border-radius: 50%;
+  border: 0.125rem solid currentColor;
+}
+.cp_form .radio .ch_bar::after {
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  background-color: #da3c41;
+  border-color: #da3c41;
+}
+.cp_form .radio label:hover .ch_bar {
+  color: #da3c41;
+}
+.cp_form .radio input:checked ~ .ch_bar::after {
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+}
+.cp_form .radio input:checked ~ .ch_bar::before {
+  color: #da3c41;
+}
+.cp_form .radio + .radio {
+  margin-top: 1rem;
+}
+.cp_form .btn_cont {
+  text-align: right;
+  margin-bottom: 10px;
+  margin-right: 5%;
+}
+.cp_form .btn {
+  position: relative;
+  background: currentColor;
+  border: 1px solid currentColor;
+  font-size: 1.3rem;
+  color: #da3c41;
+  padding: 0.5rem 3rem;
+  cursor: pointer;
+  -webkit-transition: background-color 0.28s ease, color 0.28s ease, -webkit-box-shadow 0.28s ease;
+  transition: background-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
+  overflow: hidden;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+.cp_form .btn {
+  color: #ffffff;
+  background-color: #da3c41;
+  position: relative;
+  margin-left: 15px;
+  z-index: 1;
+}
+.cp_form .btn::before {
+  content: '';
+  position: absolute;
+  background: #071017;
+  border: 50vh solid #1d4567;
+  width: 30vh;
+  height: 30vh;
+  border-radius: 50%;
+  display: block;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  opacity: 1;
+  -webkit-transform: translate(-50%, -50%) scale(0);
+  transform: translate(-50%, -50%) scale(0);
+}
+.cp_form .btn:hover {
+  -webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3);
+  background-color: cadetblue;
+}
+.cp_form .btn:focus {
+  outline: none;
+}
+.clearfix::before {
+  content: "";
+  display: block;
+  clear: both;
 }
