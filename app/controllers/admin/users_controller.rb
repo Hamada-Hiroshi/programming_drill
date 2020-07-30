@@ -2,7 +2,8 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @users = User.all
+    @user_q = User.ransack(params[:q])
+    @users = @user_q.result(distinct: true).page(params[:page]).per(10)
   end
 
   def cancel

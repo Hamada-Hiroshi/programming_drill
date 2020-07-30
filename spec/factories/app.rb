@@ -6,8 +6,8 @@ FactoryBot.define do
     repo_url { Faker::Internet.url }
     function { Faker::Lorem.characters(number: 100) }
     target { Faker::Lorem.characters(number: 20) }
-    user
-    lang
+    association :user
+    association :lang
 
     trait :invalid do
       title { nil }

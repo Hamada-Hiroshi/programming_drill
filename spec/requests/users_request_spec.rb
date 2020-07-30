@@ -21,7 +21,10 @@ RSpec.describe "Users", type: :request do
       end
 
       it 'リクエストが失敗する' do
-        expect(response.status).not_to eq 200
+        expect(response.status).to eq 302
+      end
+      it 'ログインページにリダイレクトする' do
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
@@ -33,16 +36,16 @@ RSpec.describe "Users", type: :request do
       end
 
       it 'リクエストが成功する' do
-        patch user_path(user), params: { id: user, user: attributes_for(:update_user) }
+        patch user_path(user), params: { id: user, user: attributes_for(:user, :update_user) }
         expect(response.status).to eq 302
       end
       it 'ユーザネームが更新される' do
-        expect do
-          patch user_path(user), params: { id: user, user: attributes_for(:update_user) }
-        end.to change { User.find(user.id).name }.from('test_user_a').to('test_user_b')
+        expect {
+          patch user_path(user), params: { id: user, user: attributes_for(:user, :update_user) }
+        }.to change { User.find(user.id).name }.from('test_user').to('new_user_name')
       end
       it 'リダイレクトする' do
-        patch user_path(user), params: { id: user, user: attributes_for(:update_user) }
+        patch user_path(user), params: { id: user, user: attributes_for(:user, :update_user) }
         expect(response).to redirect_to user_path(user)
       end
     end
@@ -53,9 +56,9 @@ RSpec.describe "Users", type: :request do
         expect(response.status).to eq 302
       end
       it "ユーザーネームが更新されない" do
-        expect do
+        expect {
           patch user_path(user), params: { id: user, user: attributes_for(:user, :invalid) }
-        end.not_to change { User.find(user.id).name }
+        }.not_to change { User.find(user.id).name }
       end
     end
   end

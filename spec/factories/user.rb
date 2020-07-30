@@ -1,23 +1,17 @@
 FactoryBot.define do
-  factory :user do
-    name { 'test_user_a' }
-    email { Faker::Internet.email }
+  factory :user, aliases: [:following, :follower, :visitor, :visited] do
+    name { 'test_user' }
+    email { Faker::Internet.unique.email }
     password { 'password' }
     password_confirmation { 'password' }
+
+    trait :update_user do
+      name { 'new_user_name' }
+    end
 
     trait :invalid do
       name { nil }
     end
   end
 
-  factory :update_user, class: User do
-    name { 'test_user_b' }
-    email { Faker::Internet.email }
-    password { 'password' }
-    password_confirmation { 'password' }
-
-    trait :invalid do
-      name { nil }
-    end
-  end
 end

@@ -2,9 +2,7 @@ require 'rails_helper'
 
 RSpec.describe App, type: :model do
   describe 'バリデーションのテスト' do
-    let(:user) { create(:user) }
-    let(:lang) { create(:lang) }
-    let!(:app) { create(:app, user_id: user.id, lang_id: lang.id) }
+    let(:app) { create(:app) }
 
     it "タイトル、概要、アプリURL、リポジトリURL、機能、対象があれば有効" do
       expect(app.valid?).to eq true
@@ -20,7 +18,7 @@ RSpec.describe App, type: :model do
         expect(app.valid?).to eq false
       end
       it '重複して登録できない' do
-        app_2 = build(:app, user_id: user.id, lang_id: lang.id)
+        app_2 = build(:app)
         app_2.title = app.title
         expect(app_2.valid?).to eq false
       end
