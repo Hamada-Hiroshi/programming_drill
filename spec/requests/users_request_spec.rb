@@ -31,34 +31,38 @@ RSpec.describe "Users", type: :request do
 
   describe 'PATCH update' do
     context '正常なパラメータの場合' do
+      user_params = FactoryBot.attributes_for(:user, name: "new_user_name")
       before do
         sign_in user
       end
 
-      it 'リクエストが成功する' do
-        patch user_path(user), params: { id: user, user: attributes_for(:user, :update_user) }
+      it 'リクエストが成功(リダイレクト)する' do
+        patch user_path(user), params: { user: user_params }
         expect(response.status).to eq 302
       end
       it 'ユーザネームが更新される' do
-        expect {
-          patch user_path(user), params: { id: user, user: attributes_for(:user, :update_user) }
-        }.to change { User.find(user.id).name }.from('test_user').to('new_user_name')
+        patch user_path(user), params: { user: user_params }
+        expect(user.reload.name).to eq "new_user_name"
       end
-      it 'リダイレクトする' do
-        patch user_path(user), params: { id: user, user: attributes_for(:user, :update_user) }
+      it 'マイページへリダイレクトする' do
+        patch user_path(user), params: { user: user_params }
         expect(response).to redirect_to user_path(user)
       end
     end
 
     context "不正なパラメータの場合" do
-      it "リクエストが成功すること" do
-        patch user_path(user), params: { id: user, user: attributes_for(:user, :invalid) }
-        expect(response.status).to eq 302
+      user_params = FactoryBot.attributes_for(:user, :invalid)
+      before do
+        sign_in user
+      end
+
+      it "リクエストが成功する(リダイレクトはしない)" do
+        patch user_path(user), params: { user: user_params }
+        expect(response.status).to eq 200
       end
       it "ユーザーネームが更新されない" do
-        expect {
-          patch user_path(user), params: { id: user, user: attributes_for(:user, :invalid) }
-        }.not_to change { User.find(user.id).name }
+        patch user_path(user), params: { user: user_params }
+        expect(user.reload.name).to eq "test_user"
       end
     end
   end
