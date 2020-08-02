@@ -72,7 +72,7 @@ RSpec.describe "Users", type: :request do
 
   describe 'PATCH update' do
     context '正常なパラメータの場合' do
-      user_params = FactoryBot.attributes_for(:user, name: "new_user_name")
+      let(:user_params) { { name: "new_user_name" } }
       before do
         sign_in user
       end
@@ -92,7 +92,7 @@ RSpec.describe "Users", type: :request do
     end
 
     context "不正なパラメータの場合" do
-      user_params = FactoryBot.attributes_for(:user, :invalid)
+      let(:user_params) { { name: nil } }
       before do
         sign_in user
       end
@@ -149,7 +149,7 @@ RSpec.describe "Users", type: :request do
   end
 
   describe 'PATCH cancel' do
-    user_params = FactoryBot.attributes_for(:user, status: false)
+    let(:user_params) { { status: false } }
     before do
       sign_in user
     end
