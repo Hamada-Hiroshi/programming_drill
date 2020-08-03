@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :app do
-    title { Faker::Lorem.characters(number: 10) }
+    sequence(:title) { |n| "test_app_#{n}" }
     overview { Faker::Lorem.characters(number: 30) }
     app_url { Faker::Internet.url }
     repo_url { Faker::Internet.url }
