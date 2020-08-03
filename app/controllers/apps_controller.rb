@@ -10,6 +10,7 @@ class AppsController < ApplicationController
   before_action :set_tag_apps_score, only: [:tag, :rate_tag, :popular_tag]
   before_action :set_available_tags_to_gon, only: [:new, :confirm, :create, :edit, :update]
   before_action :ensure_correct_user, only: [:edit, :hint_edit, :explanation_edit, :update, :add_update, :hidden, :cancel]
+  before_action :ensure_learning_user, only: [:hint, :explanation]
 
   def set_app
     @app = App.find(params[:id])
@@ -149,6 +150,13 @@ class AppsController < ApplicationController
 
   def ensure_correct_user
     if @app.user != current_user
+      flash[:alert] = "アクセス権限がありません。"
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
+  def ensure_learning_user
+    if @app.user != current_user && !admin_signed_in? && Learning.find_by(user: current_user, app: @app).nil?
       flash[:alert] = "アクセス権限がありません。"
       redirect_back(fallback_location: root_path)
     end
