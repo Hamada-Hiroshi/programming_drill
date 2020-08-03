@@ -3,86 +3,53 @@ require 'rails_helper'
 describe 'レビューのテスト' do
   let(:lang) { create(:lang) }
   let(:test_user) { create(:user) }
-  let!(:post_app) { create(:app, user_id: test_user.id, lang_id: lang.id) }
+  let!(:post_app) { create(:app, user: test_user, lang: lang) }
   let(:test_user_2) { create(:user) }
-  let(:learning_app) { create(:app, user_id: test_user_2.id, lang_id: lang.id) }
-  let!(:learning) { create(:learning, user_id: test_user.id, app_id: learning_app.id) }
-  let(:learned_app) { create(:app, user_id: test_user_2.id, lang_id: lang.id) }
-  let!(:learned) { create(:learning, user_id: test_user.id, app_id: learned_app.id, status: '学習済み') }
+  let(:learning_app) { create(:app, user: test_user_2, lang: lang) }
+  let!(:learning) { create(:learning, user: test_user, app: learning_app) }
+  let(:learned_app) { create(:app, user: test_user_2, lang: lang) }
+  let!(:learned) { create(:learning, user: test_user, app: learned_app, status: '学習済み') }
 
-  describe 'レビュー画面のテスト' do
-    context 'ログインしていない場合' do
-      before do
-        visit app_reviews_path(learned_app)
-      end
+  context 'レビュー画面のテスト' do
+    it 'ログインしていない場合レビューを投稿できない' do
+      visit app_reviews_path(learned_app)
 
-      it 'スコア入力フォームは表示されない' do
+      aggregate_failures do
         expect(page).not_to have_text '星の数を選択'
-      end
-      it 'レビュー入力フォームは表示されない' do
         expect(page).not_to have_field 'review[content]'
-      end
-      it '入力条件が表示される' do
         expect(page).to have_text '学習済みのアプリケーションのみ、レビューを投稿できます。'
       end
     end
 
-    context '投稿ユーザの場合' do
-      before do
-        visit new_user_session_path
-        fill_in 'user[email]', with: test_user.email
-        fill_in 'user[password]', with: test_user.password
-        click_button 'ログイン'
-        visit app_reviews_path(post_app)
-      end
+    it '投稿ユーザの場合レビューを投稿できない' do
+      sign_in test_user
+      visit app_reviews_path(post_app)
 
-      it 'スコア入力フォームは表示されない' do
+      aggregate_failures do
         expect(page).not_to have_text '星の数を選択'
-      end
-      it 'レビュー入力フォームは表示されない' do
         expect(page).not_to have_field 'review[content]'
-      end
-      it '入力条件が表示されない' do
         expect(page).not_to have_text '学習済みのアプリケーションのみ、レビューを投稿できます。'
       end
     end
 
-    context '学習中ユーザの場合' do
-      before do
-        visit new_user_session_path
-        fill_in 'user[email]', with: test_user.email
-        fill_in 'user[password]', with: test_user.password
-        click_button 'ログイン'
-        visit app_reviews_path(learning_app)
-      end
+    it '学習中ユーザの場合レビューを投稿できない' do
+      sign_in test_user
+      visit app_reviews_path(learning_app)
 
-      it 'スコア入力フォームは表示されない' do
+      aggregate_failures do
         expect(page).not_to have_text '星の数を選択'
-      end
-      it 'レビュー入力フォームは表示されない' do
         expect(page).not_to have_field 'review[content]'
-      end
-      it '入力条件が表示される' do
         expect(page).to have_text '学習済みのアプリケーションのみ、レビューを投稿できます。'
       end
     end
 
-    context '学習済みユーザの場合' do
-      before do
-        visit new_user_session_path
-        fill_in 'user[email]', with: test_user.email
-        fill_in 'user[password]', with: test_user.password
-        click_button 'ログイン'
-        visit app_reviews_path(learned_app)
-      end
+    it '学習済みユーザの場合レビュー投稿フォームが表示される' do
+      sign_in test_user
+      visit app_reviews_path(learned_app)
 
-      it 'スコア入力フォームが表示される' do
+      aggregate_failures do
         expect(page).to have_text 'レビュー内容から自動で評価を判定する。'
-      end
-      it 'レビュー入力フォームが表示される' do
         expect(page).to have_field 'review[content]'
-      end
-      it '入力条件が表示されない' do
         expect(page).not_to have_text '学習済みのアプリケーションのみ、レビューを投稿できます。'
       end
     end

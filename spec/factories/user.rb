@@ -5,10 +5,6 @@ FactoryBot.define do
     password { 'password' }
     password_confirmation { 'password' }
 
-    trait :update_user do
-      name { 'new_user_name' }
-    end
-
     trait :invalid do
       name { nil }
     end
