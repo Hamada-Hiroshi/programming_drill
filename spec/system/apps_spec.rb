@@ -4,9 +4,7 @@ RSpec.describe "Apps", type: :system do
   let(:lang) { create(:lang) }
   let(:test_user) { create(:user) }
   let!(:post_app) { create(:app, user: test_user, lang: lang) }
-  let(:test_user_2) { create(:user) }
-  let(:learning_app) { create(:app, user: test_user_2, lang: lang) }
-  let!(:learning) { create(:learning, user: test_user, app: learning_app) }
+  let(:other_user) { create(:user) }
 
   describe '一覧画面のテスト' do
     it 'アプリ一覧の並び替えテスト' do
@@ -22,33 +20,49 @@ RSpec.describe "Apps", type: :system do
 
         aggregate_failures do
           expect(page).to have_link 'アプリ詳細', href: app_path(post_app)
-          expect(page).not_to have_link '学習メモ', href: app_learning_path(learning_app, learning)
+          expect(page).not_to have_content '学習メモ'
           expect(page).to have_link 'ヒント', href: hint_app_path(post_app)
           expect(page).to have_link '質問', href: app_questions_path(post_app)
           expect(page).to have_link '解説', href: explanation_app_path(post_app)
           expect(page).to have_link 'レビュー', href: app_reviews_path(post_app)
           expect(page).to have_link '編集', href: edit_app_path(post_app)
           expect(page).not_to have_link '学習開始', href: app_learnings_path(post_app)
-          expect(page).not_to have_link '学習を開始する', href: app_learnings_path(post_app)
+          expect(page).not_to have_link 'このアプリケーションを作成する', href: app_learnings_path(post_app)
         end
       end
     end
 
     context '他のユーザ（未学習者）の場合' do
       it '学習を開始すると全てのリンクが表示' do
-        sign_in test_user
-        visit app_path(learning_app)
+        sign_in other_user
+        visit app_path(post_app)
 
         aggregate_failures do
-          expect(page).to have_link 'アプリ詳細', href: app_path(learning_app)
-          expect(page).to have_link '学習メモ', href: app_learning_path(learning_app, learning)
-          expect(page).to have_link 'ヒント', href: hint_app_path(learning_app)
-          expect(page).to have_link '質問', href: app_questions_path(learning_app)
-          expect(page).to have_link '解説', href: explanation_app_path(learning_app)
-          expect(page).to have_link 'レビュー', href: app_reviews_path(learning_app)
-          expect(page).not_to have_link '編集', href: edit_app_path(learning_app)
-          expect(page).not_to have_link '学習開始', href: app_learnings_path(learning_app)
-          expect(page).not_to have_link '学習を開始する', href: app_learnings_path(learning_app)
+          expect(page).to have_link 'アプリ詳細', href: app_path(post_app)
+          expect(page).not_to have_content '学習メモ'
+          expect(page).not_to have_link 'ヒント', href: hint_app_path(post_app)
+          expect(page).not_to have_link '質問', href: app_questions_path(post_app)
+          expect(page).not_to have_link '解説', href: explanation_app_path(post_app)
+          expect(page).to have_link 'レビュー', href: app_reviews_path(post_app)
+          expect(page).not_to have_link '編集', href: edit_app_path(post_app)
+          expect(page).to have_link '学習開始', href: app_learnings_path(post_app)
+          expect(page).to have_link 'このアプリケーションを作成する', href: app_learnings_path(post_app)
+        end
+
+        click_link "学習開始"
+        @learning = Learning.find_by(user: other_user, app: post_app)
+
+        aggregate_failures do
+          expect(page).to have_content '学習中'
+          expect(page).to have_link 'アプリ詳細', href: app_path(post_app)
+          expect(page).to have_link '学習メモ', href: app_learning_path(post_app, @learning)
+          expect(page).to have_link 'ヒント', href: hint_app_path(post_app)
+          expect(page).to have_link '質問', href: app_questions_path(post_app)
+          expect(page).to have_link '解説', href: explanation_app_path(post_app)
+          expect(page).to have_link 'レビュー', href: app_reviews_path(post_app)
+          expect(page).not_to have_link '編集', href: edit_app_path(post_app)
+          expect(page).not_to have_link '学習開始', href: app_learnings_path(post_app)
+          expect(page).not_to have_link 'このアプリケーションを作成する', href: app_learnings_path(post_app)
         end
       end
     end
@@ -59,14 +73,14 @@ RSpec.describe "Apps", type: :system do
 
         aggregate_failures do
           expect(page).to have_link 'アプリ詳細', href: app_path(post_app)
-          expect(page).not_to have_link '学習メモ', href: app_learning_path(learning_app, learning)
+          expect(page).not_to have_content '学習メモ'
           expect(page).not_to have_link 'ヒント', href: hint_app_path(post_app)
           expect(page).not_to have_link '質問', href: app_questions_path(post_app)
           expect(page).not_to have_link '解説', href: explanation_app_path(post_app)
           expect(page).to have_link 'レビュー', href: app_reviews_path(post_app)
           expect(page).not_to have_link '編集', href: edit_app_path(post_app)
           expect(page).to have_link '学習開始', href: app_learnings_path(post_app)
-          expect(page).not_to have_link '学習を開始する', href: app_learnings_path(post_app)
+          expect(page).not_to have_link 'このアプリケーションを作成する', href: app_learnings_path(post_app)
         end
 
         click_link '学習開始'
@@ -93,7 +107,7 @@ RSpec.describe "Apps", type: :system do
 
     context '他のユーザの場合' do
       it 'ページ遷移できない' do
-        sign_in test_user_2
+        sign_in other_user
         visit edit_app_path(post_app)
         expect(current_path).to eq(root_path)
       end
