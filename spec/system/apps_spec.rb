@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe "Apps", type: :system do
   let(:lang) { create(:lang) }
   let(:test_user) { create(:user) }
-  let!(:post_app) { create(:app, user: test_user, lang: lang) }
-  let(:other_user) { create(:user) }
 
   describe '一覧画面のテスト' do
     it 'アプリ一覧の並び替えテスト' do
@@ -12,7 +10,20 @@ RSpec.describe "Apps", type: :system do
     end
   end
 
+  describe '新規投稿のテスト' do
+    it '有効なパラメータ入力時のテスト' do
+
+    end
+
+    it '一度無効なパラメータを入力時のテスト' do
+
+    end
+  end
+
   describe '詳細画面、アプリ学習のテスト' do
+    let!(:post_app) { create(:app, user: test_user, lang: lang) }
+    let(:other_user) { create(:user) }
+
     context '投稿ユーザの場合' do
       it '学習はできないがリンクは全て表示' do
         sign_in test_user
@@ -90,6 +101,8 @@ RSpec.describe "Apps", type: :system do
   end
 
   describe '編集画面、アプリ更新のテスト' do
+    let!(:post_app) { create(:app, user: test_user, lang: lang) }
+
     it 'アプリの基本情報を更新' do
       sign_in test_user
       visit app_path(post_app)
