@@ -114,7 +114,7 @@ RSpec.describe "Users", type: :system do
       end
     end
 
-    xit 'ログインユーザのパスワード変更' do
+    it 'ログインユーザのパスワード変更' do
       sign_in test_user
       visit edit_user_registration_path
 
@@ -123,10 +123,20 @@ RSpec.describe "Users", type: :system do
       fill_in "新しいパスワード（確認用）", with: "newpassword"
       click_button "パスワードを変更"
 
-      aggregate_failures do
-        expect(page).to have_current_path root_path
-        expect(test_user.reload.password).to eq "newpassword"
-      end
+      expect(page).to have_current_path root_path
+
+      sign_out test_user
+      visit new_user_session_path
+
+      fill_in 'user[email]', with: test_user.email
+      fill_in 'user[password]', with: "password"
+      click_button 'ログイン'
+      expect(current_path).to eq new_user_session_path
+
+      fill_in 'user[email]', with: test_user.email
+      fill_in 'user[password]', with: "newpassword"
+      click_button 'ログイン'
+      expect(current_path).to eq user_path(test_user)
     end
 
     it 'ログインユーザのアカウント停止', js: true do
