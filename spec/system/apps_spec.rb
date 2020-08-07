@@ -12,7 +12,7 @@ RSpec.describe "Apps", type: :system do
     end
   end
 
-  describe '学習関連リンク、アプリ学習のテスト' do
+  describe '詳細画面、アプリ学習のテスト' do
     context '投稿ユーザの場合' do
       it '学習はできないがリンクは全て表示' do
         sign_in test_user
@@ -89,35 +89,91 @@ RSpec.describe "Apps", type: :system do
     end
   end
 
-  describe '詳細・編集画面、アプリ更新のテスト' do
-    context '投稿ユーザの場合' do
-      it 'アプリを更新できる' do
-        sign_in test_user
-        visit edit_app_path(post_app)
+  describe '編集画面、アプリ更新のテスト' do
+    it 'アプリの基本情報を更新' do
+      sign_in test_user
+      visit app_path(post_app)
+      click_link '編集'
 
-        aggregate_failures do
-          expect(page).to have_field 'app[title]', with: post_app.title
-          expect(page).to have_select 'app[lang_id]'
-          expect(page).to have_link 'ヒントを追加・編集', href: hint_edit_app_path(post_app)
-          expect(page).to have_link '解説を追加・編集', href: explanation_edit_app_path(post_app)
-          expect(page).to have_link 'アプリを非公開にする', href: hidden_app_path(post_app)
-        end
+      aggregate_failures do
+        expect(page).to have_field 'app[title]', with: post_app.title
+        expect(page).to have_select 'app[lang_id]'
+        expect(page).to have_link 'ヒントを追加・編集', href: hint_edit_app_path(post_app)
+        expect(page).to have_link '解説を追加・編集', href: explanation_edit_app_path(post_app)
+        expect(page).to have_link 'アプリを非公開にする', href: hidden_app_path(post_app)
+      end
+
+      fill_in 'app[overview]', with: 'new_app_title'
+      fill_in 'app[app_url]', with: 'new_app_url@example.com'
+      click_button "更新する"
+
+      aggregate_failures do
+        expect(page).to have_current_path app_path(post_app)
+        expect(page).to have_content 'new_app_title'
+        expect(page).to have_content 'new_app_url@example.com'
       end
     end
 
-    context '他のユーザの場合' do
-      it 'ページ遷移できない' do
-        sign_in other_user
-        visit edit_app_path(post_app)
-        expect(current_path).to eq(root_path)
+    it 'アプリのヒントを更新', js: true do
+      sign_in test_user
+      visit hint_app_path(post_app)
+
+      expect(page).to have_content 'ヒントは投稿されていません。'
+      click_link '編集'
+      click_link 'ヒントを追加・編集'
+
+      expect(page).to have_field 'app[hint]', with: ''
+      fill_in 'app[hint]', with: '##new_app_hint'
+
+      expect(page).to have_selector 'div#marked-area h2', text: 'new_app_hint'
+      click_button "更新する"
+
+      aggregate_failures do
+        expect(page).to have_current_path hint_app_path(post_app)
+        expect(page).to have_selector 'div#marked-text h2', text: 'new_app_hint'
       end
     end
 
-    context 'ログインしていない場合' do
-      it 'ページ遷移できない' do
-        visit edit_app_path(post_app)
-        expect(current_path).to eq(new_user_session_path)
+    it 'アプリの解説を更新', js: true do
+      sign_in test_user
+      visit explanation_app_path(post_app)
+
+      expect(page).to have_content '解説は投稿されていません。'
+      click_link '編集'
+      click_link '解説を追加・編集'
+
+      expect(page).to have_field 'app[explanation]', with: ''
+      fill_in 'app[explanation]', with: '- new_app_explanation'
+
+      expect(page).to have_selector 'div#marked-area ul li', text: 'new_app_explanation'
+      click_button "更新する"
+
+      aggregate_failures do
+        expect(page).to have_current_path explanation_app_path(post_app)
+        expect(page).to have_selector 'div#marked-text ul li', text: 'new_app_explanation'
       end
+    end
+
+    it 'アプリを非公開にする', js: true do
+      visit root_path
+      expect(page).to have_link post_app[title], href: app_path(post_app)
+
+      sign_in test_user
+      visit edit_app_path(post_app)
+      click_link 'アプリを非公開にする'
+
+      click_link 'アプリの公開を停止'
+      expect(page.driver.browser.switch_to.alert.text).to eq 'アプリを非公開にしてもよろしいですか？'
+      page.driver.browser.switch_to.alert.accept
+
+      aggregate_failures do
+        expect(page).to have_current_path user_path(test_user)
+        expect(page).to have_content '非公開済みのアプリです'
+        expect(post_app.reload.status).to eq false
+      end
+
+      visit root_path
+      expect(page).to_not have_link post_app[title], href: app_path(post_app)
     end
   end
 end
