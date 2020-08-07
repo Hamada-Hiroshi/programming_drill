@@ -17,7 +17,7 @@
       <div class="confirm-message" id="app-hidden">
         <p>この投稿アプリを一覧ページから非表示に変更します。<br>非公開にすると、現在学習中のユーザーを除き、一般ユーザーは<br>一覧ページからこのアプリを閲覧できなくなります。<br>一度非公開にしたアプリは、元の状態に戻すことはできません。<br><br>本当にこのアプリを非公開にしてもよろしいですか？</p>
         <%= link_to "アプリの公開を継続", app_path(@app), class: "btn btn-primary" %>
-        <%= link_to "アプリを非公開にする", cancel_app_path(@app), method: :patch, class: "btn btn-danger", "data-confirm" => "アプリを非公開にしてもよろしいですか？" %>
+        <%= link_to "アプリの公開を停止", cancel_app_path(@app), method: :patch, class: "btn btn-danger", "data-confirm" => "アプリを非公開にしてもよろしいですか？" %>
       </div>
     </div>
   </div>
