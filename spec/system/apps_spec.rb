@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Apps", type: :system do
-  let(:lang) { create(:lang) }
   let(:test_user) { create(:user) }
 
   describe '一覧画面のテスト' do
@@ -10,17 +9,83 @@ RSpec.describe "Apps", type: :system do
     end
   end
 
-  describe '新規投稿のテスト' do
-    it '有効なパラメータ入力時のテスト' do
-
+  describe '新規投稿のテスト', js: true do
+    let!(:lang) { create(:lang) }
+    before do
+      sign_in test_user
+      visit new_app_path
+      fill_in 'app[title]', with: "new_app_title"
+      select "Ruby", from: 'app[lang_id]'
+      fill_in 'app[overview]', with: "new_app_orverview"
+      fill_in 'app[app_url]', with: "https://new_app_app_url@example.com"
+      fill_in 'app[repo_url]', with: "https://new_app_repo_url@example.com"
+      fill_in 'app[function]', with: "new_app_function"
+      fill_in 'app[target]', with: "new_app_target"
+      first("li.tagit-new > input[type='text']").set("HTML,")
+      first("li.tagit-new > input[type='text']").set("CSS,")
     end
 
-    it '一度無効なパラメータを入力時のテスト' do
+    it '確認ページ表示後すぐに投稿' do
+      click_button '確認ページへ進む'
+      aggregate_failures do
+        expect(page).to have_current_path confirm_apps_path
+        expect(page).to have_content 'new_app_title'
+        expect(page).to have_link 'https://new_app_app_url@example.com'
+        expect(page).to have_content 'new_app_function'
+        expect(page).to have_content 'HTML'
+      end
 
+      expect {
+        click_link '投稿する'
+      }.to change(test_user.apps, :count).by(1)
+
+      aggregate_failures do
+        expect(page).to have_link 'Ruby'
+        expect(page).to have_link 'https://new_app_repo_url@example.com'
+        expect(page).to have_content 'new_app_target'
+        expect(page).to have_link 'CSS'
+      end
+    end
+
+    it '確認ページ表示後一度編集し直してから投稿' do
+      click_button '確認ページへ進む'
+      click_link '入力ページに戻る'
+
+      aggregate_failures do
+        expect(page).to have_selector 'input#app_title[value="new_app_title"]'
+        expect(page).to have_selector 'select#app_lang_id > option[selected="selected"]', text: 'Ruby'
+        expect(page).to have_selector 'li.tagit-choice > span.tagit-label', text: 'HTML'
+        expect(page).to have_selector 'li.tagit-choice > span.tagit-label', text: 'CSS'
+      end
+
+      fill_in 'app[overview]', with: "edit_app_orverview"
+      fill_in 'app[app_url]', with: "https://edit_app_app_url@example.com"
+      first("li.tagit-new > input[type='text']").set("RubyonRails,")
+      click_button '確認ページへ進む'
+
+      aggregate_failures do
+        expect(page).to have_current_path confirm_apps_path
+        expect(page).to have_content 'new_app_title'
+        expect(page).to have_link 'https://edit_app_app_url@example.com'
+        expect(page).to have_content 'HTML'
+        expect(page).to have_content 'RubyonRails'
+      end
+
+      expect {
+        click_link '投稿する'
+      }.to change(test_user.apps, :count).by(1)
+
+      aggregate_failures do
+        expect(page).to have_link 'Ruby'
+        expect(page).to have_content 'edit_app_orverview'
+        expect(page).to have_link 'CSS'
+        expect(page).to have_link 'RubyonRails'
+      end
     end
   end
 
   describe '詳細画面、アプリ学習のテスト' do
+    let(:lang) { create(:lang) }
     let!(:post_app) { create(:app, user: test_user, lang: lang) }
     let(:other_user) { create(:user) }
 
@@ -101,6 +166,7 @@ RSpec.describe "Apps", type: :system do
   end
 
   describe '編集画面、アプリ更新のテスト' do
+    let(:lang) { create(:lang) }
     let!(:post_app) { create(:app, user: test_user, lang: lang) }
 
     it 'アプリの基本情報を更新' do
