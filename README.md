@@ -16,14 +16,22 @@
 プログラミングの基礎学習を終え、アウトプットによる学習を行いたい時。
 
 ## 使用技術
+### フロントエンド
+- Javascript（jQuery）
+- Bootstrap3
+
+### バックエンド
 - Ruby 2.5.7
 - Ruby on Rails 5.2.4.3
-- RSpec
-- jQuery, Bootstrap3
-- MySQL 5.5.62
+
+### インフラその他
+- AWS（VPC, EC2, RDS, Route53）
+- MySQL
 - Nginx, Puma
-- AWS（EC2, RDS）
 - Capistrano
+- RSpec
+- Vagrant/VirtualBox（開発環境）
+- Certbot（SSL証明書）
 
 ## 機能一覧
 #### ユーザ関連
@@ -66,7 +74,7 @@
 #### 管理者関連
 - アクティビティ確認用のダッシュボード（グラフにchartkick使用）
 - 開発言語の新規登録、編集機能
-- ユーザ・アプリの一覧表示、強制退会・削除機能
+- ユーザ・アプリの一覧表示、検索・ソート機能、強制退会・削除機能
 
 #### その他
 - ページネーション機能（kaminari使用）
