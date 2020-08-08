@@ -17,7 +17,7 @@
 
 ## 使用技術
 ### フロントエンド
-- Javascript（jQuery）
+- JavaScript（jQuery）
 - Bootstrap3
 
 ### バックエンド
