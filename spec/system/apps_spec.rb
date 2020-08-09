@@ -4,8 +4,60 @@ RSpec.describe "Apps", type: :system do
   let(:test_user) { create(:user) }
 
   describe '一覧画面のテスト' do
-    it 'アプリ一覧の並び替えテスト' do
+    let(:other_user_1) { create(:user) }
+    let(:other_user_2) { create(:user) }
+    let(:other_user_3) { create(:user) }
+    let(:lang) { create(:lang) }
+    #r => reviewの評価点, l => learningの数
+    let!(:app_r2_l3) { create(:app, user: test_user, lang: lang, title: "新着3 評価3 人気1") }
+    let!(:app_r4_l1) { create(:app, user: test_user, lang: lang, title: "新着2 評価1 人気3") }
+    let!(:app_r3_l2) { create(:app, user: test_user, lang: lang, title: "新着1 評価2 人気2") }
+    let!(:learning_1) { create(:learning, user: other_user_1, app: app_r2_l3, status: "学習済み") }
+    let!(:learning_2) { create(:learning, user: other_user_2, app: app_r2_l3, status: "学習済み") }
+    let!(:learning_3) { create(:learning, user: other_user_3, app: app_r2_l3, status: "学習済み") }
+    let!(:learning_4) { create(:learning, user: other_user_1, app: app_r4_l1, status: "学習済み") }
+    let!(:learning_5) { create(:learning, user: other_user_1, app: app_r3_l2, status: "学習済み") }
+    let!(:learning_6) { create(:learning, user: other_user_2, app: app_r3_l2, status: "学習済み") }
+    let!(:review_1) { create(:review_1, user: other_user_1, app: app_r2_l3) }
+    let!(:review_2) { create(:review_2, user: other_user_2, app: app_r2_l3) }
+    let!(:review_3) { create(:review_3, user: other_user_3, app: app_r2_l3) }
+    let!(:review_4) { create(:review_4, user: other_user_1, app: app_r4_l1) }
+    let!(:review_5) { create(:review_1, user: other_user_1, app: app_r3_l2) }
+    let!(:review_6) { create(:review_5, user: other_user_2, app: app_r3_l2) }
 
+    it 'アプリ一覧の並び替えテスト' do
+      visit root_path
+      @apps = page.all(".link-app-info")
+
+      aggregate_failures do
+        expect(@apps[0].find('h4').text).to eq "新着1 評価2 人気2"
+        expect(@apps[1].find('h4').text).to eq "新着2 評価1 人気3"
+        expect(@apps[2].find('h4').text).to eq "新着3 評価3 人気1"
+      end
+
+      click_link '評価順'
+      @apps = page.all(".link-app-info")
+
+      aggregate_failures do
+        expect(@apps[0].find('h4').text).to eq "新着2 評価1 人気3"
+        expect(@apps[1].find('h4').text).to eq "新着1 評価2 人気2"
+        expect(@apps[2].find('h4').text).to eq "新着3 評価3 人気1"
+        expect(@apps[0].first('span').text).to eq "（4.0）"
+        expect(@apps[1].first('span').text).to eq "（3.0）"
+        expect(@apps[2].first('span').text).to eq "（2.0）"
+      end
+
+      click_link '人気順'
+      @apps = page.all(".link-app-info")
+
+      aggregate_failures do
+        expect(@apps[0].find('h4').text).to eq "新着3 評価3 人気1"
+        expect(@apps[1].find('h4').text).to eq "新着1 評価2 人気2"
+        expect(@apps[2].find('h4').text).to eq "新着2 評価1 人気3"
+        expect(@apps[0].find('span.learning-count').text).to eq "学習者：3人"
+        expect(@apps[1].find('span.learning-count').text).to eq "学習者：2人"
+        expect(@apps[2].find('span.learning-count').text).to eq "学習者：1人"
+      end
     end
   end
 
@@ -198,7 +250,7 @@ RSpec.describe "Apps", type: :system do
       visit hint_app_path(post_app)
 
       expect(page).to have_content 'ヒントは投稿されていません。'
-      click_link '編集'
+      visit edit_app_path(post_app)
       click_link 'ヒントを追加・編集'
 
       expect(page).to have_field 'app[hint]', with: ''
@@ -218,7 +270,7 @@ RSpec.describe "Apps", type: :system do
       visit explanation_app_path(post_app)
 
       expect(page).to have_content '解説は投稿されていません。'
-      click_link '編集'
+      visit edit_app_path(post_app)
       click_link '解説を追加・編集'
 
       expect(page).to have_field 'app[explanation]', with: ''
