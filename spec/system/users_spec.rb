@@ -147,16 +147,12 @@ RSpec.describe "Users", type: :system do
       expect(page.driver.browser.switch_to.alert.text).to eq "退会してもよろしいですか？"
       page.driver.browser.switch_to.alert.accept
 
-      aggregate_failures do
-        expect(page).to have_current_path new_user_session_path
-        expect(test_user.reload.status).to eq false
-      end
-
       sign_in test_user
 
       aggregate_failures do
         expect(page).to have_current_path new_user_session_path
         expect(page).to have_content "アカウントが有効化されていません。"
+        expect(test_user.reload.status).to eq false
       end
     end
   end
