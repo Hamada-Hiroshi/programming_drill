@@ -13,7 +13,7 @@ RSpec.describe "Users", type: :system do
         fill_in 'user[password]', with: 'password'
         fill_in 'user[password_confirmation]', with: 'password'
         click_button '登録する'
-        expect(current_path).to eq user_path(1)
+        expect(page).to have_content 'アカウント登録が完了しました。'
       end
       it '新規登録に失敗する' do
         fill_in 'user[name]', with: ''
