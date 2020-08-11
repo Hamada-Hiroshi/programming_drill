@@ -7,5 +7,5 @@
 #   )
 # end
 
-Refile.secret_key = '366cbe9e0a4da3cb4c1b5cd94e653ad29f248982af0d2cb5d539c6e56fd3e3ba75e78f269f19141ac076358a1e9909358eab015ee2ce62c94f8f6a890b9ab95b'
+Refile.secret_key = '9c2bb7bd3f46082fa15f0c0ce9ebe9c5e77b1667b17f0689624dd643f9e0cff30c01d83584e515c6e823e2a5406cf82bee6cf7a2a6baf2ec3e7bec4dd563c51b'
 Groupdate.time_zone = false
