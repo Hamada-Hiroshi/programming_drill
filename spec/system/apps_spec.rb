@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-xRSpec.describe "Apps", type: :system do
+RSpec.xdescribe "Apps", type: :system do
   let(:test_user) { create(:user) }
 
   describe '一覧画面のテスト' do

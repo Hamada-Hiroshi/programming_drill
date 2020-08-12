@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-xRSpec.describe "Users", type: :system do
+RSpec.xdescribe "Users", type: :system do
   describe 'ユーザ新規登録のテスト' do
     before do
       visit new_user_registration_path
