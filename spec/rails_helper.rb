@@ -11,7 +11,7 @@ require 'devise'
 Faker::Config.locale = :ja
 
 Capybara.register_driver :remote_chrome do |app|
-  url = "http://chrome:4444/wd/hub"
+  url = "http://localhost:4444/wd/hub"
   caps = ::Selenium::WebDriver::Remote::Capabilities.chrome(
     "goog:chromeOptions" => {
       "args" => [
