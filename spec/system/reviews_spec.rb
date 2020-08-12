@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Reviews", type: :system do
+xRSpec.describe "Reviews", type: :system do
   let(:test_user) { create(:user) }
   let(:post_user) { create(:user) }
   let(:test_app) { create(:app, user: post_user) }
