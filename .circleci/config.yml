@@ -6,12 +6,13 @@ jobs:
         environment:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
+          DB_USERNAME: root
+          DB_PASSWORD: password
       - image: circleci/mysql:5.7
         environment:
-          MYSQL_USER: test
-          MYSQL_PASSWORD: test
           MYSQL_DATABASE: programming_drill_test
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_USER: root
+          MYSQL_ROOT_PASSWORD: password
 
     working_directory: ~/programming_drill
 
