@@ -34,6 +34,9 @@ jobs:
       - run: bundle exec rails db:create RAILS_ENV=test
       - run: bundle exec rails db:schema:load RAILS_ENV=test
       - run:
+          command: chromedriver
+          background: true
+      - run:
           name: RSpec
           command: bundle exec bin/rspec
       - run:
