@@ -11,7 +11,6 @@ require 'devise'
 Faker::Config.locale = :ja
 
 Capybara.register_driver :remote_chrome do |app|
-  url = "http://localhost:4444/wd/hub"
   caps = ::Selenium::WebDriver::Remote::Capabilities.chrome(
     "goog:chromeOptions" => {
       "args" => [
@@ -22,7 +21,7 @@ Capybara.register_driver :remote_chrome do |app|
       ]
     }
   )
-  Capybara::Selenium::Driver.new(app, browser: :remote, url: url, desired_capabilities: caps)
+  Capybara::Selenium::Driver.new(app, browser: :chrome, url: url, desired_capabilities: caps)
 end
 # Add additional requires below this line. Rails is not loaded until this point!
 
