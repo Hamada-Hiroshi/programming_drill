@@ -31,8 +31,8 @@ jobs:
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
-      - run: bundle exec rails db:create RAILS_ENV=test
-      - run: bundle exec rails db:schema:load RAILS_ENV=test
+      - run: bundle exec rails db:create
+      - run: bundle exec rails db:schema:load
       - run:
           name: RSpec
           command: bundle exec bin/rspec
