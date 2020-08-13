@@ -22,12 +22,6 @@ services:
       - "3000:3000"
     links:
       - db
-      - chrome
-
-  chrome:
-    image: selenium/standalone-chrome:latest
-    ports:
-      - "4444:4444"
 
 volumes:
   mysql-data:
