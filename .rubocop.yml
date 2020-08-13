@@ -13,3 +13,7 @@ AllCops:
         - 'vendor/**/*'
         - 'path/ruby'
         - 'spec/**/*'
+        - 'app/helpers/notifications_helper.rb'
+
+Metrics/LineLength:
+  Max: 150
