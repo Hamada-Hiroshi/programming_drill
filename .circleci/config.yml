@@ -31,6 +31,7 @@ jobs:
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
+      - run: mv ./config/database.yml.ci ./config/database.yml
       - run: bundle exec rails db:create
       - run: bundle exec rails db:schema:load
       - run:
