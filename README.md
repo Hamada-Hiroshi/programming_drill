@@ -24,13 +24,18 @@
 - Ruby 2.5.7
 - Ruby on Rails 5.2.4.3
 
+### 開発環境
+- Vagrant/VirtualBox
+- Docker/docker-compose(8/11移行)
+
 ### インフラその他
 - AWS（VPC, EC2, RDS, Route53）
 - MySQL
 - Nginx, Puma
-- Capistrano
+- CircleCI (CI/CD)
 - RSpec
-- Vagrant/VirtualBox（開発環境）
+- Rubocop
+- Capistrano
 - Certbot（SSL証明書）
 
 ## 機能一覧
