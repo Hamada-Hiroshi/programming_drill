@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: %i[google_oauth2]
+         :omniauthable, omniauth_providers: %i(google_oauth2)
   attachment :profile_image
 
   has_many :apps
@@ -26,7 +26,7 @@ class User < ApplicationRecord
   end
 
   def following?(other_user)
-    self.followings.include?(other_user)
+    followings.include?(other_user)
   end
 
   def self.guest
@@ -59,18 +59,18 @@ class User < ApplicationRecord
         provider: auth.provider
       )
     end
-    return { user: user ,sns: sns}
+    { user: user, sns: sns }
   end
 
   def self.with_sns_data(auth, snscredential)
     user = User.where(id: snscredential.user_id).first
-    unless user.present?
+    if user.blank?
       user = User.new(
         name: auth.info.name,
         email: auth.info.email,
       )
     end
-    return {user: user}
+    { user: user }
   end
 
   def self.find_oauth(auth)
@@ -84,6 +84,6 @@ class User < ApplicationRecord
       user = without_sns_data(auth)[:user]
       sns = without_sns_data(auth)[:sns]
     end
-    return { user: user ,sns: sns}
+    { user: user, sns: sns }
   end
 end

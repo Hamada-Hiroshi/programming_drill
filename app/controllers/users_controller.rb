@@ -33,23 +33,23 @@ class UsersController < ApplicationController
   end
 
   def following
-    @users = @user.followings
+    @users = @user.followings.order(created_at: :desc)
   end
 
   def followers
-    @users = @user.followers
+    @users = @user.followers.order(created_at: :desc)
   end
 
   def learnings
-    @learnings = @user.learnings.includes({:app => :lang}, {:app => :reviews}, {:app => :taggings})
+    @learnings = @user.learnings.includes({ :app => :lang }, { :app => :reviews }, { :app => :taggings })
   end
 
   def stocks
-    @stocks = @user.stocks.includes({:app => :lang}, {:app => :reviews}, {:app => :taggings})
+    @stocks = @user.stocks.includes({ :app => :lang }, { :app => :reviews }, { :app => :taggings })
   end
 
   def ensure_correct_user
-    unless @user == current_user || admin_signed_in?
+    if @user != current_user && !admin_signed_in?
       flash[:alert] = "アクセス権限がありません。"
       redirect_back(fallback_location: root_path)
     end

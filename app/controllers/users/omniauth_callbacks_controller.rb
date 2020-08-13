@@ -5,7 +5,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     callback_for(:google)
   end
 
-
   def callback_for(provider)
     @omniauth = request.env['omniauth.auth']
     info = User.find_oauth(@omniauth)
@@ -20,7 +19,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    redirect_to root_path and return
+    redirect_to(root_path) && return
   end
 
   # You should configure your model like this:

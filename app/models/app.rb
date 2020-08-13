@@ -27,6 +27,6 @@ class App < ApplicationRecord
   end
 
   def stocked?(user)
-    self.stock_users.include?(user)
+    stock_users.include?(user)
   end
 end
