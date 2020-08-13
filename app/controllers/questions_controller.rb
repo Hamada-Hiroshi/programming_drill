@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
     @app = App.find(params[:app_id])
     @learning = Learning.find_by(user_id: current_user.id, app_id: @app.id)
     @question = Question.new
-    @questions = @app.questions.where(parent_id: nil).order(created_at: "DESC").includes(:user, {:replies => :user})
+    @questions = @app.questions.where(parent_id: nil).order(created_at: "DESC").includes(:user, { :replies => :user })
   end
 
   def create

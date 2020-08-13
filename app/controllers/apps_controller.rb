@@ -44,8 +44,6 @@ class AppsController < ApplicationController
     gon.available_tags = App.tags_on(:tags).pluck(:name)
   end
 
-
-
   def index
     @apps = @apps.page(params[:page]).reverse_order
   end
