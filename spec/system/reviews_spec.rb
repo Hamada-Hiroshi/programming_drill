@@ -78,29 +78,6 @@ RSpec.describe "Reviews", type: :system do
           expect(page).to have_selector 'div.post-content', text: 2.5
           expect(page).to have_content 'app_review_content'
         end
-
-      end
-
-      it 'レビューを投稿できる（点数自動判定）' do
-        sign_in test_user
-        visit app_reviews_path(test_app)
-
-        expect {
-          find(:css, '.checkbox01').set(true)
-          fill_in 'review[content]', with: 'まあまあでした。'
-          click_button 'レビューを投稿'
-          using_wait_time(7) do
-            expect(page).to have_text 'このアプリケーションはすでにレビュー済みです。'
-          end
-        }.to change(test_app.reviews, :count).by(1)
-
-        aggregate_failures do
-          expect(page).to_not have_selector 'div#manual-rating'
-          expect(page).to_not have_selector 'div#auto-rating'
-          expect(page).to_not have_field 'review[content]'
-          expect(page).to have_selector 'div.post-content', text: 3.0
-          expect(page).to have_content 'まあまあでした。'
-        end
       end
     end
   end
