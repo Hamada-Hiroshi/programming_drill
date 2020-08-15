@@ -78,11 +78,6 @@ RSpec.describe "Reviews", type: :system do
           expect(page).to have_selector 'div.post-content', text: 2.5
           expect(page).to have_content 'app_review_content'
         end
-
-      end
-
-      it 'レビューを投稿できる（点数自動判定）' do
-
       end
     end
   end
