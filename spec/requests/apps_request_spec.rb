@@ -97,23 +97,19 @@ RSpec.describe "Apps", type: :request do
     end
   end
 
-  describe 'POST create' do
+  xdescribe 'POST create' do
     before do
       sign_in test_user
     end
-
-    xcontext '有効なパラメータの場合' do
-      #let!(:rspec_session) { FactoryBot.attributes_for(:app, user: test_user) }
-
-      it 'リクエストが成功する' do
+  
+    it 'リクエストが成功する' do
+      post apps_path, session: { FactoryBot.attributes_for(:app, user: test_user) }
+      expect(response.status).to eq 302
+    end
+    it 'アプリが追加される' do
+      expect {
         post apps_path, session: { FactoryBot.attributes_for(:app, user: test_user) }
-        expect(response.status).to eq 302
-      end
-      it 'アプリが追加される' do
-        expect {
-          post apps_path, session: { FactoryBot.attributes_for(:app, user: test_user) }
-        }.to change(test_user.apps, :count).by(1)
-      end
+      }.to change(test_user.apps, :count).by(1)
     end
   end
 
