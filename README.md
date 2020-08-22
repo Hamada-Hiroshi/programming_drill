@@ -30,7 +30,7 @@ URL:https://programming-drill.work
 - Docker/docker-compose(8/11移行)
 
 ### インフラその他
-- AWS（VPC, EC2, RDS, Route53）
+- AWS（VPC, EC2, RDS, S3, Route53）
 - MySQL
 - Nginx, Puma
 - CircleCI (CI/CD)
