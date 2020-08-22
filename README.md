@@ -38,6 +38,9 @@
 - Capistrano
 - Certbot（SSL証明書）
 
+### インフラアーキテクチャ
+![AWS_proggraming_drill](https://user-images.githubusercontent.com/61898915/90954043-d1e1d400-e4ab-11ea-9e1b-0f0c20a27847.png)
+
 ## 機能一覧
 #### ユーザ関連
 - 新規登録、ログイン、ログアウト（devise使用）
