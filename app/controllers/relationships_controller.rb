@@ -5,6 +5,9 @@ class RelationshipsController < ApplicationController
     follow = current_user.active_relationships.build(follower_id: params[:user_id])
     follow.save
     follow.create_notification_follow!(current_user, follow.follower_id)
+    respond_to do |format|
+      format.js
+    end
   end
 
   def destroy
@@ -12,5 +15,8 @@ class RelationshipsController < ApplicationController
     @user = User.find(params[:user_now])
     follow = current_user.active_relationships.find_by(follower_id: params[:user_id])
     follow.destroy
+    respond_to do |format|
+      format.js
+    end
   end
 end

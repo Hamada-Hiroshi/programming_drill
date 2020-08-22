@@ -24,6 +24,9 @@ class LearningsController < ApplicationController
     if params[:learning][:status]
       @learning.update(learning_params)
       flash.now[:success] = "学習状況を更新しました。"
+      respond_to do |format|
+        format.js
+      end
     else
       @learning.update(learning_params)
       redirect_to app_learning_path(@learning.app)

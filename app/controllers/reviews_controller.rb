@@ -28,6 +28,9 @@ class ReviewsController < ApplicationController
       flash.now[:success] = "レビューを投稿しました。"
       @review.create_notification_review!(current_user, @app.user_id, @review.id)
     end
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
