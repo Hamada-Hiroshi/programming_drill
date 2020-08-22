@@ -23,6 +23,9 @@ class QuestionsController < ApplicationController
       end
       # 新しい質問投稿フォームを表示するためにインスタンスメソッドを空にする。
       @question = Question.new
+      respond_to do |format|
+        format.js
+      end
     end
   end
 
