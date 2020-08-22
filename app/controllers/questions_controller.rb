@@ -21,7 +21,7 @@ class QuestionsController < ApplicationController
         flash.now[:success] = "質問への回答を投稿しました。"
         @question.create_notification_reply!(current_user, @question.parent.user_id, @question.id)
       end
-      #新しい質問投稿フォームを表示するためにインスタンスメソッドを空にする。
+      # 新しい質問投稿フォームを表示するためにインスタンスメソッドを空にする。
       @question = Question.new
       respond_to do |format|
         format.js
