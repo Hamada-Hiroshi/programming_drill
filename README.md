@@ -1,6 +1,6 @@
 # プログラミングドリル
 先輩エンジニアが過去に作成したWebアプリケーション（ポートフォリオ）を投稿し、
-プログラミング学習者が学習のアウトプット教材として利用します。
+プログラミング学習者が学習のアウトプット教材として利用します。  
 URL:https://programming-drill.work
 
 ## テーマ選定理由
@@ -39,7 +39,7 @@ URL:https://programming-drill.work
 - Capistrano
 - Certbot（SSL証明書）
 
-### クラウドアーキテクチャ
+## クラウドアーキテクチャ
 ![AWS_proggraming_drill](https://user-images.githubusercontent.com/61898915/90954043-d1e1d400-e4ab-11ea-9e1b-0f0c20a27847.png)
 
 ## 機能一覧
