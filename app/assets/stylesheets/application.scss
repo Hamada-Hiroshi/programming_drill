@@ -264,6 +264,11 @@ p {
   }
 }
 
+//bootstrapのbtn-lgボタン
+.btn-lg:hover {
+  text-decoration: none;
+}
+
 //リンクボタンの間隔
 .actions a {
   margin: 0 20px;
