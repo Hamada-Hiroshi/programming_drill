@@ -604,6 +604,9 @@ input[type=checkbox]:checked + .checkbox01::after {
 //ストックアイコン
 .stock-button {
   float: right;
+  .fa-folder {
+    color: #666;
+  }
   .fa-folder-plus {
     color: cadetblue;
   }
