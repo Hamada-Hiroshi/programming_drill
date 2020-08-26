@@ -805,7 +805,7 @@ span {
       padding: 18px 10%;
       margin-top: 10px;
       background-color: #CCC;
-      &:hover {
+      &:hover, &.lang-active {
         background-color: $theme-color;
         color: #FFF;
       }
@@ -827,7 +827,7 @@ span {
     list-style: none;
     margin-top: 5px;
     margin-left: 10px;
-    a:hover {
+    a:hover, .tag-active {
       color: #FFF;
       background-color: $theme-color;
     }

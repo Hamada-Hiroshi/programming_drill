@@ -77,7 +77,7 @@ $(document).on('turbolinks:load', function(){
 });
 
 
-//フラッシュメッセージの表示、一定時間で非表示
+//フラッシュメッセージの表示、(一定時間で非表示)
 $(document).on('turbolinks:load', function(){
   $('.header-flash').hide();
   $('.header-flash').slideDown();
@@ -86,6 +86,22 @@ $(document).on('turbolinks:load', function(){
     setTimeout("$('.header-flash').slideUp('slow')", 4000);
   });
   */
+});
+
+
+//言語別・タグ別検索バーのcurrent表示
+$(document).on('turbolinks:load', function(){
+  var url = window.location.pathname;
+  var lang_url = "/"+url.split("/")[1]+"/"+url.split("/")[2];
+  $('a[href="'+lang_url+'"] .current-lang').addClass('lang-active');
+
+  var params = window.location.search
+  var tag_url = "/apps/tag"+params;
+  var rate_tag_url = "/apps/rate_tag"+params;
+  var popular_tag_url = "/apps/popular_tag"+params;
+  $('.current-tag a[href="'+tag_url+'"]').addClass('tag-active');
+  $('.current-tag a[href="'+rate_tag_url+'"]').addClass('tag-active');
+  $('.current-tag a[href="'+popular_tag_url+'"]').addClass('tag-active');
 });
 
 
@@ -165,8 +181,4 @@ $(document).on('turbolinks:load', function(){
     });
   }
 });
-
-
-
-
 
