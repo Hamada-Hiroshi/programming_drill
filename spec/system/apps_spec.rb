@@ -42,9 +42,9 @@ RSpec.describe "Apps", type: :system do
         expect(@apps[0].find('h4').text).to eq "新着2 評価1 人気3"
         expect(@apps[1].find('h4').text).to eq "新着1 評価2 人気2"
         expect(@apps[2].find('h4').text).to eq "新着3 評価3 人気1"
-        expect(@apps[0].first('span').text).to eq "（4.0）"
-        expect(@apps[1].first('span').text).to eq "（3.0）"
-        expect(@apps[2].first('span').text).to eq "（2.0）"
+        expect(@apps[0].first('.average-score').text).to eq "（4.0）"
+        expect(@apps[1].first('.average-score').text).to eq "（3.0）"
+        expect(@apps[2].first('.average-score').text).to eq "（2.0）"
       end
 
       click_link '人気順'
