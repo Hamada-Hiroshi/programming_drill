@@ -1,7 +1,7 @@
 <ul id="lang-index">
   <% langs.each do |lang| %>
     <%= link_to lang_path(lang) do %>
-      <li class="btn btn-default">
+      <li class="btn btn-default current-lang">
         <p><%= lang.name %><span>（<%= lang.apps.pluck(:status).count(true) %>）</span></p>
       </li>
     <% end %>
