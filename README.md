@@ -40,7 +40,7 @@ URL:https://programming-drill.work
 - Certbot（SSL証明書）
 
 ## クラウドアーキテクチャ
-![AWS_proggraming_drill](https://user-images.githubusercontent.com/61898915/90954043-d1e1d400-e4ab-11ea-9e1b-0f0c20a27847.png)
+![AWS_proggraming_drill](https://user-images.githubusercontent.com/61898915/91631225-fa6d4f00-ea12-11ea-9754-78f6d7f5cb1a.png)
 
 ## 機能一覧
 #### ユーザ関連
