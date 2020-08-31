@@ -7,7 +7,7 @@ RSpec.describe "Apps", type: :request do
 
   describe 'GET index' do
     it 'リクエストが成功する' do
-      get root_path
+      get apps_path
       expect(response.status).to eq 200
     end
   end

@@ -1,0 +1,58 @@
+<div id="top-image">
+  <div id="top-message">
+    <h1>その経験を、未来のエンジニアのために</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <section class="top-section">
+        <h3>新着アプリ</h3>
+        <div id="top-new-apps">
+          <% @apps.each do |app| %>
+            <%= link_to app_path(app) do %>
+              <div class="top-app-box">
+                <%= attachment_image_tag(app.user, :profile_image, size: "60x60", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
+                <span><%= app.lang.name %></span>
+                <h4><%= app.title %></h4>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <div id="index-link" class="text-right">
+          <%= link_to "もっと見る ＞", apps_path %>
+        </div>
+      </section>
+
+      <section class="top-section">
+        <h3>開発言語から探す</h3>
+        <div id="top-langs">
+          <%= render "langs/lang_index", langs: @langs %>
+        </div>
+      </section>
+
+      <section class="top-section">
+        <h3>タグから探す</h3>
+        <div id="top-tags">
+          <%= render "apps/tag_index" %>
+        </div>
+      </section>
+    </div>
+
+    <div class="col-md-3">
+      <div id="user-container">
+        <div id="sign-in-box">
+          <h4>ログインはこちらから</h4>
+          <p>ログインするとアプリの投稿や学習を始めることができます。</p>
+          <div class="text-center">
+            <%= link_to "ログイン", new_user_session_path, class: "btn btn-original" %>
+          </div>
+          <div class="text-center">
+            <%= link_to "新規登録", new_user_registration_path, class: "btn btn-original" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

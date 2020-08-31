@@ -23,7 +23,7 @@
     <div class="col-sm-9">
       <div class="app-index back-white">
         <ul class="nav nav-tabs">
-          <li><%= link_to "新着順", root_path(q: request.params[:q]) %></li>
+          <li><%= link_to "新着順", apps_path(q: request.params[:q]) %></li>
           <li><%= link_to "評価順", rate_index_apps_path(q: request.params[:q]) %></li>
           <li class="active"><%= link_to "人気順", popular_index_apps_path(q: request.params[:q]) %></li>
         </ul>

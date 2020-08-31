@@ -385,6 +385,85 @@ input[type=checkbox]:checked + .checkbox01::after {
 
 
 
+//トップページ -----------------------------------------------
+.top-section {
+  margin-bottom: 50px;
+}
+
+//新着アプリ
+#top-new-apps {
+  display: flex;
+  a {
+    width: 33%;
+    text-decoration: none;
+    .top-app-box {
+      height: 90%;
+      background-color: #FFF;
+      border: solid 1px lightgray;
+      border-radius: 4px;
+      box-shadow: 0 0 4px lightgrey;
+      margin: 10px;
+      padding: 10px;
+      span {
+        font-size: 20px;
+        color: #777;
+      }
+      h4 {
+        margin: 10px;
+        color: #000;
+      }
+    }
+  }
+}
+#index-link {
+  margin: 10px 30px 0 0;
+  a {
+    font-size: 16px;
+  }
+}
+
+//言語検索
+#top-langs > ul > a {
+  li {
+    width: 47%;
+    margin-left: 10px;
+    background-color: #FFF;
+    border: solid 1px lightgray;
+    border-radius: 4px;
+    box-shadow: 0 0 4px lightgrey;
+  }
+}
+
+//タグ検索
+#top-tags > ul > li {
+  margin: 10px 0 10px 10px;
+  a {
+    background-color: #FFF;
+    border: solid 1px lightgray;
+    border-radius: 4px;
+    box-shadow: 0 0 4px lightgrey;
+    padding: 7px 10px;
+    font-size: 14px;
+  }
+}
+
+//ユーザ情報
+#user-container {
+  margin-top: 30px;
+  background-color: oldlace;
+  border: solid 1px #999;
+  padding: 20px;
+  #sign-in-box {
+    background-color: #FFF;
+    padding: 10px;
+    .btn-info {
+      width:120px;
+      margin: 10px 0;
+    }
+  }
+}  
+
+
 //アプリ関連ページ -------------------------------------------
 //アプリ入力フォーム（共通）
 .app-form {
