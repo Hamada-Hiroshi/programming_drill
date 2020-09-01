@@ -48,19 +48,22 @@
       </section>
     </div>
 
-    <div class="col-md-3">
-      <div id="user-container">
-        <div id="sign-in-box">
-          <h4>ログインはこちらから</h4>
-          <p>ログインするとアプリの投稿や学習を始めることができます。</p>
-          <div class="text-center">
-            <%= link_to "ログイン", new_user_session_path, class: "btn btn-original" %>
-          </div>
-          <div class="text-center">
-            <%= link_to "新規登録", new_user_registration_path, class: "btn btn-original" %>
+    <div class="col-md-3" id="top-user-info">
+      <% unless user_signed_in? %>
+        <div id="user-container">
+          <div id="sign-in-box">
+            <h4>ログインはこちらから</h4>
+            <p>ログインするとアプリの投稿や学習を始めることができます。</p>
+            <div class="text-center">
+              <%= link_to "ログイン", new_user_session_path, class: "btn btn-original" %>
+            </div>
+            <div class="text-center">
+              <%= link_to "新規登録", new_user_registration_path, class: "btn btn-original" %>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
+      <%= render "users/user_sidebar", user: current_user %>
     </div>
   </div>
 </div>
