@@ -26,7 +26,7 @@ RSpec.describe "Apps", type: :system do
     let!(:review_6) { create(:review_5, user: other_user_2, app: app_r3_l2) }
 
     it 'アプリ一覧の並び替えテスト' do
-      visit root_path
+      visit apps_path
       @apps = page.all(".link-app-info")
 
       aggregate_failures do
@@ -286,7 +286,7 @@ RSpec.describe "Apps", type: :system do
     end
 
     it 'アプリを非公開にする', js: true do
-      visit root_path
+      visit apps_path
       expect(page).to have_link post_app[title], href: app_path(post_app)
 
       sign_in test_user
@@ -303,7 +303,7 @@ RSpec.describe "Apps", type: :system do
         expect(post_app.reload.status).to eq false
       end
 
-      visit root_path
+      visit apps_path
       expect(page).to_not have_link post_app[title], href: app_path(post_app)
     end
   end

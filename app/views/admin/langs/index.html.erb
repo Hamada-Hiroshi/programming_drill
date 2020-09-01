@@ -24,7 +24,7 @@
       </table>
     </div>
 
-    <div class="col-md-5 col-md-offset-1">
+    <div class="lang-info col-md-5 col-md-offset-1">
       <h3 class="admin-title">新規登録</h3>
       <%= form_with(model: [:admin, @lang], local: true) do |f| %>
         <%= render 'layouts/error_messages', model: @lang %>
@@ -34,7 +34,13 @@
           <%= f.text_field :name, class: "form-control" %>
         </div>
 
-        <div class="actions">
+        <div class="field lang-form">
+          <%= f.label :lang_image, "アイコン" %>
+          <%= f.attachment_field :lang_image, id: "image" %>
+          <img width="100" height="100" id="imagePreview">
+        </div>
+
+        <div class="actions">
           <%= f.submit "登録", class: "btn btn-original" %>
         </div>
       <% end %>
