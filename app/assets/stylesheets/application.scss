@@ -406,11 +406,11 @@ input[type=checkbox]:checked + .checkbox01::after {
       padding: 10px;
       span {
         font-size: 20px;
-        color: #777;
+        color: #555;
       }
       h4 {
         margin: 10px;
-        color: #000;
+        color: #555;
       }
     }
   }
@@ -423,14 +423,33 @@ input[type=checkbox]:checked + .checkbox01::after {
 }
 
 //言語検索
-#top-langs > ul > a {
-  li {
-    width: 47%;
-    margin-left: 10px;
-    background-color: #FFF;
-    border: solid 1px lightgray;
-    border-radius: 4px;
-    box-shadow: 0 0 4px lightgrey;
+#top-langs {
+  display: flex;
+  flex-wrap: wrap;
+  a {
+    width: 50%;
+    text-decoration: none;
+    .top-lang-box {
+      background-color: #FFF;
+      border: solid 1px lightgray;
+      border-radius: 4px;
+      box-shadow: 0 0 4px lightgrey;
+      margin: 10px 10px 0 10px;
+      padding: 5px;
+      min-height: 62px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .top-lang-name {
+        font-size: 20px;
+        color: #333;
+        margin-left: 5%;
+      }
+      .top-lang-count {
+        font-size: 14px;
+        color: #555;
+      }
+    }
   }
 }
 

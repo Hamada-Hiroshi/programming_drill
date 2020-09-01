@@ -28,7 +28,15 @@
       <section class="top-section">
         <h3>開発言語から探す</h3>
         <div id="top-langs">
-          <%= render "langs/lang_index", langs: @langs %>
+          <% @langs.each do |lang| %>
+            <%= link_to lang_path(lang) do %>
+              <div class="top-lang-box">
+                <%= attachment_image_tag(lang, :lang_image, size: "50x50", format: "jpeg") %>
+                <span class="top-lang-name"><%= lang.name %></span>
+                <span class="top-lang-count">（<%= lang.apps.pluck(:status).count(true) %>）</span>
+              </div>
+            <% end %>
+          <% end %>
         </div>
       </section>
 

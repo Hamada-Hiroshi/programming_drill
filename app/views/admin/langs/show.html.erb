@@ -35,6 +35,16 @@
           <%= f.text_field :name, class: "form-control" %>
         </div>
 
+        <div class="field lang-form">
+          <%= f.label :lang_image, "アイコン" %>
+          <% if @lang.lang_image_id != nil %>
+            <%= attachment_image_tag(@lang, :lang_image, size: "100x100", format: "jpeg", id: "imagePreview") %>
+          <% else %>
+            <img width="100" height="100" id="imagePreview">
+          <% end %>
+          <%= f.attachment_field :lang_image, id: "image" %>
+        </div>
+
         <div class="actions">
           <%= f.submit "更新", class: "btn btn-original" %>
         </div>

@@ -25,10 +25,10 @@
 
 //画像アップロード時のプレビュー表示
 $(document).on('turbolinks:load', function(){
-  $('#myImage').on('change', function (e) {
+  $('#image').on('change', function (e) {
     var reader = new FileReader();
     reader.onload = function (e) {
-      $("#profilePreview").attr('src', e.target.result);
+      $("#imagePreview").attr('src', e.target.result);
     }
     reader.readAsDataURL(e.target.files[0]);
   });

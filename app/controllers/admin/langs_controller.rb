@@ -47,6 +47,6 @@ class Admin::LangsController < ApplicationController
   private
 
   def lang_params
-    params.require(:lang).permit(:name)
+    params.require(:lang).permit(:name, :lang_image)
   end
 end
