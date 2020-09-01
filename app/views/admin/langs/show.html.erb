@@ -25,7 +25,7 @@
       <%= link_to "新規登録", admin_langs_path, class: "btn btn-default" %>
     </div>
 
-    <div class="col-md-5 col-md-offset-1">
+    <div class="lang-info col-md-5 col-md-offset-1">
       <h3 class="admin-title"><%= @lang.name %></h3>
       <%= form_with(model: [:admin, @lang], local: true) do |f| %>
         <%= render 'layouts/error_messages', model: @lang %>
@@ -37,18 +37,18 @@
 
         <div class="field lang-form">
           <%= f.label :lang_image, "アイコン" %>
+          <%= f.attachment_field :lang_image, id: "image" %>
           <% if @lang.lang_image_id != nil %>
             <%= attachment_image_tag(@lang, :lang_image, size: "100x100", format: "jpeg", id: "imagePreview") %>
           <% else %>
             <img width="100" height="100" id="imagePreview">
           <% end %>
-          <%= f.attachment_field :lang_image, id: "image" %>
         </div>
 
         <div class="actions">
           <%= f.submit "更新", class: "btn btn-original" %>
+          <%= link_to "この開発言語を削除する", admin_lang_path(@lang), method: :delete, class: "btn btn-original2", "data-confirm" => "本当に削除してよろしいですか？" %>
         </div>
-        <%= link_to "この開発言語を削除する", admin_lang_path(@lang), method: :delete, class: "btn btn-original2", "data-confirm" => "本当に削除してよろしいですか？" %>
       <% end %>
     </div>
   </div>

@@ -387,7 +387,7 @@ input[type=checkbox]:checked + .checkbox01::after {
 
 //トップページ -----------------------------------------------
 .top-section {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 //新着アプリ
@@ -404,6 +404,10 @@ input[type=checkbox]:checked + .checkbox01::after {
       box-shadow: 0 0 4px lightgrey;
       margin: 10px;
       padding: 10px;
+      &:hover {
+        border: solid 1px #FFD700;
+        background-color: rgba(0,0,0,0.2);
+      }
       span {
         font-size: 20px;
         color: #555;
@@ -440,6 +444,10 @@ input[type=checkbox]:checked + .checkbox01::after {
       display: flex;
       justify-content: center;
       align-items: center;
+      &:hover {
+        border: solid 1px #FFD700;
+        background-color: rgba(0,0,0,0.2);
+      }
       .top-lang-name {
         font-size: 20px;
         color: #333;
@@ -463,6 +471,11 @@ input[type=checkbox]:checked + .checkbox01::after {
     box-shadow: 0 0 4px lightgrey;
     padding: 7px 10px;
     font-size: 14px;
+    &:hover {
+      border: solid 1px #FFD700;
+      background-color: rgba(0,0,0,0.2);
+      color: #000;
+    }
   }
 }
 
@@ -1232,6 +1245,18 @@ span {
 }
 .lang-index > tbody > tr > td {
   font-size: 1.2em;
+}
+
+.lang-info {
+  .lang-form {
+    margin-bottom: 30px;
+    input {
+      margin-bottom: 10px;
+    }
+  }
+  .actions > .btn-original {
+    margin: initial;
+  }
 }
 
 //管理者ダッシュボード
