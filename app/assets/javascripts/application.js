@@ -35,6 +35,13 @@ $(document).on('turbolinks:load', function(){
 });
 
 
+//トップページのアニメーション
+$(document).on('turbolinks:load', function(){
+  $('#top-message h1').hide();
+  $('#top-message h1').fadeIn(2500);
+});
+
+
 //レビューの星表示
 $(document).on('turbolinks:load', function(){
   $('#star').html('');
