@@ -14,8 +14,12 @@
             <%= link_to app_path(app) do %>
               <div class="top-app-box">
                 <%= attachment_image_tag(app.user, :profile_image, size: "60x60", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
-                <span><%= app.lang.name %></span>
+                <span class="top-app-user"><%= app.user.name %></span>
                 <h4><%= app.title %></h4>
+                <span class="top-app-lang">
+                  <%= attachment_image_tag(app.lang, :lang_image, size: "20x20", format: "jpeg") %>
+                  <%= app.lang.name %>
+                </span>
               </div>
             <% end %>
           <% end %>
