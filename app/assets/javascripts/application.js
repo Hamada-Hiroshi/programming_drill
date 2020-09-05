@@ -137,6 +137,7 @@ $(document).on('turbolinks:load', function(){
     scale: .25,
     prefetch: 'pageload'
   });
+});
 
 //タグ付け、自動補完
 $(document).on('turbolinks:load', function(){
@@ -189,4 +190,3 @@ $(document).on('turbolinks:load', function(){
     });
   }
 });
-
