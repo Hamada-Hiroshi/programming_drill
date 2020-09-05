@@ -55,11 +55,14 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'bullet'
+  gem 'spring-commands-rspec'
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+  gem 'webdrivers'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
@@ -73,6 +76,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'refile', require: 'refile/rails', github: 'manfe/refile'
 gem 'refile-mini_magick'
+gem 'refile-s3'
 gem 'kaminari', '~> 1.2.1'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'ransack'
@@ -82,8 +86,12 @@ gem 'omniauth-google-oauth2'
 gem 'dotenv-rails'
 gem 'rails-i18n'
 gem 'rubocop-airbnb'
+gem 'jquery-ui-rails'
+gem 'gon'
+gem 'chartkick'
+gem 'groupdate'
+gem 'marked-rails'
 
 group :production do
   gem 'mysql2'
-  gem 'listen', '>= 3.0.5', '< 3.2'
 end

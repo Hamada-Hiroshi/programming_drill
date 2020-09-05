@@ -6,11 +6,18 @@
     <span><%= app.user.name %></span>
     <span><%= app.updated_at.strftime("%Y年%m月%d日更新") %></span>
   </div>
+  <span class="stock-button" id="stock-form-<%= app.id %>">
+    <% if user_signed_in? %>
+      <%= render 'stocks/stock_form', app: app %>
+    <% else %>
+      <i class="fas fa-folder fa-2x"></i>
+    <% end %>
+  </span>
   <h1><%= app.title %></h1>
   <div id="average-rate">
     <%= render 'reviews/average_rate', app: @app %>
   </div>
-  <p>開発言語：<%= link_to app.language.name, language_path(app.language) %></p>
+  <p>開発言語：<%= link_to app.lang.name, lang_path(app.lang) %></p>
   <% app.tag_list.each do |tag| %>
     <span class="tag-link"><%= link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag" %></span>
   <% end %>

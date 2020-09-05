@@ -2,9 +2,9 @@
   <div class="row border-box">
     <div class="col-md-3 border-space">
       <ul class="edit-link">
-        <li><%= link_to "プロフィール編集", edit_user_path(@user) %></li>
+        <li>プロフィール編集</li>
         <li><%= link_to "パスワード変更", edit_user_registration_path %></li>
-        <li><%= link_to "アカウント削除", quit_user_path(@user) %></li>
+        <li><%= link_to "アカウント停止", quit_user_path(@user) %></li>
       </ul>
     </div>
 
@@ -13,10 +13,10 @@
         <div class="col-md-10 col-md-offset-1">
           <%= form_with(model: @user, local: true) do |f| %>
             <div class="field edit-user">
-              <%= attachment_image_tag(@user, :profile_image, size: "150x150", format: "jpeg", fallback: "no_image.jpg", class: "img-circle", id: "profilePreview") %>
+              <%= attachment_image_tag(@user, :profile_image, size: "150x150", format: "jpeg", fallback: "no_image.jpg", class: "img-circle", id: "imagePreview") %>
               <div class="edit-user-name">
                 <h3><%= @user.name %></h3>
-                <%= f.attachment_field :profile_image, id: "myImage" %>
+                <%= f.attachment_field :profile_image, id: "image" %>
               </div>
             </div>
 

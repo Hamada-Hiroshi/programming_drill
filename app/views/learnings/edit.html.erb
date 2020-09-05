@@ -1,0 +1,25 @@
+<div class="marked-wrapper">
+  <h3>学習メモ</h3>
+  <%= form_with(model: [@learning.app, @learning]) do |f| %>
+    <div class="marked-form">
+      <div class="row">
+
+        <div class="col-md-6">
+          <h5>記入欄（マークダウン記法で記述できます）</h5>
+          <div class="field">
+            <div id='editor'>
+              <%= f.text_area :memo, placeholder: "ご自由に記入してください。", class: "textarea-form form-control", style: "min-height: 480px" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <h5>プレビュー</h5>
+          <div id="marked-area"></div>
+        </div>
+
+      </div>
+    </div>
+    <%= f.submit "メモを保存", class: "btn btn-original" %>
+  <% end %>
+</div>

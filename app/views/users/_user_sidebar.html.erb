@@ -1,0 +1,40 @@
+<% if user_signed_in? %>
+  <div id="my-info-bar">
+    <%= link_to user_path(user), id: "my-img" do %>
+      <div id="my-name">
+        <%= attachment_image_tag(user, :profile_image, size: "60x60", format: "jpeg", fallback: "no_image.jpg", class: "img-circle") %>
+        <span><%= user.name %></span>
+      </div>
+    <% end %>
+
+    <hr>
+
+    <div id="my-app">
+      <% if user == current_user %>
+        <h4>マイアプリ</h4>
+      <% else %>
+        <h4>アプリ情報</h4>
+      <% end %>
+      <ul id="app-count">
+        <li><%= link_to "投稿 #{user.apps.count}件", user_path(user), class: "btn-original3" %></li>
+        <li><%= link_to "学習 #{user.learnings.count}件", learnings_user_path(user), class: "btn-original3" %></li>
+        <li id="stock-count-btn">
+          <%= render 'stocks/stock_count_btn', user: user %>
+        </li>
+      </ul>
+    </div>
+
+    <hr>
+
+    <div id="my-user">
+      <% if user == current_user %>
+        <h4>マイユーザー</h4>
+      <% else %>
+        <h4>ユーザー情報</h4>
+      <% end %>
+      <ul id="follow-count">
+        <%= render 'relationships/follow_count', user: user %>
+      </ul>
+    </div>
+  </div>
+<% end %>

@@ -12,21 +12,28 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require jquery
+//= require jquery-ui
+//= require tag-it
+//= require chartkick
+//= require Chart.bundle
+//= require marked
+//= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
 
+
 //画像アップロード時のプレビュー表示
 $(document).on('turbolinks:load', function(){
-  $('#myImage').on('change', function (e) {
+  $('#image').on('change', function (e) {
     var reader = new FileReader();
     reader.onload = function (e) {
-      $("#profilePreview").attr('src', e.target.result);
+      $("#imagePreview").attr('src', e.target.result);
     }
     reader.readAsDataURL(e.target.files[0]);
   });
 });
+
 
 //レビューの星表示
 $(document).on('turbolinks:load', function(){
@@ -56,25 +63,47 @@ $(document).on('turbolinks:load', function(){
   });
 });
 
+
 //テキストエリアの高さ自動調整
 $(document).on('turbolinks:load', function(){
-  var $obj = $('textarea');
-  var height = parseInt($obj.css('lineHeight'));
-  $obj.on('click', function(e) {
-    var lines = ($(this).val() + '\n').match(/\n/g).length;
-    $(this).height(height  * lines);
-  });
-  $obj.on('input', function(e) {
-    var lines = ($(this).val() + '\n').match(/\n/g).length;
-    $(this).height(height  * lines);
+  $('textarea').on('click input paste cut', function(){
+    if ($(this).outerHeight() > this.scrollHeight){
+      $(this).height(1)
+    }
+    while ($(this).outerHeight() < this.scrollHeight){
+      $(this).height($(this).height() + 1)
+    }
   });
 });
 
-//フラッシュメッセージの表示
+
+//フラッシュメッセージの表示、(一定時間で非表示)
 $(document).on('turbolinks:load', function(){
   $('.header-flash').hide();
   $('.header-flash').slideDown();
+  /*
+  $(function(){
+    setTimeout("$('.header-flash').slideUp('slow')", 4000);
+  });
+  */
 });
+
+
+//言語別・タグ別検索バーのcurrent表示
+$(document).on('turbolinks:load', function(){
+  var url = window.location.pathname;
+  var lang_url = "/"+url.split("/")[1]+"/"+url.split("/")[2];
+  $('a[href="'+lang_url+'"] .current-lang').addClass('lang-active');
+
+  var params = window.location.search
+  var tag_url = "/apps/tag"+params;
+  var rate_tag_url = "/apps/rate_tag"+params;
+  var popular_tag_url = "/apps/popular_tag"+params;
+  $('.current-tag a[href="'+tag_url+'"]').addClass('tag-active');
+  $('.current-tag a[href="'+rate_tag_url+'"]').addClass('tag-active');
+  $('.current-tag a[href="'+popular_tag_url+'"]').addClass('tag-active');
+});
+
 
 //リンクバー固定、current表示
 $(document).on('turbolinks:load', function(){
@@ -88,11 +117,12 @@ $(document).on('turbolinks:load', function(){
     $(window).on('scroll resize', function(){ // スクロールかリサイズ時
       // 現在の位置
       var scrollTop = $(document).scrollTop();
-      if (scrollTop > sidebar_top - 80){
+      if (scrollTop > sidebar_top - 100){
         // 現在位置が、初期位置より下なら、画面上部にサイドバーを固定
-        sidebar.css({'position': 'fixed',
-            'top': 80,
-            'width': sidebar.width()
+        sidebar.css({
+          'position': 'fixed',
+          'top': 100,
+          'width': sidebar.width()
         });
       }
     });
@@ -107,5 +137,56 @@ $(document).on('turbolinks:load', function(){
     scale: .25,
     prefetch: 'pageload'
   });
+
+//タグ付け、自動補完
+$(document).on('turbolinks:load', function(){
+  if($('#app-tags').length){
+    $('#app-tags').html('');
+    $('#app-tags').tagit({
+      fieldName: 'app[tag_list]',
+      singleField: true,
+      availableTags: gon.available_tags
+    });
+    var i, len, tag;
+    if (gon.app_tags != null) {
+      for (i = 0, len = gon.app_tags.length; i < len; i++) {
+        tag = gon.app_tags[i];
+        $('#app-tags').tagit('createTag', tag);
+      }
+    }
+  }
+});
+
+
+//マークダウン記法
+$(document).on('turbolinks:load', function(){
+  if($("#marked-text").length){
+    var text = $("#marked-text").html();
+    $("#marked-text").html(marked(text));
+  }
+});
+
+$(document).on('turbolinks:load', function(){
+  if($("#marked-area").length){
+    var html = $("#editor textarea").val();
+    $("#marked-area").html(marked(html));
+
+    $(function() {
+      $("#editor textarea").each(function () {
+        $(this).on('keyup', replaceMarkdown(this));
+      });
+
+      function replaceMarkdown(elm) {
+        var v, old = elm.value;
+        return function () {
+          if (old != (v = elm.value)) {
+          old = v;
+          str = $(this).val();
+          $("#marked-area").html(marked(str));
+          }
+        }
+      }
+    });
+  }
 });
 

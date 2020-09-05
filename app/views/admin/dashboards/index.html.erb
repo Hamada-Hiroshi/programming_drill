@@ -1,0 +1,32 @@
+<div class="container admin-space">
+  <h3 class="admin-title">ダッシュボード</h3>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="chart">
+        <h4>ユーザー登録者数遷移 / 日</h4>
+        <p>累計登録者数：<%= @users.count %>人（退会者除く）</p>
+        <%= area_chart @new_user, download: true %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="chart">
+        <h4>投稿アプリ　開発言語内訳</h4>
+        <p>累計アプリ投稿数：<%= @apps.count %>（非公開アプリ除く）</p>
+        <%= pie_chart @app_lang, download: true %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="chart">
+        <h4>学習　開発言語内訳</h4>
+        <p>累計学習数：<%= @learnings.count %>（非公開アプリ除く）</p>
+        <%= pie_chart @learning_lang, download: true %>
+      </div>
+    </div>
+  </div>
+
+</div>
+

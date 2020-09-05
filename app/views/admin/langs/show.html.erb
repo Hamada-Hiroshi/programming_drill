@@ -1,0 +1,55 @@
+<div class="container admin-space">
+  <div class="row">
+    <div class="col-md-5">
+      <h3 class="admin-title">開発言語一覧</h3>
+      <table class="table lang-index">
+        <thead>
+          <tr>
+            <th>言語名</th>
+            <th>登録アプリ数</th>
+            <th>全体に占める割合</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @langs.each do |lang| %>
+            <tr>
+              <td><%= lang.name %></td>
+              <td class="text-center"><%= lang.apps.pluck(:status).count(true) %></td>
+              <td class="text-center"><%= "#{lang.apps.pluck(:status).count(true) * 100 / @apps.count }％" %></th>
+              <td><%= link_to "詳細・編集", admin_lang_path(lang), class: "btn btn-sm btn-default" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= link_to "新規登録", admin_langs_path, class: "btn btn-default" %>
+    </div>
+
+    <div class="lang-info col-md-5 col-md-offset-1">
+      <h3 class="admin-title"><%= @lang.name %></h3>
+      <%= form_with(model: [:admin, @lang], local: true) do |f| %>
+        <%= render 'layouts/error_messages', model: @lang %>
+
+        <div class="field lang-form">
+          <%= f.label :name, "言語名編集" %>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="field lang-form">
+          <%= f.label :lang_image, "アイコン" %>
+          <%= f.attachment_field :lang_image, id: "image" %>
+          <% if @lang.lang_image_id != nil %>
+            <%= attachment_image_tag(@lang, :lang_image, size: "100x100", format: "jpeg", id: "imagePreview") %>
+          <% else %>
+            <img width="100" height="100" id="imagePreview">
+          <% end %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "更新", class: "btn btn-original" %>
+          <%= link_to "この開発言語を削除する", admin_lang_path(@lang), method: :delete, class: "btn btn-original2", "data-confirm" => "本当に削除してよろしいですか？" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

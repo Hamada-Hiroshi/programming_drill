@@ -30,7 +30,8 @@
         </div>
 
         <div class="actions text-center">
-          <%= f.submit "登録する", class: "btn btn-original" %>
+          <%= f.submit "登録する", class: "btn btn-original" %><br>
+          <%= link_to "Googleアカウントでログイン", user_google_oauth2_omniauth_authorize_path, class: "btn btn-original2" %>
         </div>
       <% end %>
 

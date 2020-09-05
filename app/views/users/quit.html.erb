@@ -4,7 +4,7 @@
       <ul class="edit-link">
         <li><%= link_to "プロフィール編集", edit_user_path(@user) %></li>
         <li><%= link_to "パスワード変更", edit_user_registration_path %></li>
-        <li><%= link_to "アカウント削除", quit_user_path(@user) %></li>
+        <li>アカウント停止</li>
       </ul>
     </div>
 
@@ -16,9 +16,9 @@
             <h3 class="edit-user-name"><%= @user.name %></h3>
           </div>
           <div class="confirm-message">
-            <p>現在利用しているアカウントを削除します。<br>削除すると、これまで利用された学習履歴やマイページが<br>全て閲覧できなくなります。<br><br>本当にアカウントを削除してもよろしいですか？</p>
+            <p>現在利用しているアカウントを停止（退会）します。<br>退会すると、これまで利用された学習履歴やマイページが<br>全て閲覧できなくなります。<br><br>本当に退会してもよろしいですか？</p>
             <%= link_to "アカウントを継続", user_path(@user), class: "btn btn-primary" %>
-            <%= link_to "アカウントを削除", cancel_user_path(@user), method: :patch, class: "btn btn-danger" %>
+            <%= link_to "退会する", cancel_user_path(@user), method: :patch, class: "btn btn-danger", "data-confirm" => "退会してもよろしいですか？" %>
           </div>
         </div>
       </div>

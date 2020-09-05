@@ -1,0 +1,9 @@
+<% if app.stocked?(current_user) %>
+  <%= link_to app_stocks_path(app), method: :delete, remote: true do %>
+    <i class="fas fa-folder-plus fa-2x"></i>
+  <% end %>
+<% else %>
+  <%= link_to app_stocks_path(app), method: :post, remote: true do %>
+    <i class="fas fa-folder-minus fa-2x"></i>
+  <% end %>
+<% end %>

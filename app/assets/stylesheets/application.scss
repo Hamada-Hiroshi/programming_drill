@@ -11,12 +11,37 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require jquery.tagit
+ *= require tagit.ui-zendesk
  *= require_self
  */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+$theme-color: #494275;
+$theme-color2: #6A5ACD;
+$back-grey: #F6F6F6;
+$dark-grey: #48484A;
+$original-btn: #FFD700;
+$dark-orange: #FF8C00;
+$index-border: #C0C0C0;
+$back-blue: #D9E5FF;
 
+@mixin link-box {
+  background-color: #FFF;
+  border: solid 1px lightgray;
+  border-radius: 4px;
+  box-shadow: 0 0 4px lightgrey;
+}
+
+@mixin link-box-hover {
+  border: solid 1px #FFD700;
+  background-color: rgba(0,0,0,0.2);
+}
+
+
+//共通 -----------------------------------------------------
 * {
   margin: 0;
   padding: 0;
@@ -24,13 +49,21 @@
 }
 
 body {
-  padding-top: 55px;
-  background-color: #F6F6F6;
+  padding-top: 80px;
+  background-color: $back-grey;
 }
 
+.main-body {
+  min-height: 600px;
+  .container {
+    margin-top: 20px;
+  }
+}
+
+//ヘッダ
 #header-top {
-  background-color: #483D8B;
-  min-height: 62px;
+  background-color: $theme-color;
+  min-height: 56px;
 }
 .header-logo img {
   width: 230px;
@@ -39,8 +72,15 @@ body {
 }
 #header-link {
   li {
+    position: relative;
     padding: 18px 15px 0  15px;
     font-size: 1.1em;
+    .n-circle {
+      position: absolute;
+      left: 4rem;
+      top: 1.5rem;
+      color: #efa04c;
+    }
     a {
       color: #FFF;
       padding: 0;
@@ -53,11 +93,11 @@ body {
 #header-mylink {
   padding: 8px 15px !important;
 }
-#app_search {
+#app_search, #user_search {
   padding: 13px 0px;
   margin: 0;
 }
-#q_title_cont {
+#q_title_or_lang_name_or_tags_name_cont {
   height: 30px;
 }
 
@@ -82,6 +122,7 @@ body {
     float: right;
     list-style: none;
     font-size: 1.1em;
+    margin-left: 40px;
     a {
       color: #000;
     }
@@ -110,19 +151,25 @@ body {
   color: #BB0000;
 }
 
-.main-body {
-  min-height: 600px;
-  .container {
-    margin-top: 20px;
-  }
+//検索バー
+.search {
+  padding:6px 15px 6px 30px;
+  background: image-url("search_icon.png") no-repeat 8px 6px;
+  background-size: 15px;
+  border-radius:15px;
+  -moz-border-radius:15px;
+  -webkit-border-radius:15px;
+  border:1px solid #d0d0d0;
+  background-color:#fcfcfc;
 }
 
+//フッタ
 footer {
   #footer-top {
     padding-top: 50px;
     margin-top: 30px;
     height: 200px;
-    background-color: #483D8B;
+    background-color: $dark-grey;
     border-top: solid 1px #AAA;
     border-bottom: solid 1px #AAA;
     a {
@@ -134,19 +181,6 @@ footer {
     padding: 10px 0;
     text-align: center;
   }
-}
-
-//検索バー
-.search {
-  padding:6px 15px 6px 30px;
-  margin:3px;
-  background: image-url("search_icon.png") no-repeat 8px 6px;
-  background-size: 15px;
-  border-radius:15px;
-  -moz-border-radius:15px;
-  -webkit-border-radius:15px;
-  border:1px solid #d0d0d0;
-  background-color:#fcfcfc;
 }
 
 //白背景のボックス、ボーダー
@@ -183,8 +217,14 @@ footer {
 
 //グレー背景のみ
 .back-grey {
-  background-color: #F6F6F6;;
-  padding: 20px 20px;
+  background-color: $back-grey;;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+}
+
+//管理者ページ用余白
+.admin-space {
+  padding-top: 10px;
 }
 
 //改行を反映
@@ -194,7 +234,7 @@ p {
 
 //オリジナルボタン
 .btn-original {
-  background-color: #FFD700;
+  background-color: $original-btn;
   color: #000;
   font-size: 1.2em;
   padding: 5px 30px;
@@ -203,7 +243,7 @@ p {
   border: solid 1px #808080;
   border-radius: 20px;
   &:hover {
-    background-color: #FF8C00;
+    background-color: $dark-orange;
   }
 }
 
@@ -222,6 +262,30 @@ p {
   }
 }
 
+//オリジナルボタン3
+.btn-original3 {
+  background-color: cadetblue;
+  color: #FFF;
+  font-size: 0.9em;
+  padding: 5px 10px;
+  border: solid 1px #808080;
+  border-radius: 10px;
+  &:hover {
+    background-color: #AAA;
+    text-decoration: none;
+  }
+}
+
+//bootstrapのbtn-lgボタン
+.btn-lg:hover {
+  text-decoration: none;
+}
+
+//リンクボタンの間隔
+.actions a {
+  margin: 0 20px;
+}
+
 //エラーメッセージ
 #error-explanation {
   border: solid 1px red;
@@ -235,27 +299,277 @@ p {
   @extend .has-error;
 }
 
-//リンクボタンの間隔
-.actions a {
-  margin: 0 20px;
+//セレクトボックス
+.field select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-block;
+  max-width: 300px;
+  vertical-align: middle;
+  padding: 0.6em 2.0em 0.6em 0.5em; /* 文字周りの余白 */
+  cursor: pointer; /* カーソルを指に */
+  line-height: 14px; /* 行高 */
+  font-size: 15px; /* フォントサイズ */
+  border-radius: 4px; /* 角丸 */
+  border: solid 1px $index-border; /* 枠線 */
+  background-color: #FFF;
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.4) 50%),
+    linear-gradient(135deg, rgba(0,0,0,0.4) 50%, transparent 50%);
+  background-size: 5px 5px, 5px 5px;
+  background-position: calc(100% - 15px) 50%, calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
 }
 
-//アプリ詳細のリンクバー
-.one-btn {
-  margin-top: 30px;
+//チェックボックス
+input[type=checkbox] {
+  display: none;
 }
-.current-btn a, .one-btn a {
-  width: 80%;
-  border-radius: 0;
-  padding: 15px 0;
+.checkbox01 {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 30px;
+  position: relative;
+  width: auto;
+  font-size: 15px;
 }
-.btn-active {
-  background-color: #6A5ACD;
+.checkbox01::before {
+  background: #FFF;
+  border: 1px solid #231815;
+  content: '';
+  display: block;
+  height: 16px;
+  left: 5px;
+  margin-top: -8px;
+  position: absolute;
+  top: 50%;
+  width: 16px;
+}
+.checkbox01::after {
+  border-right: 3px solid $dark-orange;
+  border-bottom: 3px solid $dark-orange;
+  content: '';
+  display: block;
+  height: 12px;
+  left: 10px;
+  margin-top: -7px;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: rotate(45deg);
+  width: 8px;
+}
+input[type=checkbox]:checked + .checkbox01::after {
+  opacity: 1;
+}
+
+//横幅いっぱいの投稿フォーム
+.textarea-form {
+  width: 100%;
+  min-height: 150px;
+  padding: 5px;
+}
+
+//ページネーション
+.paginate {
+  text-align: center;
+}
+.pagination>li>a {
+  border: none;
+  color: #696969;
+  background-color: initial;
+}
+.pagination>.active>a {
+  background: $theme-color;
+  border-radius: 15px;
   color: #FFF;
   &:hover {
-    background-color: #6A5ACD;
-    color: #FFF;
+    background: $theme-color;
   }
+}
+.pagination>li>a:hover {
+  border-radius: 15px;
+  background-color: #878796;
+  color: #FFF
+}
+
+
+
+//トップページ -----------------------------------------------
+.top-section {
+  margin-bottom: 30px;
+}
+
+//新着アプリ
+#top-new-apps {
+  display: flex;
+  flex-wrap: wrap;
+  a {
+    width: 33%;
+    text-decoration: none;
+    .top-app-box {
+      @include link-box;
+      height: 90%;
+      margin: 10px;
+      padding: 10px;
+      &:hover {
+        @include link-box-hover;
+      }
+      .top-app-user {
+        font-size: 14px;
+        color: #555;
+        margin-left: 10px;
+      }
+      h4 {
+        margin: 10px;
+      }
+      .top-app-lang {
+        font-size: 16px;
+        color: #333;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+#index-link {
+  margin: 10px 30px 0 0;
+  a {
+    font-size: 16px;
+  }
+}
+
+//言語検索
+#top-langs {
+  display: flex;
+  flex-wrap: wrap;
+  a {
+    width: 50%;
+    text-decoration: none;
+    .top-lang-box {
+      @include link-box;
+      margin: 10px 10px 0 10px;
+      padding: 5px;
+      min-height: 62px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+        @include link-box-hover;
+      }
+      .top-lang-name {
+        font-size: 20px;
+        color: #333;
+        margin-left: 5%;
+      }
+      .top-lang-count {
+        font-size: 14px;
+        color: #555;
+      }
+    }
+  }
+}
+
+//タグ検索
+#top-tags > ul > li {
+  margin: 10px 0 10px 10px;
+  a {
+    @include link-box;
+    padding: 7px 10px;
+    font-size: 14px;
+    &:hover {
+      @include link-box-hover;
+      color: #000;
+    }
+  }
+}
+
+//ユーザ情報
+#top-user-info {
+  #user-container {
+    margin-top: 30px;
+    background-color: oldlace;
+    border: solid 1px #999;
+    padding: 20px;
+    #sign-in-box {
+      background-color: #FFF;
+      padding: 10px;
+      .btn-info {
+        width:120px;
+        margin: 10px 0;
+      }
+    }
+  }
+  #my-info-bar {
+    margin-top: 30px;
+  }
+}
+
+
+//アプリ関連ページ -------------------------------------------
+//アプリ入力フォーム（共通）
+.app-form {
+  width: 90%;
+  margin: 0 auto;
+}
+.new-app-form {
+  margin-bottom: 30px;
+  label {
+    font-size: 1.2em;
+    width: 25%;
+    vertical-align: top;
+    text-align: right;
+    margin-right: 5%;
+  }
+  input {
+    width: 65%;
+    display: inline-block;
+  }
+  textarea {
+    width: 65%;
+    min-height: 100px;
+    display: inline-block;
+  }
+  .mini-height {
+    min-height: 54px;
+  }
+  p {
+    margin: 0 0 0 30%;
+  }
+  .tagit {
+    display: inline-block;
+    width: 65%;
+    height: 68px;
+    margin-bottom: 0;
+  }
+}
+
+//アプリ入力フォーム（編集ページのみ）
+.edit-app-form, .add-edit-app-form {
+  width: 95%;
+  margin: 0 auto 40px;
+  label {
+    font-size: 1.2em;
+  }
+  textarea {
+    min-height: 100px;
+  }
+  .mini-height {
+    min-height: 54px;
+  }
+  .tagit {
+    height: 68px;
+    margin-bottom: 0;
+  }
+}
+.add-edit-app-form textarea {
+  min-height: 400px;
+}
+
+//アプリ編集
+.edit-app-title h2 {
+  margin: 10px 15px 50px 15px;
 }
 
 //編集ページのリンクバー
@@ -268,35 +582,22 @@ p {
   }
 }
 
-//タグ
-.tag-link {
-  display: inline-block;
-  margin: 0 5px 7px 0;
-  .btn-tag {
-    background-color: #CCC;
-    padding: 4px 8px;
-    &:hover {
-      text-decoration: none;
-    }
+//アプリ投稿確認
+.new-app-confirm {
+  margin-bottom: 40px;
+  h4 {
+    font-weight: bold;
   }
-}
-
-//レビュー星
-#star {
-  display: inline-block;
-  margin: 0 20px 10px 0;
-}
-
-.star-rate {
-  display: inline-block;
-}
-span {
-  font-size: 0.9em;
+  p, a {
+    margin: 15px 0 5px;
+    font-size: 1.2em;
+    word-wrap: break-word;
+  }
 }
 
 //アプリ一覧の各アプリ
 .link-app-box {
-  border-bottom: solid 1px #C0C0C0;
+  border-bottom: solid 1px $index-border;
   padding: 10px 0;
   .link-app-user {
     float: left;
@@ -314,12 +615,15 @@ span {
         height: 13px;
       }
     }
+    .learning-count {
+      margin-left: 20px;
+    }
   }
 }
 
 //マイページのアプリ一覧の各アプリ
 .my-app-box {
-  border-bottom: solid 1px #C0C0C0;
+  border-bottom: solid 1px $index-border;
   padding: 10px 20px 15px;
 }
 .my-app {
@@ -349,12 +653,40 @@ span {
 }
 .my-app-edit {
   margin-top: 20px;
+  p {
+    display: inline-block;
+    padding: 5px 20px;
+  }
+}
+
+//アプリ詳細のリンクバー
+.one-btn {
+  margin-top: 30px;
+}
+.current-btn a, .one-btn a {
+  width: 100%;
+  max-width: 135px;
+  min-width: 110px;
+  border-radius: 0;
+  padding: 15px 0;
+}
+.btn-active {
+  background-color: $original-btn;
+  color: #000;
+  &:hover {
+    background-color: $original-btn;
+    color: #000;
+  }
+}
+.app-link {
+  font-size: 1.1em;
 }
 
 //アプリ詳細
 .app-info {
   .app-info-top {
     .app-post {
+      display: inline-block;
       a {
         text-decoration: none;
       }
@@ -382,9 +714,51 @@ span {
       word-wrap: break-word;
     }
   }
+  #make-app {
+    margin: 50px 0 20px 0;
+    text-align: center;
+  }
 }
 
-//アプリ詳細の学習関連ページ
+
+
+//アプリ付随機能 ---------------------------------------------
+//ストックアイコン
+.stock-button {
+  float: right;
+  .fa-folder {
+    color: #666;
+  }
+  .fa-folder-plus {
+    color: cadetblue;
+  }
+  .fa-folder-minus {
+    color: $dark-grey;
+  }
+}
+
+//タグ
+.tag-link {
+  display: inline-block;
+  margin: 0 5px 7px 0;
+  .btn-tag {
+    background-color: #CCC;
+    padding: 4px 8px;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+//ヒント・解説
+#hint-info, #explanation-info p {
+  font-size: 1.2em;
+}
+
+//学習関連ページ
 .learning-app-info {
   h1 {
     margin-bottom: 30px;
@@ -409,30 +783,38 @@ span {
   }
 }
 
-//横幅いっぱいの投稿フォーム
-.textarea-form {
-  width: 100%;
-  min-height: 150px;
+//マークダウン編集ページ
+.marked-wrapper {
+  padding: 0 2%;
+  span {
+    float: right;
+  }
+  .marked-form {
+    border: solid 1px #AAA;
+    padding: 15px;
+    #marked-area {
+      background-color: #FFF;
+      padding: 1px 20px;
+      min-height: 480px;
+      overflow :scroll;
+      list-style: inside;
+    }
+  }
 }
-
-//ヒント・解説
-#hint-info, #explanation-info p {
-  font-size: 1.2em;
-}
-
-//質問、レビュー投稿
-#review-form {
-  margin-top: 30px;
-  p {
-    margin-top: 30px;
+#marked-text {
+  overflow :scroll;
+  list-style: inside;
+  a {
+    margin-top: 10px;
   }
 }
 
+//質問、レビュー、通知一覧
 #question-index > p, #review-index > p {
   margin-top: 30px;
 }
-.question-box, .review-box {
-  border-top: solid 1px #C0C0C0;
+.question-box, .review-box, .notification-box {
+  border-top: solid 1px $index-border;
   margin-top: 30px;
   padding-top: 20px;
 }
@@ -455,11 +837,11 @@ span {
   .reply {
     list-style: none;
     padding: 10px;
-    border-top: solid 1px #C0C0C0;
-    border-right: solid 1px #C0C0C0;
-    border-left: solid 1px #C0C0C0;
+    border-top: solid 1px $index-border;
+    border-right: solid 1px $index-border;
+    border-left: solid 1px $index-border;
     &:last-child {
-      border-bottom: solid 1px #C0C0C0;
+      border-bottom: solid 1px $index-border;
     }
   }
 }
@@ -467,49 +849,173 @@ span {
   margin-left: 35px;
 }
 
-//セレクトボックス
-select {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
+//レビュー星表示（共通）
+.star-rate {
   display: inline-block;
-  vertical-align: middle;
-  padding: 0.6em 2.0em 0.6em 0.5em; /* 文字周りの余白 */
-  cursor: pointer; /* カーソルを指に */
-  line-height: 14px; /* 行高 */
-  font-size: 15px; /* フォントサイズ */
-  border-radius: 4px; /* 角丸 */
-  border: solid 1px #C0C0C0; /* 枠線 */
-  background-color: #FFF;
-  background-image:
-    linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.4) 50%),
-    linear-gradient(135deg, rgba(0,0,0,0.4) 50%, transparent 50%);
-  background-size: 5px 5px, 5px 5px;
-  background-position: calc(100% - 15px) 50%, calc(100% - 10px) 50%;
-  background-repeat: no-repeat;
+}
+span {
+  font-size: 0.9em;
 }
 
-//マイページ
-#user-image {
-  margin-top: 20px;
+//レビュー星（手動入力）
+#manual-rating {
+  vertical-align: bottom;
+  #star {
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 15px;
+  }
+  span {
+    font-size: 15px;
+    font-weight: bold;
+  }
 }
-#user-info {
+
+//レビューフォーム
+#review-form {
+  margin-top: 30px;
+  p {
+    margin-top: 30px;
+  }
+}
+
+//通知
+.notification-delete a span {
+  color: #000;
+  font-size: 1.2em;
+  margin-right: 20px;
+}
+.notification-box {
+  .visitor-img {
+    height: 60px;
+    float: left;
+  }
+  a {
+    text-decoration: none;
+  }
+  .notification-info {
+    margin: 15px 0 0 50px;
+    .notification-form {
+      font-size: 16px;
+    }
+  }
+  .notification-content {
+    padding: 20px 10px 0 50px;
+    color: #565454D1;
+  }
+}
+
+
+
+//サイドバー（言語・タグ検索、ユーザ情報） ---------------------------
+//検索サイドバー全体
+.category-bar {
+  //padding-top: 30px;
   margin-bottom: 40px;
-  #user-acount {
-    h3 {
-      display: inline-block;
-      margin-right: 30px;
-      margin-bottom: 0;
+}
+
+//言語別検索バー
+#lang-index {
+  padding: 0;
+  a {
+    &:hover {
+      text-decoration: none;
     }
-    a {
-      vertical-align: bottom;
+    li {
+      list-style: none;
+      width: 100%;
+      padding: 18px 10%;
+      margin-top: 10px;
+      background-color: #CCC;
+      &:hover, &.lang-active {
+        background-color: $theme-color;
+        color: #FFF;
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3);
+        transition: color 0.3s ease;
+      }
+      p {
+        margin: 0;
+        font-size: 18px;
+        span {
+          font-size: 13px;
+        }
+      }
     }
-  }
-  #user-introduction {
-    margin: 20px 0;
   }
 }
 
+//タグ別検索バー
+#tag-index {
+  padding: 0;
+  li {
+    list-style: none;
+    margin-top: 5px;
+    margin-left: 10px;
+    a:hover, .tag-active {
+      color: #FFF;
+      background-color: $theme-color;
+      box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3);
+      transition: color 0.3s ease;
+    }
+  }
+}
+
+//ユーザ情報バー
+#my-info-bar {
+  padding: 20px 10px;
+  background-color: #FFF;
+  border: solid 0.5px $theme-color2;
+  ul {
+    margin-bottom: initial;
+  }
+  li {
+    list-style: none;
+    color: #000;
+  }
+  #my-img {
+    text-decoration: none;
+    #my-name {
+      img {
+        margin-right: 10px;
+      }
+      span {
+        display: inline-block;
+        font-size: 1.3em;
+        color: #000;
+        margin-top: 15px;
+      }
+    }
+  }
+  #my-app > #app-count >li, #my-user > #follow-count > li {
+    margin: 15px 0 0 10px;
+  }
+}
+
+//ユーザーバー固定
+.fixed {
+  position: sticky;
+  top: 100px;
+}
+
+//タブメニュー
+.nav-tabs > li.active > a {
+  background-color: $back-blue;
+  border: none;
+  border-bottom: solid 3px $theme-color2;
+  &:hover, &:focus {
+    background-color: $back-blue;
+
+    border: none;
+    border-bottom: solid 3px $theme-color2;
+  }
+}
+.nav-tabs > li > a {
+  margin-right: initial;
+}
+
+
+
+//ユーザ関連ページ -----------------------------------------
 //新規登録・ログイン
 .new-user {
   width: 500px;
@@ -518,7 +1024,18 @@ select {
     margin-bottom: 40px;
   }
   .actions {
-    margin: 30px 0 20px 0;
+    margin-bottom: 20px;
+    .btn {
+      margin-top: 10px;
+      margin-bottom: 5px;
+      width: 280px;
+    }
+    .btn-original {
+      background-color: #AAA;
+    }
+    .btn-original2 {
+      background-color: #F54F4FD9;
+    }
   }
 }
 
@@ -538,27 +1055,12 @@ select {
   }
 }
 
-//プロフィール編集画面のユーザ情報
-.edit-user {
-  img {
-    float: left;
-  }
-  .edit-user-name {
-    min-height: 150px;
-    margin: 0 0 30px 200px;
-    padding-top: 30px;
-    h3 {
-      margin-top: 0;
-    }
-  }
-}
-
 //ユーザ情報編集
 .edit-user-form {
   width: 500px;
 }
 
-//ユーザ情報の入力フォーム
+//ユーザ情報の入力フォーム（編集）
 .user-form{
   margin-bottom: 20px;
   label {
@@ -597,75 +1099,78 @@ select {
   }
 }
 
-//アプリ入力フォーム（共通）
-.app-form {
-  width: 90%;
-  margin: 0 auto;
-}
-.new-app-form {
-  margin-bottom: 30px;
-  label {
+//マイページ
+#user-info {
+  margin-bottom: 40px;
+  #user-acount {
+    h3 {
+      display: inline-block;
+      margin-right: 30px;
+      margin-bottom: 0;
+    }
+    a {
+      vertical-align: bottom;
+    }
+  }
+  #user-follow li {
+    list-style: none;
+    display: inline-block;
     font-size: 1.2em;
-    width: 25%;
-    vertical-align: top;
-    text-align: right;
-    margin-right: 5%;
+    margin: 15px 30px 0 20px;
   }
-  input {
-    width: 65%;
-    display: inline-block;
+  #user-introduction {
+    margin: 20px 0;
   }
-  textarea {
-    width: 65%;
-    min-height: 100px;
-    display: inline-block;
+}
+
+//プロフィール編集画面のユーザ情報
+.edit-user {
+  img {
+    float: left;
   }
-  .mini-height {
-    min-height: 54px;
+  .edit-user-name {
+    min-height: 150px;
+    margin: 0 0 30px 200px;
+    padding-top: 30px;
+    h3 {
+      margin-top: 0;
+    }
+  }
+}
+
+//フォロー、フォロワー一覧
+.follow-user-img {
+  float: left;
+}
+.follow-user-info {
+  margin-left: 80px;
+  h4 {
+    margin-top: initial;
   }
   p {
-    margin: 0 0 0 30%;
+    white-space: initial;
   }
 }
 
-//アプリ編集
-.edit-app-title h2 {
-  margin: 10px 15px 50px 15px;
-}
-
-//アプリ入力フォーム（編集）
-.edit-app-form, .add-edit-app-form {
-  width: 95%;
-  margin: 0 auto 40px;
-  label {
-    font-size: 1.2em;
-  }
-  textarea {
-    min-height: 100px;
-  }
-  .mini-height {
-    min-height: 54px;
+//フォロー・フォロワー一覧の各ユーザ
+.user-box {
+  border-bottom: solid 1px $index-border;
+  padding: 10px 0;
+  min-height: 80px;
+  .follow-user-info {
+    h4 {
+      display: inline-block;
+    }
+    span {
+      float: right;
+    }
   }
 }
 
-.add-edit-app-form textarea {
-  min-height: 400px;
-}
 
-//アプリ投稿確認
-.new-app-confirm {
-  margin-bottom: 40px;
-  h4 {
-    font-weight: bold;
-  }
-  p, a {
-    margin: 15px 0 5px;
-    font-size: 1.2em;
-    word-wrap: break-word;
-  }
-}
 
-//削除ページ
+//その他 -----------------------------------------------
+//削除ページ(ユーザ・アプリ)
 .confirm-message {
   p {
     font-size: 17px;
@@ -678,68 +1183,6 @@ select {
   margin: 0 15px;
 }
 
-//検索バー全体
-.category-bar {
-  padding-top: 30px;
-  width: 90%;
-}
-
-//言語別検索バー
-#language-index {
-  padding: 0;
-  a {
-    color: #000;
-    &:hover {
-      color: #483D8B;
-      text-decoration: none;
-    }
-    li {
-      list-style: none;
-      padding: 20px 10%;
-      border-bottom: solid 1px #DDD;
-      &:hover {
-        background-color: #EEE;
-        border-bottom: solid 3px #6A5ACD;
-      }
-      p {
-        margin: 0;
-        font-size: 18px;
-        span {
-          font-size: 13px;
-        }
-      }
-    }
-  }
-}
-
-//タグ別検索バー
-#tag-index {
-  padding: 0;
-  li {
-    list-style: none;
-    margin-top: 5px;
-    margin-left: 10px;
-    a:hover {
-      border: solid 1px #6A5ACD;
-      color: #6A5ACD;
-    }
-  }
-}
-
-//タブメニュー
-.nav-tabs > li.active > a {
-  background-color: #D9E5FF;
-
-  border: none;
-  border-bottom: solid 3px #6A5ACD;
-  &:hover, &:focus {
-    background-color: #D9E5FF;
-
-    border: none;
-    border-bottom: solid 3px #6A5ACD;
-  }
-}
-
 //アバウトページ
 #top-image {
   background-image: image-url("priscilla-du-preez-XkKCui44iM0-unsplash.jpg");
@@ -748,6 +1191,7 @@ select {
   width: 100%;
   height: 500px;
   position: relative;
+  margin-top: -23px;
 }
 #top-message {
   width: 100%;
@@ -768,15 +1212,14 @@ select {
   section {
     margin: 30px auto 80px;
     h1 {
-      width: 200px;
-      margin: 0 auto 30px;
+      margin-bottom: 30px;
       position: relative;
       &:after {
         content: "";
         display: block;
         height: 8px;
-        background: -webkit-linear-gradient(to right, #FF8C00, transparent);
-        background: linear-gradient(to right, #FF8C00, transparent);
+        background: -webkit-linear-gradient(to right, $dark-orange, transparent);
+        background: linear-gradient(to right, $dark-orange, transparent);
       }
     }
     p {
@@ -797,35 +1240,54 @@ select {
   text-decoration: none;
 }
 .panel-heading {
-  background-color: #FFD700;
+  background-color: #FDA149;
 }
 .panel-title {
   text-align: center;
   color: #000;
 }
 
-//ページネーション
-.paginate {
-  text-align: center;
+
+
+//管理者ページ ----------------------------------------------
+//管理者言語登録ページ
+.admin-title {
+  margin-bottom: 30px;
 }
-.pagination>li>a {
-  border: none;
-  color: #696969;
+.lang-index > tbody > tr > td {
+  font-size: 1.2em;
 }
-.pagination>.active>a {
-  background: #FFD700;
-  border-radius: 15px;
-  color: #696969;
-  &:hover {
-    background: #FFD700;
-    color: #696969;
+
+.lang-info {
+  .lang-form {
+    margin-bottom: 30px;
+    input {
+      margin-bottom: 10px;
+    }
+  }
+  .actions > .btn-original {
+    margin: initial;
   }
 }
-.pagination>li>a:hover {
-  border-radius: 15px;
+
+//管理者ダッシュボード
+.chart {
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #F2DEDE4D;
+  h4 {
+    margin-left: 40px;
+  }
+  p {
+    margin-left: 40px;
+    margin-bottom: 20px;
+  }
 }
 
 
+
+
+//レスポンシブ対応 ----------------------------------------------
 @media screen and (max-width:991px) {
   .border-left {
     border-left: initial !important;
@@ -833,11 +1295,25 @@ select {
 }
 
 @media screen and (max-width:768px) {
-  .category-bar {
-    width: 100%;
+  .navbar-toggle {
+    margin-top: 11px;
   }
 
-  #language-index {
+  #top-new-apps a {
+    width: 50%
+  }
+
+  .category-bar {
+    width: 100%;
+    padding-top: initial;
+    margin-bottom: initial;
+  }
+
+  #my-info-bar {
+    display: none;
+  }
+
+  #lang-index {
     padding: 0;
     a {
       li {
@@ -859,6 +1335,9 @@ select {
     p {
       margin: 0;
     }
+    .tagit {
+      width: 100%;
+    }
   }
 
   .one-btn, .current-btn {
@@ -873,6 +1352,7 @@ select {
     padding-left: 30px;
   }
 }
+
 
 @media screen and (max-width:580px) {
   .new-user {
@@ -929,4 +1409,278 @@ select {
       margin-left: 0;
     }
   }
+}
+
+
+
+//管理者ページ検索フォーム-------------------------------------------
+.cp_form {
+  position: relative;
+  width: 100%;
+  margin: -10px auto 30px;
+  padding-left: 2em;
+  background-color: #FFF;
+  box-shadow:0px 0px 3px 2px #ededed;
+}
+.cp_group {
+  position: relative;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  width: 45%;
+  margin-right: 5%;
+  float: left;
+}
+.cp_form .cp_ipselect {
+  position: relative;
+  margin-top: 2em;
+  margin-right: 5%;
+}
+.cp_form .cp_radio {
+  position: relative;
+  margin-top: 10px;
+  float: left;
+}
+
+.cp_form .cp_group input {
+  font-family: inherit;
+  height: 3.0rem;
+}
+.cp_form .cp_group select {
+  font-family: inherit;
+}
+.cp_form .cp_sl {
+  position: relative;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: transparent;
+  width: 100%;
+  padding: 4px 0px;
+  border-radius: 0;
+  border: none;
+  -webkit-appearance: none;
+  appearance: none;
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid rgba(0,0,0, 0);
+  }
+}
+//セレクトボックス逆三角
+.cp_form .cp_ipselect:after {
+  position: absolute;
+  top: 13px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  padding: 0;
+  content: '';
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.cp_form .cp_sl_selectlabel {
+  color: #b3b3b3;
+  position: absolute;
+  pointer-events: none;
+  left: 0;
+  top: 10px;
+  transition: 0.2s ease all;
+  font-weight: initial;
+}
+.cp_form .cp_sl:focus ~ .cp_sl_selectlabel,
+.cp_form .cp_sl:valid ~ .cp_sl_selectlabel {
+  font-size: 14px;
+  color: #da3c41;
+  top: -20px;
+  transition: 0.2s ease all;
+}
+.cp_form .cp_group .cp_label {
+  position: absolute;
+  top: 0.25rem;
+  pointer-events: none;
+  padding-left: 0.125rem;
+  z-index: 1;
+  color: #b3b3b3;
+  font-size: 1rem;
+  font-weight: normal;
+  -webkit-transition: all 0.28s ease;
+  transition: all 0.28s ease;
+}
+.cp_form .cp_group .bar {
+  position: relative;
+  border-bottom: 0.0625rem solid #999999;
+  display: block;
+}
+.cp_form .cp_group .bar::before {
+  content: '';
+  height: 0.125rem;
+  width: 0;
+  left: 50%;
+  bottom: -0.0625rem;
+  position: absolute;
+  background: #da3c41;
+  -webkit-transition: left 0.28s ease, width 0.28s ease;
+  transition: left 0.28s ease, width 0.28s ease;
+  z-index: 2;
+}
+.cp_form .cp_group input {
+  display: block;
+  background: none;
+  padding: 0.125rem 0.125rem 0.0625rem;
+  font-size: 16px;
+  border-width: 0;
+  border-color: transparent;
+  line-height: 1.9;
+  width: 100%;
+  color: transparent;
+  -webkit-transition: all 0.28s ease;
+  transition: all 0.28s ease;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.cp_form .cp_group select,
+.cp_form .cp_group input:focus,
+.cp_form .cp_group input:valid {
+  color: #333333;
+}
+.cp_form .cp_group select ~ .cp_label,
+.cp_form .cp_group input:focus ~ .cp_label,
+.cp_form .cp_group input:valid ~ .cp_label {
+  font-size: 14px;
+  color: #da3c41;
+  top: -1.7rem;
+  left: 0;
+}
+.cp_form .cp_group select:hover,
+.cp_form .cp_group input:focus {
+  outline: none;
+}
+.cp_form .cp_group select:hover ~ .cp_label,
+.cp_form .cp_group input:focus ~ .cp_label {
+  color: #da3c41;
+}
+.cp_form .cp_group select:hover ~ .bar::before,
+.cp_form .cp_group input:focus ~ .bar::before {
+  width: 100%;
+  left: 0;
+}
+.cp_form .cp_radio label {
+  position: relative;
+  cursor: pointer;
+  padding-left: 2rem;
+  text-align: left;
+  color: #333333;
+  font-size: 16px;
+  float: left;
+}
+.cp_form .cp_radio input {
+  width: auto;
+  opacity: 0.00000001;
+  position: absolute;
+  left: 0;
+}
+.cp_form .radio {
+  margin-bottom: initial;
+  margin-right: 20px;
+  float: left;
+}
+.cp_form .radio .ch_bar {
+  position: absolute;
+  top: -0.25rem;
+  left: -0.25rem;
+  cursor: pointer;
+  display: block;
+  font-size: 1rem;
+  -webkit-user-select: none;
+  user-select: none;
+  color: #999999;
+}
+.cp_form .radio .ch_bar::before,
+.cp_form .radio .ch_bar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.3rem;
+  margin: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  -webkit-transition: -webkit-transform 0.28s ease;
+  transition:         transform 0.28s ease;
+  border-radius: 50%;
+  border: 0.125rem solid currentColor;
+}
+.cp_form .radio .ch_bar::after {
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  background-color: #da3c41;
+  border-color: #da3c41;
+}
+.cp_form .radio label:hover .ch_bar {
+  color: #da3c41;
+}
+.cp_form .radio input:checked ~ .ch_bar::after {
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+}
+.cp_form .radio input:checked ~ .ch_bar::before {
+  color: #da3c41;
+}
+.cp_form .radio + .radio {
+  margin-top: 1rem;
+}
+.cp_form .btn_cont {
+  text-align: right;
+  margin-bottom: 10px;
+  margin-right: 5%;
+}
+.cp_form .btn {
+  position: relative;
+  background: currentColor;
+  border: 1px solid currentColor;
+  font-size: 1.3rem;
+  color: #da3c41;
+  padding: 0.5rem 3rem;
+  cursor: pointer;
+  -webkit-transition: background-color 0.28s ease, color 0.28s ease, -webkit-box-shadow 0.28s ease;
+  transition: background-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
+  overflow: hidden;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+.cp_form .btn {
+  color: #ffffff;
+  background-color: #da3c41;
+  position: relative;
+  margin-left: 15px;
+  z-index: 1;
+}
+.cp_form .btn::before {
+  content: '';
+  position: absolute;
+  background: #071017;
+  border: 50vh solid #1d4567;
+  width: 30vh;
+  height: 30vh;
+  border-radius: 50%;
+  display: block;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  opacity: 1;
+  -webkit-transform: translate(-50%, -50%) scale(0);
+  transform: translate(-50%, -50%) scale(0);
+}
+.cp_form .btn:hover {
+  -webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3);
+  background-color: cadetblue;
+}
+.cp_form .btn:focus {
+  outline: none;
+}
+.clearfix::before {
+  content: "";
+  display: block;
+  clear: both;
 }
