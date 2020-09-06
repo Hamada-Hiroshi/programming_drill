@@ -13,8 +13,11 @@
           <section class="app-contents">
             <h3>アプリケーションURL</h3>
             <%= link_to @app.app_url, @app.app_url, target: :_blank, class: "URL" %>
+            <a id="preview_url">
+              <img id="preview_image" src=""/>
+              <p id="preview_description"></p>
+            </a>
           </section>
-
 
           <section class="app-contents">
             <h3>リモートリポジトリURL</h3>
