@@ -141,22 +141,24 @@ $(document).on('turbolinks:load', function(){
 
 //リンク先プレビュー表示
 $(document).on('turbolinks:load', function(){
-  const data = {
-    key: gon.link_preview_key,
-    q: gon.app_url
+  if($('#preview_url').length){
+    const data = {
+      key: gon.link_preview_key,
+      q: gon.app_url
+    }
+    const createIMG = json => {
+      document.querySelector('img#preview_image').src = json.image;
+      document.querySelector('a#preview_url').href = json.url;
+      document.querySelector('p#preview_description').textContent = json.description;
+    }
+    fetch('https://api.linkpreview.net', {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify(data),
+    })
+    .then(data => data.json())
+    .then(json => createIMG(json));
   }
-  const createIMG = json => {
-    document.querySelector('img#preview_image').src = json.image;
-    document.querySelector('a#preview_url').href = json.url;
-    document.querySelector('p#preview_description').textContent = json.description;
-  }
-  fetch('https://api.linkpreview.net', {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify(data),
-  })
-  .then(data => data.json())
-  .then(json => createIMG(json));
 });
 
 
