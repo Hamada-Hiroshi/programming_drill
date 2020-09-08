@@ -129,6 +129,38 @@ $(document).on('turbolinks:load', function(){
   }
 });
 
+//リンク先プレビュー表示
+$(document).on('turbolinks:load', function(){
+  $('.URL').miniPreview({
+    width: 256,
+    height: 144,
+    scale: .25,
+    prefetch: 'pageload'
+  });
+});
+
+//リンク先プレビュー表示
+$(document).on('turbolinks:load', function(){
+  if($('#preview_url').length){
+    const data = {
+      key: gon.link_preview_key,
+      q: gon.app_url
+    }
+    const createIMG = json => {
+      document.querySelector('img#preview_image').src = json.image;
+      document.querySelector('a#preview_url').href = json.url;
+      document.querySelector('p#preview_description').textContent = json.description;
+    }
+    fetch('https://api.linkpreview.net', {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify(data),
+    })
+    .then(data => data.json())
+    .then(json => createIMG(json));
+  }
+});
+
 
 //タグ付け、自動補完
 $(document).on('turbolinks:load', function(){
@@ -181,4 +213,3 @@ $(document).on('turbolinks:load', function(){
     });
   }
 });
-

@@ -713,6 +713,22 @@ input[type=checkbox]:checked + .checkbox01::after {
       font-size: 1.2em;
       word-wrap: break-word;
     }
+    #preview_url {
+      display: flex;
+      width: 100%;
+      &:hover {
+        text-decoration: none;
+      }
+      #preview_image {
+        width: 60%;
+      }
+      #preview_description {
+        width: 40%;
+        font-size: 14px;
+        color: #777;
+        padding: 20px 0 0 20px;
+      }
+    }
   }
   #make-app {
     margin: 50px 0 20px 0;
