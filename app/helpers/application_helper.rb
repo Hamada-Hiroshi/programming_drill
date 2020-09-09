@@ -1,7 +1,7 @@
 module ApplicationHelper
   def default_meta_tags
     {
-      site: 'ProgrammingDrill'',
+      site: 'ProgrammingDrill',
       title: 'プログラミングドリル',
       reverse: true,
       charset: 'utf-8',
@@ -11,7 +11,6 @@ module ApplicationHelper
       separator: '|',
       icon: [
         { href: image_url('favicon.ico') },
-        { href: image_url('sample.png'), rel: 'apple-touch-icon', sizes: '180x180', type: 'image/jpg' },
       ],
       og: {
         site_name: :site,
