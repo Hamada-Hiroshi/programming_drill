@@ -24,7 +24,7 @@ module ApplicationHelper
       twitter: {
         card: 'summary',
         site: '@RAMhamahitsuji',
-      }
+      },
     }
   end
 end
