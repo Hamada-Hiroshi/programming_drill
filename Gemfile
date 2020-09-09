@@ -91,6 +91,7 @@ gem 'gon'
 gem 'chartkick'
 gem 'groupdate'
 gem 'marked-rails'
+gem 'meta-tags'
 
 group :production do
   gem 'mysql2'
