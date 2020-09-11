@@ -97,8 +97,6 @@ class AppsController < ApplicationController
   end
 
   def show
-    gon.link_preview_key = ENV['LINK_PREVIEW_KEY']
-    gon.app_url = @app.app_url
   end
 
   def edit
