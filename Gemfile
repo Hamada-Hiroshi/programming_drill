@@ -93,6 +93,8 @@ gem 'groupdate'
 gem 'marked-rails'
 gem 'meta-tags'
 gem 'rack-attack'
+gem 'exception_notification'
+gem 'slack-notifier'
 
 group :production do
   gem 'mysql2'
