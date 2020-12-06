@@ -1,0 +1,16 @@
+.container
+  .row.border-box.border-space
+    .new-user
+      h3
+        | パスワード再設定
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+        = render "devise/shared/error_messages", resource: resource
+        p
+          | 登録時に利用したメールアドレスを入力してください。
+        .field.new-password-form
+          = f.label :email, "メールアドレス"
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+        .actions.text-center
+          = f.submit "認証メールを送信する", class: "btn btn-original"
+      p
+        = link_to "ログイン画面に戻る", new_user_session_path

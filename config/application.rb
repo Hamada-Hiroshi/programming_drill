@@ -26,5 +26,7 @@ module ProgrammingDrill
         helper_specs: false,
         routing_specs: false
     end
+
+    config.generators.template_engine = :slim
   end
 end

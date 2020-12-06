@@ -1,0 +1,10 @@
+h4
+  = link_to app.title, app_path(app)
+= render 'reviews/average_rate', app: app
+p
+  | 開発言語：
+  = link_to app.lang.name, lang_path(app.lang)
+.tag-lists
+  - app.tag_list.each do |tag|
+    span.tag-link
+      = link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag"

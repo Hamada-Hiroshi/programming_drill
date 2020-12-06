@@ -1,0 +1,10 @@
+| <div class="star-rate" data-score="
+= app.average_rate
+| ">
+span.average-score
+  - if app.reviews.present?
+    |  （
+    = app.average_rate.round(2)
+    | ） 
+  - else
+    |  （評価無し） 

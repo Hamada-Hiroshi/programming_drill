@@ -1,0 +1,95 @@
+doctype html
+html
+  head
+    title
+      | ProgrammingDrill
+    = csrf_meta_tags
+    = csp_meta_tag
+    meta[name="viewport" content="width=device-width,initial-scale=1.0"]
+    = display_meta_tags(default_meta_tags)
+    script[src="https://kit.fontawesome.com/6c4c9f280d.js" crossorigin="anonymous"]
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = include_gon
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = favicon_link_tag('favicon.ico')
+  body
+    header#header-top.navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          button.navbar-toggle.collapsed[type="button" data-toggle="collapse" data-target="#navbar"]
+            span.sr-only
+              | Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand.header-logo[href="/"]
+            = image_tag 'Programming Drill_logo.png'
+        #navbar.collapse.navbar-collapse
+          ul#header-link.nav.navbar-nav.navbar-right
+            - if user_signed_in?
+              li#header-mylink
+                = link_to user_path(current_user) do
+                  = attachment_image_tag(current_user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle")
+              li
+                - if unchecked_notifications.any?
+                  span.n-circle
+                    i.fa.fa-circle
+                = link_to "通知", user_notifications_path(current_user)
+              li
+                = link_to "アプリ一覧", apps_path
+              li
+                = link_to "新規投稿", new_app_path
+              - if admin_signed_in?
+                li
+                  = link_to "管理者ログアウト",  destroy_admin_session_path, method: :delete
+              - else
+                li
+                  = link_to "ログアウト",  destroy_user_session_path, method: :delete
+            - else
+              li
+                = link_to "アプリ一覧", apps_path
+              li
+                = link_to "新規登録", new_user_registration_path
+              li
+                = link_to "ログイン", new_user_session_path
+          = search_form_for @q, class: "navbar-form navbar-left hidden-sm" do |f|
+            .form-group
+              = f.search_field :title_or_lang_name_or_tags_name_cont, placeholder: "キーワード検索", class: "search"
+      - if admin_signed_in?
+        #admin-header
+          .container
+            ul#header-admin-link
+
+            span#admin-notice
+              = flash[:notice]
+            span#admin-success
+              = flash[:success]
+            span#admin-alert
+              = flash[:alert]
+        li
+          = link_to "開発言語", admin_langs_path
+        li
+          = link_to "投稿データ", admin_apps_path
+        li
+          = link_to "会員データ", admin_users_path
+        li
+          = link_to "ダッシュボード", admin_root_path
+      - unless admin_signed_in?
+        #flash-message
+          = render 'layouts/flash_message'
+    .main-body
+      = yield
+    footer
+      #footer-top
+        .container
+          p
+            = link_to "このサイトについて", about_path
+          p
+            = link_to "利用規約"
+          p
+            = link_to "プライバシーポリシー"
+      #footer-bottom
+        p
+          small
+            | ©
+          |  hamada_hiroshi

@@ -1,0 +1,15 @@
+- reviews.each do |review|
+  .review-box
+    .post-user
+      = attachment_image_tag(review.user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle")
+      span
+        = review.user.name
+      span
+        = review.created_at.strftime("%Y年%m月%d日")
+    .post-content
+      |  <div class="star-rate" data-score="
+      = review.rate
+      | ">
+    = review.rate
+    p.review-text
+      = review.content

@@ -95,6 +95,8 @@ gem 'meta-tags'
 gem 'rack-attack'
 gem 'exception_notification'
 gem 'slack-notifier'
+gem 'slim-rails'
+gem 'html2slim'
 
 group :production do
   gem 'mysql2'

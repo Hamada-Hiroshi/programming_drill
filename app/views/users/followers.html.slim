@@ -1,0 +1,16 @@
+.container
+  .row
+    .col-sm-3.sidebar.fixed
+      = render 'users/user_sidebar', user: @user
+    .col-sm-9
+      .user-index.back-white
+        ul.nav.nav-tabs
+          li
+            = link_to "フォロー中", following_user_path(@user)
+          li.active
+            = link_to "フォロワー", followers_user_path(@user)
+        - if @users.present?
+          = render 'user_index', users: @users
+        - else
+          p
+            | フォロワーはいません。

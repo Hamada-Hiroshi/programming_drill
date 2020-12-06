@@ -1,0 +1,77 @@
+.container.admin-space
+  h3.admin-title
+    | 会員一覧
+  #admin-search.cp_form
+    = search_form_for [:admin, @user_q] do |f|
+      h4
+        | 検索
+      .cp_group
+        = f.search_field :name_cont
+        = f.label :name_cont, "ユーザーネーム", class: "cp_label"
+        i.bar
+      .cp_group
+        = f.search_field :email_cont
+        = f.label :email_cont, "メールアドレス", class: "cp_label"
+        i.bar
+      .cp_radio
+        .radio
+          = f.label :status_eq, value: '' do
+            = f.radio_button :status_eq, '', checked: true
+            i.ch_bar
+            | 全て 
+        .radio
+          = f.label :status_eq, value: true do
+            = f.radio_button :status_eq, true
+            i.ch_bar
+            | 有効のみ 
+        .radio
+          = f.label :status_eq, value: false do
+            = f.radio_button :status_eq, false
+            i.ch_bar
+            | 退会済みのみ 
+      .btn_cont.clearfix
+        = f.submit "検索", class: "btn"
+        = link_to "検索リセット", admin_users_path, class: "btn"
+  - if @users.present?
+    table.table
+      thead
+        tr
+          th
+            = sort_link(@user_q, :id, "ID")
+          th
+            = sort_link(@user_q, :name, "ユーザーネーム")
+          th
+            = sort_link(@user_q, :email, "メールアドレス")
+          th
+            = sort_link(@user_q, :created_at, "登録日")
+          th
+            = sort_link(@user_q, :status, "ステータス")
+          th
+          th
+      tbody
+        - @users.each do |user|
+          tr
+            td
+              = user.id
+            td
+              = user.name
+            td
+              = user.email
+            td
+              = user.created_at.strftime("%Y/%m/%d")
+            td
+              - if user.status == true
+                |  有効 
+              - else
+                |  退会済み 
+            td
+              - if user.status == true
+                = link_to "詳細", user_path(user), class: "btn btn-sm btn-default"
+            td
+              - if user.status == true
+                = link_to "強制退会", cancel_admin_user_path(user), method: :patch, class: "btn btn-sm btn-default", "data-confirm" => "このユーザーを強制的に退会させますか？"
+    .paginate
+      = paginate @users
+  - else
+    p
+      | 検索に一致するデータはありません。

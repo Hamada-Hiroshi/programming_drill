@@ -1,0 +1,8 @@
+- if model.errors.any?
+  #error-explanation
+    h4
+      | 正しく入力されていない項目があります。
+    ul
+      - model.errors.full_messages.each do |message|
+        li
+          = message

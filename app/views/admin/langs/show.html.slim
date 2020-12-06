@@ -1,0 +1,45 @@
+.container.admin-space
+  .row
+    .col-md-5
+      h3.admin-title
+        | 開発言語一覧
+      table.table.lang-index
+        thead
+          tr
+            th
+              | 言語名
+            th
+              | 登録アプリ数
+            th
+              | 全体に占める割合
+            th
+        tbody
+          - @langs.each do |lang|
+            tr
+              td
+                = lang.name
+              td.text-center
+                = lang.apps.pluck(:status).count(true)
+              td.text-center
+                = "#{lang.apps.pluck(:status).count(true) * 100 / @apps.count }％"
+              td
+                = link_to "詳細・編集", admin_lang_path(lang), class: "btn btn-sm btn-default"
+      = link_to "新規登録", admin_langs_path, class: "btn btn-default"
+    .lang-info.col-md-5.col-md-offset-1
+      h3.admin-title
+        = @lang.name
+      = form_with(model: [:admin, @lang], local: true) do |f|
+        = render 'layouts/error_messages', model: @lang
+        .field.lang-form
+          = f.label :name, "言語名編集"
+          = f.text_field :name, class: "form-control"
+        .field.lang-form
+          = f.label :lang_image, "アイコン"
+          = f.attachment_field :lang_image, id: "image"
+          - if @lang.lang_image_id != nil
+            = attachment_image_tag(@lang, :lang_image, size: "100x100", format: "jpeg", id: "imagePreview")
+          - else
+            img#imagePreview[width="100" height="100"]
+        .actions
+          = f.submit "更新", class: "btn btn-original"
+          = link_to "この開発言語を削除する", admin_lang_path(@lang), method: :delete, class: "btn btn-original2", "data-confirm" => "本当に削除してよろしいですか？"

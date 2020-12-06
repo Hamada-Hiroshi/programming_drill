@@ -1,0 +1,19 @@
+.container
+  .row
+    .col-sm-10
+      .app-show-box.border-space
+        #app-learning
+          = render 'learning_status', app: @learning.app, learning: @learning
+          #learning-memo
+            h4
+              | 学習メモ
+            .back-grey
+              - if @learning.memo.present?
+                #marked-text
+                  = @learning.memo
+              - else
+                p
+                  | 学習メモはありません。
+            = link_to "学習メモを編集する", edit_app_learning_path(@learning.app), class: "btn btn-primary"
+    .col-sm-2
+      = render 'learning_linkbar', app: @learning.app, learning: @learning

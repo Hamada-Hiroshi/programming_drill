@@ -1,0 +1,18 @@
+.container
+  .row
+    .col-sm-10
+      .app-show-box.border-space
+        #app-hint
+          = render 'learnings/learning_status', app: @app, learning: @learning
+          #hint-info
+            h4
+              | ヒント
+            .back-grey
+              - if @app.hint.present?
+                #marked-text
+                  = @app.hint
+              - else
+                p
+                  | ヒントは投稿されていません。
+    .col-sm-2
+      = render 'learnings/learning_linkbar', app: @app, learning: @learning

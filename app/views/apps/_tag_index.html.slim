@@ -1,0 +1,4 @@
+ul#tag-index
+  - ActsAsTaggableOn::Tag.most_used(30).each do |tag|
+    li.tag-link.current-tag
+      = link_to  "#{tag}（#{tag.taggings_count}）", tag_apps_path(tag_name: tag.name), class: "btn-xs btn-default btn-tag"

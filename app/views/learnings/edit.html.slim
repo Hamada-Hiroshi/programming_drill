@@ -1,0 +1,17 @@
+.marked-wrapper
+  h3
+    | 学習メモ
+  = form_with(model: [@learning.app, @learning]) do |f|
+    .marked-form
+      .row
+        .col-md-6
+          h5
+            | 記入欄（マークダウン記法で記述できます）
+          .field
+            #editor
+              = f.text_area :memo, placeholder: "ご自由に記入してください。", class: "textarea-form form-control", style: "min-height: 480px"
+        .col-md-6
+          h5
+            | プレビュー
+          #marked-area
+    = f.submit "メモを保存", class: "btn btn-original"

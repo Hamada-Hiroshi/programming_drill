@@ -1,0 +1,24 @@
+.row.user-edit
+  #user-image.col-sm-3.col-sm-offset-1
+    = attachment_image_tag(user, :profile_image, size: "150x150", format: "jpeg", fallback: "no_image.jpg", class: "img-circle")
+  #user-info.col-sm-7
+    #user-acount
+      h3
+        = user.name
+      - if user == current_user
+        = link_to "アカウント情報を編集", edit_user_path(user), class: "btn btn-default"
+      - else
+        |  <span id="follow-form-
+        = user.id
+        | "> 
+        = render 'relationships/follow_form', user: user
+    ul#user-follow
+      = render 'relationships/follow_count', user: user
+    #user-introduction
+      h4
+        | 自己紹介
+      = user.introduction
+    #user-skill
+      h4
+        | 学習スキル
+      = user.skill

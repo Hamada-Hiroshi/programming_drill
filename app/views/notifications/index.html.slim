@@ -1,0 +1,27 @@
+.container
+  .row.back-white
+    h3.text-center
+      | 通知
+    #notification-index
+      - if @notifications.present?
+        .notification-delete.text-right
+          = link_to destroy_all_user_notifications_path, method: :delete do
+            span
+              i.fas.fa-trash
+              |  通知を全消去
+        - @notifications.each do |notification|
+          .notification-box
+            .visitor-img
+              = link_to user_path(notification.visitor) do
+                = attachment_image_tag(notification.visitor, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle")
+            .notification-info
+              span.notification-form
+                = notification_form(notification)
+              span
+                = "（#{time_ago_in_words(notification.created_at)}前）"
+            = link_to @content_path do
+              .notification-content
+                = @content
+      - else
+        h4
+          | 通知はありません。

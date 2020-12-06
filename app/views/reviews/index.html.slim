@@ -1,0 +1,17 @@
+.container
+  .row
+    .col-sm-10
+      .app-show-box.border-space
+        article.app-info
+          = render 'apps/app_info_top', app: @app
+        #review-contents
+          #review-form.field
+            = render 'review_form', my_review: @my_review, learning: @learning, app: @app
+        #review-index
+          - if @reviews.present?
+            = render 'review_index', reviews: @reviews
+          - else
+            p
+              | このアプリケーションは、まだレビューがありません。
+    .col-sm-2
+      = render 'learnings/learning_linkbar', app: @app, learning: @learning

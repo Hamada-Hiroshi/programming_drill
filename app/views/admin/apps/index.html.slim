@@ -1,0 +1,88 @@
+.container.admin-space
+  h3.admin-title
+    | アプリケーション一覧
+  #admin-search.cp_form
+    = search_form_for [:admin, @app_q] do |f|
+      h4
+        | 検索
+      .cp_group
+        = f.search_field :title_cont
+        = f.label :title_cont, "アプリケーション名", class: "cp_label"
+        i.bar
+      .cp_group
+        = f.search_field :user_name_cont
+        = f.label :user_name_cont, "投稿者名", class: "cp_label"
+        i.bar
+      .cp_group.cp_ipselect
+        = f.collection_select :lang_id_eq, Lang.all, :id, :name, { include_blank: "選択してください" }, { class: "cp_sl" }
+        = f.label :lang_id_eq, "開発言語", class: "cp_sl_selectlabel"
+        i.bar
+      .cp_radio
+        .radio
+          = f.label :status_eq, value: '' do
+            = f.radio_button :status_eq, '', checked: true
+            i.ch_bar
+            | 全て 
+        .radio
+          = f.label :status_eq, value: true do
+            = f.radio_button :status_eq, true
+            i.ch_bar
+            | 有効のみ 
+        .radio
+          = f.label :status_eq, value: false do
+            = f.radio_button :status_eq, false
+            i.ch_bar
+            | 非公開のみ 
+      .btn_cont.clearfix
+        = f.submit "検索", class: "btn"
+        = link_to "検索リセット", admin_apps_path, class: "btn"
+  - if @apps.present?
+    table.table
+      thead
+        tr
+          th
+            = sort_link(@app_q, :id, "ID")
+          th
+            = sort_link(@app_q, :title, "タイトル")
+          th
+            = sort_link(@app_q, :lang_name, "開発言語")
+          th
+            = sort_link(@app_q, :user_name, "投稿者")
+          th
+            = sort_link(@app_q, :created_at, "登録日")
+          th
+            = sort_link(@app_q, :updated_at, "最終更新日")
+          th
+            = sort_link(@app_q, :status, "ステータス")
+          th
+          th
+      tbody
+        - @apps.each do |app|
+          tr
+            td
+              = app.id
+            td
+              = app.title
+            td
+              = app.lang.name
+            td
+              = app.user.name
+            td
+              = app.created_at.strftime("%Y/%m/%d")
+            td
+              = app.updated_at.strftime("%Y/%m/%d")
+            td
+              - if app.status == true
+                |  有効 
+              - else
+                |  非公開 
+            td
+              = link_to "詳細", app_path(app), class: "btn btn-sm btn-default"
+            td
+              - if app.status == true
+                = link_to "強制非公開", cancel_admin_app_path(app), method: :patch, class: "btn btn-sm btn-default", "data-confirm" => "この投稿アプリを強制的に非公開にしますか？"
+    .paginate
+      = paginate @apps
+  - else
+    p
+      | 検索に一致するデータはありません。

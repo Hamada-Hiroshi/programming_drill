@@ -1,0 +1,56 @@
+#top-image
+  #top-message
+    h1
+      | その経験を、未来のエンジニアのために
+.container
+  .row
+    .col-md-9
+      section.top-section
+        h3
+          | 新着アプリ
+        #top-new-apps
+          - @apps.each do |app|
+            = link_to app_path(app) do
+              .top-app-box
+                = attachment_image_tag(app.user, :profile_image, size: "60x60", format: "jpeg", fallback: "no_image.jpg", class: "img-circle")
+                span.top-app-user
+                  = app.user.name
+                h4
+                  = app.title
+                span.top-app-lang
+                  = attachment_image_tag(app.lang, :lang_image, size: "20x20", format: "jpeg")
+                  = app.lang.name
+        #index-link.text-right
+          = link_to "もっと見る ＞", apps_path
+      section.top-section
+        h3
+          | 開発言語から探す
+        #top-langs
+          - @langs.each do |lang|
+            = link_to lang_path(lang) do
+              .top-lang-box
+                = attachment_image_tag(lang, :lang_image, size: "50x50", format: "jpeg")
+                span.top-lang-name
+                  = lang.name
+                span.top-lang-count
+                  | （
+                  = lang.apps.pluck(:status).count(true)
+                  | ）
+      section.top-section
+        h3
+          | タグから探す
+        #top-tags
+          = render "apps/tag_index"
+    #top-user-info.col-md-3
+      - unless user_signed_in?
+        #user-container
+          #sign-in-box
+            h4
+              | ログインはこちらから
+            p
+              | ログインするとアプリの投稿や学習を始めることができます。
+            .text-center
+              = link_to "ログイン", new_user_session_path, class: "btn btn-original"
+            .text-center
+              = link_to "新規登録", new_user_registration_path, class: "btn btn-original"
+      = render "users/user_sidebar", user: current_user

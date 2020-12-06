@@ -1,0 +1,32 @@
+.container.admin-space
+  h3.admin-title
+    | ダッシュボード
+  .row
+    .col-md-12
+      .chart
+        h4
+          | ユーザー登録者数遷移 / 日
+        p
+          | 累計登録者数：
+          = @users.count
+          | 人（退会者除く）
+        = area_chart @new_user, download: true
+  .row
+    .col-md-6
+      .chart
+        h4
+          | 投稿アプリ　開発言語内訳
+        p
+          | 累計アプリ投稿数：
+          = @apps.count
+          | （非公開アプリ除く）
+        = pie_chart @app_lang, download: true
+    .col-md-6
+      .chart
+        h4
+          | 学習　開発言語内訳
+        p
+          | 累計学習数：
+          = @learnings.count
+          | （非公開アプリ除く）
+        = pie_chart @learning_lang, download: true

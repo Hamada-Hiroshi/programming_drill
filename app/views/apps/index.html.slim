@@ -1,0 +1,25 @@
+.container
+  .row
+    .col-sm-3.sidebar
+      .category-bar
+        ul.category-menu.nav.nav-tabs
+          li.active
+            = link_to "言語別", "#lang-tab", data: { toggle: "tab"}
+          li
+            = link_to "タグ別", "#tag-tab", data: { toggle: "tab"}
+        .tab-content.category-contents
+          #lang-tab.tab-pane.active
+            = render 'langs/lang_index', langs: @langs
+          #tag-tab.tab-pane
+            = render 'tag_index'
+      = render 'users/user_sidebar', user: current_user
+    .col-sm-9
+      .app-index.back-white
+        ul.nav.nav-tabs
+          li.active
+            = link_to "新着順", apps_path(q: request.params[:q])
+          li
+            = link_to "評価順", rate_index_apps_path(q: request.params[:q])
+          li
+            = link_to "人気順", popular_index_apps_path(q: request.params[:q])
+        = render 'app_index', apps: @apps

@@ -1,0 +1,32 @@
+- if user_signed_in?
+  #my-info-bar
+    = link_to user_path(user), id: "my-img" do
+      #my-name
+        = attachment_image_tag(user, :profile_image, size: "60x60", format: "jpeg", fallback: "no_image.jpg", class: "img-circle")
+        span
+          = user.name
+    hr
+    #my-app
+      - if user == current_user
+        h4
+          | マイアプリ
+      - else
+        h4
+          | アプリ情報
+      ul#app-count
+        li
+          = link_to "投稿 #{user.apps.count}件", user_path(user), class: "btn-original3"
+        li
+          = link_to "学習 #{user.learnings.count}件", learnings_user_path(user), class: "btn-original3"
+        li#stock-count-btn
+          = render 'stocks/stock_count_btn', user: user
+    hr
+    #my-user
+      - if user == current_user
+        h4
+          | マイユーザー
+      - else
+        h4
+          | ユーザー情報
+      ul#follow-count
+        = render 'relationships/follow_count', user: user

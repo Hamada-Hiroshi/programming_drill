@@ -1,0 +1,18 @@
+.container
+  .row
+    .col-sm-10
+      .app-show-box.border-space
+        #app-explanation
+          = render 'learnings/learning_status', app: @app, learning: @learning
+          #explanation-info
+            h4
+              | 解説
+            .back-grey
+              - if @app.explanation.present?
+                #marked-text
+                  = @app.explanation
+              - else
+                p
+                  | 解説は投稿されていません。
+    .col-sm-2
+      = render 'learnings/learning_linkbar', app: @app, learning: @learning

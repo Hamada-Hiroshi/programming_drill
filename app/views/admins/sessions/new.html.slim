@@ -1,0 +1,16 @@
+.container
+  .row.border-box.border-space
+    .new-user
+      h3
+        | 管理者用ログイン
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .field.new-password-form
+          = f.label :email, "メールアドレス"
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+        .field.new-password-form
+          = f.label :password, "パスワード"
+          = f.password_field :password, autocomplete: "current-password", class: "form-control"
+        .actions.text-center
+          = f.submit "ログイン", class: "btn btn-original"
+        p
+          = link_to '簡単ログイン', admin_guest_sign_in_path, method: :post

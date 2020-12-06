@@ -1,0 +1,24 @@
+- unless my_review.present?
+  - if learning.present? && learning.status == "学習済み"
+    = form_with(model: [@app, @review]) do |f|
+      #error-messages
+      h4
+        | レビュー
+      h5
+        | ※評価点は、手動入力とレビュー内容からの自動判定の２つから選択が可能です。
+      #manual-rating
+        span
+          | 評価
+        #star
+          = f.hidden_field :rate, id: "review_star"
+      #auto-rating
+        = check_box_tag :auto_rate
+        = label_tag :auto_rate, "レビュー内容から自動で評価を判定する。", class: "checkbox01"
+      = f.text_area :content, placeholder: "レビューを記入してください。", class: "textarea-form"
+      = f.submit "レビューを投稿", class: "btn btn-default"
+  - elsif app.user != current_user
+    p
+      | 学習済みのアプリケーションのみ、レビューを投稿できます。
+- else
+  p
+    | このアプリケーションはすでにレビュー済みです。

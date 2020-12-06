@@ -1,0 +1,35 @@
+.container
+  .row.border-box.top-bottom-space
+    .app-form
+      = form_with(model: @app, url: confirm_apps_path, local: true) do |f|
+        = render 'layouts/error_messages', model: @app
+        .field.new-app-form
+          = f.label :title, "アプリケーション名"
+          = f.text_field :title, class: "form-control"
+        .field.new-app-form
+          = f.label :lang_id, "開発言語"
+          = f.collection_select :lang_id, Lang.all, :id, :name, { include_blank: "選択してください" }, { class: "form-control" }
+          p
+            | 最もメインで使用した言語を選択してください。
+        .field.new-app-form
+          = f.label :overview, "アプリケーションの概要"
+          = f.text_area :overview, class: "form-control"
+        .field.new-app-form
+          = f.label :app_url, "アプリケーションURL"
+          = f.text_area :app_url, class: "form-control mini-height"
+        .field.new-app-form
+          = f.label :repo_url, "リポジトリURL"
+          = f.text_area :repo_url, class: "form-control mini-height"
+        .field.new-app-form
+          = f.label :function, "機能"
+          = f.text_area :function, class: "form-control"
+        .field.new-app-form
+          = f.label :target, "対象者"
+          = f.text_area :target, class: "form-control mini-height"
+        .field.new-app-form
+          = f.label :tag_list, "タグ付け"
+          ul#app-tags.form-control
+          p
+            | 複数入力が可能です。
+        .actions.text-center
+          = f.submit "確認ページへ進む", class: "btn btn-center btn-original"

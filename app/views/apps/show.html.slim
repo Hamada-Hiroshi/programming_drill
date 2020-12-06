@@ -1,0 +1,35 @@
+.container
+  .row
+    .col-sm-10
+      .app-show-box.border-space
+        article.app-info
+          = render 'app_info_top', app: @app
+          section.app-contents
+            h3
+              | 概要
+            p
+              = @app.overview
+          section.app-contents
+            h3
+              | アプリケーションURL
+            = link_to @app.app_url, @app.app_url, target: :_blank, class: "URL"
+          section.app-contents
+            h3
+              | リモートリポジトリURL
+            = link_to @app.repo_url, @app.repo_url, target: :_blank
+          section.app-contents
+            h3
+              | 機能一覧
+            p
+              = @app.function
+          section.app-contents
+            h3
+              | 対象者
+            p
+              = @app.target
+          - if user_signed_in?
+            - unless @app.user == current_user || Learning.find_by(user_id: current_user.id, app_id: @app.id) || admin_signed_in?
+              #make-app
+                = link_to "このアプリケーションを作成する", app_learnings_path(@app), method: :post, class: "btn-lg btn-primary"
+    .col-sm-2
+      = render 'learnings/learning_linkbar', app: @app, learning: @learning

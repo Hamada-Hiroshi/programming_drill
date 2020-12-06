@@ -1,0 +1,15 @@
+- if flash[:notice]
+  #notice-flash.header-flash
+    .container
+      p#notice.flash
+        = flash[:notice]
+- elsif flash[:success]
+  #success-flash.header-flash
+    .container
+      p#success.flash
+        = flash[:success]
+- elsif flash[:alert]
+  #alert-flash.header-flash
+    .container
+      p#alert.flash
+        = flash[:alert]

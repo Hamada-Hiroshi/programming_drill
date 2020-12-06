@@ -1,0 +1,32 @@
+- if apps.present?
+  - apps.each do |app|
+    .link-app-box
+      .link-app-user
+        = link_to user_path(app.user) do
+          = attachment_image_tag(app.user, :profile_image, size: "60x60", format: "jpeg", fallback: "no_image.jpg", class: "img-circle")
+      .link-app-info
+        |  <span class="stock-button" id="stock-form-
+        = app.id
+        | "> 
+        - if user_signed_in?
+          = render 'stocks/stock_form', app: app
+        - else
+          i.fas.fa-folder.fa-2x
+        h4
+          = link_to app.title, app_path(app)
+        = render 'reviews/average_rate', app: app
+        span.learning-count
+          | 学習者：
+          = app.learnings.count
+          | 人
+        p
+          | 開発言語：
+          = link_to app.lang.name, lang_path(app.lang)
+        - app.tag_list.each do |tag|
+          span.tag-link
+            = link_to tag, tag_apps_path(tag_name: tag), class: "btn-xs btn-default btn-tag"
+  .paginate
+    = paginate apps
+- else
+  p
+    | 検索に該当するアプリがありません。

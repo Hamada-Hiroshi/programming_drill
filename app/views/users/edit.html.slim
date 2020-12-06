@@ -1,0 +1,36 @@
+.container
+  .row.border-box
+    .col-md-3.border-space
+      ul.edit-link
+        li
+          | プロフィール編集
+        li
+          = link_to "パスワード変更", edit_user_registration_path
+        li
+          = link_to "アカウント停止", quit_user_path(@user)
+    .col-md-9.border-left.border-space
+      .row
+        .col-md-10.col-md-offset-1
+          = form_with(model: @user, local: true) do |f|
+            .field.edit-user
+              = attachment_image_tag(@user, :profile_image, size: "150x150", format: "jpeg", fallback: "no_image.jpg", class: "img-circle", id: "imagePreview")
+              .edit-user-name
+                h3
+                  = @user.name
+                = f.attachment_field :profile_image, id: "image"
+            .edit-user-form
+              = render 'layouts/error_messages', model: @user
+              .field.user-form
+                = f.label :name, "ユーザーネーム"
+                = f.text_field :name, class: "form-control"
+              .field.user-form
+                = f.label :email, "メールアドレス"
+                = f.email_field :email, class: "form-control"
+              .field.user-form
+                = f.label :introduction, "自己紹介"
+                = f.text_area :introduction, class: "form-control"
+              .field.user-form
+                = f.label :skill, "学習スキル"
+                = f.text_area :skill, class: "form-control"
+              .actions.text-center
+                = f.submit "更新する", class: "btn btn-original"

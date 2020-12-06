@@ -1,0 +1,24 @@
+.container
+  .row
+    .col-sm-10
+      .app-show-box.border-space
+        #app-question
+          = render 'learnings/learning_status', app: @app, learning: @learning
+          #question-contents
+            #question-form.field
+              = form_with(model: [@app, @question]) do |f|
+                #error-messages
+                = render 'layouts/error_messages', model: @question
+                - if @app.user != current_user
+                  h4
+                    | 質問
+                  = f.text_area :content, placeholder: "質問内容を記入してください。", class: "textarea-form"
+                  = f.submit "質問を投稿", class: "btn btn-default"
+            #question-index
+              - if @questions.present?
+                = render 'question_index', questions: @questions
+              - else
+                p
+                  | 質問履歴はありません。
+    .col-sm-2
+      = render 'learnings/learning_linkbar', app: @app, learning: @learning

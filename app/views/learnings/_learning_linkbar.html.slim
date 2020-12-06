@@ -1,0 +1,38 @@
+.link-bar
+  .current-btn
+    = link_to app_path(app), class: "btn btn-default" do
+      span.app-link
+        i.fas.fa-info-circle
+        |  アプリ詳細
+    - if learning.present?
+      = link_to app_learning_path(app, learning), class: "btn btn-default" do
+        span.app-link
+          i.fas.fa-book-open
+          |  学習メモ
+    - if learning.present? || app.user == current_user || admin_signed_in?
+      = link_to hint_app_path(app), class: "btn btn-default" do
+        span.app-link
+          i.fas.fa-question-circle
+          |  ヒント
+      = link_to app_questions_path(app), class: "btn btn-default" do
+        span.app-link
+          i.fas.fa-comments
+          |  質問
+      = link_to explanation_app_path(app), class: "btn btn-default" do
+        span.app-link
+          i.fas.fa-chalkboard-teacher
+          |  解説
+  .current-btn.one-btn
+    = link_to app_reviews_path(app), class: "btn btn-default" do
+      span.app-link
+        i.fas.fa-star
+        |  レビュー
+  - if app.user == current_user
+    - if app.status == true
+      .one-btn
+        = link_to "編集", edit_app_path(app), class: "btn btn-primary app-link"
+  - elsif admin_signed_in?
+
+  - elsif learning.blank?
+    .one-btn
+      = link_to "学習開始", app_learnings_path(app), method: :post, class: "btn btn-primary app-link"

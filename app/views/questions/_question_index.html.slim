@@ -1,0 +1,36 @@
+- questions.each do |question|
+  .question-box
+    .question
+      .post-user
+        = attachment_image_tag(question.user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle")
+        span
+          = question.user.name
+        span
+          = question.created_at.strftime("%Y年%m月%d日")
+      .post-content
+        p
+          = question.content
+    .reply-box
+      ul.reply-index
+        - question.replies.each do |reply|
+          li.reply
+            .post-user
+              = attachment_image_tag(reply.user, :profile_image, size: "40x40", format: "jpeg", fallback: "no_image.jpg", class: "img-circle")
+              span
+                = reply.user.name
+              span
+                = reply.created_at.strftime("%Y年%m月%d日")
+            .post-content
+              p
+                = reply.content
+      .reply-form.field
+        |  <a class="btn btn-default" data-toggle="collapse" href="#collapseReply-
+        = question.id
+        | "> 質問に回答する 
+        |  <div class="collapse" id="collapseReply-
+        = question.id
+        | "> 
+        = form_with(model: [@app, @question]) do |f|
+          = f.text_area :content, placeholder: "返信内容を記入してください。", class: "textarea-form"
+          = f.hidden_field :parent_id, value: question.id
+          = f.submit "回答を送信", class: "btn btn-default"

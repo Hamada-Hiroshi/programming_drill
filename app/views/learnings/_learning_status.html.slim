@@ -1,0 +1,26 @@
+article.learning-app-info
+  h1
+    = app.title
+  section
+    h4
+      | アプリケーションURL
+    p
+      = link_to app.app_url, app.app_url, target: :_blank
+  section
+    h4
+      | リモートリポジトリURL
+    p
+      = link_to app.repo_url, app.repo_url, target: :_blank
+- unless app.user == current_user || admin_signed_in?
+  .learning-status
+    .row
+      .col-md-5
+        h4
+          | 学習開始日 
+          = learning.created_at.strftime("%Y年%m月%d日")
+      .col-md-7.field
+        h4
+          | 学習状況
+        = form_with(model: [learning.app, learning]) do |f|
+          = f.select :status, ["学習中", "学習済み", "学習中断"]
+          = f.submit "更新", class: "btn btn-default"
